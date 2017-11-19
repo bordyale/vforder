@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+    <SecurityGroupPermission groupId="FULLADMIN" permissionId="VFORDER_ADMIN"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="VFORDER_CREATE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="VFORDER_DELETE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="VFORDER_UPDATE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="VFORDER_VIEW"/>
+    <SecurityGroupPermission groupId="VIEWADMIN" permissionId="VFORDER_VIEW"/>
+    <SecurityGroupPermission groupId="BIZADMIN" permissionId="VFORDER_ADMIN"/>
+</entity-engine-xml>
