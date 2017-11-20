@@ -9,5 +9,14 @@
             </condition>
             <link target="findorders"/>
         </menu-item>
+        <menu-item name="orderentry" title="${uiLabelMap.OrderOrderEntry}">
+            <condition>
+                <or>
+                    <if-has-permission permission="VFORDER" action="_CREATE"/>
+                    <if-has-permission permission="VFORDER" action="_PURCHASE_CREATE"/>
+                </or>
+            </condition>
+            <link target="orderentry" link-type="anchor"/>
+        </menu-item>
     </menu>
 </menus>

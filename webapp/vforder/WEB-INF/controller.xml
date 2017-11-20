@@ -32,13 +32,100 @@
         <response name="success" type="view" value="findorders"/>
         <response name="error" type="view" value="findorders"/>
     </request-map>
+        <!-- Order Entry Requests -->
+    <request-map uri="orderentry">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="routeOrderEntry"/>
+        <response name="init" type="view" value="checkinits"/>
+        <response name="agreements" type="view" value="orderagreements"/>
+        <response name="cart" type="view" value="showcart"/>
+        <response name="error" type="view" value="checkinits"/>
+    </request-map>
+    <request-map uri="initorderentry">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="initializeOrderEntry"/>
+        <response name="success" type="request" value="orderentry"/>
+        <response name="error" type="view" value="checkinits"/>
+    </request-map>
+    <request-map uri="checkinits">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="checkinits"/>
+    </request-map>
+    <request-map uri="orderagreements">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="orderagreements"/>
+    </request-map>
+    <request-map uri="setOrderCurrencyAgreementShipDates">
+        <description>Handles setting the currency, agreement and shipment dates of an order.</description>
+        <security https="true" auth="true"/>
+        <event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="setOrderCurrencyAgreementShipDates"/>
+        <response name="success" type="request" value="orderentry"/>
+        <response name="error" type="request" value="orderagreements"/>
+    </request-map>
+    <request-map uri="setOrderAgreement">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="selectAgreement"/>
+        <response name="success" type="request" value="orderentry"/>
+        <response name="error" type="request" value="orderagreements"/>
+    </request-map>
+    <request-map uri="setOrderCurrency">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="setCurrency"/>
+        <response name="success" type="request" value="orderentry"/>
+        <response name="error" type="request" value="orderagreements"/>
+    </request-map>
+    <request-map uri="setOrderName">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="setOrderName"/>
+        <response name="success" type="request" value="orderentry"/>
+        <response name="error" type="request" value="orderentry"/>
+    </request-map>
+    <request-map uri="setPoNumber">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="setPoNumber"/>
+        <response name="success" type="request" value="orderentry"/>
+        <response name="error" type="request" value="orderentry"/>
+    </request-map>
+
+    <request-map uri="additem">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="addToCart"/>
+        <response name="success" type="request" value="orderentry"/>
+        <response name="survey" type="view" value="survey"/>
+        <response name="product" type="view" value="product"/>
+        <response name="error" type="request" value="orderentry"/>
+    </request-map>
+    <request-map uri="loadCartFromOrder">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="loadCartFromOrder"/>
+        <response name="success" type="request" value="finalizeOrder"/>
+        <response name="error" type="view" value="orderview"/>
+    </request-map>
+    <request-map uri="getProductInventoryAvailable">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="getInventoryAvailableByFacility"/>
+        <response name="success" type="view" value="showcart"/>
+        <response name="error" type="view" value="showcart"/>
+    </request-map>
+    <request-map uri="emptycart">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="destroyCart"/>
+        <response name="success" type="request" value="orderentry"/>
+        <response name="error" type="request" value="orderentry"/>
+    </request-map>
+    <request-map uri="LookupUserLoginAndPartyDetails"><security https="true" auth="true"/><response name="success" type="view" value="LookupUserLoginAndPartyDetails"/></request-map>
+   <request-map uri="LookupProduct"><security https="true" auth="true"/><response name="success" type="view" value="LookupProduct"/></request-map>
+    
+    
+    
+    
     
     <!-- View Mappings -->
     <view-map name="main" type="screen" page="component://vforder/widget/VforderScreens.xml#main"/>
-    <view-map name="findorders" type="screen" page="component://order/widget/ordermgr/OrderViewScreens.xml#OrderFindOrder"/>
-    
-    
-    
-    
-    
+    <view-map name="findorders" type="screen" page="component://vforder/widget/VforderScreens.xml#OrderFindOrder"/>
+    <view-map name="checkinits" type="screen" page="component://vforder/widget/VforderScreens.xml#CheckInits"/>
+    <view-map name="LookupUserLoginAndPartyDetails" type="screen" page="component://party/widget/partymgr/LookupScreens.xml#LookupUserLoginAndPartyDetails"/>
+    <view-map name="showcart" type="screen" page="component://vforder/widget/VforderScreens.xml#ShowCart"/>
+    <view-map name="orderagreements" type="screen" page="component://order/widget/ordermgr/OrderEntryScreens.xml#OrderAgreements"/>
+    <view-map name="LookupProduct" type="screen" page="component://product/widget/catalog/LookupScreens.xml#LookupProduct"/>
 </site-conf>

@@ -61,5 +61,71 @@
             </widgets>
         </section>
     </screen>
+    <screen name="CheckInits">
+        <section>
+            <actions>
+                <set field="titleProperty" value="PageTitleOrderInits"/>
+                <set field="headerItem" value="orderentry"/>
+                <script location="component://order/groovyScripts/entry/CheckInits.groovy"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <platform-specific><html><html-template location="component://order/template/entry/CheckInits.ftl"/></html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="ShowCart">
+        <section>
+            <actions>
+                <set field="titleProperty" value="PageTitleOrderShowCart"/>
+                <set field="productsummaryScreen" value="component://order/widget/ordermgr/OrderEntryCatalogScreens.xml#productsummary"/>
+                <property-to-field resource="order" property="orderPreference.giftEnable" field="giftEnable" default="Y"/>
+                <set field="promoUseDetailsInlineScreen" value="component://order/widget/ordermgr/OrderEntryCartScreens.xml#promoUseDetailsInline"/>
+                <script location="component://order/groovyScripts/entry/ShowCart.groovy"/>
+                <script location="component://order/groovyScripts/entry/ShowPromoText.groovy"/>
+                <entity-condition entity-name="ProductStorePromoAndAppl" list="allProductPromos" filter-by-date="true">
+                    <condition-list combine="and">
+                        <condition-expr field-name="manualOnly" value="Y"/>
+                        <condition-expr field-name="productStoreId" from-field="productStoreId"/>
+                    </condition-list>
+                    <order-by field-name="productPromoId"/>
+                </entity-condition>
+            </actions>
+            <widgets>
+                <decorator-screen name="CommonOrderEntryDecorator" location="component://order/widget/ordermgr/OrderEntryCommonScreens.xml">
+                    <decorator-section name="body">
+                        <platform-specific><html><html-template location="component://order/template/entry/cart/Javascript.ftl"/></html></platform-specific>
+                        <platform-specific><html><html-template location="component://order/template/entry/cart/ShowCart.ftl"/></html></platform-specific>
+                        <platform-specific><html><html-template location="component://order/template/entry/cart/AddItemsToShoppingList.ftl"/></html></platform-specific>
+                        <platform-specific><html><html-template location="component://order/template/entry/cart/ShowCartItems.ftl"/></html></platform-specific>
+                        <platform-specific><html><html-template location="component://order/template/entry/cart/PromoCodes.ftl"/></html></platform-specific>
+                        <platform-specific><html><html-template location="component://order/template/entry/cart/ManualPromotions.ftl"/></html></platform-specific>
+                        <platform-specific><html><html-template location="component://order/template/entry/cart/PromoText.ftl"/></html></platform-specific>
+                        <platform-specific><html><html-template location="component://order/template/entry/cart/AssociatedProducts.ftl"/></html></platform-specific>
+                        <platform-specific><html><html-template location="component://order/template/entry/cart/PromotionsApplied.ftl"/></html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="OrderAgreements">
+        <section>
+            <actions>
+                <set field="titleProperty" value="PageTitleOrderAgreements"/>
+                <set field="headerItem" value="orderentry"/>
+                <script location="component://order/groovyScripts/entry/OrderAgreements.groovy"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <platform-specific><html><html-template location="component://order/template/entry/OrderAgreements.ftl"/></html></platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
 
 </screens>
