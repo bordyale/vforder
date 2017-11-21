@@ -31,6 +31,31 @@
             </widgets>
         </section>
     </screen>
+    <screen name="CommonOrderEntryDecorator">
+        <section>
+            <actions>
+                <set field="headerItem" value="orderentry"/>
+                <script location="component://order/groovyScripts/entry/SetShoppingCart.groovy"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                   <!--  <decorator-section name="left-column">
+                        <include-screen name="leftbar"/>
+                    </decorator-section> -->
+                    <decorator-section name="body">
+                        <section>
+                            <widgets>
+                                <platform-specific>
+                                    <html><html-template location="component://order/template/entry/OrderEntryTabBar.ftl"/></html>
+                                </platform-specific>
+                                <decorator-section-include name="body"/>
+                            </widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
     
     <screen name="OrderFindOrder">
         <section>
@@ -80,6 +105,7 @@
     <screen name="ShowCart">
         <section>
             <actions>
+            	<set field="headerItem" value="orderentry"/>
                 <set field="titleProperty" value="PageTitleOrderShowCart"/>
                 <set field="productsummaryScreen" value="component://order/widget/ordermgr/OrderEntryCatalogScreens.xml#productsummary"/>
                 <property-to-field resource="order" property="orderPreference.giftEnable" field="giftEnable" default="Y"/>
@@ -95,17 +121,17 @@
                 </entity-condition>
             </actions>
             <widgets>
-                <decorator-screen name="CommonOrderEntryDecorator" location="component://order/widget/ordermgr/OrderEntryCommonScreens.xml">
+                <decorator-screen name="CommonOrderEntryDecorator">
                     <decorator-section name="body">
                         <platform-specific><html><html-template location="component://order/template/entry/cart/Javascript.ftl"/></html></platform-specific>
                         <platform-specific><html><html-template location="component://order/template/entry/cart/ShowCart.ftl"/></html></platform-specific>
-                        <platform-specific><html><html-template location="component://order/template/entry/cart/AddItemsToShoppingList.ftl"/></html></platform-specific>
+                        <!-- <platform-specific><html><html-template location="component://order/template/entry/cart/AddItemsToShoppingList.ftl"/></html></platform-specific> -->
                         <platform-specific><html><html-template location="component://order/template/entry/cart/ShowCartItems.ftl"/></html></platform-specific>
-                        <platform-specific><html><html-template location="component://order/template/entry/cart/PromoCodes.ftl"/></html></platform-specific>
-                        <platform-specific><html><html-template location="component://order/template/entry/cart/ManualPromotions.ftl"/></html></platform-specific>
-                        <platform-specific><html><html-template location="component://order/template/entry/cart/PromoText.ftl"/></html></platform-specific>
-                        <platform-specific><html><html-template location="component://order/template/entry/cart/AssociatedProducts.ftl"/></html></platform-specific>
-                        <platform-specific><html><html-template location="component://order/template/entry/cart/PromotionsApplied.ftl"/></html></platform-specific>
+                        <!-- <platform-specific><html><html-template location="component://order/template/entry/cart/PromoCodes.ftl"/></html></platform-specific> -->
+                        <!-- <platform-specific><html><html-template location="component://order/template/entry/cart/ManualPromotions.ftl"/></html></platform-specific> -->
+                        <!-- <platform-specific><html><html-template location="component://order/template/entry/cart/PromoText.ftl"/></html></platform-specific> -->
+                        <!-- <platform-specific><html><html-template location="component://order/template/entry/cart/AssociatedProducts.ftl"/></html></platform-specific> -->
+                        <!-- <platform-specific><html><html-template location="component://order/template/entry/cart/PromotionsApplied.ftl"/></html></platform-specific> -->
                     </decorator-section>
                 </decorator-screen>
             </widgets>
@@ -121,7 +147,7 @@
             <widgets>
                 <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
                     <decorator-section name="body">
-                        <platform-specific><html><html-template location="component://order/template/entry/OrderAgreements.ftl"/></html></platform-specific>
+                        <platform-specific><html><html-template location="component://vforder/template/OrderAgreements.ftl"/></html></platform-specific>
                     </decorator-section>
                 </decorator-screen>
             </widgets>

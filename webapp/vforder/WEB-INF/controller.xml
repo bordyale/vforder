@@ -113,9 +113,54 @@
         <response name="success" type="request" value="orderentry"/>
         <response name="error" type="request" value="orderentry"/>
     </request-map>
+    <request-map uri="modifycart">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="modifyCart"/>
+        <response name="success" type="request" value="orderentry"/>
+        <response name="error" type="request" value="orderentry"/>
+    </request-map>
+    <request-map uri="finalizeOrder">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.apache.ofbiz.order.shoppingcart.CheckOutEvents" invoke="finalizeOrderEntry"/>
+        <response name="addparty" type="view" value="setAdditionalParty"/>
+        <response name="customer" type="view" value="custsetting"/>
+        <response name="shipping" type="view" value="confirm"/>
+        <response name="shippingAddress" type="view" value="EditShipAddress"/>
+        <response name="options" type="view" value="optionsetting"/>
+        <response name="payment" type="request" value="calcShippingBeforePayment"/>
+        <response name="paymentError" type="request" value="calcShippingBeforePayment"/>
+        <response name="term" type="view" value="confirm"/>
+        <response name="shipGroups" type="view" value="SetItemShipGroups"/>
+        <response name="sales" type="request" value="calcShipping"/>
+        <response name="po" type="request" value="calcTax"/>
+        <response name="error" type="request" value="orderentry"/>
+    </request-map>
+    <request-map uri="processorder">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.apache.ofbiz.order.shoppingcart.CheckOutEvents" invoke="createOrder"/>
+        <response name="sales_order" type="request" value="checkBlackList"/>
+        <response name="work_order" type="request" value="checkBlackList"/>
+        <response name="purchase_order" type="request" value="clearpocart"/>
+        <response name="error" type="view" value="confirm"/>
+    </request-map>
+    <request-map uri="confirmOrder">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="confirm"/>
+    </request-map>
+    <request-map uri="clearpocart">
+        <security https="true" direct-request="false"/>
+        <event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="destroyCart"/>
+        <response name="success" type="view" value="ordercomplete"/>
+        <response name="error" type="view" value="confirm"/>
+    </request-map>
+    
+    
+    
+    
+    
     <request-map uri="LookupUserLoginAndPartyDetails"><security https="true" auth="true"/><response name="success" type="view" value="LookupUserLoginAndPartyDetails"/></request-map>
    <request-map uri="LookupProduct"><security https="true" auth="true"/><response name="success" type="view" value="LookupProduct"/></request-map>
-    
+   <request-map uri="LookupSupplierProduct"><security https="true" auth="true"/><response name="success" type="view" value="LookupSupplierProduct"/></request-map>
     
     
     
@@ -126,6 +171,10 @@
     <view-map name="checkinits" type="screen" page="component://vforder/widget/VforderScreens.xml#CheckInits"/>
     <view-map name="LookupUserLoginAndPartyDetails" type="screen" page="component://party/widget/partymgr/LookupScreens.xml#LookupUserLoginAndPartyDetails"/>
     <view-map name="showcart" type="screen" page="component://vforder/widget/VforderScreens.xml#ShowCart"/>
-    <view-map name="orderagreements" type="screen" page="component://order/widget/ordermgr/OrderEntryScreens.xml#OrderAgreements"/>
+    <view-map name="orderagreements" type="screen" page="component://vforder/widget/VforderScreens.xml#OrderAgreements"/>
     <view-map name="LookupProduct" type="screen" page="component://product/widget/catalog/LookupScreens.xml#LookupProduct"/>
+    <view-map name="LookupSupplierProduct" type="screen" page="component://product/widget/catalog/LookupScreens.xml#LookupSupplierProduct"/>
+    <view-map name="confirm" type="screen" page="component://order/widget/ordermgr/OrderEntryOrderScreens.xml#ConfirmOrder"/>
+    <view-map name="shipsetting" type="screen" page="component://order/widget/ordermgr/OrderEntryOrderScreens.xml#ShipSettings"/>
+    <view-map name="ordercomplete" type="screen" page="component://order/widget/ordermgr/OrderViewScreens.xml#OrderHeaderView"/>
 </site-conf>
