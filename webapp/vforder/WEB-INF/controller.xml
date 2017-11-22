@@ -32,6 +32,10 @@
         <response name="success" type="view" value="findorders"/>
         <response name="error" type="view" value="findorders"/>
     </request-map>
+    <request-map uri="orderview">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="orderview"/>
+    </request-map>
         <!-- Order Entry Requests -->
     <request-map uri="orderentry">
         <security https="true" auth="true"/>
@@ -177,4 +181,5 @@
     <view-map name="confirm" type="screen" page="component://vforder/widget/VforderScreens.xml#ConfirmOrder"/>
     <view-map name="shipsetting" type="screen" page="component://order/widget/ordermgr/OrderEntryOrderScreens.xml#ShipSettings"/>
     <view-map name="ordercomplete" type="screen" page="component://order/widget/ordermgr/OrderViewScreens.xml#OrderHeaderView"/>
+    <view-map name="orderview" type="screen" page="component://order/widget/ordermgr/OrderViewScreens.xml#OrderHeaderView"/>
 </site-conf>
