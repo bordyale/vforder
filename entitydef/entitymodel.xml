@@ -9,4 +9,42 @@
     <copyright></copyright>
     <version></version>
 
+
+    <entity entity-name="ShippingHeader"
+            package-name="org.apache.ofbiz.order.shipping"
+            never-cache="true"
+            title="Shipping Header Entity">
+      <field name="shippingId" type="id-ne"></field>
+      <field name="estimatedShipDate" type="date-time"></field>
+      <prim-key field="shippingId"/>
+      <relation type="many" rel-entity-name="ShippingItem">
+        <key-map field-name="shippingId"/>
+      </relation>
+    </entity>
+    
+    <entity entity-name="ShippingItem"
+            package-name="org.apache.ofbiz.order.shipping"
+            never-cache="true"
+            title="Shipping Item Entity">
+      <field name="shippingId" type="id-ne"></field>
+      <field name="shippingItemSeqId" type="id-ne"></field>
+      <field name="orderId" type="id-ne"></field>
+      <field name="orderItemSeqId" type="id-ne"></field>
+      <field name="quantityToShip" type="fixed-point" enable-audit-log="true"></field>
+      <prim-key field="shippingId"/>
+      <prim-key field="shippingItemSeqId"/>
+      <relation type="one" fk-name="ORDER_ITEM_HDR" rel-entity-name="OrderItem">
+        <key-map field-name="orderId"/>
+      </relation>
+      <relation type="one" fk-name="ORDER_ITEM_SEQ_ID_HDR" rel-entity-name="OrderItem">
+        <key-map field-name="orderItemSeqId"/>
+      </relation>
+      <relation type="one" fk-name="SHIPPING_HDR" rel-entity-name="ShippingHeader">
+        <key-map field-name="shippingId"/>
+      </relation>
+    </entity>
+
+
+
+
 </entitymodel>

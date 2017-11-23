@@ -3,4 +3,23 @@
         xmlns="http://ofbiz.apache.org/Widget-Form" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Form http://ofbiz.apache.org/dtds/widget-form.xsd">
 
 
+
+
+
+	<form name="EditShipping" type="single" target="updateShipping" title="" default-map-name="shipping" default-entity-name="ShippingHeader">
+        <alt-target use-when="example==null" target="createShipping"/>
+        <auto-fields-service service-name="updateShipping"/>
+        <field use-when="shipping!=null" name="shippingId" title="${uiLabelMap.ShippingShippingId}"><display/></field>
+        <field use-when="shipping==null @and shippingId==null" name="shippingId" title="${uiLabelMap.ShippingShippingId}"><ignored/></field>
+        <field use-when="shipping==null @and exampleId!=null" name="shippingId" title="${uiLabelMap.ShippingShippingId}"><display description="${uiLabelMap.CommonCannotBeFound}: [${shippingId}]" also-hidden="false"/></field>
+     
+        <field name="submitButton" use-when="shipping==null" title="${uiLabelMap.CommonCreate}"><submit button-type="button"/></field>
+        <field name="submitButton" use-when="shipping!=null" title="${uiLabelMap.CommonUpdate}"><submit button-type="button"/></field>
+    </form>
+
+
+
+
+
+
 </forms>

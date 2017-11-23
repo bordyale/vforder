@@ -18,5 +18,19 @@
             </condition>
             <link target="orderentry" link-type="anchor"/>
         </menu-item>
+        <menu-item name="findshippings" title="${uiLabelMap.ShippingFindShipping}">
+            <condition>
+                <if-has-permission permission="VFORDER" action="_VIEW"/>
+            </condition>
+            <link target="findshippings"/>
+        </menu-item>
+        <menu-item name="shippingentry" title="${uiLabelMap.ShippingShippingEntry}">
+            <condition>
+                <or>
+                    <if-has-permission permission="VFORDER" action="_CREATE"/>
+                </or>
+            </condition>
+            <link target="shippingentry" link-type="anchor"/>
+        </menu-item>
     </menu>
 </menus>

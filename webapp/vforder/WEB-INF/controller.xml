@@ -157,7 +157,19 @@
         <response name="success" type="view" value="ordercomplete"/>
         <response name="error" type="view" value="confirm"/>
     </request-map>
-    
+    <!-- Shipping Part -->
+    <request-map uri="findshippings">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="findshippings"/>
+    </request-map>
+    <request-map uri="shippingentry">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="shippingentry"/>
+    </request-map>
+    <request-map uri="EditShippingLayer">
+    	<security https="true" auth="true"/>
+    	<response name="success" type="view" value="EditShippingLayer"/>
+    </request-map>
     
     
     
@@ -182,4 +194,8 @@
     <view-map name="shipsetting" type="screen" page="component://order/widget/ordermgr/OrderEntryOrderScreens.xml#ShipSettings"/>
     <view-map name="ordercomplete" type="screen" page="component://order/widget/ordermgr/OrderViewScreens.xml#OrderHeaderView"/>
     <view-map name="orderview" type="screen" page="component://order/widget/ordermgr/OrderViewScreens.xml#OrderHeaderView"/>
+    <view-map name="findshippings" type="screen" page="component://vforder/widget/VforderScreens.xml#ShippingFindShipping"/>
+    <view-map name="shippingentry" type="screen" page="component://vforder/widget/VforderScreens.xml#ShippingEntryShipping"/>
+    <view-map name="EditShippingLayer" type="screen" page="component://vforder/widget/VforderScreens.xml#EditShippingLayer"/>
+    
 </site-conf>

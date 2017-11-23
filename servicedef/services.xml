@@ -9,6 +9,35 @@
         <description>
             Dummy service to prevent empty files and syntax error - Remove when the 1st real service will be added here 
         </description>
-    </service> 
+    </service>
+    <service name="createShipping" default-entity-name="ShippingHeader" engine="entity-auto" invoke="create" auth="true">
+        <description>Create a Example</description>
+        <permission-service service-name="shippingGenericPermission" main-action="CREATE"/>
+        <auto-attributes include="pk" mode="OUT" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <override name="estimatedShipDate" optional="false"/>
+    </service>
+    <service name="updateShipping" default-entity-name="ShippingHeader" engine="entity-auto" invoke="update" auth="true">
+        <description>Update a Example</description>
+        <permission-service service-name="shippingGenericPermission" main-action="UPDATE"/>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+    <service name="deleteShipping" default-entity-name="ShippingHeader" engine="entity-auto" invoke="delete" auth="true">
+        <description>Delete a Example</description>
+        <permission-service service-name="shippingGenericPermission" main-action="DELETE"/>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+    </service>
+    
+    <!-- Permission Services -->
+    <service name="shippingGenericPermission" engine="simple"
+             location="component://vforder/minilang/VforderPermissionServices.xml" invoke="shippingGenericPermission">
+        <implements service="permissionInterface"/>
+    </service>
+    
+    
+    
+    
+     
     
 </services>
