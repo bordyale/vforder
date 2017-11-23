@@ -170,6 +170,26 @@
     	<security https="true" auth="true"/>
     	<response name="success" type="view" value="EditShippingLayer"/>
     </request-map>
+    <request-map uri="EditShipping">
+    	<security https="true" auth="true"/>
+    	<response name="success" type="view" value="EditShipping"/>
+   	</request-map>
+    <request-map uri="createShipping">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createShipping"/>
+        <response name="success" type="request-redirect" value="EditShipping">
+            <redirect-parameter name="shippingId"/>
+        </response>
+        <response name="error" type="view" value="findshippings"/>
+    </request-map>
+    <request-map uri="updateShipping">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateShipping"/>
+        <response name="success" type="request-redirect" value="EditShipping">
+            <redirect-parameter name="shippingId"/>
+        </response>
+        <response name="error" type="view" value="EditShipping"/>
+    </request-map>
     
     
     
@@ -197,5 +217,6 @@
     <view-map name="findshippings" type="screen" page="component://vforder/widget/VforderScreens.xml#ShippingFindShipping"/>
     <view-map name="shippingentry" type="screen" page="component://vforder/widget/VforderScreens.xml#ShippingEntryShipping"/>
     <view-map name="EditShippingLayer" type="screen" page="component://vforder/widget/VforderScreens.xml#EditShippingLayer"/>
+    <view-map name="EditShipping" type="screen" page="component://vforder/widget/VforderScreens.xml#EditShipping"/>
     
 </site-conf>
