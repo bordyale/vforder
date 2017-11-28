@@ -3,8 +3,14 @@
         xmlns="http://ofbiz.apache.org/Widget-Form" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Form http://ofbiz.apache.org/dtds/widget-form.xsd">
 
 	<form name="FindShippings" type="single" target="findshippings" default-entity-name="ShippingHeader">
+		<field name="noConditionFind"><hidden value="Y"/><!-- if this isn't there then with all fields empty no query will be done --></field>
+		<field name="shippingId"><text-find ignore-case="true"/></field>
+		<!-- <field name="fromDate"><date-time/></field>
+        <field name="thruDate"><date-time/></field> -->
+        <field name="estimatedShipDate"><date-find type="date"/></field>
+        <field name="searchButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit"><submit button-type="button"/></field>
         
-        <field name="exampleId" title="${uiLabelMap.ExampleExampleId}"><text-find/></field>
+        <!-- <field name="exampleId" title="${uiLabelMap.ExampleExampleId}"><text-find/></field>
         <field name="exampleName" title="${uiLabelMap.CommonName}"><text-find/></field>
         <field name="exampleTypeId" title="${uiLabelMap.CommonType}">
             <drop-down allow-empty="true" current-description="">
@@ -29,8 +35,34 @@
         <field name="exportButton" position="2" widget-style="smallSubmit" title=" ">
             <hyperlink also-hidden="false" target-type="plain" description="${uiLabelMap.CommonExport}"
                        target="javascript: document.FindExamples.action='ListExampleExport'; document.FindExamples.submit();"/>
-        </field>
+        </field> -->
     </form>
+    
+    <form name="ListShippings" type="list" list-name="listIt" paginate-target="findshippings" odd-row-style="alternate-row" default-table-style="basic-table hover-bar">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="ShippingHeader"/>
+                <field-map field-name="orderBy" value="shippingId"/>              
+            </service>
+        </actions>
+        
+        <field name="shippingId" title="${uiLabelMap.ShippingShippingId}" widget-style="buttontext">
+            <hyperlink description="${shippingId}" target="EditShipping" also-hidden="false">
+                <parameter param-name="shippingId"/>
+            </hyperlink>
+        </field>
+        
+        
+        
+         <!-- <field name="shippingId"><display/></field> -->
+        <!-- <field name="shippingId" widget-style="buttontext">
+            <hyperlink description="${billingAccountId}" target="EditBillingAccount">
+                <parameter param-name="billingAccountId"/>
+            </hyperlink>
+        </field> -->
+        <field name="estimatedShipDate"><display/></field>
+	</form>
 
 
 

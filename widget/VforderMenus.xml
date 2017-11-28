@@ -25,4 +25,22 @@
             <link target="findshippings"/>
         </menu-item>
     </menu>
+    
+    
+    <menu name="EditShipping" extends="CommonTabBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+        <menu-item name="EditShipping" title="${uiLabelMap.ShippingShippping}">
+            <link target="EditShipping">
+                <parameter param-name="shippingId"/>
+            </link>
+        </menu-item>
+        <menu-item name="EditShippingItems" title="${uiLabelMap.CommonItems}">
+            <link target="EditShippingItems">
+                <parameter param-name="shippingId"/>
+            </link>
+        </menu-item>
+    </menu>
+    
+    
+    
+    
 </menus>
