@@ -76,5 +76,31 @@
         <field name="submitButton" use-when="shipping==null" title="${uiLabelMap.CommonCreate}"><submit button-type="button"/></field>
         <field name="submitButton" use-when="shipping!=null" title="${uiLabelMap.CommonUpdate}"><submit button-type="button"/></field>
     </form>
+    
+    <form name="EditShippingItems" type="single" target="updateShipping" title="" default-map-name="shipping" default-entity-name="ShippingHeader">
+        <alt-target use-when="example==null" target="createShipping"/>
+        
+        <field name="geoName" title="${uiLabelMap.CommonGeoName}" tooltip="${uiLabelMap.ExampleLookupFields4}" tooltip-style="button-text">
+            <lookup target-form-name="LookupOrder" description-field-name="geoId"/>
+        </field>
+        <!-- This field may be hidden and the name rendered in geoName using default-value if geoId is known when loading the form-->
+        <field name="geoId" title="${uiLabelMap.CommonGeoId}"><text/></field><!-- the text field is only used for rendering. In the "real life" you would use the hidden field commented below to pass the data to the request  -->
+        <!--field name="geoId"><hidden/></field-->
+
+        
+        <sort-order>
+            <field-group>
+                <sort-field name="geoName"/>
+                <sort-field name="geoId"/>
+            </field-group>
+        </sort-order>
+        
+        
+        
+        
+    </form>
+    
+    
+    
 
 </forms>
