@@ -34,7 +34,42 @@
                             <condition>
                                 <if-has-permission permission="VFORDER" action="_VIEW"/>
                             </condition>
+                            <widgets>                            
+                                <decorator-section-include name="body"/>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3">${uiLabelMap.VforderViewPermissionError}</label>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <screen name="VfFindorderCommonDecorator">
+        <section>
+            <actions>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="VFORDER" action="_VIEW"/>
+                            </condition>
                             <widgets>
+                            	<section>
+				                    <condition>
+				                        <if-empty field="titleProperty"/>
+				                    </condition>
+				                    <widgets>
+				                        <container style="page-title"><label text="${title}"></label></container>
+				                    </widgets>
+				                    <fail-widgets>
+				                        <container style="page-title"><label text="${uiLabelMap[titleProperty]}"></label></container>
+				                    </fail-widgets>
+				                </section>
                                 <decorator-section-include name="body"/>
                             </widgets>
                             <fail-widgets>

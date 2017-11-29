@@ -194,9 +194,11 @@
         </response>
         <response name="error" type="view" value="EditShipping"/>
     </request-map>
-    <request-map uri="LookupOrder">
-    	<security https="true" auth="true"/>
-    	<response name="success" type="view" value="LookupOrder"/>
+    <request-map uri="AddShippingItem">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="AddShippingItem">
+        	<redirect-parameter name="shippingId"/>
+        </response>
     </request-map>
     
     
@@ -227,6 +229,6 @@
     <view-map name="EditShippingLayer" type="screen" page="component://vforder/widget/VforderScreens.xml#EditShippingLayer"/>
     <view-map name="EditShipping" type="screen" page="component://vforder/widget/VforderScreens.xml#EditShipping"/>
     <view-map name="EditShippingItems" type="screen" page="component://vforder/widget/VforderScreens.xml#EditShippingItems"/>
-    <view-map name="LookupOrder" type="screen" page="component://vforder/widget/VforderScreens.xml#LookupOrder"/>
+    <view-map name="AddShippingItem" type="screen" page="component://vforder/widget/VforderScreens.xml#AddShippingItem"/>
     
 </site-conf>

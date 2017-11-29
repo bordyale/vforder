@@ -83,9 +83,10 @@
     <screen name="OrderFindOrder">
         <section>
             <actions>
-                <set field="titleProperty" value="OrderFindOrder"/>
-                <set field="headerItem" value="findorders"/>
-                <script location="component://order/groovyScripts/order/FindOrders.groovy"/>
+            	<set field="shippingId" from-field="parameters.shippingId"/>
+                <set field="titleProperty" value="${shippingId}"/>
+                <set field="headerItem" value="findorders"/>                
+                <script location="component://vforder/groovyScripts/FindOrders.groovy"/>
                 <script location="component://content/groovyScripts/print/FindPrinters.groovy"/>
 
                 <!-- asmselect parameters, must be prefixed by asm_ for SetMultipleSelectJs.ftl -->
@@ -98,12 +99,12 @@
                 <set field="asm_title" value="${uiLabelMap.OrderPartySelectRoleForParty}"/>
             </actions>
             <widgets>
-                <decorator-screen name="CommonOrderViewDecorator">
+            	<decorator-screen name="CommonOrderViewDecorator">                
                     <decorator-section name="body">
-                        <platform-specific><html><html-template location="component://common/template/includes/SetMultipleSelectJs.ftl"/></html></platform-specific>
+                    	<platform-specific><html><html-template location="component://common/template/includes/SetMultipleSelectJs.ftl"/></html></platform-specific>
                         <platform-specific>
-                            <html><html-template location="component://order/template/order/FindOrders.ftl"/></html>
-                        </platform-specific>
+                           <html><html-template location="component://vforder/template/FindOrders.ftl"/></html>
+                        </platform-specific>    
                     </decorator-section>
                 </decorator-screen>
             </widgets>
@@ -210,7 +211,7 @@
             <actions>
                 <set field="titleProperty" value="ShippingFindShipping"/>
                 <set field="headerItem" value="findshippings"/>
-                <set field="exampleCtx" from-field="parameters"/>
+                
                 <set field="formShippingListName" value="${groovy: return 'ListShippings';}"/>
             
                 <!-- asmselect parameters, must be prefixed by asm_ for SetMultipleSelectJs.ftl -->
@@ -278,39 +279,61 @@
     <screen name="EditShippingItems">
         <section>
             <actions>
-                <set field="titleProperty" value="PageTitleEditShipping"/>
                 <set field="tabButtonItem" value="EditShippingItems"/>
                 <set field="headerItem" value="findshippings"/>
                 <set field="shippingId" from-field="parameters.shippingId"/>
+                <set field="titleProperty" value="${shippingId}"/>
                 <entity-one entity-name="ShippingHeader" value-field="shipping"/>
             </actions>
             <widgets>
                 <decorator-screen name="VforderShippingCommonDecorator" location="${parameters.mainDecoratorLocation}">
                     <decorator-section name="body">
-                        <include-form name="EditShippingItems" location="component://vforder/widget/VforderForms.xml"/>
+                    	<section>
+                   		<widgets>
+                   			<decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
+                    				<decorator-section name="menu-bar">
+                                        <container style="button-bar"><link target="AddShippingItem" text="${uiLabelMap.AddShippingItem}" style="buttontext create"><parameter param-name="shippingId"/></link></container>
+                                    </decorator-section>
+                                   <!--  <decorator-section name="search-options">
+                                        <include-form name="EditShippingItems" location="component://vforder/widget/VforderForms.xml"/>
+                                    </decorator-section> -->
+                                    <decorator-section name="search-results">
+                                        <include-form name="ListShippingItems" location="component://vforder/widget/VforderForms.xml"/>
+                                    </decorator-section>
+                            </decorator-screen>
+                         </widgets>           
+            		</section>
                     </decorator-section>
                 </decorator-screen>
             </widgets>
         </section>
     </screen>
     
-    <screen name="LookupOrder">
+    <screen name="AddShippingItem">
         <section>
             <actions>
-                <set field="titleProperty" value="CommonCompany"/>
-                <entity-condition entity-name="PartyAcctgPrefAndGroup" list="companyList" distinct="true">
-                    <condition-list>
-                        <condition-expr field-name="roleTypeId" operator="equals" value="INTERNAL_ORGANIZATIO"/>
-                    </condition-list>
-                    <select-field field-name="partyId"/>
-                    <select-field field-name="groupName"/>
-                </entity-condition>
+                <set field="tabButtonItem" value="EditShippingItems"/>
+                <set field="headerItem" value="findshippings"/>
+                <set field="shippingId" from-field="parameters.shippingId"/>
+                <set field="titleProperty" value="${shippingId}"/>
+                
+                <script location="component://order/groovyScripts/order/FindOrders.groovy"/>
+                <script location="component://content/groovyScripts/print/FindPrinters.groovy"/>
+
+                <!-- asmselect parameters, must be prefixed by asm_ for SetMultipleSelectJs.ftl -->
+                <set field="asm_multipleSelectForm"  value="lookuporder"/>
+                <set field="asm_multipleSelect"  value="roleTypeId"/>
+                <set field="asm_formSize" value="1000"/>
+                <set field="asm_asmListItemPercentOfForm" value="95"/>
+                <set field="asm_sortable" value="false"/>
+                <entity-one entity-name="ShippingHeader" value-field="shipping"/>
             </actions>
             <widgets>
-                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                <decorator-screen name="VfFindorderCommonDecorator" location="${parameters.mainDecoratorLocation}">
                     <decorator-section name="body">
+                        <platform-specific><html><html-template location="component://common/template/includes/SetMultipleSelectJs.ftl"/></html></platform-specific>
                         <platform-specific>
-                            <!-- <html><html-template location="component://common/template/includes/listCompanies.ftl"/></html> -->
+                            <html><html-template location="component://vforder/template/FindOrders.ftl"/></html>
                         </platform-specific>
                     </decorator-section>
                 </decorator-screen>
@@ -318,8 +341,4 @@
         </section>
     </screen>
     
-    
-
-
-
 </screens>

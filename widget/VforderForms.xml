@@ -95,10 +95,30 @@
             </field-group>
         </sort-order>
         
-        
-        
-        
     </form>
+    
+    
+     <form name="ListShippingItems" type="list" list-name="listIt" paginate-target="findshippings" odd-row-style="alternate-row" default-table-style="basic-table hover-bar">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="ShippingItem"/>
+                <field-map field-name="orderBy" value="shippingItemSeqId"/>              
+            </service>
+        </actions>
+        
+       <field name="shippingId"><display/></field>
+        
+        
+        
+         <!-- <field name="shippingId"><display/></field> -->
+        <!-- <field name="shippingId" widget-style="buttontext">
+            <hyperlink description="${billingAccountId}" target="EditBillingAccount">
+                <parameter param-name="billingAccountId"/>
+            </hyperlink>
+        </field> -->
+        
+	</form>
     
     
     
