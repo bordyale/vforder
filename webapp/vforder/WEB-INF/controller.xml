@@ -196,21 +196,15 @@
     </request-map>
     <request-map uri="AddShippingItem">
         <security https="true" auth="true"/>
+        <event type="service" invoke="findOrders"/>
         <response name="success" type="view" value="AddShippingItem">
         	<redirect-parameter name="shippingId"/>
         </response>
     </request-map>
-    
-    
-    
-    
+
     <request-map uri="LookupUserLoginAndPartyDetails"><security https="true" auth="true"/><response name="success" type="view" value="LookupUserLoginAndPartyDetails"/></request-map>
    <request-map uri="LookupProduct"><security https="true" auth="true"/><response name="success" type="view" value="LookupProduct"/></request-map>
    <request-map uri="LookupSupplierProduct"><security https="true" auth="true"/><response name="success" type="view" value="LookupSupplierProduct"/></request-map>
-    
-    
-    
-    
     <!-- View Mappings -->
     <view-map name="main" type="screen" page="component://vforder/widget/VforderScreens.xml#main"/>
     <view-map name="findorders" type="screen" page="component://vforder/widget/VforderScreens.xml#OrderFindOrder"/>

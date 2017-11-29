@@ -316,8 +316,9 @@
                 <set field="headerItem" value="findshippings"/>
                 <set field="shippingId" from-field="parameters.shippingId"/>
                 <set field="titleProperty" value="${shippingId}"/>
-                
-                <script location="component://order/groovyScripts/order/FindOrders.groovy"/>
+                	
+                <script location="component://vforder/groovyScripts/FindOrders.groovy"/>
+
                 <script location="component://content/groovyScripts/print/FindPrinters.groovy"/>
 
                 <!-- asmselect parameters, must be prefixed by asm_ for SetMultipleSelectJs.ftl -->

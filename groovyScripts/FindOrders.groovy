@@ -24,7 +24,6 @@ import org.apache.ofbiz.base.util.*
 import org.apache.ofbiz.entity.util.*
 
 module = "FindOrders.groovy"
-
 // get the order types
 orderTypes = from("OrderType").orderBy("description").queryList()
 context.orderTypes = orderTypes
@@ -178,3 +177,13 @@ context.lowIndex = lowIndex
 
 highIndex = request.getAttribute("highIndex")
 context.highIndex = highIndex
+
+
+
+formTarget= "searchorders"
+shippingId = request.getParameter("shippingId")
+context.shippingId = shippingId
+if (shippingId) {
+    formTarget = "AddShippingItem"
+}
+context.formTarget = formTarget

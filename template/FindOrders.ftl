@@ -25,7 +25,7 @@ function lookupOrders(click) {
         document.lookuporder.action = "<@ofbizUrl>orderview</@ofbizUrl>";
         document.lookuporder.method = "get";
     } else {
-        document.lookuporder.action = "<@ofbizUrl>searchorders</@ofbizUrl>";
+        document.lookuporder.action = "<@ofbizUrl>${formTarget}</@ofbizUrl>";
     }
 
     if (click) {
@@ -76,7 +76,10 @@ function toggleOrderIdList() {
 
 <#if security.hasEntityPermission("VFORDER", "_VIEW", session)>
 <#if parameters.hideFields?has_content>
-<form name='lookupandhidefields${requestParameters.hideFields?default("Y")}' method="post" action="<@ofbizUrl>searchorders</@ofbizUrl>">
+<form name='lookupandhidefields${requestParameters.hideFields?default("Y")}' method="post" action="<@ofbizUrl>${formTarget}</@ofbizUrl>">
+  <#if shippingId?has_content>
+    	<input type="hidden" name="shippingId" value="${shippingId}"/>
+    </#if>
   <#if parameters.hideFields?default("N")=='Y'>
     <input type="hidden" name="hideFields" value="N"/>
   <#else>
@@ -117,11 +120,14 @@ function toggleOrderIdList() {
   <input type='hidden' name='gatewayScoreResult' value='${requestParameters.gatewayScoreResult!}'/>
 </form>
 </#if>
-<form method="post" name="lookuporder" id="lookuporder" action="<@ofbizUrl>searchorders</@ofbizUrl>" onsubmit="javascript:lookupOrders();">
+<form method="post" name="lookuporder" id="lookuporder" action="<@ofbizUrl>${formTarget}</@ofbizUrl>" onsubmit="javascript:lookupOrders();">
 <input type="hidden" name="lookupFlag" value="Y"/>
 <input type="hidden" name="hideFields" value="Y"/>
 <input type="hidden" name="viewSize" value="${viewSize}"/>
 <input type="hidden" name="viewIndex" value="${viewIndex}"/>
+<#if shippingId?has_content>
+    	<input type="hidden" name="shippingId" value="${shippingId}"/>
+</#if>
 
 <div id="findOrders" class="screenlet">
   <div class="screenlet-title-bar">
@@ -196,23 +202,28 @@ function toggleOrderIdList() {
               </#if>
               
               
-              <tr>
-                <td width='25%' align='right' class='label'>${uiLabelMap.OrderOrderType}</td>
-                <td width='5%'>&nbsp;</td>
-                <td align='left'>
-                  <select name='orderTypeId'>
-                    <#if currentType?has_content>
-                    <option value="${currentType.orderTypeId}">${currentType.get("description", locale)}</option>
-                    <option value="${currentType.orderTypeId}">---</option>
-                    </#if>
-                    <option value="">${uiLabelMap.OrderAnyOrderType}</option>
-                    <#list orderTypes as orderType>
-                      <option value="${orderType.orderTypeId}">${orderType.get("description", locale)}</option>
-                    </#list>
-                  </select>
-                </td>
-              </tr>
-             
+              <#if !shippingId?has_content>
+              
+	              <tr>
+	                <td width='25%' align='right' class='label'>${uiLabelMap.OrderOrderType}</td>
+	                <td width='5%'>&nbsp;</td>
+	                <td align='left'>
+	                  <select name='orderTypeId'>
+	                    <#if currentType?has_content>
+	                    <option value="${currentType.orderTypeId}">${currentType.get("description", locale)}</option>
+	                    <option value="${currentType.orderTypeId}">---</option>
+	                    </#if>
+	                    <option value="">${uiLabelMap.OrderAnyOrderType}</option>
+	                    <#list orderTypes as orderType>
+	                      <option value="${orderType.orderTypeId}">${orderType.get("description", locale)}</option>
+	                    </#list>
+	                  </select>
+	                </td>
+	              </tr>
+              
+              <#else>
+              	<input type="hidden" name="orderTypeId" value="SALES_ORDER"/>
+             </#if>
               
               <tr>
                 <td width='25%' align='right' class='label'>${uiLabelMap.CommonStatus}</td>
@@ -312,7 +323,7 @@ function toggleOrderIdList() {
                 <td width='25%' align='right'>&nbsp;</td>
                 <td width='5%'>&nbsp;</td>
                 <td align='left'>
-                    <input type="hidden" name="showAll" value="Y"/>
+                    <input type="hidden" name="showAll" value="Y"/>                    
                     <input type='submit' value='${uiLabelMap.CommonFind}'/>
                 </td>
               </tr>
@@ -358,7 +369,10 @@ document.lookuporder.orderId.focus();
     <br class="clear" />
   </div>
   <div class="screenlet-body">
-    <form name="paginationForm" method="post" action="<@ofbizUrl>searchorders</@ofbizUrl>">
+    <form name="paginationForm" method="post" action="<@ofbizUrl>${formTarget}</@ofbizUrl>">
+    <#if shippingId?has_content>
+    	<input type="hidden" name="shippingId" value="${shippingId}"/>
+    </#if>
       <input type="hidden" name="viewSize"/>
       <input type="hidden" name="viewIndex"/>
       <input type="hidden" name="hideFields"/>
@@ -370,6 +384,9 @@ document.lookuporder.orderId.focus();
       </#if>
     </form>
     <form name="massOrderChangeForm" method="post" action="javascript:void(0);">
+    <#if shippingId?has_content>
+    	<input type="hidden" name="shippingId" value="${shippingId}"/>
+    </#if>
       <div>&nbsp;</div>
       <div align="right">
         <input type="hidden" name="screenLocation" value="component://order/widget/ordermgr/OrderPrintScreens.xml#OrderPDF"/>
