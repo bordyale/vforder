@@ -115,12 +115,12 @@
             <actions>
                 <set field="titleProperty" value="PageTitleOrderInits"/>
                 <set field="headerItem" value="orderentry"/>
-                <script location="component://order/groovyScripts/entry/CheckInits.groovy"/>
+                <script location="component://vforder/groovyScripts/CheckInits.groovy"/>
             </actions>
             <widgets>
                 <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
                     <decorator-section name="body">
-                        <platform-specific><html><html-template location="component://order/template/entry/CheckInits.ftl"/></html></platform-specific>
+                        <platform-specific><html><html-template location="component://vforder/template/CheckInits.ftl"/></html></platform-specific>
                     </decorator-section>
                 </decorator-screen>
             </widgets>
@@ -134,7 +134,7 @@
                 <set field="productsummaryScreen" value="component://order/widget/ordermgr/OrderEntryCatalogScreens.xml#productsummary"/>
                 <property-to-field resource="order" property="orderPreference.giftEnable" field="giftEnable" default="Y"/>
                 <set field="promoUseDetailsInlineScreen" value="component://order/widget/ordermgr/OrderEntryCartScreens.xml#promoUseDetailsInline"/>
-                <script location="component://order/groovyScripts/entry/ShowCart.groovy"/>
+                <script location="component://vforder/groovyScripts/ShowCart.groovy"/>
                 <script location="component://order/groovyScripts/entry/ShowPromoText.groovy"/>
                 <entity-condition entity-name="ProductStorePromoAndAppl" list="allProductPromos" filter-by-date="true">
                     <condition-list combine="and">
@@ -147,10 +147,10 @@
             <widgets>
                 <decorator-screen name="CommonOrderEntryDecorator">
                     <decorator-section name="body">
-                        <!-- <platform-specific><html><html-template location="component://order/template/entry/cart/Javascript.ftl"/></html></platform-specific> -->
-                        <platform-specific><html><html-template location="component://order/template/entry/cart/ShowCart.ftl"/></html></platform-specific>
+                        <platform-specific><html><html-template location="component://order/template/entry/cart/Javascript.ftl"/></html></platform-specific>
+                        <platform-specific><html><html-template location="component://vforder/template/ShowCart.ftl"/></html></platform-specific>
                         <!-- <platform-specific><html><html-template location="component://order/template/entry/cart/AddItemsToShoppingList.ftl"/></html></platform-specific> -->
-                        <platform-specific><html><html-template location="component://order/template/entry/cart/ShowCartItems.ftl"/></html></platform-specific>
+                        <platform-specific><html><html-template location="component://vforder/template/ShowCartItems.ftl"/></html></platform-specific>
                         <!-- <platform-specific><html><html-template location="component://order/template/entry/cart/PromoCodes.ftl"/></html></platform-specific> -->
                         <!-- <platform-specific><html><html-template location="component://order/template/entry/cart/ManualPromotions.ftl"/></html></platform-specific> -->
                         <!-- <platform-specific><html><html-template location="component://order/template/entry/cart/PromoText.ftl"/></html></platform-specific> -->
