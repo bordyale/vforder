@@ -123,9 +123,9 @@
 	
 	<form name="AddShippingItemOrderItem" type="multi" use-row-submit="true" list-name="orderItems" title="" target="UpdateShippingItems"
         odd-row-style="alternate-row" default-table-style="basic-table hover-bar" paginate-target="AddShippingItemOrderItem">
-        <row-actions>
+        <!-- <row-actions>
             <entity-one entity-name="OrderItem" value-field="product" auto-field-map="true"/>
-        </row-actions>
+        </row-actions> -->
         <field name="orderId"  title="${uiLabelMap.OrderOrderId}" widget-style="buttontext">
             <hyperlink description="${orderId}" target="/catalog/control/EditProductInventoryItems" target-type="inter-app">
                 <parameter param-name="orderId"/>
@@ -133,6 +133,7 @@
         </field>
         <field name="quantity" title="${uiLabelMap.OrderItemQuantity}"><display/></field>
         <field name="productId"><display/></field>
+        <field name="numero"><display/></field>
         <field name="quantityToShip" title="${uiLabelMap.OrderQuantity}">
             <text size="5" maxlength="10"/>
         </field>

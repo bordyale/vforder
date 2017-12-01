@@ -23,15 +23,29 @@ import org.apache.ofbiz.entity.condition.EntityOperator
 import org.apache.ofbiz.entity.condition.EntityFieldValue
 import org.apache.ofbiz.entity.condition.EntityConditionList
 import org.apache.ofbiz.entity.condition.EntityCondition
+import org.apache.ofbiz.entity.GenericValue
 
 shippingId = request.getParameter("shippingId") ?: ""
 orderId = request.getParameter("orderId") ?: ""
 
 
 
-orderItems = select("orderId","productId","quantity").from("OrderItem").where("orderId", orderId).cache(true).queryList()
+orderItems = select("orderId","orderItemSeqId","productId","quantity").from("OrderItem").where("orderId", orderId).cache(true).queryList()
+
+shippingOrderItems = select("orderId","orderItemSeqId","productId","quantity").from("OrderItem").where("orderId", orderId).cache(true).queryList()
+
+
+List<HashMap<String,Object>> hashMaps = new ArrayList<HashMap<String,Object>>()
+
+for (GenericValue entry: orderItems){
+	Map<String,Object> e = new HashMap<String,Object>()
+	e.put("orderId",entry.get("orderId"))
+	e.put("productId",entry.get("productId"))
+	e.put("quantity",entry.get("quantity"))
+	e.put("numero","45")
+	hashMaps.add(e)
+}
 
 
 
-
-context.orderItems = orderItems
+context.orderItems = hashMaps
