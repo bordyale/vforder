@@ -342,4 +342,31 @@
         </section>
     </screen>
     
+    <screen name="AddShippingItemOrderItem">
+        <section>
+            <actions>
+                <set field="tabButtonItem" value="EditShippingItems"/>
+                <set field="headerItem" value="findshippings"/>
+                <set field="shippingId" from-field="parameters.shippingId"/>
+                <set field="orderId" from-field="parameters.orderId"/>
+                <set field="titleProperty" value="${shippingId} - ${orderId}"/>
+             	<script location="component://vforder/groovyScripts/AddShippingItemOrderItem.groovy"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="VfFindorderCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                    	<include-form name="AddShippingItemOrderItem" location="component://vforder/widget/VforderForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    
+    
+    
+    
+    
+    
+    
 </screens>

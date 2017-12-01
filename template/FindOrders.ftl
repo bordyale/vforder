@@ -413,31 +413,59 @@ document.lookuporder.orderId.focus();
       </div>
 
       <table class="basic-table hover-bar" cellspacing='0'>
-        <tr class="header-row">
-          <td width="1%">
-            <input type="checkbox" id="checkAllOrders" name="checkAllOrders" value="1" onchange="javascript:toggleOrderId(this);"/>
-          </td>
-          <td width="5%">${uiLabelMap.OrderOrderType}</td>
-          <td width="5%">${uiLabelMap.OrderOrderId}</td>
-          <td width="15%">${uiLabelMap.OrderOrderName}</td>
-          <td width="20%">${uiLabelMap.PartyName}</td>
-          <td width="5%" align="right">${uiLabelMap.OrderSurvey}</td>
-          <td width="5%" align="right">${uiLabelMap.OrderItemsOrdered}</td>
-          <td width="5%" align="right">${uiLabelMap.OrderItemsBackOrdered}</td>
-          <td width="5%" align="right">${uiLabelMap.OrderItemsReturned}</td>
-          <td width="10%" align="right">${uiLabelMap.OrderRemainingSubTotal}</td>
-          <td width="10%" align="right">${uiLabelMap.OrderOrderTotal}</td>
-          <td width="5%">&nbsp;</td>
-            <#if (requestParameters.filterInventoryProblems?default("N") == "Y") || (requestParameters.filterPOsOpenPastTheirETA?default("N") == "Y") || (requestParameters.filterPOsWithRejectedItems?default("N") == "Y") || (requestParameters.filterPartiallyReceivedPOs?default("N") == "Y")>
-              <td width="10%">${uiLabelMap.CommonStatus}</td>
-              <td width="5%">${uiLabelMap.CommonFilter}</td>
-            <#else>
-              <td width="15%">${uiLabelMap.CommonStatus}</td>
-            </#if>
-          <td width="20%">${uiLabelMap.OrderDate}</td>
-          <td width="5%">${uiLabelMap.PartyPartyId}</td>
-          <td width="10%">&nbsp;</td>
-        </tr>
+      <#if !shippingId?has_content>
+	        <tr class="header-row">
+	          <td width="1%">
+	            <input type="checkbox" id="checkAllOrders" name="checkAllOrders" value="1" onchange="javascript:toggleOrderId(this);"/>
+	          </td>
+	          <td width="5%">${uiLabelMap.OrderOrderType}</td>
+	          <td width="5%">${uiLabelMap.OrderOrderId}</td>
+	          <td width="15%">${uiLabelMap.OrderOrderName}</td>
+	          <td width="20%">${uiLabelMap.PartyName}</td>
+	          <td width="5%" align="right">${uiLabelMap.OrderSurvey}</td>
+	          <td width="5%" align="right">${uiLabelMap.OrderItemsOrdered}</td>
+	          <td width="5%" align="right">${uiLabelMap.OrderItemsBackOrdered}</td>
+	          <td width="5%" align="right">${uiLabelMap.OrderItemsReturned}</td>
+	          <td width="10%" align="right">${uiLabelMap.OrderRemainingSubTotal}</td>
+	          <td width="10%" align="right">${uiLabelMap.OrderOrderTotal}</td>
+	          <td width="5%">&nbsp;</td>
+	            <#if (requestParameters.filterInventoryProblems?default("N") == "Y") || (requestParameters.filterPOsOpenPastTheirETA?default("N") == "Y") || (requestParameters.filterPOsWithRejectedItems?default("N") == "Y") || (requestParameters.filterPartiallyReceivedPOs?default("N") == "Y")>
+	              <td width="10%">${uiLabelMap.CommonStatus}</td>
+	              <td width="5%">${uiLabelMap.CommonFilter}</td>
+	            <#else>
+	              <td width="15%">${uiLabelMap.CommonStatus}</td>
+	            </#if>
+	          <td width="20%">${uiLabelMap.OrderDate}</td>
+	          <td width="5%">${uiLabelMap.PartyPartyId}</td>
+	          <td width="10%">&nbsp;</td>
+	        </tr>
+        <#else>
+		    <tr class="header-row">
+	          <td width="1%">
+	            <input type="checkbox" id="checkAllOrders" name="checkAllOrders" value="1" onchange="javascript:toggleOrderId(this);"/>
+	          </td>
+	          <td width="5%">${uiLabelMap.OrderOrderType}</td>
+	          <td width="5%">${uiLabelMap.OrderOrderId}</td>
+	          <td width="15%">${uiLabelMap.OrderOrderName}</td>
+	          
+	          
+	          <td width="5%" align="right">${uiLabelMap.OrderItemsOrdered}</td>
+	          <td width="5%" align="right">${uiLabelMap.OrderItemsBackOrdered}</td>
+	          
+	          <td width="10%" align="right">${uiLabelMap.OrderRemainingSubTotal}</td>
+	          <td width="10%" align="right">${uiLabelMap.OrderOrderTotal}</td>
+	          <td width="5%">&nbsp;</td>
+	            <#if (requestParameters.filterInventoryProblems?default("N") == "Y") || (requestParameters.filterPOsOpenPastTheirETA?default("N") == "Y") || (requestParameters.filterPOsWithRejectedItems?default("N") == "Y") || (requestParameters.filterPartiallyReceivedPOs?default("N") == "Y")>
+	              <td width="10%">${uiLabelMap.CommonStatus}</td>
+	              <td width="5%">${uiLabelMap.CommonFilter}</td>
+	            <#else>
+	              <td width="15%">${uiLabelMap.CommonStatus}</td>
+	            </#if>
+	          <td width="20%">${uiLabelMap.OrderDate}</td>
+	          
+	          <td width="10%">&nbsp;</td>
+	        </tr>
+		</#if>
         <#if orderList?has_content>
           <#assign alt_row = false>
           <#list orderList as orderHeader>
@@ -450,65 +478,115 @@ document.lookuporder.orderId.focus();
               <#assign displayParty = orh.getPlacingParty()!>
             </#if>
             <#assign partyId = displayParty.partyId?default("_NA_")>
-            <tr valign="middle"<#if alt_row> class="alternate-row"</#if>>
-              <td>
-                 <input type="checkbox" name="orderIdList" value="${orderHeader.orderId}" onchange="javascript:toggleOrderIdList();"/>
-              </td>
-              <td>${orderType.get("description",locale)?default(orderType.orderTypeId?default(""))}</td>
-              <td><a href="<@ofbizUrl>orderview?orderId=${orderHeader.orderId}</@ofbizUrl>" class='buttontext'>${orderHeader.orderId}</a></td>
-              <#if orderHeader.orderName?has_content>
-                <td><a href="<@ofbizUrl>orderview?orderId=${orderHeader.orderId}</@ofbizUrl>" class='buttontext'>${orderHeader.orderName}</a></td>
-              <#else>  
-                <td></td>
-              </#if>  
-              <td>
-                <div>
-                  <#if displayParty?has_content>
-                      <#assign displayPartyNameResult = dispatcher.runSync("getPartyNameForDate", Static["org.apache.ofbiz.base.util.UtilMisc"].toMap("partyId", displayParty.partyId, "compareDate", orderHeader.orderDate, "userLogin", userLogin))/>
-                      ${displayPartyNameResult.fullName?default("[${uiLabelMap.OrderPartyNameNotFound}]")}
-                  <#else>
-                    ${uiLabelMap.CommonNA}
-                  </#if>
-                </div>
-              </td>
-              <td align="right">${orh.hasSurvey()?string.number}</td>
-              <td align="right">${orh.getTotalOrderItemsQuantity()?string.number}</td>
-              <td align="right">${orh.getOrderBackorderQuantity()?string.number}</td>
-              <td align="right">${orh.getOrderReturnedQuantity()?string.number}</td>
-              <td align="right"><@ofbizCurrency amount=orderHeader.remainingSubTotal isoCode=orh.getCurrency()/></td>
-              <td align="right"><@ofbizCurrency amount=orderHeader.grandTotal isoCode=orh.getCurrency()/></td>
-
-              <td>&nbsp;</td>
-              <td>${statusItem.get("description",locale)?default(statusItem.statusId?default("N/A"))}</td>
-              </td>
-              <#if (requestParameters.filterInventoryProblems?default("N") == "Y") || (requestParameters.filterPOsOpenPastTheirETA?default("N") == "Y") || (requestParameters.filterPOsWithRejectedItems?default("N") == "Y") || (requestParameters.filterPartiallyReceivedPOs?default("N") == "Y")>
-                  <td>
-                      <#if filterInventoryProblems.contains(orderHeader.orderId)>
-                        Inv&nbsp;
-                      </#if>
-                      <#if filterPOsOpenPastTheirETA.contains(orderHeader.orderId)>
-                        ETA&nbsp;
-                      </#if>
-                      <#if filterPOsWithRejectedItems.contains(orderHeader.orderId)>
-                        Rej&nbsp;
-                      </#if>
-                      <#if filterPartiallyReceivedPOs.contains(orderHeader.orderId)>
-                        Part&nbsp;
-                      </#if>
-                  </td>
-              </#if>
-              <td>${orderHeader.getString("orderDate")}</td>
-              <td>
-                <#if partyId != "_NA_">
-                  <a href="${customerDetailLink}${partyId}" class="buttontext">${partyId}</a>
-                <#else>
-                  ${uiLabelMap.CommonNA}
-                </#if>
-              </td>
-              <td align='right'>
-                <a href="<@ofbizUrl>orderview?orderId=${orderHeader.orderId}</@ofbizUrl>" class='buttontext'>${uiLabelMap.CommonView}</a>
-              </td>
-            </tr>
+            <#if !shippingId?has_content>
+		            <tr valign="middle"<#if alt_row> class="alternate-row"</#if>>
+		              <td>
+		                 <input type="checkbox" name="orderIdList" value="${orderHeader.orderId}" onchange="javascript:toggleOrderIdList();"/>
+		              </td>
+		              <td>${orderType.get("description",locale)?default(orderType.orderTypeId?default(""))}</td>
+		              <td><a href="<@ofbizUrl>orderview?orderId=${orderHeader.orderId}</@ofbizUrl>" class='buttontext'>${orderHeader.orderId}</a></td>
+		              <#if orderHeader.orderName?has_content>
+		                <td><a href="<@ofbizUrl>orderview?orderId=${orderHeader.orderId}</@ofbizUrl>" class='buttontext'>${orderHeader.orderName}</a></td>
+		              <#else>  
+		                <td></td>
+		              </#if>  
+		              <td>
+		                <div>
+		                  <#if displayParty?has_content>
+		                      <#assign displayPartyNameResult = dispatcher.runSync("getPartyNameForDate", Static["org.apache.ofbiz.base.util.UtilMisc"].toMap("partyId", displayParty.partyId, "compareDate", orderHeader.orderDate, "userLogin", userLogin))/>
+		                      ${displayPartyNameResult.fullName?default("[${uiLabelMap.OrderPartyNameNotFound}]")}
+		                  <#else>
+		                    ${uiLabelMap.CommonNA}
+		                  </#if>
+		                </div>
+		              </td>
+		              <td align="right">${orh.hasSurvey()?string.number}</td>
+		              <td align="right">${orh.getTotalOrderItemsQuantity()?string.number}</td>
+		              <td align="right">${orh.getOrderBackorderQuantity()?string.number}</td>
+		              <td align="right">${orh.getOrderReturnedQuantity()?string.number}</td>
+		              <td align="right"><@ofbizCurrency amount=orderHeader.remainingSubTotal isoCode=orh.getCurrency()/></td>
+		              <td align="right"><@ofbizCurrency amount=orderHeader.grandTotal isoCode=orh.getCurrency()/></td>
+		
+		              <td>&nbsp;</td>
+		              <td>${statusItem.get("description",locale)?default(statusItem.statusId?default("N/A"))}</td>
+		              </td>
+		              <#if (requestParameters.filterInventoryProblems?default("N") == "Y") || (requestParameters.filterPOsOpenPastTheirETA?default("N") == "Y") || (requestParameters.filterPOsWithRejectedItems?default("N") == "Y") || (requestParameters.filterPartiallyReceivedPOs?default("N") == "Y")>
+		                  <td>
+		                      <#if filterInventoryProblems.contains(orderHeader.orderId)>
+		                        Inv&nbsp;
+		                      </#if>
+		                      <#if filterPOsOpenPastTheirETA.contains(orderHeader.orderId)>
+		                        ETA&nbsp;
+		                      </#if>
+		                      <#if filterPOsWithRejectedItems.contains(orderHeader.orderId)>
+		                        Rej&nbsp;
+		                      </#if>
+		                      <#if filterPartiallyReceivedPOs.contains(orderHeader.orderId)>
+		                        Part&nbsp;
+		                      </#if>
+		                  </td>
+		              </#if>
+		              <td>${orderHeader.getString("orderDate")}</td>
+		              <td>
+		                <#if partyId != "_NA_">
+		                  <a href="${customerDetailLink}${partyId}" class="buttontext">${partyId}</a>
+		                <#else>
+		                  ${uiLabelMap.CommonNA}
+		                </#if>
+		              </td>
+		              <td align='right'>
+		                <a href="<@ofbizUrl>orderview?orderId=${orderHeader.orderId}</@ofbizUrl>" class='buttontext'>${uiLabelMap.CommonView}</a>
+		              </td>
+		            </tr>
+		    <#else>
+	              <tr valign="middle"<#if alt_row> class="alternate-row"</#if>>
+			              <td>
+			                 <input type="checkbox" name="orderIdList" value="${orderHeader.orderId}" onchange="javascript:toggleOrderIdList();"/>
+			              </td>
+			              <td>${orderType.get("description",locale)?default(orderType.orderTypeId?default(""))}</td>
+			              <td><a href="<@ofbizUrl>orderview?orderId=${orderHeader.orderId}</@ofbizUrl>" class='buttontext'>${orderHeader.orderId}</a></td>
+			              <#if orderHeader.orderName?has_content>
+			                <td><a href="<@ofbizUrl>orderview?orderId=${orderHeader.orderId}</@ofbizUrl>" class='buttontext'>${orderHeader.orderName}</a></td>
+			              <#else>  
+			                <td></td>
+			              </#if>  
+			              
+			              
+			              <td align="right">${orh.getTotalOrderItemsQuantity()?string.number}</td>
+			              <td align="right">${orh.getOrderBackorderQuantity()?string.number}</td>
+			              
+			              <td align="right"><@ofbizCurrency amount=orderHeader.remainingSubTotal isoCode=orh.getCurrency()/></td>
+			              <td align="right"><@ofbizCurrency amount=orderHeader.grandTotal isoCode=orh.getCurrency()/></td>
+			
+			              <td>&nbsp;</td>
+			              <td>${statusItem.get("description",locale)?default(statusItem.statusId?default("N/A"))}</td>
+			              </td>
+			              <#if (requestParameters.filterInventoryProblems?default("N") == "Y") || (requestParameters.filterPOsOpenPastTheirETA?default("N") == "Y") || (requestParameters.filterPOsWithRejectedItems?default("N") == "Y") || (requestParameters.filterPartiallyReceivedPOs?default("N") == "Y")>
+			                  <td>
+			                      <#if filterInventoryProblems.contains(orderHeader.orderId)>
+			                        Inv&nbsp;
+			                      </#if>
+			                      <#if filterPOsOpenPastTheirETA.contains(orderHeader.orderId)>
+			                        ETA&nbsp;
+			                      </#if>
+			                      <#if filterPOsWithRejectedItems.contains(orderHeader.orderId)>
+			                        Rej&nbsp;
+			                      </#if>
+			                      <#if filterPartiallyReceivedPOs.contains(orderHeader.orderId)>
+			                        Part&nbsp;
+			                      </#if>
+			                  </td>
+			              </#if>
+			              <td>${orderHeader.getString("orderDate")}</td>
+			              
+			              <td align='right'>
+			                <a href="<@ofbizUrl>orderview?orderId=${orderHeader.orderId}</@ofbizUrl>" class='buttontext'>${uiLabelMap.CommonView}</a>
+			              </td>
+			              <td align='right'>
+			                <a href="<@ofbizUrl>AddShippingItemOrderItem?orderId=${orderHeader.orderId}&shippingId=${shippingId}</@ofbizUrl>" class='buttontext'>${uiLabelMap.AddShippingItemOrderItem}</a>
+			              </td>
+			      </tr>
+            </#if>
             <#-- toggle the row color -->
             <#assign alt_row = !alt_row>
           </#list>

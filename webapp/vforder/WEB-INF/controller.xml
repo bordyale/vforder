@@ -223,9 +223,17 @@
     <request-map uri="AddShippingItem">
         <security https="true" auth="true"/>
         <event type="service" invoke="findOrders"/>
-        <response name="success" type="view" value="AddShippingItem">
-        	<redirect-parameter name="shippingId"/>
-        </response>
+        <response name="success" type="view" value="AddShippingItem"></response>
+    </request-map>
+    <request-map uri="AddShippingItemOrderItem">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="AddShippingItemOrderItem"></response>
+    </request-map>
+    <request-map uri="UpdateShippingItems">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="bulkAddProducts"/>
+        <response name="success" type="request" value="orderentry"/>
+        <response name="error" type="request" value="orderentry"/>
     </request-map>
 
     <request-map uri="LookupUserLoginAndPartyDetails"><security https="true" auth="true"/><response name="success" type="view" value="LookupUserLoginAndPartyDetails"/></request-map>
@@ -252,5 +260,6 @@
     <view-map name="EditShipping" type="screen" page="component://vforder/widget/VforderScreens.xml#EditShipping"/>
     <view-map name="EditShippingItems" type="screen" page="component://vforder/widget/VforderScreens.xml#EditShippingItems"/>
     <view-map name="AddShippingItem" type="screen" page="component://vforder/widget/VforderScreens.xml#AddShippingItem"/>
+    <view-map name="AddShippingItemOrderItem" type="screen" page="component://vforder/widget/VforderScreens.xml#AddShippingItemOrderItem"/>
     
 </site-conf>
