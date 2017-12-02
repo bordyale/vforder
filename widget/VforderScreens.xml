@@ -349,7 +349,7 @@
                 <set field="headerItem" value="findshippings"/>
                 <set field="shippingId" from-field="parameters.shippingId"/>
                 <set field="orderId" from-field="parameters.orderId"/>
-                <set field="titleProperty" value="${shippingId} - ${orderId}"/>
+                <set field="titleProperty" value="${shippingId} -- ${orderId}"/>
              	<script location="component://vforder/groovyScripts/AddShippingItemOrderItem.groovy"/>
             </actions>
             <widgets>

@@ -231,9 +231,9 @@
     </request-map>
     <request-map uri="UpdateShippingItems">
         <security https="true" auth="true"/>
-        <event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="bulkAddProducts"/>
+        <event type="java" path="org.apache.ofbiz.vforder.VforderEvents" invoke="updateOrderShippingItems"/>
         <response name="success" type="request" value="orderentry"/>
-        <response name="error" type="request" value="orderentry"/>
+        <response name="error" type="request-redirect" value="AddShippingItemOrderItem"><redirect-parameter name="shippingId"/><redirect-parameter name="orderId"/></response>
     </request-map>
 
     <request-map uri="LookupUserLoginAndPartyDetails"><security https="true" auth="true"/><response name="success" type="view" value="LookupUserLoginAndPartyDetails"/></request-map>

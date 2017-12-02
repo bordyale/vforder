@@ -126,14 +126,18 @@
         <!-- <row-actions>
             <entity-one entity-name="OrderItem" value-field="product" auto-field-map="true"/>
         </row-actions> -->
+        <field name="shippingId"><hidden value="${shippingId}"/></field>
+       <field name="orderId"><hidden value="${orderId}"/></field>
+       <field name="orderItemSeqId"><hidden value="${orderItemSeqId}"/></field>
         <field name="orderId"  title="${uiLabelMap.OrderOrderId}" widget-style="buttontext">
             <hyperlink description="${orderId}" target="/catalog/control/EditProductInventoryItems" target-type="inter-app">
                 <parameter param-name="orderId"/>
             </hyperlink>
         </field>
-        <field name="quantity" title="${uiLabelMap.OrderItemQuantity}"><display/></field>
         <field name="productId"><display/></field>
-        <field name="numero"><display/></field>
+        <field name="quantity" title="${uiLabelMap.OrderItemQuantity}"><display/></field>
+        <field name="quantityShipped"><display/></field>
+        <field name="quantityShippable"><display/></field>
         <field name="quantityToShip" title="${uiLabelMap.OrderQuantity}">
             <text size="5" maxlength="10"/>
         </field>

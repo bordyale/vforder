@@ -32,7 +32,7 @@ orderId = request.getParameter("orderId") ?: ""
 
 orderItems = select("orderId","orderItemSeqId","productId","quantity").from("OrderItem").where("orderId", orderId).cache(true).queryList()
 
-shippingOrderItems = select("orderId","orderItemSeqId","productId","quantity").from("OrderItem").where("orderId", orderId).cache(true).queryList()
+shippingOrderItems = select("orderId","orderItemSeqId","quantityShipped").from("OrderItemShippingItem").where("orderId", orderId).cache(true).queryList()
 
 
 List<HashMap<String,Object>> hashMaps = new ArrayList<HashMap<String,Object>>()
@@ -41,8 +41,20 @@ for (GenericValue entry: orderItems){
 	Map<String,Object> e = new HashMap<String,Object>()
 	e.put("orderId",entry.get("orderId"))
 	e.put("productId",entry.get("productId"))
+	e.put("orderItemSeqId",entry.get("orderItemSeqId"))
 	e.put("quantity",entry.get("quantity"))
-	e.put("numero","45")
+	e.put("quantityShipped",new BigDecimal(0))
+	BigDecimal quantityShippable = (BigDecimal)entry.get("quantity")
+	for (GenericValue eship: shippingOrderItems){
+		if((String)eship.get("orderItemSeqId").equals((String)entry.get("orderItemSeqId"))){
+		    e.put("quantityShipped",eship.get("quantityShipped"))
+		    quantityShippable.subtract((BigDecimal)eship.get("quantityShipped"))
+		}
+	}
+	
+	e.put("quantityShippable",quantityShippable)
+	
+	
 	hashMaps.add(e)
 }
 

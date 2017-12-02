@@ -43,5 +43,25 @@
         <key-map field-name="shippingId"/>
       </relation>
     </entity>
+    
+    <entity entity-name="OrderItemShippingItem"
+            package-name="org.apache.ofbiz.order.shipping"
+            never-cache="true"
+            title="Order Item Shipping Item">
+      <field name="orderId" type="id-ne"></field>
+      <field name="orderItemSeqId" type="id-ne"></field>
+      <field name="quantityShipped" type="fixed-point" enable-audit-log="true"></field>
+      <prim-key field="orderId"/>
+      <prim-key field="orderItemSeqId"/>
+      <relation type="one" fk-name="ORDER_ITEM_HDR" rel-entity-name="OrderItem">
+        <key-map field-name="orderId"/>
+      </relation>
+      <relation type="one" fk-name="ORDER_ITEM_SEQ_ID_HDR" rel-entity-name="OrderItem">
+        <key-map field-name="orderItemSeqId"/>
+      </relation>
+    </entity>
+    
+    
+    
 
 </entitymodel>
