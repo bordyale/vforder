@@ -232,7 +232,7 @@
     <request-map uri="UpdateShippingItems">
         <security https="true" auth="true"/>
         <event type="java" path="org.apache.ofbiz.vforder.VforderEvents" invoke="updateOrderShippingItems"/>
-        <response name="success" type="request" value="orderentry"/>
+        <response name="success" type="request-redirect" value="EditShippingItems"><redirect-parameter name="shippingId"/></response>
         <response name="error" type="request-redirect" value="AddShippingItemOrderItem"><redirect-parameter name="shippingId"/><redirect-parameter name="orderId"/></response>
     </request-map>
 

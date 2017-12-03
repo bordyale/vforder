@@ -61,6 +61,24 @@
       </relation>
     </entity>
     
+    <view-entity entity-name="OrderItemShippingItemView"
+            package-name="org.apache.ofbiz.order.order"
+            never-cache="true"
+            title="Order Items and ShippingItem View Entity">
+      <member-entity entity-alias="SI" entity-name="OrderItemShippingItem"/>
+      <member-entity entity-alias="OI" entity-name="OrderItem"/>
+      <alias entity-alias="OI" name="orderId"/>
+      <alias entity-alias="OI" name="orderDate"/>
+      <alias entity-alias="OI" name="orderItemSeqId"/>
+      <alias entity-alias="OI" name="productId"/>
+      <alias entity-alias="OI" name="quantity"/>
+      <alias entity-alias="SI" name="quantityShipped"/>
+      <view-link entity-alias="OI" rel-entity-alias="SI" rel-optional="true">
+        <key-map field-name="orderId"/>
+        <key-map field-name="orderItemSeqId"/>
+      </view-link>
+    </view-entity>
+    
     
     
 

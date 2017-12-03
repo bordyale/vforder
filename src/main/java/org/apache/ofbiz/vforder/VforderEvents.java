@@ -200,6 +200,52 @@ public class VforderEvents {
                 	request.setAttribute("_ERROR_MESSAGE_","errore");
                     return "error";
                 }else {
+                	
+                	Integer shippingItemsSize = 0;
+                	try {
+						List<GenericValue> shippingItems = delegator.findByAnd("ShippingItem", UtilMisc.toMap("shippingId", shippingId), null, false);
+						if (shippingItems!=null)
+							shippingItemsSize=shippingItems.size()+1;
+						
+					} catch (GenericEntityException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+        	
+                	GenericValue shippingItem = delegator.makeValue("ShippingItem");
+                	shippingItem.set("shippingId", shippingId);
+                	shippingItem.set("orderId", orderId);
+                	shippingItem.set("orderItemSeqId", orderItemSeqId);
+                	shippingItem.set("quantityToShip", quantityToShip);
+                	shippingItem.set("shippingItemSeqId", shippingItemsSize.toString());
+                	try {
+						delegator.create(shippingItem);
+					} catch (GenericEntityException e) {
+						Debug.logError(e, module);
+			            
+					}
+                	
+                	GenericValue ordershippingItem = delegator.makeValue("OrderItemShippingItem");
+                	ordershippingItem.set("orderId", orderId);
+                	ordershippingItem.set("orderItemSeqId", orderItemSeqId);
+                	ordershippingItem.set("quantityShipped", quantityShipped.add(quantityToShip));
+                	try {
+               
+						delegator.createOrStore(ordershippingItem);
+					} catch (GenericEntityException e) {
+						Debug.logError(e, module);
+			      
+					}
+                	
+                	
+                	
+                	
+                	
+                	
+                	
+                	
+                	
+                	
                 	return "success";
                 }
                 
