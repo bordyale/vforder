@@ -235,6 +235,14 @@
         <response name="success" type="request-redirect" value="EditShippingItems"><redirect-parameter name="shippingId"/></response>
         <response name="error" type="request-redirect" value="AddShippingItemOrderItem"><redirect-parameter name="shippingId"/><redirect-parameter name="orderId"/></response>
     </request-map>
+    <request-map uri="deleteShippingItem">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deleteShippingItem"/>
+        <response name="success" type="request-redirect" value="EditShippingItems">
+            <redirect-parameter name="shippingId"/>
+        </response>
+        <response name="error" type="view" value="EditShippingItems"/>
+    </request-map>
 
     <request-map uri="LookupUserLoginAndPartyDetails"><security https="true" auth="true"/><response name="success" type="view" value="LookupUserLoginAndPartyDetails"/></request-map>
    <request-map uri="LookupProduct"><security https="true" auth="true"/><response name="success" type="view" value="LookupProduct"/></request-map>

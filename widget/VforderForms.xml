@@ -108,6 +108,17 @@
         </actions>
         
        <field name="shippingId"><display/></field>
+       <field name="shippingItemSeqId"><display/></field>
+       <field name="orderId"><display/></field>
+       <field name="quantityToShip"><display/></field>
+        
+       <field name="deleteLink" title=" " widget-style="buttontext">
+            <hyperlink description="${uiLabelMap.CommonDelete}" target="deleteShippingItem" also-hidden="false" confirmation-message="${uiLabelMap.CommonConfirmDelete}" image-location="${iconsLocation}/delete.png">
+                <parameter param-name="shippingId"/>
+                <parameter param-name="shippingItemSeqId"/>
+            </hyperlink>
+        </field> 
+        
         
         
         
