@@ -183,6 +183,12 @@
         <response name="success" type="view" value="ordercomplete"/>
         <response name="error" type="view" value="confirm"/>
     </request-map>
+    <request-map uri="BulkAddProducts">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="bulkAddProducts"/>
+        <response name="success" type="request" value="orderentry"/>
+        <response name="error" type="request" value="orderentry"/>
+    </request-map>
     <!-- Shipping Part -->
     <request-map uri="findshippings">
         <security https="true" auth="true"/>
@@ -248,6 +254,8 @@
    <request-map uri="LookupProduct"><security https="true" auth="true"/><response name="success" type="view" value="LookupProduct"/></request-map>
    <request-map uri="LookupSupplierProduct"><security https="true" auth="true"/><response name="success" type="view" value="LookupSupplierProduct"/></request-map>
    <request-map uri="LookupCustomerName"><security auth="true" https="true"/><response name="success" type="view" value="LookupCustomerName"/></request-map>
+   <request-map uri="LookupBulkAddProducts"><security https="true" auth="true"/><response name="success" type="view" value="LookupBulkAddProducts"/></request-map>
+    <request-map uri="LookupBulkAddSupplierProducts"><security https="true" auth="true"/><response name="success" type="view" value="LookupBulkAddSupplierProducts"/></request-map> 
     <!-- View Mappings -->
     <view-map name="main" type="screen" page="component://vforder/widget/VforderScreens.xml#main"/>
     <view-map name="findorders" type="screen" page="component://vforder/widget/VforderScreens.xml#OrderFindOrder"/>
@@ -269,5 +277,7 @@
     <view-map name="EditShippingItems" type="screen" page="component://vforder/widget/VforderScreens.xml#EditShippingItems"/>
     <view-map name="AddShippingItem" type="screen" page="component://vforder/widget/VforderScreens.xml#AddShippingItem"/>
     <view-map name="AddShippingItemOrderItem" type="screen" page="component://vforder/widget/VforderScreens.xml#AddShippingItemOrderItem"/>
+    <view-map name="LookupBulkAddProducts" type="screen" page="component://vforder/widget/VforderScreens.xml#LookupBulkAddProducts"/>
+    <view-map name="LookupBulkAddSupplierProducts" type="screen" page="component://vforder/widget/VforderScreens.xml#LookupBulkAddSupplierProducts"/>
     
 </site-conf>

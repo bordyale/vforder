@@ -38,7 +38,7 @@ under the License.
     <ul>
       <li class="h3">${uiLabelMap.OrderSalesOrder}<#if shoppingCart??>&nbsp;${uiLabelMap.OrderInProgress}</#if></li>
       <li><a href="javascript:document.salesentryform.submit();">${uiLabelMap.CommonContinue}</a></li>
-      <li><a href="/partymgr/control/findparty?${StringUtil.wrapString(externalKeyParam)}">${uiLabelMap.PartyFindParty}</a></li>
+     <!-- <li><a href="/partymgr/control/findparty?${StringUtil.wrapString(externalKeyParam)}">${uiLabelMap.PartyFindParty}</a></li>-->
     </ul>
     <br class="clear"/>
   </div>
@@ -47,8 +47,9 @@ under the License.
       <input type="hidden" name="originOrderId" value="${parameters.originOrderId!}"/>
       <input type="hidden" name="finalizeMode" value="type"/>
       <input type="hidden" name="orderMode" value="SALES_ORDER"/>
+      <input type="hidden" name="productStoreId" value="9000"/>
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
+       <!-- <tr>
           <td >&nbsp;</td>
           <td width="300" align='right' valign='middle' nowrap="nowrap"><div class='tableheadtext'>${uiLabelMap.ProductProductStore}</div></td>
           <td >&nbsp;</td>
@@ -67,9 +68,9 @@ under the License.
               <#if sessionAttributes.orderMode??>${uiLabelMap.OrderCannotBeChanged}</#if>
             </div>
           </td>
-        </tr>
+        </tr>-->
         <tr><td colspan="4">&nbsp;</td></tr>
-        <tr>
+        <!-- <tr>
           <td>&nbsp;</td>
           <td align='right' valign='middle' nowrap="nowrap"><div class='tableheadtext'>${uiLabelMap.OrderSalesChannel}</div></td>
           <td>&nbsp;</td>
@@ -88,7 +89,7 @@ under the License.
               </select>
             </div>
           </td>
-        </tr>
+        </tr>-->
         <tr><td colspan="4">&nbsp;</td></tr>
         <#if partyId??>
           <#assign thisPartyId = partyId>
@@ -130,7 +131,7 @@ under the License.
       <ul>
         <li class="h3">${uiLabelMap.OrderPurchaseOrder}<#if shoppingCart??>&nbsp;${uiLabelMap.OrderInProgress}</#if></li>
         <li><a href="javascript:document.poentryform.submit();">${uiLabelMap.CommonContinue}</a></li>
-        <li><a href="/partymgr/control/findparty?${StringUtil.wrapString(externalKeyParam)}">${uiLabelMap.PartyFindParty}</a></li>
+       <!-- <li><a href="/partymgr/control/findparty?${StringUtil.wrapString(externalKeyParam)}">${uiLabelMap.PartyFindParty}</a></li>-->
       </ul>
       <br class="clear"/>
     </div>

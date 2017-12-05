@@ -101,7 +101,7 @@ under the License.
         </td>
       </tr>
 
-      <#if cart.getOrderType() != "PURCHASE_ORDER">
+     <!--<#if cart.getOrderType() != "PURCHASE_ORDER">
       <tr>
         <td>&nbsp;</td>
         <td align='right' valign='middle' class='tableheadtext' nowrap="nowrap">
@@ -112,7 +112,7 @@ under the License.
           <input type="text" class='inputBox' name="correspondingPoId" size="15" />
         </td>
       </tr>
-      </#if>
+      </#if>-->
 
       <tr>
         <td>&nbsp;</td>
@@ -130,13 +130,13 @@ under the License.
               <option value=""></option>
               <#list currencies as currency>
               <option value="${currency.uomId}" <#if currencyUomId?default('') == currency.uomId>selected="selected"</#if> >${currency.uomId}</option>
-              </#list>
+              </#list>javascript:document.agreementForm.submit()
             </select>
           </div>
         </td>
       </tr>
-
-      <tr>
+<!--
+     <tr>
         <td>&nbsp;</td>
         <td align="right">
           ${uiLabelMap.ProductChooseCatalog}
@@ -155,18 +155,7 @@ under the License.
           </#if>
         </td>
       </tr>
-
-      <tr>
-        <td>&nbsp;</td>
-        <td align="right">
-          ${uiLabelMap.WorkEffortWorkEffortId}
-        </td>
-        <td>&nbsp;</td>
-        <td>
-          <@htmlTemplate.lookupField formName="agreementForm" name="workEffortId" id="workEffortId" fieldFormName="LookupWorkEffort"/>
-        </td>
-      </tr>
-
+	
       <tr>
         <td>&nbsp;</td>
         <td align='right' valign='top' nowrap="nowrap">
@@ -179,7 +168,7 @@ under the License.
             <@htmlTemplate.renderDateTimeField name="shipAfterDate" event="" action="" value="" className="" alert="" title="Format: yyyy-MM-dd HH:mm:ss.SSS" size="25" maxlength="30" id="shipAfterDate1" dateType="date" shortDateInput=false timeDropdownParamName="" defaultDateTimeString="" localizedIconTitle="" timeDropdown="" timeHourName="" classString="" hour1="" hour2="" timeMinutesName="" minutes="" isTwelveHour="" ampmName="" amSelected="" pmSelected="" compositeType="" formName=""/>
         </td>
       </tr>
-
+-->
       <tr>
         <td>&nbsp;</td>
         <td align='right' valign='top' nowrap="nowrap">

@@ -362,7 +362,39 @@
         </section>
     </screen>
     
-    
+    <screen name="LookupBulkAddProducts">
+     <section>
+            <actions>
+                <set field="titleProperty" value="PageTitleLookupBulkAddProduct"/>
+                <set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="0"/>
+                <property-to-field resource="widget" property="widget.form.defaultViewSize" field="viewSizeDefaultValue"/>
+                <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="${viewSizeDefaultValue}"/>
+                <script location="component://order/groovyScripts/entry/cart/LookupBulkAddProducts.groovy"/>
+            </actions>
+            <widgets>
+                 <decorator-screen name="VfFindorderCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <include-form name="LookupBulkAddProducts" location="component://order/widget/ordermgr/OrderEntryForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="LookupBulkAddSupplierProducts">
+     <section>
+            <actions>
+                <set field="titleProperty" value="PageTitleLookupBulkAddSupplierProduct"/>
+                <script location="component://order/groovyScripts/entry/cart/LookupBulkAddSupplierProducts.groovy"/>
+            </actions>
+            <widgets>
+                 <decorator-screen name="VfFindorderCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <include-form name="LookupBulkAddSupplierProducts" location="component://order/widget/ordermgr/OrderEntryForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
     
     
     
