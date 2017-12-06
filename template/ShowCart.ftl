@@ -102,7 +102,7 @@ under the License.
                   <td align="right"><div>${uiLabelMap.OrderQuantity} :</div></td>
                   <td><input type="text" size="6" name="quantity" value=""/></td>
                 </tr>
-                <tr>
+                <!--<tr>
                   <td align="right"><div>${uiLabelMap.OrderDesiredDeliveryDate} :</div></td>
                   <td>
                     <div>
@@ -132,7 +132,7 @@ under the License.
                       <@htmlTemplate.renderDateTimeField name="shipBeforeDate" value="${shoppingCart.getDefaultShipBeforeDate()!''}" className="" alert="" title="Format: yyyy-MM-dd HH:mm:ss.SSS" size="25" maxlength="30" id="item3" dateType="date" shortDateInput=false timeDropdownParamName="" defaultDateTimeString="" localizedIconTitle="" timeDropdown="" timeHourName="" classString="" hour1="" hour2="" timeMinutesName="" minutes="" isTwelveHour="" ampmName="" amSelected="" pmSelected="" compositeType="" formName=""/>
                     </div>
                   </td>
-                </tr>
+                </tr>-->
                 <#if shoppingCart.getOrderType() == "PURCHASE_ORDER">
                 <tr>
                   <td align="right"><div>${uiLabelMap.OrderOrderItemType} :</div></td>
