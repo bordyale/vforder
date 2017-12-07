@@ -260,6 +260,7 @@ function toggleOrderIdList() {
                   </table>
                 </td>
               </tr>
+              <!--
               <tr>
                 <td width='25%' align='right' class='label'><label for="filterInventoryProblems">${uiLabelMap.OrderFilterOn} ${uiLabelMap.OrderFilterInventoryProblems}</label></td>
                 <td width='5%'>&nbsp;</td>
@@ -315,7 +316,7 @@ function toggleOrderIdList() {
                     </tr>
                   </table>
                 </td>
-              </tr>
+              </tr>-->
               
               
               <tr><td colspan="3"><hr /></td></tr>
@@ -388,7 +389,7 @@ document.lookuporder.orderId.focus();
     	<input type="hidden" name="shippingId" value="${shippingId}"/>
     </#if>
       <div>&nbsp;</div>
-      <div align="right">
+     <!-- <div align="right">
         <input type="hidden" name="screenLocation" value="component://order/widget/ordermgr/OrderPrintScreens.xml#OrderPDF"/>
         <select name="serviceName" onchange="javascript:setServiceName(this);">
            <option value="javascript:void(0);">&nbsp;</option>
@@ -410,7 +411,7 @@ document.lookuporder.orderId.focus();
            </#list>
         </select>
         <a href="javascript:runAction();" class="buttontext">${uiLabelMap.OrderRunAction}</a>
-      </div>
+      </div>-->
 
       <table class="basic-table hover-bar" cellspacing='0'>
       <#if !shippingId?has_content>

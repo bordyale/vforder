@@ -229,10 +229,45 @@
                             <html><html-template location="component://vforder/template/order/OrderNotes.ftl"/></html>
                         </platform-specific>
                         <platform-specific>
-                            <html><html-template location="component://vforder/template/order/Transitions.ftl"/></html>
+                          <!--   <html><html-template location="component://vforder/template/order/Transitions.ftl"/></html> -->
                         </platform-specific>
                     </decorator-section>
                 </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="orderHeader">
+        <section>
+            <condition>
+                <not><if-empty field="orderHeader"/></not>
+            </condition>
+            <widgets>
+                <container id="split50">
+                    <container style="lefthalf">
+                        <include-screen name="orderinfo"/>
+                        <!-- <include-screen name="orderterms"/>
+                        <include-screen name="orderpaymentinfo"/>
+                        <include-screen name="projectAssoOrder"/> -->
+                    </container>
+                    <!-- <container style="righthalf">
+                        <include-screen name="ordercontactinfo"/>
+                        <include-screen name="OrderRoleInfo"/>
+                        <include-screen name="ordershippinginfo"/>
+                        <include-screen name="OrderSalesReps"/>
+                    </container> -->
+                </container>
+            </widgets>
+            <fail-widgets>
+                <label style="h2" text="${uiLabelMap.OrderNoOrderFound}: [${orderId}]"></label>
+            </fail-widgets>
+        </section>
+    </screen>
+     <screen name="orderinfo">
+        <section>
+            <widgets>
+                <platform-specific>
+                    <html><html-template location="component://vforder/template/order/OrderInfo.ftl"/></html>
+                </platform-specific>
             </widgets>
         </section>
     </screen>
