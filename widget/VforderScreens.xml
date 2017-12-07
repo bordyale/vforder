@@ -226,8 +226,8 @@
                             <html><html-template location="component://vforder/template/order/OrderItems.ftl"/></html>
                         </platform-specific>
                         <platform-specific>
-                            <html><html-template location="component://vforder/template/order/OrderNotes.ftl"/></html>
-                        </platform-specific>
+<!--                             <html><html-template location="component://vforder/template/order/OrderNotes.ftl"/></html>
+ -->                        </platform-specific>
                         <platform-specific>
                           <!--   <html><html-template location="component://vforder/template/order/Transitions.ftl"/></html> -->
                         </platform-specific>

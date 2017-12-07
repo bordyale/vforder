@@ -133,13 +133,13 @@ function toggleOrderIdList() {
   <div class="screenlet-title-bar">
     <ul>
       <li class="h3">${uiLabelMap.OrderFindOrder}</li>
-      <#if requestParameters.hideFields?default("N") == "Y">
+      <!--<#if requestParameters.hideFields?default("N") == "Y">
         <li><a href="javascript:document.lookupandhidefields${requestParameters.hideFields}.submit()">${uiLabelMap.CommonShowLookupFields}</a></li>
       <#else>
         <#if orderList??><li><a href="javascript:document.lookupandhidefields${requestParameters.hideFields?default("Y")}.submit()">${uiLabelMap.CommonHideFields}</a></li></#if>
         <li><a href="/partymgr/control/findparty?externalLoginKey=${requestAttributes.externalLoginKey!}">${uiLabelMap.PartyLookupParty}</a></li>
         <li><a href="javascript:lookupOrders(true);">${uiLabelMap.OrderLookupOrder}</a></li>
-      </#if>
+      </#if>-->
     </ul>
     <br class="clear"/>
   </div>
