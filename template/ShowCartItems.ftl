@@ -43,7 +43,8 @@ under the License.
       <table cellspacing="0" cellpadding="1" border="0">
         <tr>
           <td>&nbsp;</td>
-          <td colspan="2">
+          
+          <!--<td colspan="2">
             <div>
               <b>${uiLabelMap.ProductProduct}</b>
               <#if (shoppingCart.getOrderType() == 'SALES_ORDER') && (productStore.showCheckoutGiftOptions)?default('Y') != 'N'>
@@ -58,9 +59,11 @@ under the License.
                   </select>
               </#if>
             </div>
-          </td>
+          </td>-->
+          
+          <td align="center"><div><b>${uiLabelMap.ProductProductName}</b></div></td>
           <td align="center"><div><b>${uiLabelMap.OrderQuantity}</b></div></td>
-          <td align="right"><div><b>${uiLabelMap.CommonUnitPrice}</b></div></td>
+          <td align="center"><div><b>${uiLabelMap.CommonUnitPrice}</b></div></td>
           <td align="right"><div><b>${uiLabelMap.OrderAdjustments}</b></div></td>
           <td align="right"><div><b>${uiLabelMap.OrderItemTotal}</b></div></td>
           <td align="center"><input type="checkbox" name="selectAll" value="0" class="selectAll"/></td>
@@ -135,11 +138,11 @@ under the License.
                   <td><div><input size="60" type="text" name="comment_${cartLineIndex}" value="${cartLine.getItemComment()?default("")}"/><br /></div></td>
               </tr>
             </#if>
-            <#if cartLine.getDesiredDeliveryDate()?has_content>
+            <!--<#if cartLine.getDesiredDeliveryDate()?has_content>
               <tr><td><div>${uiLabelMap.OrderDesiredDeliveryDate}: </div></td>
                   <td><div>${cartLine.getDesiredDeliveryDate()!}</div>
               </td></tr>
-            </#if>
+            </#if>-->
             <#-- inventory summary -->
             <#if cartLine.getProductId()??>
               <#assign productId = cartLine.getProductId()>
@@ -191,7 +194,7 @@ under the License.
             </#if>
 
             <#-- ship before/after date -->
-            <tr>
+           <!-- <tr>
               <td colspan="2">
                <table border="0" cellpadding="0" cellspacing="0" width="100%">
                <tr>
@@ -209,7 +212,7 @@ under the License.
                </tr>
                </table>
               </td>
-            </tr>
+            </tr>-->
 
             <#-- Show Associated Products (not for Variants) -->
             <#if cartLine.getProductId()??>
@@ -247,7 +250,7 @@ under the License.
 
             <#-- gift wrap option -->
             <#assign showNoGiftWrapOptions = false>
-            <td nowrap="nowrap" align="right">
+            <!--<td nowrap="nowrap" align="right">
               <#assign giftWrapOption = lineOptionalFeatures.GIFT_WRAP!>
               <#assign selectedOption = cartLine.getAdditionalProductFeatureAndAppl("GIFT_WRAP")!>
               <#if giftWrapOption?has_content>
@@ -264,7 +267,7 @@ under the License.
               <#else>
                 &nbsp;
               </#if>
-            </td>
+            </td>-->
             <#-- end gift wrap option -->
             <td nowrap="nowrap" align="center">
               <div>

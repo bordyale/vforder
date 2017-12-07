@@ -189,6 +189,25 @@
         <response name="success" type="request" value="orderentry"/>
         <response name="error" type="request" value="orderentry"/>
     </request-map>
+    
+    
+    <!-- Order Manager Edit Requests -->
+    <request-map uri="changeOrderStatus">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="changeOrderStatus"/>
+        <response name="success" type="view" value="orderlist"/>
+        <response name="error" type="view" value="orderview"/>
+    </request-map>
+    <request-map uri="changeOrderItemStatus">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="changeOrderItemStatus"/>
+        <response name="success" type="view" value="orderview"/>
+        <response name="error" type="view" value="orderview"/>
+    </request-map>
+    
+    
+    
+    
     <!-- Shipping Part -->
     <request-map uri="findshippings">
         <security https="true" auth="true"/>

@@ -189,22 +189,56 @@
                 <decorator-screen name="CommonOrderCheckoutDecorator">
                     <decorator-section name="body">
                         <platform-specific>
-                            <html><html-template location="component://order/template/entry/order/OrderHeaderInfo.ftl"/></html>
+                            <html><html-template location="component://vforder/template/OrderHeaderInfoFinalize.ftl"/></html>
                         </platform-specific>
                         <platform-specific>
-                            <html><html-template location="component://order/template/entry/order/OrderPaymentInfo.ftl"/></html>
+                            <!-- <html><html-template location="component://order/template/entry/order/OrderPaymentInfo.ftl"/></html> -->
                         </platform-specific>
                         <platform-specific>
-                            <html><html-template location="component://order/template/entry/order/ShipGroupConfirmSummary.ftl"/></html>
+                            <!-- <html><html-template location="component://order/template/entry/order/ShipGroupConfirmSummary.ftl"/></html> -->
                         </platform-specific>
                         <platform-specific>
-                            <html><html-template location="component://order/template/entry/order/OrderItems.ftl"/></html>
+                            <html><html-template location="component://vforder/template/OrderItems.ftl"/></html>
                         </platform-specific>
                     </decorator-section>
                   </decorator-screen>
             </widgets>
         </section>
     </screen>
+    
+    <screen name="OrderHeaderView">
+        <section>
+            <actions>
+                <set field="titleProperty" value="OrderViewOrder"/>
+                <set field="headerItem" value="findorders"/>
+                <set field="layoutSettings.javaScripts[]" value="/ordermgr-js/order.js" global="true"/>
+                <set field="layoutSettings.javaScripts[]" value="/ordermgr-js/OrderShippingInfo.js" global="true"/>
+                <set field="layoutSettings.javaScripts[]" value="/ordermgr-js/geoAutoCompleter.js" global="true"/>
+                <script location="component://order/groovyScripts/order/OrderView.groovy"/>
+                <script location="component://order/groovyScripts/order/OrderViewWebSecure.groovy"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="CommonOrderViewDecorator">
+                    <decorator-section name="body">
+                        <include-screen name="orderHeader"/>
+                        <container style="clear"/>
+                        <platform-specific>
+                            <html><html-template location="component://vforder/template/order/OrderItems.ftl"/></html>
+                        </platform-specific>
+                        <platform-specific>
+                            <html><html-template location="component://vforder/template/order/OrderNotes.ftl"/></html>
+                        </platform-specific>
+                        <platform-specific>
+                            <html><html-template location="component://vforder/template/order/Transitions.ftl"/></html>
+                        </platform-specific>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    
+    
     
     <screen name="ShippingFindShipping">
         <section>
