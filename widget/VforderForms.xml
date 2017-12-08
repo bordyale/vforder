@@ -62,19 +62,31 @@
             </hyperlink>
         </field> -->
         <field name="estimatedShipDate"><display/></field>
+        
+        
+        
+     
+        
 	</form>
 
 
 
 	<form name="EditShipping" type="single" target="updateShipping" title="" default-map-name="shipping" default-entity-name="ShippingHeader">
-        <alt-target use-when="example==null" target="createShipping"/>
+        <alt-target use-when="shipping==null" target="createShipping"/>
         <auto-fields-service service-name="updateShipping"/>
         <field use-when="shipping!=null" name="shippingId" title="${uiLabelMap.ShippingShippingId}"><display/></field>
         <field use-when="shipping==null @and shippingId==null" name="shippingId" title="${uiLabelMap.ShippingShippingId}"><ignored/></field>
         <field use-when="shipping==null @and exampleId!=null" name="shippingId" title="${uiLabelMap.ShippingShippingId}"><display description="${uiLabelMap.CommonCannotBeFound}: [${shippingId}]" also-hidden="false"/></field>
      
         <field name="submitButton" use-when="shipping==null" title="${uiLabelMap.CommonCreate}"><submit button-type="button"/></field>
-        <field name="submitButton" use-when="shipping!=null" title="${uiLabelMap.CommonUpdate}"><submit button-type="button"/></field>
+        <field name="submitButton"  title="${uiLabelMap.CommonUpdate}"><submit button-type="button"/></field>
+        <!-- <field name="deleteLink" use-when="shipping!=null" title=" " widget-style="buttontext">
+            <hyperlink description="${uiLabelMap.CommonDelete}" target="deleteShipping" also-hidden="false" confirmation-message="${uiLabelMap.CommonConfirmDelete}" image-location="${iconsLocation}/delete.png">
+                <parameter param-name="shippingId"/>
+            </hyperlink>
+        </field> --> 
+ 
+        
     </form>
     
     <form name="EditShippingItems" type="single" target="updateShipping" title="" default-map-name="shipping" default-entity-name="ShippingHeader">

@@ -336,7 +336,7 @@
                 <entity-one entity-name="ShippingHeader" value-field="shipping"/>
             </actions>
             <widgets>
-                <decorator-screen name="VforderShippingCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                <decorator-screen name="VforderShippingCommonDecorator" location="${parameters.mainDecoratorLocation}">                	            	
                     <decorator-section name="body">
                         <include-form name="EditShipping" location="component://vforder/widget/VforderForms.xml"/>
                     </decorator-section>
