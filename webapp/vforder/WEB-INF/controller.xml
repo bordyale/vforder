@@ -262,7 +262,7 @@
     </request-map>
     <request-map uri="deleteShippingItem">
         <security https="true" auth="true"/>
-        <event type="service" invoke="deleteShippingItem"/>
+        <event type="java" path="org.apache.ofbiz.vforder.VforderEvents" invoke="deleteShippingItemOrderItem"/>
         <response name="success" type="request-redirect" value="EditShippingItems">
             <redirect-parameter name="shippingId"/>
         </response>

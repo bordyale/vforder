@@ -301,6 +301,86 @@ public class VforderEvents {
             return NO_ERROR;
         }
     }
+    
+    
+    public static String deleteShippingItemOrderItem(HttpServletRequest request, HttpServletResponse response) {
+    	
+    	Delegator delegator = (Delegator) request.getAttribute("delegator");
+        LocalDispatcher dispatcher = (LocalDispatcher) request.getAttribute("dispatcher");
+        
+        String controlDirective = null;
+        Map<String, Object> result = null;
+        String shippingId = null;
+        String orderId = null;
+        String orderItemSeqId = null;
+        String shippingItemSeqId = null;
+        BigDecimal quantityToShip = BigDecimal.ZERO;
+                
+        
+        // Get the parameters as a MAP, remove the productId and quantity params.
+        Map<String, Object> paramMap = UtilHttp.getParameterMap(request);
+        
+        
+        
+        // get the params
+        if (paramMap.containsKey("shippingId")) {
+        	shippingId = (String) paramMap.remove("shippingId");
+        }
+        if (paramMap.containsKey("orderId")) {
+        	orderId = (String) paramMap.remove("orderId");
+        }
+        if (paramMap.containsKey("orderItemSeqId")) {
+        	orderItemSeqId = (String) paramMap.remove("orderItemSeqId");
+        }
+        if (paramMap.containsKey("shippingItemSeqId")) {
+        	shippingItemSeqId = (String) paramMap.remove("shippingItemSeqId");
+        }
+
+        String quantityStr=null;
+        if (paramMap.containsKey("quantityToShip" )) {
+        	quantityStr = (String) paramMap.remove("quantityToShip");
+        }
+        if ((quantityStr == null) || (quantityStr.equals(""))) {    // otherwise, every empty value causes an exception and makes the log ugly
+        	quantityStr = "0";  // default quantity is 0, so without a quantity input, this field will not be added
+        }
+        try {
+        	quantityToShip = new BigDecimal(quantityStr);
+        } catch (Exception e) {
+            Debug.logWarning(e, "Problems parsing quantity string: " + quantityStr, module);
+            quantityToShip = BigDecimal.ZERO;
+        }
+        
+        
+        
+        Map serviceTwoCtx = UtilMisc.toMap("shippingId", shippingId, "shippingItemSeqId", shippingItemSeqId); 
+		try{
+			dispatcher.runSync("deleteShippingItem", serviceTwoCtx);
+		}catch(GenericServiceException e){
+			Debug.logError(e, module);
+		}
+        
+        
+	
+		
+		
+		
+    	
+    	GenericValue ordershippingItem = delegator.findOne("OrderItemShippingItem",true,"orderId",orderId,"orderItemSeqId",orderItemSeqId);    	
+    	BigDecimal quantity= (BigDecimal)ordershippingItem.get("quantityShipped");
+    	ordershippingItem.set("quantityShipped", quantity.subtract(quantityToShip));
+    	try {   
+			delegator.createOrStore(ordershippingItem);
+		} catch (GenericEntityException e) {
+			Debug.logError(e, module);
+      
+		}
+        
+        
+        
+    	
+    	return "success";
+    	
+    }
 
     
 }

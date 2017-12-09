@@ -131,6 +131,7 @@
                 <parameter param-name="orderId"/>
                 <parameter param-name="orderItemSeqId"/>
                 <parameter param-name="shippingItemSeqId"/>
+                <parameter param-name="quantityToShip"/>
             </hyperlink>
         </field> 
         
