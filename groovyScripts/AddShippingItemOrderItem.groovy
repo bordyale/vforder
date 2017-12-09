@@ -44,6 +44,7 @@ for (GenericValue entry: orderItems){
 	e.put("orderItemSeqId",entry.get("orderItemSeqId"))
 	e.put("quantity",entry.get("quantity"))
 	e.put("quantityShipped",new BigDecimal(0))
+	e.put("quantityShippable",entry.get("quantity"))
 	BigDecimal quantityShippable = (BigDecimal)entry.get("quantity")
 	entryOrderItemSeqId = entry.get("orderItemSeqId")
 	for (GenericValue eship: shippingOrderItems){

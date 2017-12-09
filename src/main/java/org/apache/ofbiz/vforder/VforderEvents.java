@@ -89,14 +89,8 @@ public class VforderEvents {
 
 		String controlDirective = null;
 		Map<String, Object> result = null;
-		String shippingId = null;
-		String orderId = null;
-		String orderItemSeqId = null;
-
-		BigDecimal quantity = BigDecimal.ZERO;
-		BigDecimal quantityShipped = BigDecimal.ZERO;
-		BigDecimal quantityToShip = BigDecimal.ZERO;
-		BigDecimal quantityShippable = BigDecimal.ZERO;
+		
+	
 
 		// Get the parameters as a MAP, remove the productId and quantity params.
 		Map<String, Object> paramMap = UtilHttp.getParameterMap(request);
@@ -114,6 +108,18 @@ public class VforderEvents {
 			Debug.logWarning("No rows to process, as rowCount = " + rowCount, module);
 		} else {
 			for (int i = 0; i < rowCount; i++) {
+				String shippingId = null;
+				String orderId = null;
+				String orderItemSeqId = null;
+
+				BigDecimal quantity = BigDecimal.ZERO;
+				BigDecimal quantityShipped = BigDecimal.ZERO;
+				BigDecimal quantityToShip = BigDecimal.ZERO;
+				BigDecimal quantityShippable = BigDecimal.ZERO;
+				
+				
+				
+				
 				controlDirective = null; // re-initialize each time
 				String thisSuffix = UtilHttp.getMultiRowDelimiter() + i; // current suffix after each field id
 
