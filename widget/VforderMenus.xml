@@ -38,11 +38,6 @@
                 <parameter param-name="shippingId"/>
             </link>
         </menu-item>
-        <menu-item name="DeleteShipping" title="${uiLabelMap.CommonItems}">
-            <link target="EditShippingItems">
-                <parameter param-name="shippingId"/>
-            </link>
-        </menu-item>
     </menu>
     
 </menus>

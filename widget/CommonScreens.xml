@@ -114,10 +114,10 @@
                                     <widgets>
                                         <!-- <container style="h1"><label>${uiLabelMap[titleProperty]} ${uiLabelMap.CommonFor} ${example.exampleName} [${exampleId}]</label></container> -->
                                         <container style="button-bar">                                            
-                                            <link target="deleteShipping" text="${uiLabelMap.CommonDelete}" style="buttontext" confirmation-message="${uiLabelMap.CommonConfirmDelete}" >
+                                            <!-- <link target="deleteShipping" text="${uiLabelMap.CommonDelete}" style="buttontext" request-confirmation="true" confirmation-message="${uiLabelMap.CommonConfirmDelete}" >
                                                 <parameter param-name="shippingId"/>                                               
                                                 <image url-mode="raw" src="${iconsLocation}/delete.png"/>
-                                            </link>                                            
+                                            </link>   -->                                          
                                         </container>
                                     </widgets>
                                     <fail-widgets>
