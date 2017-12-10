@@ -22,6 +22,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -238,8 +239,11 @@ public class VforderEvents {
 							shippingItem.set("shippingItemSeqId", shippingItemsSize.toString());
 
 						}
-						shippingItem.set("quantityToShip", qty.add(quantityToShip));
-						delegator.createOrStore(shippingItem);
+						qty = qty.add(quantityToShip);
+						shippingItem.set("quantityToShip", qty);
+						if (qty.compareTo(BigDecimal.ZERO)>0){
+							delegator.createOrStore(shippingItem);
+						}
 					} catch (GenericEntityException e) {
 						Debug.logError(e, module);
 
@@ -315,7 +319,7 @@ public class VforderEvents {
 
 		Delegator delegator = (Delegator) request.getAttribute("delegator");
 		LocalDispatcher dispatcher = (LocalDispatcher) request.getAttribute("dispatcher");
-
+		GenericValue userLogin = (GenericValue) request.getSession().getAttribute("userLogin");		
 		String controlDirective = null;
 		Map<String, Object> result = null;
 		String shippingId = null;
@@ -357,10 +361,37 @@ public class VforderEvents {
 			quantityToShip = BigDecimal.ZERO;
 		}
 
-		Map serviceTwoCtx = UtilMisc.toMap("shippingId", shippingId, "shippingItemSeqId", shippingItemSeqId);
 		try {
+			Map serviceTwoCtx = UtilMisc.toMap("shippingId", shippingId, "shippingItemSeqId", shippingItemSeqId,"userLogin",userLogin);
 			dispatcher.runSync("deleteShippingItem", serviceTwoCtx);
+			
 		} catch (GenericServiceException e) {
+			Debug.logError(e, module);
+		}
+		
+		try {
+			
+			List<GenericValue> shippingItems = delegator.findByAnd("ShippingItem",
+					UtilMisc.toMap("shippingId", shippingId), Arrays.asList("shippingItemSeqId"), false);
+			if(shippingItems!=null){
+				Integer i = 1;
+				for(GenericValue entry : shippingItems){
+					Map serviceTwoCtx = UtilMisc.toMap("shippingId", entry.get("shippingId"), "shippingItemSeqId", entry.get("shippingItemSeqId"),"userLogin",userLogin);
+					dispatcher.runSync("deleteShippingItem", serviceTwoCtx);
+					entry.put("shippingItemSeqId",i.toString());
+					i++;
+					delegator.createOrStore(entry);
+				}
+			}
+			
+			
+			/*GenericValue shippingItem = delegator.findOne("ShippingItem", true, "shippingId", shippingId,
+					"shippingItemSeqId", shippingItemSeqId);
+			shippingItem.set("quantityToShip", BigDecimal.ZERO);
+
+			delegator.createOrStore(shippingItem);*/
+
+		} catch (Exception e) {
 			Debug.logError(e, module);
 		}
 
