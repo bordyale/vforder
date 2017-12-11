@@ -1,85 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
-    <!-- ========================================================= -->
-    <!-- ======================== Defaults ======================= -->
-    <!-- ========================================================= -->
-    <title>Entity of Vforder Component</title>
-    <description>None</description>
-    <copyright></copyright>
-    <version></version>
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+	<!-- ========================================================= -->
+	<!-- ======================== Defaults ======================= -->
+	<!-- ========================================================= -->
+	<title>Entity of Vforder Component</title>
+	<description>None</description>
+	<copyright></copyright>
+	<version></version>
 
 
-    <entity entity-name="ShippingHeader"
-            package-name="org.apache.ofbiz.order.shipping"
-            never-cache="true"
-            title="Shipping Header Entity">
-      <field name="shippingId" type="id-ne"></field>
-      <field name="estimatedShipDate" type="date-time"></field>
-      <prim-key field="shippingId"/>
-      <relation type="many" rel-entity-name="ShippingItem">
-        <key-map field-name="shippingId"/>
-      </relation>
-    </entity>
-    
-    <entity entity-name="ShippingItem"
-            package-name="org.apache.ofbiz.order.shipping"
-            never-cache="true"
-            title="Shipping Item Entity">
-      <field name="shippingId" type="id-ne"></field>
-      <field name="shippingItemSeqId" type="id-ne"></field>
-      <field name="orderId" type="id-ne"></field>
-      <field name="orderItemSeqId" type="id-ne"></field>
-      <field name="quantityToShip" type="fixed-point" enable-audit-log="true"></field>
-      <prim-key field="shippingId"/>
-      <prim-key field="shippingItemSeqId"/>
-      <relation type="one" fk-name="ORDER_ITEM_HDR" rel-entity-name="OrderItem">
-        <key-map field-name="orderId"/>
-      </relation>
-      <relation type="one" fk-name="ORDER_ITEM_SEQ_ID_HDR" rel-entity-name="OrderItem">
-        <key-map field-name="orderItemSeqId"/>
-      </relation>
-      <relation type="one" fk-name="SHIPPING_HDR" rel-entity-name="ShippingHeader">
-        <key-map field-name="shippingId"/>
-      </relation>
-    </entity>
-    
-    <entity entity-name="OrderItemShippingItem"
-            package-name="org.apache.ofbiz.order.shipping"
-            never-cache="true"
-            title="Order Item Shipping Item">
-      <field name="orderId" type="id-ne"></field>
-      <field name="orderItemSeqId" type="id-ne"></field>
-      <field name="quantityShipped" type="fixed-point" enable-audit-log="true"></field>
-      <prim-key field="orderId"/>
-      <prim-key field="orderItemSeqId"/>
-      <relation type="one" fk-name="ORDER_ITEM_HDR" rel-entity-name="OrderItem">
-        <key-map field-name="orderId"/>
-      </relation>
-      <relation type="one" fk-name="ORDER_ITEM_SEQ_ID_HDR" rel-entity-name="OrderItem">
-        <key-map field-name="orderItemSeqId"/>
-      </relation>
-    </entity>
-    
-    <view-entity entity-name="OrderItemShippingItemView"
-            package-name="org.apache.ofbiz.order.order"
-            never-cache="true"
-            title="Order Items and ShippingItem View Entity">
-      <member-entity entity-alias="SI" entity-name="OrderItemShippingItem"/>
-      <member-entity entity-alias="OI" entity-name="OrderItem"/>
-      <alias entity-alias="OI" name="orderId"/>
-      <alias entity-alias="OI" name="orderDate"/>
-      <alias entity-alias="OI" name="orderItemSeqId"/>
-      <alias entity-alias="OI" name="productId"/>
-      <alias entity-alias="OI" name="quantity"/>
-      <alias entity-alias="SI" name="quantityShipped"/>
-      <view-link entity-alias="OI" rel-entity-alias="SI" rel-optional="true">
-        <key-map field-name="orderId"/>
-        <key-map field-name="orderItemSeqId"/>
-      </view-link>
-    </view-entity>
-    
-    
-    
+	<entity entity-name="ShippingHeader" package-name="org.apache.ofbiz.order.shipping"
+		never-cache="true" title="Shipping Header Entity">
+		<field name="shippingId" type="id-ne"></field>
+		<field name="estimatedShipDate" type="date-time"></field>
+		<prim-key field="shippingId" />
+		<relation type="many" rel-entity-name="ShippingItem">
+			<key-map field-name="shippingId" />
+		</relation>
+	</entity>
+
+	<entity entity-name="ShippingItem" package-name="org.apache.ofbiz.order.shipping"
+		never-cache="true" title="Shipping Item Entity">
+		<field name="shippingId" type="id-ne"></field>
+		<field name="shippingItemSeqId" type="id-ne"></field>
+		<field name="orderId" type="id-ne"></field>
+		<field name="orderItemSeqId" type="id-ne"></field>
+		<field name="quantityToShip" type="fixed-point"
+			enable-audit-log="true"></field>
+		<prim-key field="shippingId" />
+		<prim-key field="shippingItemSeqId" />
+		<relation type="one" fk-name="ORDER_ITEM_HDR"
+			rel-entity-name="OrderItem">
+			<key-map field-name="orderId" />
+		</relation>
+		<relation type="one" fk-name="ORDER_ITEM_SEQ_ID_HDR"
+			rel-entity-name="OrderItem">
+			<key-map field-name="orderItemSeqId" />
+		</relation>
+		<relation type="one" fk-name="SHIPPING_HDR" rel-entity-name="ShippingHeader">
+			<key-map field-name="shippingId" />
+		</relation>
+	</entity>
+
+	<entity entity-name="OrderItemShippingItem" package-name="org.apache.ofbiz.order.shipping"
+		never-cache="true" title="Order Item Shipping Item">
+		<field name="orderId" type="id-ne"></field>
+		<field name="orderItemSeqId" type="id-ne"></field>
+		<field name="quantityShipped" type="fixed-point"
+			enable-audit-log="true"></field>
+		<prim-key field="orderId" />
+		<prim-key field="orderItemSeqId" />
+		<relation type="one" fk-name="ORDER_ITEM_HDR"
+			rel-entity-name="OrderItem">
+			<key-map field-name="orderId" />
+		</relation>
+		<relation type="one" fk-name="ORDER_ITEM_SEQ_ID_HDR"
+			rel-entity-name="OrderItem">
+			<key-map field-name="orderItemSeqId" />
+		</relation>
+	</entity>
+
+	<view-entity entity-name="OrderItemShippingItemView"
+		package-name="org.apache.ofbiz.order.order" never-cache="true"
+		title="Order Items and ShippingItem View Entity">
+		<member-entity entity-alias="SI" entity-name="ShippingItemView" />
+		<member-entity entity-alias="OI" entity-name="OrderItem" />
+		<member-entity entity-alias="PR" entity-name="Product" />
+		<alias entity-alias="OI" name="orderId" />
+		<alias entity-alias="PR" name="productName" />
+		<alias entity-alias="PR" name="internalName" />		
+		<alias entity-alias="OI" name="orderDate" />
+		<alias entity-alias="OI" name="orderItemSeqId" />
+		<alias entity-alias="OI" name="productId" />
+		<alias entity-alias="OI" name="quantity" />
+		<alias entity-alias="SI" name="quantityShipped" />
+		<alias name="quantityShippable">
+			<complex-alias operator="-">
+				<complex-alias-field entity-alias="OI" field="quantity" />
+				<complex-alias-field entity-alias="SI" field="quantityShipped" />
+			</complex-alias>
+		</alias>
+		<view-link entity-alias="OI" rel-entity-alias="SI"
+			rel-optional="true">
+			<key-map field-name="orderId" />
+			<key-map field-name="orderItemSeqId" />
+		</view-link>
+		<view-link entity-alias="OI" rel-entity-alias="PR"
+			rel-optional="true">
+			<key-map field-name="productId" />			
+		</view-link>
+	</view-entity>
+
+	<view-entity entity-name="ShippingItemView" package-name="org.apache.ofbiz.order.order"
+		never-cache="true" title="Order Items and ShippingItem View Entity">
+		<member-entity entity-alias="SI" entity-name="ShippingItem" />
+		<alias entity-alias="SI" name="orderId" group-by="true" />
+		<alias entity-alias="SI" name="orderItemSeqId" group-by="true" />
+		<alias entity-alias="SI" name="quantityShipped" field="quantityToShip"
+			function="sum" />
+	</view-entity>
+
+
+
 
 </entitymodel>

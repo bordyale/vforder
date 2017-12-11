@@ -353,6 +353,7 @@
                 <set field="shippingId" from-field="parameters.shippingId"/>
                 <set field="titleProperty" value="${shippingId}"/>
                 <entity-one entity-name="ShippingHeader" value-field="shipping"/>
+                <script location="component://vforder/groovyScripts/ListShippingItems.groovy"/>
             </actions>
             <widgets>
                 <decorator-screen name="VforderShippingCommonDecorator" location="${parameters.mainDecoratorLocation}">
