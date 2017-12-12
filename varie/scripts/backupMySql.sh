@@ -25,7 +25,7 @@ CHMOD="$(which chmod)"
 GZIP="$(which gzip)"
  
 # Backup Dest directory, change this if you have someother location
-DEST="/home/ale/backupMySql"
+DEST="/home/ale/Dropbox/backupMySql"
  
 # Main directory where backup will be stored
 MBD="$DEST/mysql"
