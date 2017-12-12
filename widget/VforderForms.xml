@@ -111,19 +111,23 @@
     
     
      <form name="ListShippingItems" type="list" list-name="listIt" paginate-target="findshippings" odd-row-style="alternate-row" default-table-style="basic-table hover-bar">
-        <actions>
+        <!-- <actions>
             <service service-name="performFind" result-map="result" result-map-list="listIt">
                 <field-map field-name="inputFields" from-field="findParams"/>
                 <field-map field-name="entityName" value="ShippingItem"/>
                 <field-map field-name="orderBy" value="shippingItemSeqId"/>              
             </service>
-        </actions>
+        </actions> -->
         
-       <field name="shippingId"><display/></field>
+   
        <field name="shippingItemSeqId"><display/></field>
        <field name="orderId"><display/></field>
-       <field name="quantityToShip"><display/></field>
        <field name="orderItemSeqId"><display/></field>
+       <field name="productId"><display/></field>
+       <field name="productName"><display/></field>
+       <field name="quantityToShip"><display/></field>
+       
+       
         
        <field name="deleteLink" title=" " widget-style="buttontext">
             <hyperlink description="${uiLabelMap.CommonDelete}" target="deleteShippingItem" also-hidden="false" confirmation-message="${uiLabelMap.CommonConfirmDelete}" image-location="${iconsLocation}/delete.png">
@@ -156,12 +160,13 @@
         <field name="shippingId"><hidden value="${shippingId}"/></field>
        <field name="orderId"><hidden value="${orderId}"/></field>
        <field name="orderItemSeqId"><hidden value="${orderItemSeqId}"/></field>
-        <field name="orderId"  title="${uiLabelMap.OrderOrderId}" widget-style="buttontext">
+       <!--  <field name="orderId"  title="${uiLabelMap.OrderOrderId}" widget-style="buttontext">
             <hyperlink description="${orderId}" target="/catalog/control/EditProductInventoryItems" target-type="inter-app">
                 <parameter param-name="orderId"/>
             </hyperlink>
-        </field>
+        </field> -->
         <field name="productId"><display/></field>
+        <field name="productName"><display/></field>
         <field name="quantity" title="${uiLabelMap.OrderItemQuantity}"><display/></field>
         <field name="quantityShipped"><display/></field>
         <field name="quantityShippable"><display/></field>

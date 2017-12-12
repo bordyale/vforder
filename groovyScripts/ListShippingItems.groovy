@@ -31,6 +31,10 @@ import org.apache.ofbiz.entity.GenericValue
 shippingId = request.getParameter("shippingId") ?: ""
 
 
-Map<String, String> findParams = UtilMisc.toMap("shippingId", shippingId);
+orderItemShippingItem = select("orderId","orderItemSeqId","quantityToShip","productId","productName","shippingItemSeqId").from("ShippingItemView").where("shippingId", shippingId).cache(false).queryList()
 
-context.findParams = findParams
+
+
+//Map<String, String> findParams = UtilMisc.toMap("shippingId", shippingId);
+
+context.listIt = orderItemShippingItem
