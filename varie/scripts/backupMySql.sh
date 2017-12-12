@@ -13,8 +13,8 @@
 # Visit http://bash.cyberciti.biz/ for more information.
 # -------------------------------------------------------------------------
  
-MyUSER="root"     # USERNAME
-MyPASS="ofbiz"   # PASSWORD
+MyUSER=${1}     # USERNAME
+MyPASS=${2}   # PASSWORD
 MyHOST="localhost"        # Hostname
  
 # Linux bin paths, change this if it can't be autodetected via which command
