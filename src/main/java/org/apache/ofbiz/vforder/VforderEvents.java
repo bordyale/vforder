@@ -84,9 +84,11 @@ public class VforderEvents {
 
 	public static final MathContext generalRounding = new MathContext(10);
 
-	public static String updateOrderShippingItems(HttpServletRequest request, HttpServletResponse response) {
+	public static String updateOrderShippingItems(HttpServletRequest request,
+			HttpServletResponse response) {
 		Delegator delegator = (Delegator) request.getAttribute("delegator");
-		LocalDispatcher dispatcher = (LocalDispatcher) request.getAttribute("dispatcher");
+		LocalDispatcher dispatcher = (LocalDispatcher) request
+				.getAttribute("dispatcher");
 
 		String controlDirective = null;
 		Map<String, Object> result = null;
@@ -107,10 +109,11 @@ public class VforderEvents {
 		// The number of multi form rows is retrieved
 		int rowCount = UtilHttp.getMultiFormRowCount(paramMap);
 		if (rowCount < 1) {
-			Debug.logWarning("No rows to process, as rowCount = " + rowCount, module);
+			Debug.logWarning("No rows to process, as rowCount = " + rowCount,
+					module);
 		} else {
 			for (int i = 0; i < rowCount; i++) {
-				String shippingId = null;
+				String shipmentId = null;
 				String orderId = null;
 				String orderItemSeqId = null;
 
@@ -128,21 +131,24 @@ public class VforderEvents {
 																			// id
 
 				// get the params
-				if (paramMap.containsKey("shippingId" + thisSuffix)) {
-					shippingId = (String) paramMap.remove("shippingId" + thisSuffix);
+				if (paramMap.containsKey("shipmentId" + thisSuffix)) {
+					shipmentId = (String) paramMap.remove("shipmentId"
+							+ thisSuffix);
 				}
 				if (paramMap.containsKey("orderId" + thisSuffix)) {
 					orderId = (String) paramMap.remove("orderId" + thisSuffix);
 				}
-				request.setAttribute("shippingId", shippingId);
+				request.setAttribute("shipmentId", shipmentId);
 				request.setAttribute("orderId", orderId);
 				if (paramMap.containsKey("orderItemSeqId" + thisSuffix)) {
-					orderItemSeqId = (String) paramMap.remove("orderItemSeqId" + thisSuffix);
+					orderItemSeqId = (String) paramMap.remove("orderItemSeqId"
+							+ thisSuffix);
 				}
 
 				String quantityStr = null;
 				if (paramMap.containsKey("quantity" + thisSuffix)) {
-					quantityStr = (String) paramMap.remove("quantity" + thisSuffix);
+					quantityStr = (String) paramMap.remove("quantity"
+							+ thisSuffix);
 				}
 				if ((quantityStr == null) || (quantityStr.equals(""))) { // otherwise,
 																			// every
@@ -164,38 +170,44 @@ public class VforderEvents {
 				try {
 					quantity = new BigDecimal(quantityStr);
 				} catch (Exception e) {
-					Debug.logWarning(e, "Problems parsing quantity string: " + quantityStr, module);
+					Debug.logWarning(e, "Problems parsing quantity string: "
+							+ quantityStr, module);
 					quantity = BigDecimal.ZERO;
 				}
 
-				/*try {
-					GenericValue orderShippingItem = delegator.findOne("OrderItemShippingItem", true, "orderId", orderId, "orderItemSeqId", orderItemSeqId);
-					if (orderShippingItem != null) {
-
-						quantityShipped = (BigDecimal) orderShippingItem.get("quantityShipped");
-					}
-
-				} catch (GenericEntityException e) {
-					Debug.logError(e, module);
-
-				}*/
+				/*
+				 * try { GenericValue orderShippingItem =
+				 * delegator.findOne("OrderItemShippingItem", true, "orderId",
+				 * orderId, "orderItemSeqId", orderItemSeqId); if
+				 * (orderShippingItem != null) {
+				 * 
+				 * quantityShipped = (BigDecimal)
+				 * orderShippingItem.get("quantityShipped"); }
+				 * 
+				 * } catch (GenericEntityException e) { Debug.logError(e,
+				 * module);
+				 * 
+				 * }
+				 */
 
 				String quantityToShipStr = null;
 				if (paramMap.containsKey("quantityToShip" + thisSuffix)) {
-					quantityToShipStr = (String) paramMap.remove("quantityToShip" + thisSuffix);
+					quantityToShipStr = (String) paramMap
+							.remove("quantityToShip" + thisSuffix);
 				}
-				if ((quantityToShipStr == null) || (quantityToShipStr.equals(""))) { // otherwise,
-																						// every
-																						// empty
-																						// value
-																						// causes
-																						// an
-																						// exception
-																						// and
-																						// makes
-																						// the
-																						// log
-																						// ugly
+				if ((quantityToShipStr == null)
+						|| (quantityToShipStr.equals(""))) { // otherwise,
+																// every
+																// empty
+																// value
+																// causes
+																// an
+																// exception
+																// and
+																// makes
+																// the
+																// log
+																// ugly
 					quantityToShipStr = "0"; // default quantity is 0, so
 												// without a quantity input,
 												// this field will not
@@ -205,36 +217,26 @@ public class VforderEvents {
 				try {
 					quantityToShip = new BigDecimal(quantityToShipStr);
 				} catch (Exception e) {
-					Debug.logWarning(e, "Problems parsing quantity string: " + quantityToShipStr, module);
+					Debug.logWarning(e, "Problems parsing quantity string: "
+							+ quantityToShipStr, module);
 					quantityToShip = BigDecimal.ZERO;
 				}
 
 				String quantityShippableStr = null;
 				if (paramMap.containsKey("quantityShippable" + thisSuffix)) {
-					quantityShippableStr = (String) paramMap.remove("quantityShippable" + thisSuffix);
+					quantityShippableStr = (String) paramMap
+							.remove("quantityShippable" + thisSuffix);
 				}
-				if ((quantityShippableStr == null) || (quantityShippableStr.equals(""))) { // otherwise,
-																							// every
-																							// empty
-																							// value
-																							// causes
-																							// an
-																							// exception
-																							// and
-																							// makes
-																							// the
-																							// log
-																							// ugly
-					quantityShippableStr = "0"; // default quantity is 0, so
-												// without a quantity input,
-												// this field will
-												// not be added
+				if ((quantityShippableStr == null)
+						|| (quantityShippableStr.equals(""))) {
+					quantityShippableStr = "0";
 				}
 
 				try {
 					quantityShippable = new BigDecimal(quantityShippableStr);
 				} catch (Exception e) {
-					Debug.logWarning(e, "Problems parsing quantity string: " + quantityShippableStr, module);
+					Debug.logWarning(e, "Problems parsing quantity string: "
+							+ quantityShippableStr, module);
 					quantityShippable = BigDecimal.ZERO;
 				}
 
@@ -243,11 +245,14 @@ public class VforderEvents {
 					return "error";
 				} else {
 
-					Integer shippingItemsSize = 0;
+					Integer shipmentItemsSize = 0;
 					try {
-						List<GenericValue> shippingItems = delegator.findByAnd("ShippingItem", UtilMisc.toMap("shippingId", shippingId), null, false);
-						if (shippingItems != null)
-							shippingItemsSize = shippingItems.size() + 1;
+						List<GenericValue> shipmentItems = delegator.findByAnd(
+								"ShipmentItem",
+								UtilMisc.toMap("shipmentId", shipmentId), null,
+								false);
+						if (shipmentItems != null)
+							shipmentItemsSize = shipmentItems.size() + 1;
 
 					} catch (GenericEntityException e1) {
 						// TODO Auto-generated catch block
@@ -255,46 +260,67 @@ public class VforderEvents {
 					}
 
 					try {
-						List<GenericValue> shippingItems = delegator.findByAnd("ShippingItem",
-								UtilMisc.toMap("shippingId", shippingId, "orderId", orderId, "orderItemSeqId", orderItemSeqId), null, false);
+						List<GenericValue> vfshipmentItems = delegator
+								.findByAnd("VfShipmentItem", UtilMisc.toMap(
+										"shipmentId", shipmentId, "orderId",
+										orderId, "orderItemSeqId",
+										orderItemSeqId), null, false);
 						BigDecimal qty = BigDecimal.ZERO;
-						GenericValue shippingItem = null;
-						if (shippingItems.size() > 0) {
-							shippingItem = shippingItems.get(0);
-							qty = (BigDecimal) shippingItem.get("quantityToShip");
+						GenericValue vfshipmentItem = null;
+						GenericValue shipmentItem = null;
+						if (vfshipmentItems.size() > 0) {
+							vfshipmentItem = vfshipmentItems.get(0);
+							shipmentItem = delegator.findOne("ShipmentItem",
+									UtilMisc.toMap("shipmentId", shipmentId,
+											"shipmentItemSeqId", vfshipmentItem
+													.get("shipmentItemSeqId")),
+									false);
+
+							qty = (BigDecimal) shipmentItem.get("quantity");
 
 						} else {
-							shippingItem = delegator.makeValue("ShippingItem");
+							shipmentItem = delegator.makeValue("ShipmentItem");
+							vfshipmentItem = delegator
+									.makeValue("VfShipmentItem");
 							// GenericValue shippingItem =
 							// delegator.makeValue("ShippingItem");
-							shippingItem.set("shippingId", shippingId);
-							shippingItem.set("orderId", orderId);
-							shippingItem.set("orderItemSeqId", orderItemSeqId);
+							shipmentItem.set("shipmentId", shipmentId);
+							vfshipmentItem.set("shipmentId", shipmentId);
 
-							shippingItem.set("shippingItemSeqId", shippingItemsSize.toString());
+							vfshipmentItem.set("orderId", orderId);
+							vfshipmentItem
+									.set("orderItemSeqId", orderItemSeqId);
+
+							vfshipmentItem.set("shipmentItemSeqId",
+									shipmentItemsSize.toString());
+							shipmentItem.set("shipmentItemSeqId",
+									shipmentItemsSize.toString());
 
 						}
 						qty = qty.add(quantityToShip);
-						shippingItem.set("quantityToShip", qty);
+						shipmentItem.set("quantity", qty);
 						if (qty.compareTo(BigDecimal.ZERO) > 0) {
-							delegator.createOrStore(shippingItem);
+							delegator.createOrStore(shipmentItem);
+							delegator.createOrStore(vfshipmentItem);
 						}
 					} catch (GenericEntityException e) {
 						Debug.logError(e, module);
 
 					}
 
-					/*GenericValue ordershippingItem = delegator.makeValue("OrderItemShippingItem");
-					ordershippingItem.set("orderId", orderId);
-					ordershippingItem.set("orderItemSeqId", orderItemSeqId);
-					ordershippingItem.set("quantityShipped", quantityShipped.add(quantityToShip));
-					try {
-
-						delegator.createOrStore(ordershippingItem);
-					} catch (GenericEntityException e) {
-						Debug.logError(e, module);
-
-					}*/
+					/*
+					 * GenericValue ordershippingItem =
+					 * delegator.makeValue("OrderItemShippingItem");
+					 * ordershippingItem.set("orderId", orderId);
+					 * ordershippingItem.set("orderItemSeqId", orderItemSeqId);
+					 * ordershippingItem.set("quantityShipped",
+					 * quantityShipped.add(quantityToShip)); try {
+					 * 
+					 * delegator.createOrStore(ordershippingItem); } catch
+					 * (GenericEntityException e) { Debug.logError(e, module);
+					 * 
+					 * }
+					 */
 
 				}
 
@@ -319,11 +345,13 @@ public class VforderEvents {
 	 *            The servlet request instance to set the error messages in
 	 * @return one of NON_CRITICAL_ERROR, ERROR or NO_ERROR.
 	 */
-	private static String processResult(Map<String, Object> result, HttpServletRequest request) {
+	private static String processResult(Map<String, Object> result,
+			HttpServletRequest request) {
 		// Check for errors
 		StringBuilder errMsg = new StringBuilder();
 		if (result.containsKey(ModelService.ERROR_MESSAGE_LIST)) {
-			List<String> errorMsgs = UtilGenerics.checkList(result.get(ModelService.ERROR_MESSAGE_LIST));
+			List<String> errorMsgs = UtilGenerics.checkList(result
+					.get(ModelService.ERROR_MESSAGE_LIST));
 			Iterator<String> iterator = errorMsgs.iterator();
 			errMsg.append("<ul>");
 			while (iterator.hasNext()) {
@@ -340,7 +368,8 @@ public class VforderEvents {
 		// See whether there was an error
 		if (errMsg.length() > 0) {
 			request.setAttribute("_ERROR_MESSAGE_", errMsg.toString());
-			if (result.get(ModelService.RESPONSE_MESSAGE).equals(ModelService.RESPOND_SUCCESS)) {
+			if (result.get(ModelService.RESPONSE_MESSAGE).equals(
+					ModelService.RESPOND_SUCCESS)) {
 				return NON_CRITICAL_ERROR;
 			} else {
 				return ERROR;
@@ -350,17 +379,20 @@ public class VforderEvents {
 		}
 	}
 
-	public static String deleteShippingItemOrderItem(HttpServletRequest request, HttpServletResponse response) {
+	public static String deleteShippingItemOrderItem(
+			HttpServletRequest request, HttpServletResponse response) {
 
 		Delegator delegator = (Delegator) request.getAttribute("delegator");
-		LocalDispatcher dispatcher = (LocalDispatcher) request.getAttribute("dispatcher");
-		GenericValue userLogin = (GenericValue) request.getSession().getAttribute("userLogin");
+		LocalDispatcher dispatcher = (LocalDispatcher) request
+				.getAttribute("dispatcher");
+		GenericValue userLogin = (GenericValue) request.getSession()
+				.getAttribute("userLogin");
 		String controlDirective = null;
 		Map<String, Object> result = null;
-		String shippingId = null;
+		String shipmentId = null;
 		String orderId = null;
 		String orderItemSeqId = null;
-		String shippingItemSeqId = null;
+		String shipmentItemSeqId = null;
 		BigDecimal quantityToShip = BigDecimal.ZERO;
 
 		// Get the parameters as a MAP, remove the productId and quantity
@@ -368,8 +400,8 @@ public class VforderEvents {
 		Map<String, Object> paramMap = UtilHttp.getParameterMap(request);
 
 		// get the params
-		if (paramMap.containsKey("shippingId")) {
-			shippingId = (String) paramMap.remove("shippingId");
+		if (paramMap.containsKey("shipmentId")) {
+			shipmentId = (String) paramMap.remove("shipmentId");
 		}
 		if (paramMap.containsKey("orderId")) {
 			orderId = (String) paramMap.remove("orderId");
@@ -377,37 +409,31 @@ public class VforderEvents {
 		if (paramMap.containsKey("orderItemSeqId")) {
 			orderItemSeqId = (String) paramMap.remove("orderItemSeqId");
 		}
-		if (paramMap.containsKey("shippingItemSeqId")) {
-			shippingItemSeqId = (String) paramMap.remove("shippingItemSeqId");
+		if (paramMap.containsKey("shipmentItemSeqId")) {
+			shipmentItemSeqId = (String) paramMap.remove("shipmentItemSeqId");
 		}
 
 		String quantityStr = null;
 		if (paramMap.containsKey("quantityToShip")) {
 			quantityStr = (String) paramMap.remove("quantityToShip");
 		}
-		if ((quantityStr == null) || (quantityStr.equals(""))) { // otherwise,
-																	// every
-																	// empty
-																	// value
-																	// causes an
-																	// exception
-																	// and
-																	// makes the
-																	// log ugly
-			quantityStr = "0"; // default quantity is 0, so without a quantity
-								// input, this field will not be
-								// added
+		if ((quantityStr == null) || (quantityStr.equals(""))) {
+			quantityStr = "0";
 		}
 		try {
 			quantityToShip = new BigDecimal(quantityStr);
 		} catch (Exception e) {
-			Debug.logWarning(e, "Problems parsing quantity string: " + quantityStr, module);
+			Debug.logWarning(e, "Problems parsing quantity string: "
+					+ quantityStr, module);
 			quantityToShip = BigDecimal.ZERO;
 		}
 
 		try {
-			Map serviceTwoCtx = UtilMisc.toMap("shippingId", shippingId, "shippingItemSeqId", shippingItemSeqId, "userLogin", userLogin);
-			dispatcher.runSync("deleteShippingItem", serviceTwoCtx);
+			Map serviceTwoCtx = UtilMisc.toMap("shipmentId", shipmentId,
+					"shipmentItemSeqId", shipmentItemSeqId, "userLogin",
+					userLogin);
+			dispatcher.runSync("deleteVfShipmentItem", serviceTwoCtx);
+			dispatcher.runSync("deleteShipmentItem", serviceTwoCtx);
 
 		} catch (GenericServiceException e) {
 			Debug.logError(e, module);
@@ -415,15 +441,32 @@ public class VforderEvents {
 
 		try {
 
-			List<GenericValue> shippingItems = delegator.findByAnd("ShippingItem", UtilMisc.toMap("shippingId", shippingId),
-					Arrays.asList("shippingItemSeqId"), false);
-			if (shippingItems != null) {
+			List<GenericValue> shipmentItems = delegator.findByAnd(
+					"ShipmentItem", UtilMisc.toMap("shipmentId", shipmentId),
+					Arrays.asList("shipmentItemSeqId"), false);
+			List<GenericValue> vfshipmentItems = delegator.findByAnd(
+					"VfShipmentItem", UtilMisc.toMap("shipmentId", shipmentId),
+					Arrays.asList("shipmentItemSeqId"), false);
+			if (shipmentItems != null) {
 				Integer i = 1;
-				for (GenericValue entry : shippingItems) {
-					Map serviceTwoCtx = UtilMisc.toMap("shippingId", entry.get("shippingId"), "shippingItemSeqId", entry.get("shippingItemSeqId"), "userLogin",
+				for (GenericValue entry : shipmentItems) {
+					Map serviceTwoCtx = UtilMisc.toMap("shipmentId",
+							entry.get("shipmentId"), "shipmentItemSeqId",
+							entry.get("shipmentItemSeqId"), "userLogin",
 							userLogin);
-					dispatcher.runSync("deleteShippingItem", serviceTwoCtx);
-					entry.put("shippingItemSeqId", i.toString());
+					dispatcher.runSync("deleteShipmentItem", serviceTwoCtx);
+					entry.put("shipmentItemSeqId", i.toString());
+					i++;
+					delegator.createOrStore(entry);
+				}
+				i = 1;
+				for (GenericValue entry : vfshipmentItems) {
+					Map serviceTwoCtx = UtilMisc.toMap("shipmentId",
+							entry.get("shipmentId"), "shipmentItemSeqId",
+							entry.get("shipmentItemSeqId"), "userLogin",
+							userLogin);
+					dispatcher.runSync("deleteVfShipmentItem", serviceTwoCtx);
+					entry.put("shipmentItemSeqId", i.toString());
 					i++;
 					delegator.createOrStore(entry);
 				}
@@ -442,38 +485,47 @@ public class VforderEvents {
 			Debug.logError(e, module);
 		}
 
-		/*try {
-			GenericValue ordershippingItem = delegator.findOne("OrderItemShippingItem", true, "orderId", orderId, "orderItemSeqId", orderItemSeqId);
-			BigDecimal quantity = (BigDecimal) ordershippingItem.get("quantityShipped");
-			ordershippingItem.set("quantityShipped", quantity.subtract(quantityToShip));
-
-			delegator.createOrStore(ordershippingItem);
-		} catch (GenericEntityException e) {
-			Debug.logError(e, module);
-
-		}*/
+		/*
+		 * try { GenericValue ordershippingItem =
+		 * delegator.findOne("OrderItemShippingItem", true, "orderId", orderId,
+		 * "orderItemSeqId", orderItemSeqId); BigDecimal quantity = (BigDecimal)
+		 * ordershippingItem.get("quantityShipped");
+		 * ordershippingItem.set("quantityShipped",
+		 * quantity.subtract(quantityToShip));
+		 * 
+		 * delegator.createOrStore(ordershippingItem); } catch
+		 * (GenericEntityException e) { Debug.logError(e, module);
+		 * 
+		 * }
+		 */
 
 		return "success";
 
 	}
 
-	public static String deleteShipping(HttpServletRequest request, HttpServletResponse response) {
+	public static String deleteShipping(HttpServletRequest request,
+			HttpServletResponse response) {
 
 		Delegator delegator = (Delegator) request.getAttribute("delegator");
-		LocalDispatcher dispatcher = (LocalDispatcher) request.getAttribute("dispatcher");
-		GenericValue userLogin = (GenericValue) request.getSession().getAttribute("userLogin");
-		String shippingId = null;
+		LocalDispatcher dispatcher = (LocalDispatcher) request
+				.getAttribute("dispatcher");
+		GenericValue userLogin = (GenericValue) request.getSession()
+				.getAttribute("userLogin");
+		String shipmentId = null;
 
 		// Get the parameters as a MAP, remove the productId and quantity
 		// params.
 		Map<String, Object> paramMap = UtilHttp.getParameterMap(request);
 
-		if (paramMap.containsKey("shippingId")) {
-			shippingId = (String) paramMap.remove("shippingId");
+		if (paramMap.containsKey("shipmentId")) {
+			shipmentId = (String) paramMap.remove("shipmentId");
 		}
 
 		try {
-			delegator.removeByAnd("shippingItem", UtilMisc.toMap("shippingId", shippingId));
+			delegator.removeByAnd("shipmentItem",
+					UtilMisc.toMap("shipmentId", shipmentId));
+			delegator.removeByAnd("VfShipmentItem",
+					UtilMisc.toMap("shipmentId", shipmentId));
 
 		} catch (GenericEntityException e) {
 			Debug.logError(e, module);
@@ -481,8 +533,9 @@ public class VforderEvents {
 		}
 
 		try {
-			Map serviceTwoCtx = UtilMisc.toMap("shippingId", shippingId, "userLogin", userLogin);
-			dispatcher.runSync("deleteShipping", serviceTwoCtx);
+			Map serviceTwoCtx = UtilMisc.toMap("shipmentId", shipmentId,
+					"userLogin", userLogin);
+			dispatcher.runSync("deleteShipment", serviceTwoCtx);
 
 		} catch (GenericServiceException e) {
 			Debug.logError(e, module);

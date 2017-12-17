@@ -77,8 +77,8 @@ function toggleOrderIdList() {
 <#if security.hasEntityPermission("VFORDER", "_VIEW", session)>
 <#if parameters.hideFields?has_content>
 <form name='lookupandhidefields${requestParameters.hideFields?default("Y")}' method="post" action="<@ofbizUrl>${formTarget}</@ofbizUrl>">
-  <#if shippingId?has_content>
-    	<input type="hidden" name="shippingId" value="${shippingId}"/>
+  <#if shipmentId?has_content>
+    	<input type="hidden" name="shipmentId" value="${shipmentId}"/>
     </#if>
   <#if parameters.hideFields?default("N")=='Y'>
     <input type="hidden" name="hideFields" value="N"/>
@@ -125,8 +125,8 @@ function toggleOrderIdList() {
 <input type="hidden" name="hideFields" value="Y"/>
 <input type="hidden" name="viewSize" value="${viewSize}"/>
 <input type="hidden" name="viewIndex" value="${viewIndex}"/>
-<#if shippingId?has_content>
-    	<input type="hidden" name="shippingId" value="${shippingId}"/>
+<#if shipmentId?has_content>
+    	<input type="hidden" name="shipmentId" value="${shipmentId}"/>
 </#if>
 
 <div id="findOrders" class="screenlet">
@@ -202,7 +202,7 @@ function toggleOrderIdList() {
               </#if>
               
               
-              <#if !shippingId?has_content>
+              <#if !shipmentId?has_content>
               
 	              <tr>
 	                <td width='25%' align='right' class='label'>${uiLabelMap.OrderOrderType}</td>
@@ -371,8 +371,8 @@ document.lookuporder.orderId.focus();
   </div>
   <div class="screenlet-body">
     <form name="paginationForm" method="post" action="<@ofbizUrl>${formTarget}</@ofbizUrl>">
-    <#if shippingId?has_content>
-    	<input type="hidden" name="shippingId" value="${shippingId}"/>
+    <#if shipmentId?has_content>
+    	<input type="hidden" name="shipmentId" value="${shipmentId}"/>
     </#if>
       <input type="hidden" name="viewSize"/>
       <input type="hidden" name="viewIndex"/>
@@ -385,8 +385,8 @@ document.lookuporder.orderId.focus();
       </#if>
     </form>
     <form name="massOrderChangeForm" method="post" action="javascript:void(0);">
-    <#if shippingId?has_content>
-    	<input type="hidden" name="shippingId" value="${shippingId}"/>
+    <#if shipmentId?has_content>
+    	<input type="hidden" name="shipmentId" value="${shipmentId}"/>
     </#if>
       <div>&nbsp;</div>
      <!-- <div align="right">
@@ -414,7 +414,7 @@ document.lookuporder.orderId.focus();
       </div>-->
 
       <table class="basic-table hover-bar" cellspacing='0'>
-      <#if !shippingId?has_content>
+      <#if !shipmentId?has_content>
 	        <tr class="header-row">
 	          <td width="1%">
 	            <input type="checkbox" id="checkAllOrders" name="checkAllOrders" value="1" onchange="javascript:toggleOrderId(this);"/>
@@ -479,7 +479,7 @@ document.lookuporder.orderId.focus();
               <#assign displayParty = orh.getPlacingParty()!>
             </#if>
             <#assign partyId = displayParty.partyId?default("_NA_")>
-            <#if !shippingId?has_content>
+            <#if !shipmentId?has_content>
 		            <tr valign="middle"<#if alt_row> class="alternate-row"</#if>>
 		              <td>
 		                 <input type="checkbox" name="orderIdList" value="${orderHeader.orderId}" onchange="javascript:toggleOrderIdList();"/>
@@ -584,7 +584,7 @@ document.lookuporder.orderId.focus();
 			                <a href="<@ofbizUrl>orderview?orderId=${orderHeader.orderId}</@ofbizUrl>" class='buttontext'>${uiLabelMap.CommonView}</a>
 			              </td>
 			              <td align='right'>
-			                <a href="<@ofbizUrl>AddShippingItemOrderItem?orderId=${orderHeader.orderId}&shippingId=${shippingId}</@ofbizUrl>" class='buttontext'>${uiLabelMap.AddShippingItemOrderItem}</a>
+			                <a href="<@ofbizUrl>AddShippingItemOrderItem?orderId=${orderHeader.orderId}&shipmentId=${shipmentId}</@ofbizUrl>" class='buttontext'>${uiLabelMap.AddShippingItemOrderItem}</a>
 			              </td>
 			      </tr>
             </#if>

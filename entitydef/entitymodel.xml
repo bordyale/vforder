@@ -10,7 +10,7 @@
 	<version></version>
 
 
-	<entity entity-name="ShippingHeader" package-name="org.apache.ofbiz.order.shipping"
+	<!-- <entity entity-name="ShippingHeader" package-name="org.apache.ofbiz.order.shipping"
 		never-cache="true" title="Shipping Header Entity">
 		<field name="shippingId" type="id-ne"></field>
 		<field name="estimatedShipDate" type="date-time"></field>
@@ -18,18 +18,16 @@
 		<relation type="many" rel-entity-name="ShippingItem">
 			<key-map field-name="shippingId" />
 		</relation>
-	</entity>
+	</entity> -->
 
-	<entity entity-name="ShippingItem" package-name="org.apache.ofbiz.order.shipping"
+	<entity entity-name="VfShipmentItem" package-name="org.apache.ofbiz.order.shipping"
 		never-cache="true" title="Shipping Item Entity">
-		<field name="shippingId" type="id-ne"></field>
-		<field name="shippingItemSeqId" type="id-ne"></field>
+		<field name="shipmentId" type="id-ne"></field>
+		<field name="shipmentItemSeqId" type="id-ne"></field>
 		<field name="orderId" type="id-ne"></field>
 		<field name="orderItemSeqId" type="id-ne"></field>
-		<field name="quantityToShip" type="fixed-point"
-			enable-audit-log="true"></field>
-		<prim-key field="shippingId" />
-		<prim-key field="shippingItemSeqId" />
+		<prim-key field="shipmentId" />
+		<prim-key field="shipmentItemSeqId" />
 		<relation type="one" fk-name="ORDER_ITEM_HDR"
 			rel-entity-name="OrderItem">
 			<key-map field-name="orderId" />
@@ -38,8 +36,8 @@
 			rel-entity-name="OrderItem">
 			<key-map field-name="orderItemSeqId" />
 		</relation>
-		<relation type="one" fk-name="SHIPPING_HDR" rel-entity-name="ShippingHeader">
-			<key-map field-name="shippingId" />
+		<relation type="one" fk-name="SHIPPING_HDR" rel-entity-name="Shipment">
+			<key-map field-name="shipmentId" />
 		</relation>
 	</entity>
 
@@ -96,31 +94,41 @@
 	<view-entity entity-name="ShippingItemQtySumView"
 		package-name="org.apache.ofbiz.order.order" never-cache="true"
 		title="Order Items and ShippingItem View Entity">
-		<member-entity entity-alias="SI" entity-name="ShippingItem" />
-		<alias entity-alias="SI" name="orderId" group-by="true" />
-		<alias entity-alias="SI" name="orderItemSeqId" group-by="true" />
-		<alias entity-alias="SI" name="quantityShipped" field="quantityToShip"
+		<member-entity entity-alias="VSI" entity-name="VfShipmentItem" />
+		<member-entity entity-alias="SI" entity-name="ShipmentItem" />
+		<alias entity-alias="VSI" name="orderId" group-by="true" />
+		<alias entity-alias="VSI" name="orderItemSeqId" group-by="true" />
+		<alias entity-alias="SI" name="quantityShipped" field="quantity"
 			function="sum" />
+		<view-link entity-alias="VSI" rel-entity-alias="SI">
+			<key-map field-name="shipmentId" />
+			<key-map field-name="shipmentItemSeqId" />
+		</view-link>
 	</view-entity>
 
 	<view-entity entity-name="ShippingItemView" package-name="org.apache.ofbiz.order.order"
 		never-cache="true" title="ShippingItem View Entity">
-		<member-entity entity-alias="SI" entity-name="ShippingItem" />
+		<member-entity entity-alias="VSI" entity-name="VfShipmentItem" />
+		<member-entity entity-alias="SI" entity-name="ShipmentItem" />
 		<member-entity entity-alias="OI" entity-name="OrderItem" />
 		<member-entity entity-alias="PR" entity-name="Product" />
 		<alias entity-alias="OI" name="orderId" />
 		<alias entity-alias="OI" name="orderItemSeqId" />
 		<alias entity-alias="PR" name="productName" />
-		<alias entity-alias="SI" name="shippingId" />
-		<alias entity-alias="SI" name="shippingItemSeqId" />
-		<alias entity-alias="SI" name="quantityToShip" />
+		<alias entity-alias="SI" name="shipmentId" />
+		<alias entity-alias="SI" name="shipmentItemSeqId" />
+		<alias entity-alias="SI" name="quantity" />
 		<alias entity-alias="OI" name="productId" />
-		<view-link entity-alias="OI" rel-entity-alias="SI">
+		<view-link entity-alias="OI" rel-entity-alias="VSI">
 			<key-map field-name="orderId" />
 			<key-map field-name="orderItemSeqId" />
 		</view-link>
 		<view-link entity-alias="OI" rel-entity-alias="PR">
 			<key-map field-name="productId" />
+		</view-link>
+		<view-link entity-alias="VSI" rel-entity-alias="SI">
+			<key-map field-name="shipmentId" />
+			<key-map field-name="shipmentItemSeqId" />
 		</view-link>
 	</view-entity>
 

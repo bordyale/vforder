@@ -181,9 +181,9 @@ context.highIndex = highIndex
 
 
 formTarget= "searchorders"
-shippingId = request.getParameter("shippingId")
-context.shippingId = shippingId
-if (shippingId) {
+shipmentId = request.getParameter("shipmentId")
+context.shipmentId = shipmentId
+if (shipmentId) {
     formTarget = "AddShippingItem"
 }
 context.formTarget = formTarget

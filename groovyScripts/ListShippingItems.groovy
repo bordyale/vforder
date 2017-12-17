@@ -28,10 +28,10 @@ import org.apache.ofbiz.entity.condition.EntityConditionList
 import org.apache.ofbiz.entity.condition.EntityCondition
 import org.apache.ofbiz.entity.GenericValue
 
-shippingId = request.getParameter("shippingId") ?: ""
+shipmentId = request.getParameter("shipmentId") ?: ""
 
 
-orderItemShippingItem = select("orderId","orderItemSeqId","quantityToShip","productId","productName","shippingItemSeqId").from("ShippingItemView").where("shippingId", shippingId).cache(false).queryList()
+orderItemShippingItem = select("orderId","orderItemSeqId","quantity","productId","productName","shipmentItemSeqId").from("ShippingItemView").where("shipmentId", shipmentId).cache(false).queryList()
 
 
 

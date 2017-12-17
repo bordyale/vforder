@@ -25,7 +25,7 @@ import org.apache.ofbiz.entity.condition.EntityConditionList
 import org.apache.ofbiz.entity.condition.EntityCondition
 import org.apache.ofbiz.entity.GenericValue
 
-shippingId = request.getParameter("shippingId") ?: ""
+shipmentId = request.getParameter("shipmentId") ?: ""
 orderId = request.getParameter("orderId") ?: ""
 
 

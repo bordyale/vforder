@@ -21,9 +21,9 @@ under the License.
 <service-eca xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/service-eca.xsd">
     <!-- order item status changes -->
-    <eca service="deleteShippingItemOrderItem" event="return">
+    <!-- <eca service="deleteShippingItemOrderItem" event="return">
         <action service="deleteShippingItem" mode="sync"/>
         <action service="deleteOrderItemShippingItem" mode="sync"/>
-    </eca>
+    </eca> -->
     
 </service-eca>

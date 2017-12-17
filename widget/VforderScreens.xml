@@ -96,8 +96,8 @@
 	<screen name="OrderFindOrder">
 		<section>
 			<actions>
-				<set field="shippingId" from-field="parameters.shippingId" />
-				<set field="titleProperty" value="${shippingId}" />
+				<set field="shipmentId" from-field="parameters.shipmentId" />
+				<set field="titleProperty" value="${shipmentId}" />
 				<set field="headerItem" value="findorders" />
 				<script location="component://vforder/groovyScripts/FindOrders.groovy" />
 				<script
@@ -393,8 +393,8 @@
 					global="true" />
 				<set field="titleProperty" value="PageTitleEditShipping" />
 				<set field="tabButtonItem" value="EditShipping" />
-				<set field="shippingId" from-field="parameters.shippingId" />
-				<entity-one entity-name="ShippingHeader" value-field="shipping" />
+				<set field="shipmentId" from-field="parameters.shipmentId" />
+				<entity-one entity-name="Shipment" value-field="shipping" />
 			</actions>
 			<widgets>
 				<include-form name="EditShipping"
@@ -409,8 +409,8 @@
 				<set field="titleProperty" value="PageTitleEditShipping" />
 				<set field="tabButtonItem" value="EditShipping" />
 				<set field="headerItem" value="findshippings" />
-				<set field="shippingId" from-field="parameters.shippingId" />
-				<entity-one entity-name="ShippingHeader" value-field="shipping" />
+				<set field="shipmentId" from-field="parameters.shipmentId" />
+				<entity-one entity-name="Shipment" value-field="shipping" />
 			</actions>
 			<widgets>
 				<decorator-screen name="VforderShippingCommonDecorator"
@@ -429,9 +429,9 @@
 			<actions>
 				<set field="tabButtonItem" value="EditShippingItems" />
 				<set field="headerItem" value="findshippings" />
-				<set field="shippingId" from-field="parameters.shippingId" />
-				<set field="titleProperty" value="${shippingId}" />
-				<entity-one entity-name="ShippingHeader" value-field="shipping" />
+				<set field="shipmentId" from-field="parameters.shipmentId" />
+				<set field="titleProperty" value="${shipmentId}" />
+				<entity-one entity-name="Shipment" value-field="shipping" />
 				<script location="component://vforder/groovyScripts/ListShippingItems.groovy" />
 			</actions>
 			<widgets>
@@ -446,7 +446,7 @@
 										<container style="button-bar">
 											<link target="AddShippingItem" text="${uiLabelMap.AddShippingItem}"
 												style="buttontext create">
-												<parameter param-name="shippingId" />
+												<parameter param-name="shipmentId" />
 											</link>
 										</container>
 									</decorator-section>
@@ -470,8 +470,8 @@
 			<actions>
 				<set field="tabButtonItem" value="EditShippingItems" />
 				<set field="headerItem" value="findshippings" />
-				<set field="shippingId" from-field="parameters.shippingId" />
-				<set field="titleProperty" value="${shippingId}" />
+				<set field="shipmentId" from-field="parameters.shipmentId" />
+				<set field="titleProperty" value="${shipmentId}" />
 
 				<script location="component://vforder/groovyScripts/FindOrders.groovy" />
 
@@ -484,7 +484,7 @@
 				<set field="asm_formSize" value="1000" />
 				<set field="asm_asmListItemPercentOfForm" value="95" />
 				<set field="asm_sortable" value="false" />
-				<entity-one entity-name="ShippingHeader" value-field="shipping" />
+				<entity-one entity-name="Shipment" value-field="shipping" />
 			</actions>
 			<widgets>
 				<decorator-screen name="VfFindorderCommonDecorator"
@@ -512,9 +512,9 @@
 			<actions>
 				<set field="tabButtonItem" value="EditShippingItems" />
 				<set field="headerItem" value="findshippings" />
-				<set field="shippingId" from-field="parameters.shippingId" />
+				<set field="shipmentId" from-field="parameters.shipmentId" />
 				<set field="orderId" from-field="parameters.orderId" />
-				<set field="titleProperty" value="${shippingId} -- ${orderId}" />
+				<set field="titleProperty" value="${shipmentId} -- ${orderId}" />
 				<script
 					location="component://vforder/groovyScripts/AddShippingItemOrderItem.groovy" />
 			</actions>
@@ -581,13 +581,13 @@
 				
 				<set field="tabButtonItem" value="EditShippingItems" />
 				<set field="headerItem" value="findshippings" />
-				<set field="shippingId" from-field="parameters.shippingId" />
-				<set field="titleProperty" value="${shippingId}" />	
+				<set field="shipmentId" from-field="parameters.shipmentId" />
+				<set field="titleProperty" value="${shipmentId}" />	
 					
 					
 					
 				<set field="tabButtonItem" value="EditExample" />
-				<entity-one entity-name="ShippingHeader" value-field="shipping" />
+				<entity-one entity-name="Shipment" value-field="shipping" />
 				<script location="component://vforder/groovyScripts/ListShippingItems.groovy" />
 			</actions>
 			<widgets>

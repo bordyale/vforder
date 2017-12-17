@@ -26,7 +26,7 @@
 	</request-map>
 	<request-map uri="searchorders">
 		<security https="true" auth="true" />
-		<event type="service" invoke="findOrders" />
+		<event type="service" invoke="vffindOrders" />
 		<response name="success" type="view" value="findorders" />
 		<response name="error" type="view" value="findorders" />
 	</request-map>
@@ -246,7 +246,25 @@
 		<security https="true" auth="true" />
 		<response name="success" type="view" value="EditShippingItems" />
 	</request-map>
-	<request-map uri="createShipping">
+	
+	<request-map uri="createShipment">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="createShipment"/>
+        <response name="success" type="request-redirect" value="EditShipping">
+            <redirect-parameter name="shipmentId"/>
+        </response>
+        <response name="error" type="view" value="EditShipping"/>
+    </request-map>
+    <request-map uri="updateShipment">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="updateShipment"/>
+        <response name="success" type="view" value="EditShipping"/>
+        <response name="error" type="view" value="EditShipping"/>
+    </request-map>
+	
+	
+	
+	<!-- <request-map uri="createShipping">
 		<security https="true" auth="true" />
 		<event type="service" invoke="createShipping" />
 		<response name="success" type="request-redirect" value="EditShipping">
@@ -261,10 +279,10 @@
 			<redirect-parameter name="shippingId" />
 		</response>
 		<response name="error" type="view" value="EditShipping" />
-	</request-map>
+	</request-map> -->
 	<request-map uri="AddShippingItem">
 		<security https="true" auth="true" />
-		<event type="service" invoke="findOrders" />
+		<event type="service" invoke="vffindOrders" />
 		<response name="success" type="view" value="AddShippingItem"></response>
 	</request-map>
 	<request-map uri="AddShippingItemOrderItem">
@@ -276,10 +294,10 @@
 		<event type="java" path="org.apache.ofbiz.vforder.VforderEvents"
 			invoke="updateOrderShippingItems" />
 		<response name="success" type="request-redirect" value="EditShippingItems">
-			<redirect-parameter name="shippingId" />
+			<redirect-parameter name="shipmentId" />
 		</response>
 		<response name="error" type="request-redirect" value="AddShippingItemOrderItem">
-			<redirect-parameter name="shippingId" />
+			<redirect-parameter name="shipmentId" />
 			<redirect-parameter name="orderId" />
 		</response>
 	</request-map>
@@ -288,7 +306,7 @@
 		<event type="java" path="org.apache.ofbiz.vforder.VforderEvents"
 			invoke="deleteShippingItemOrderItem" />
 		<response name="success" type="request-redirect" value="EditShippingItems">
-			<redirect-parameter name="shippingId" />
+			<redirect-parameter name="shipmentId" />
 		</response>
 		<response name="error" type="view" value="EditShippingItems" />
 	</request-map>
