@@ -82,7 +82,7 @@
      	<field name="estimatedShipDate"><date-time/></field>
      
         <field name="submitButton" use-when="shipping==null" title="${uiLabelMap.CommonCreate}"><submit button-type="button"/></field>
-        <field name="submitButton"  title="${uiLabelMap.CommonUpdate}"><submit button-type="button"/></field>
+        <field name="submitButton"  use-when="shipping!=null" title="${uiLabelMap.CommonUpdate}"><submit button-type="button"/></field>
         <!-- <field name="deleteLink" use-when="shipping!=null" title=" " widget-style="buttontext">
             <hyperlink description="${uiLabelMap.CommonDelete}" target="deleteShipping" also-hidden="false" confirmation-message="${uiLabelMap.CommonConfirmDelete}" image-location="${iconsLocation}/delete.png">
                 <parameter param-name="shipmentId"/>

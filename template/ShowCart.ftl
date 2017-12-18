@@ -91,10 +91,10 @@ under the License.
                       </#if>
                       <@htmlTemplate.lookupField formName="quickaddform" name="add_product_id" id="add_product_id" fieldFormName="${fieldFormName}"/>
                       <a href="javascript:quicklookup(document.quickaddform.add_product_id)" class="buttontext">${uiLabelMap.OrderQuickLookup}</a>
-                      <!--<a href="javascript:quicklookupGiftCertificate()" class="buttontext">${uiLabelMap.OrderAddGiftCertificate}</a>-->
+                      <!--<a href="javascript:quicklookupGiftCertificate()" class="buttontext">${uiLabelMap.OrderAddGiftCertificate}</a>
                       <#if "PURCHASE_ORDER" == shoppingCart.getOrderType()>
                         <a href="javascript:showQohAtp()" class="buttontext">${uiLabelMap.ProductAtpQoh}</a>
-                      </#if>
+                      </#if>-->
                     </span>
                   </td>
                 </tr>
@@ -133,21 +133,7 @@ under the License.
                     </div>
                   </td>
                 </tr>-->
-                <#if shoppingCart.getOrderType() == "PURCHASE_ORDER">
-                <tr>
-                  <td align="right"><div>${uiLabelMap.OrderOrderItemType} :</div></td>
-                  <td>
-                    <div>
-                      <select name="add_item_type">
-                        <option value="">&nbsp;</option>
-                        <#list purchaseOrderItemTypeList as orderItemType>
-                        <option value="${orderItemType.orderItemTypeId}">${orderItemType.description}</option>
-                        </#list>
-                      </select>
-                    </div>
-                  </td>
-                </tr>
-                </#if>
+                
                 <tr>
                   <td align="right"><div>${uiLabelMap.CommonComment} :</div></td>
                   <td>
@@ -168,26 +154,7 @@ under the License.
             </form>
           </td>
         </tr>
-        <#if shoppingCart.getOrderType() == "PURCHASE_ORDER">
-        <tr><td><hr /></td></tr>
-        <tr>
-          <td>
-            <form method="post" action="<@ofbizUrl>additem</@ofbizUrl>" name="bulkworkaddform" style="margin: 0;">
-                <div>
-                    ${uiLabelMap.OrderOrderItemType}:&nbsp;<select name="add_item_type"><option value="BULK_ORDER_ITEM">${uiLabelMap.ProductBulkItem}</option><option value="WORK_ORDER_ITEM">${uiLabelMap.ProductWorkItem}</option></select>
-                    <br/>${uiLabelMap.ProductProductCategory}:&nbsp;
-                    <@htmlTemplate.lookupField formName="bulkworkaddform" value="${requestParameters.add_category_id!}" name="add_category_id" id="add_category_id" fieldFormName="LookupProductCategory"/>
-                </div>
-                <div>
-                    ${uiLabelMap.CommonDescription}:&nbsp;<input type="text" size="25" name="add_item_description" value=""/>
-                    ${uiLabelMap.OrderQuantity}:&nbsp;<input type="text" size="3" name="quantity" value="${requestParameters.quantity?default("1")}"/>
-                    ${uiLabelMap.OrderPrice}:&nbsp;<input type="text" size="6" name="price" value="${requestParameters.price!}"/>
-                    <input type="submit" class="smallSubmit" value="${uiLabelMap.OrderAddToOrder}"/>
-                </div>
-            </form>
-          </td>
-        </tr>
-        </#if>
+        
       </table>
     </div>
 </div>

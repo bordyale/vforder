@@ -172,7 +172,7 @@ under the License.
                 </td>
               </tr>
             </#if>
-            <#if shoppingCart.getOrderType() == "PURCHASE_ORDER">
+            <!--<#if shoppingCart.getOrderType() == "PURCHASE_ORDER">
               <#assign currentOrderItemType = cartLine.getItemTypeGenericValue()!/>
                 <tr>
                   <td>
@@ -191,7 +191,7 @@ under the License.
                     </div>
                   </td>
                 </tr>
-            </#if>
+            </#if>-->
 
             <#-- ship before/after date -->
            <!-- <tr>
