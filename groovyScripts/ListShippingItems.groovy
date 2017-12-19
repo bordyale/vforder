@@ -31,7 +31,7 @@ import org.apache.ofbiz.entity.GenericValue
 shipmentId = request.getParameter("shipmentId") ?: ""
 
 
-orderItemShippingItem = select("orderId","orderItemSeqId","quantity","productId","productName","shipmentItemSeqId").from("ShippingItemView").where("shipmentId", shipmentId).cache(false).queryList()
+orderItemShippingItem = select("orderId","orderItemSeqId","quantity","productId","productName","pallet","shipmentItemSeqId").from("ShippingItemView").where("shipmentId", shipmentId).cache(false).queryList()
 
 
 

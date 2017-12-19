@@ -438,28 +438,29 @@
 				<decorator-screen name="VforderShippingCommonDecorator"
 					location="${parameters.mainDecoratorLocation}">
 					<decorator-section name="body">
-						<section>
-							<widgets>
-								<decorator-screen name="FindScreenDecorator"
-									location="component://common/widget/CommonScreens.xml">
-									<decorator-section name="menu-bar">
-										<container style="button-bar">
-											<link target="AddShippingItem" text="${uiLabelMap.AddShippingItem}"
-												style="buttontext create">
-												<parameter param-name="shipmentId" />
-											</link>
-										</container>
-									</decorator-section>
-									<!-- <decorator-section name="search-options"> <include-form name="EditShippingItems" 
-										location="component://vforder/widget/VforderForms.xml"/> </decorator-section> -->
-									<decorator-section name="search-results">
-										<include-form name="ListShippingItems"
-											location="component://vforder/widget/VforderForms.xml" />
-									</decorator-section>
-								</decorator-screen>
-							</widgets>
-						</section>
+
+						<container style="button-bar">
+							<link target="AddShippingItem" text="${uiLabelMap.AddShippingItem}"
+								style="buttontext create">
+								<parameter param-name="shipmentId" />
+							</link>
+						</container>
+
+						<!-- <decorator-section name="search-options"> <include-form name="EditShippingItems" 
+							location="component://vforder/widget/VforderForms.xml"/> </decorator-section> -->
+
+						<include-form name="ListShippingItems"
+							location="component://vforder/widget/VforderForms.xml" />
+							
+						<platform-specific>
+							<html>
+								<html-template
+									location="component://vforder/template/ListShippingItemsFooter.ftl" />
+							</html>
+						</platform-specific>
+
 					</decorator-section>
+				
 				</decorator-screen>
 			</widgets>
 		</section>
@@ -578,14 +579,14 @@
 			<actions>
 				<property-map resource="ExampleUiLabels" map-name="uiLabelMap"
 					global="true" />
-				
+
 				<set field="tabButtonItem" value="EditShippingItems" />
 				<set field="headerItem" value="findshippings" />
 				<set field="shipmentId" from-field="parameters.shipmentId" />
-				<set field="titleProperty" value="${shipmentId}" />	
-					
-					
-					
+				<set field="titleProperty" value="${shipmentId}" />
+
+
+
 				<set field="tabButtonItem" value="EditExample" />
 				<entity-one entity-name="Shipment" value-field="shipping" />
 				<script location="component://vforder/groovyScripts/ListShippingItems.groovy" />

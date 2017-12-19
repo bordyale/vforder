@@ -546,4 +546,66 @@ public class VforderEvents {
 
 	}
 
+	public static String updatePallet(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		Delegator delegator = (Delegator) request.getAttribute("delegator");
+		LocalDispatcher dispatcher = (LocalDispatcher) request
+				.getAttribute("dispatcher");
+		GenericValue userLogin = (GenericValue) request.getSession()
+				.getAttribute("userLogin");
+
+		Map<String, Object> paramMap = UtilHttp.getParameterMap(request);
+		int rowCount = UtilHttp.getMultiFormRowCount(paramMap);
+		if (rowCount < 1) {
+			Debug.logWarning("No rows to process, as rowCount = " + rowCount,
+					module);
+		} else {
+			for (int i = 0; i < rowCount; i++) {
+				String shipmentId = null;
+				String shipmentItemSeqId = null;
+				String pallet = null;
+
+				String thisSuffix = UtilHttp.getMultiRowDelimiter() + i;
+
+				// get the params
+				if (paramMap.containsKey("shipmentId" + thisSuffix)) {
+					shipmentId = (String) paramMap.remove("shipmentId"
+							+ thisSuffix);
+
+				}
+				request.setAttribute("shipmentId", shipmentId);
+				if (paramMap.containsKey("shipmentItemSeqId" + thisSuffix)) {
+					shipmentItemSeqId = (String) paramMap
+							.remove("shipmentItemSeqId" + thisSuffix);
+
+				}
+				if (paramMap.containsKey("pallet" + thisSuffix)) {
+					pallet = (String) paramMap
+							.remove("pallet" + thisSuffix);
+
+				}
+
+				try {
+					GenericValue vfShippingItem = delegator.findOne(
+							"VfShipmentItem", UtilMisc.toMap("shipmentId",
+									shipmentId, "shipmentItemSeqId",
+									shipmentItemSeqId), false);
+					if(vfShippingItem!=null){
+						vfShippingItem.put("pallet", pallet);
+						delegator.createOrStore(vfShippingItem);
+					}
+					
+				} catch (GenericEntityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		}
+
+		return "success";
+
+	}
+
 }

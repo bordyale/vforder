@@ -350,6 +350,16 @@
 		<security https="true" auth="true" />
 		<response name="success" type="view" value="ExportShippingPdf" />
 	</request-map>
+	<request-map uri="UpdatePallet">
+		<security https="true" auth="true" />
+		<event type="java" path="org.apache.ofbiz.vforder.VforderEvents"
+			invoke="updatePallet" />
+		<response name="success" type="request-redirect" value="EditShippingItems">
+			<redirect-parameter name="shipmentId" />
+		</response>
+		<response name="error" type="view" value="EditShippingItems" />
+	</request-map>
+	
 	<!-- View Mappings -->
 	<view-map name="main" type="screen"
 		page="component://vforder/widget/VforderScreens.xml#main" />

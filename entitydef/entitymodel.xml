@@ -26,6 +26,7 @@
 		<field name="shipmentItemSeqId" type="id-ne"></field>
 		<field name="orderId" type="id-ne"></field>
 		<field name="orderItemSeqId" type="id-ne"></field>
+		<field name="pallet" type="value"></field>
 		<prim-key field="shipmentId" />
 		<prim-key field="shipmentItemSeqId" />
 		<relation type="one" fk-name="ORDER_ITEM_HDR"
@@ -119,6 +120,7 @@
 		<alias entity-alias="SI" name="shipmentItemSeqId" />
 		<alias entity-alias="SI" name="quantity" />
 		<alias entity-alias="OI" name="productId" />
+		<alias entity-alias="VSI" name="pallet" />
 		<view-link entity-alias="OI" rel-entity-alias="VSI">
 			<key-map field-name="orderId" />
 			<key-map field-name="orderItemSeqId" />
