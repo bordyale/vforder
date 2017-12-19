@@ -138,57 +138,6 @@
 	</form>
 
 
-	<form name="ListShippingItems" type="list" list-name="listIt"
-		paginate-target="findshippings" odd-row-style="alternate-row"
-		default-table-style="basic-table hover-bar">
-		<!-- <actions> <service service-name="performFind" result-map="result" 
-			result-map-list="listIt"> <field-map field-name="inputFields" from-field="findParams"/> 
-			<field-map field-name="entityName" value="ShippingItem"/> <field-map field-name="orderBy" 
-			value="shippingItemSeqId"/> </service> </actions> -->
-
-
-		<field name="shipmentItemSeqId">
-			<display />
-		</field>
-		<field name="orderId">
-			<display />
-		</field>
-		<field name="orderItemSeqId">
-			<display />
-		</field>
-		<field name="productId">
-			<display />
-		</field>
-		<field name="productName">
-			<display />
-		</field>
-		<field name="quantity">
-			<display />
-		</field>
-
-
-
-		<field name="deleteLink" title=" " widget-style="buttontext">
-			<hyperlink description="${uiLabelMap.CommonDelete}" target="deleteShippingItem"
-				also-hidden="false" confirmation-message="${uiLabelMap.CommonConfirmDelete}"
-				image-location="${iconsLocation}/delete.png">
-				<parameter param-name="shipmentId" />
-				<parameter param-name="orderId" />
-				<parameter param-name="orderItemSeqId" />
-				<parameter param-name="shipmentItemSeqId" />
-				<parameter param-name="quantityToShip" />
-			</hyperlink>
-		</field>
-
-
-
-
-		<!-- <field name="shipmentId"><display/></field> -->
-		<!-- <field name="shipmentId" widget-style="buttontext"> <hyperlink description="${billingAccountId}" 
-			target="EditBillingAccount"> <parameter param-name="billingAccountId"/> </hyperlink> 
-			</field> -->
-
-	</form>
 
 
 
