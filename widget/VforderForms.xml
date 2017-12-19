@@ -68,8 +68,125 @@
 		</field>
 
 
+	</form>
 
 
+	<form name="EditShipping" type="single" target="updateShipment"
+		title="" default-map-name="shipping" default-entity-name="Shipment">
+		<alt-target use-when="shipping==null" target="createShipment" />
+		<!-- <auto-fields-service service-name="updateShipment"/> -->
+		<field use-when="shipping!=null" name="shipmentId"
+			title="${uiLabelMap.ShippingshipmentId}">
+			<display />
+		</field>
+		<field use-when="shipping==null @and shipmentId==null" name="shipmentId"
+			title="${uiLabelMap.ShippingshipmentId}">
+			<ignored />
+		</field>
+		<field use-when="shipping==null @and shipmentId!=null" name="shipmentId"
+			title="${uiLabelMap.ShippingshipmentId}">
+			<display description="${uiLabelMap.CommonCannotBeFound}: [${shipmentId}]"
+				also-hidden="false" />
+		</field>
+
+		<field use-when="shipping==null" name="shipmentTypeId">
+			<hidden value="SALES_SHIPMENT" />
+		</field>
+		<field name="estimatedShipDate">
+			<date-time />
+		</field>
+
+		<field name="submitButton" use-when="shipping==null" title="${uiLabelMap.CommonCreate}">
+			<submit button-type="button" />
+		</field>
+		<field name="submitButton" use-when="shipping!=null" title="${uiLabelMap.CommonUpdate}">
+			<submit button-type="button" />
+		</field>
+		<!-- <field name="deleteLink" use-when="shipping!=null" title=" " widget-style="buttontext"> 
+			<hyperlink description="${uiLabelMap.CommonDelete}" target="deleteShipping" 
+			also-hidden="false" confirmation-message="${uiLabelMap.CommonConfirmDelete}" 
+			image-location="${iconsLocation}/delete.png"> <parameter param-name="shipmentId"/> 
+			</hyperlink> </field> -->
+
+
+	</form>
+
+	<form name="EditShippingItems" type="single" target="updateShipment"
+		title="" default-map-name="shipping" default-entity-name="Shipment">
+		<alt-target use-when="example==null" target="createShipment" />
+
+		<field name="geoName" title="${uiLabelMap.CommonGeoName}"
+			tooltip="${uiLabelMap.ExampleLookupFields4}" tooltip-style="button-text">
+			<lookup target-form-name="LookupOrder" description-field-name="geoId" />
+		</field>
+		<!-- This field may be hidden and the name rendered in geoName using default-value 
+			if geoId is known when loading the form -->
+		<field name="geoId" title="${uiLabelMap.CommonGeoId}">
+			<text />
+		</field><!-- the text field is only used for rendering. In the "real life" 
+			you would use the hidden field commented below to pass the data to the request -->
+		<!--field name="geoId"><hidden/></field -->
+
+
+		<sort-order>
+			<field-group>
+				<sort-field name="geoName" />
+				<sort-field name="geoId" />
+			</field-group>
+		</sort-order>
+
+	</form>
+
+
+	<form name="ListShippingItems" type="list" list-name="listIt"
+		paginate-target="findshippings" odd-row-style="alternate-row"
+		default-table-style="basic-table hover-bar">
+		<!-- <actions> <service service-name="performFind" result-map="result" 
+			result-map-list="listIt"> <field-map field-name="inputFields" from-field="findParams"/> 
+			<field-map field-name="entityName" value="ShippingItem"/> <field-map field-name="orderBy" 
+			value="shippingItemSeqId"/> </service> </actions> -->
+
+
+		<field name="shipmentItemSeqId">
+			<display />
+		</field>
+		<field name="orderId">
+			<display />
+		</field>
+		<field name="orderItemSeqId">
+			<display />
+		</field>
+		<field name="productId">
+			<display />
+		</field>
+		<field name="productName">
+			<display />
+		</field>
+		<field name="quantity">
+			<display />
+		</field>
+
+
+
+		<field name="deleteLink" title=" " widget-style="buttontext">
+			<hyperlink description="${uiLabelMap.CommonDelete}" target="deleteShippingItem"
+				also-hidden="false" confirmation-message="${uiLabelMap.CommonConfirmDelete}"
+				image-location="${iconsLocation}/delete.png">
+				<parameter param-name="shipmentId" />
+				<parameter param-name="orderId" />
+				<parameter param-name="orderItemSeqId" />
+				<parameter param-name="shipmentItemSeqId" />
+				<parameter param-name="quantityToShip" />
+			</hyperlink>
+		</field>
+
+
+
+
+		<!-- <field name="shipmentId"><display/></field> -->
+		<!-- <field name="shipmentId" widget-style="buttontext"> <hyperlink description="${billingAccountId}" 
+			target="EditBillingAccount"> <parameter param-name="billingAccountId"/> </hyperlink> 
+			</field> -->
 
 	</form>
 
@@ -142,8 +259,8 @@
 	</form>
 
 
-	<form name="ListShippingItems" type="multi" list-name="listIt" target="UpdatePallet"
-		paginate-target="findshippings" odd-row-style="alternate-row"
+	<form name="ListShippingItems" type="multi" list-name="listIt"
+		target="UpdatePallet" paginate-target="findshippings" odd-row-style="alternate-row"
 		default-table-style="basic-table hover-bar">
 		<!-- <actions> <service service-name="performFind" result-map="result" 
 			result-map-list="listIt"> <field-map field-name="inputFields" from-field="findParams"/> 
@@ -173,7 +290,7 @@
 		<field name="quantity">
 			<display />
 		</field>
-		
+
 
 
 
@@ -243,6 +360,7 @@
 			widget-style="smallSubmit">
 			<submit />
 		</field>
+		
 	</form>
 
 
