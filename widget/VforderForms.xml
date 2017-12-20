@@ -236,6 +236,15 @@
 		<field name="pallet" title="${uiLabelMap.OrderPallettization}">
 			<text size="5" maxlength="10" />
 		</field>
+		<field name="isBoxOrPallet" title="${uiLabelMap.OrderIsBoxOrPallet}">
+			<text size="5" maxlength="10" />
+		</field>
+		<field name="piecesPerBox" title="${uiLabelMap.OrderPiecesPerBox}">
+			<text size="5" maxlength="10" />
+		</field>
+		<field name="boxNumber">
+			<display />
+		</field>
 		<field name="quantity">
 			<display />
 		</field>

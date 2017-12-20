@@ -31,10 +31,71 @@ import org.apache.ofbiz.entity.GenericValue
 shipmentId = request.getParameter("shipmentId") ?: ""
 
 
-orderItemShippingItem = select("orderId","orderItemSeqId","quantity","productId","productName","pallet","shipmentItemSeqId").from("ShippingItemView").where("shipmentId", shipmentId).cache(false).queryList()
+orderItemShippingItem = select("orderId","orderItemSeqId","quantity","productId","productName","pallet","isBoxOrPallet","piecesPerBox","shipmentItemSeqId").from("ShippingItemView").where("shipmentId", shipmentId).cache(false).queryList()
 
 
 
-//Map<String, String> findParams = UtilMisc.toMap("shippingId", shippingId);
+List<HashMap<String,Object>> hashMaps = new ArrayList<HashMap<String,Object>>()
+Map<String,HashMap<String,Object>> boxes = new HashMap<String,HashMap<String,Object>>()
 
-context.listIt = orderItemShippingItem
+for (GenericValue entry: orderItemShippingItem){
+	Map<String,Object> e = new HashMap<String,Object>()
+	e.put("orderItemSeqId",entry.get("orderItemSeqId"))
+	e.put("orderId",entry.get("orderId"))
+	e.put("productId",entry.get("productId"))
+	e.put("productName",entry.get("productName"))
+	BigDecimal quantity = entry.get("quantity")
+	e.put("quantity",entry.get("quantity"))
+	Long piecesPerBox = entry.get("piecesPerBox")
+	if (piecesPerBox ==null){
+		piecesPerBox = 1L
+	}
+	e.put("piecesPerBox",piecesPerBox)
+	e.put("shipmentItemSeqId",entry.get("shipmentItemSeqId"))
+	e.put("isBoxOrPallet",entry.get("isBoxOrPallet"))
+	String pallet = entry.get("pallet")
+	e.put("pallet",entry.get("pallet"))
+
+	int boxNumber =0
+	int boxAlreadyadded=0
+	if(pallet!=null){
+		String[] token = pallet.split(";");
+		int qtySplitpallet = 0
+		for (int i=0;i<token.length;i++){
+			String[] split = token[i].split(":")
+			if (split.length>1){
+				qtySplitpallet += Integer.parseInt(split[1])
+				if (boxes.get(split[0])==null){
+					boxes.put(split[0], new HashMap<String,Object>())
+					boxNumber++
+					boxAlreadyadded++
+				}else{
+					//TODO
+				}
+			}
+		}
+		boxNumber =boxNumber+ ( (quantity.longValue()-qtySplitpallet)/piecesPerBox)
+	}else{
+		boxNumber = (quantity.longValue())/piecesPerBox
+	}
+	e.put("boxNumber",boxNumber)
+	for (int i=0;i<boxNumber;i++){
+		if (boxAlreadyadded==0){
+			boxes.put(boxes.size(),new HashMap<String,Object>())
+		}else{
+			boxAlreadyadded--
+		}
+	}
+	hashMaps.add(e)
+}
+
+
+
+
+
+context.listIt = hashMaps
+
+context.totBoxNumber = boxes.size()
+
+
+

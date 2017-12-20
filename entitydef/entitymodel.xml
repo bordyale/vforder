@@ -10,16 +10,6 @@
 	<version></version>
 
 
-	<!-- <entity entity-name="ShippingHeader" package-name="org.apache.ofbiz.order.shipping"
-		never-cache="true" title="Shipping Header Entity">
-		<field name="shippingId" type="id-ne"></field>
-		<field name="estimatedShipDate" type="date-time"></field>
-		<prim-key field="shippingId" />
-		<relation type="many" rel-entity-name="ShippingItem">
-			<key-map field-name="shippingId" />
-		</relation>
-	</entity> -->
-
 	<entity entity-name="VfShipmentItem" package-name="org.apache.ofbiz.order.shipping"
 		never-cache="true" title="Shipping Item Entity">
 		<field name="shipmentId" type="id-ne"></field>
@@ -27,6 +17,8 @@
 		<field name="orderId" type="id-ne"></field>
 		<field name="orderItemSeqId" type="id-ne"></field>
 		<field name="pallet" type="value"></field>
+		<field name="isBoxOrPallet" type="value"></field>
+		<field name="piecesPerBox" type="numeric"></field>
 		<prim-key field="shipmentId" />
 		<prim-key field="shipmentItemSeqId" />
 		<relation type="one" fk-name="ORDER_ITEM_HDR"
@@ -42,23 +34,15 @@
 		</relation>
 	</entity>
 
-	<!-- <entity entity-name="OrderItemShippingItem" package-name="org.apache.ofbiz.order.shipping"
-		never-cache="true" title="Order Item Shipping Item">
-		<field name="orderId" type="id-ne"></field>
-		<field name="orderItemSeqId" type="id-ne"></field>
-		<field name="quantityShipped" type="fixed-point"
-			enable-audit-log="true"></field>
-		<prim-key field="orderId" />
-		<prim-key field="orderItemSeqId" />
-		<relation type="one" fk-name="ORDER_ITEM_HDR"
-			rel-entity-name="OrderItem">
-			<key-map field-name="orderId" />
-		</relation>
-		<relation type="one" fk-name="ORDER_ITEM_SEQ_ID_HDR"
-			rel-entity-name="OrderItem">
-			<key-map field-name="orderItemSeqId" />
-		</relation>
-	</entity> -->
+	<!-- <entity entity-name="OrderItemShippingItem" package-name="org.apache.ofbiz.order.shipping" 
+		never-cache="true" title="Order Item Shipping Item"> <field name="orderId" 
+		type="id-ne"></field> <field name="orderItemSeqId" type="id-ne"></field> 
+		<field name="quantityShipped" type="fixed-point" enable-audit-log="true"></field> 
+		<prim-key field="orderId" /> <prim-key field="orderItemSeqId" /> <relation 
+		type="one" fk-name="ORDER_ITEM_HDR" rel-entity-name="OrderItem"> <key-map 
+		field-name="orderId" /> </relation> <relation type="one" fk-name="ORDER_ITEM_SEQ_ID_HDR" 
+		rel-entity-name="OrderItem"> <key-map field-name="orderItemSeqId" /> </relation> 
+		</entity> -->
 
 	<view-entity entity-name="OrderItemShippingItemView"
 		package-name="org.apache.ofbiz.order.order" never-cache="true"
@@ -121,6 +105,8 @@
 		<alias entity-alias="SI" name="quantity" />
 		<alias entity-alias="OI" name="productId" />
 		<alias entity-alias="VSI" name="pallet" />
+		<alias entity-alias="VSI" name="isBoxOrPallet" />
+		<alias entity-alias="VSI" name="piecesPerBox" />
 		<view-link entity-alias="OI" rel-entity-alias="VSI">
 			<key-map field-name="orderId" />
 			<key-map field-name="orderItemSeqId" />
