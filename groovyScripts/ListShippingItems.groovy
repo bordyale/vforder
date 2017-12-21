@@ -66,7 +66,9 @@ for (GenericValue entry: orderItemShippingItem){
 			if (split.length>1){
 				qtySplitpallet += Integer.parseInt(split[1])
 				if (boxes.get(split[0])==null){
-					boxes.put(split[0], new HashMap<String,Object>())
+					Map<String,Object> box = new HashMap<String,Object>()
+					box.put("isBoxOrPallet", entry.get("isBoxOrPallet"))
+					boxes.put(split[0], box)
 					boxNumber++
 					boxAlreadyadded++
 				}else{
@@ -81,7 +83,9 @@ for (GenericValue entry: orderItemShippingItem){
 	e.put("boxNumber",boxNumber)
 	for (int i=0;i<boxNumber;i++){
 		if (boxAlreadyadded==0){
-			boxes.put(boxes.size(),new HashMap<String,Object>())
+			Map<String,Object> box = new HashMap<String,Object>()
+			box.put("isBoxOrPallet", entry.get("isBoxOrPallet"))
+			boxes.put(boxes.size(),box)
 		}else{
 			boxAlreadyadded--
 		}
@@ -89,13 +93,25 @@ for (GenericValue entry: orderItemShippingItem){
 	hashMaps.add(e)
 }
 
+int palletNr = 0
+for (e in boxes){
+	Map<String,Object> box  = e.value
+	String isBoxOrPallet = box."isBoxOrPallet"
+	if (isBoxOrPallet !=null && isBoxOrPallet.equals("R")){
+		palletNr++
+	}
+}
+
+
 
 
 
 
 context.listIt = hashMaps
 
-context.totBoxNumber = boxes.size()
+context.totBoxNumber = boxes.size()-palletNr
+context.totPalletNumber = palletNr
+
 
 
 
