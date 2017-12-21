@@ -99,6 +99,7 @@
 		<member-entity entity-alias="PR" entity-name="Product" />
 		<alias entity-alias="OI" name="orderId" />
 		<alias entity-alias="OI" name="orderItemSeqId" />
+		<alias entity-alias="PR" name="productWeight" />
 		<alias entity-alias="PR" name="productName" />
 		<alias entity-alias="SI" name="shipmentId" />
 		<alias entity-alias="SI" name="shipmentItemSeqId" />

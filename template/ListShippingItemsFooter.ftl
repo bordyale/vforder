@@ -21,6 +21,8 @@ under the License.
     <div class="screenlet-title-bar">
     
     <div class="h3">${uiLabelMap.CommonTotal}</div>
+    <div class="h3">${boxes}</div>
+    
        
         
         

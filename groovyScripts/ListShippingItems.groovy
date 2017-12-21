@@ -31,7 +31,7 @@ import org.apache.ofbiz.entity.GenericValue
 shipmentId = request.getParameter("shipmentId") ?: ""
 
 
-orderItemShippingItem = select("orderId","orderItemSeqId","quantity","productId","productName","pallet","isBoxOrPallet","piecesPerBox","shipmentItemSeqId").from("ShippingItemView").where("shipmentId", shipmentId).cache(false).queryList()
+orderItemShippingItem = select("orderId","orderItemSeqId","quantity","productId","productName","pallet","isBoxOrPallet","piecesPerBox","shipmentItemSeqId","productWeight").from("ShippingItemView").where("shipmentId", shipmentId).cache(false).queryList()
 
 
 
@@ -52,7 +52,14 @@ for (GenericValue entry: orderItemShippingItem){
 	}
 	e.put("piecesPerBox",piecesPerBox)
 	e.put("shipmentItemSeqId",entry.get("shipmentItemSeqId"))
-	e.put("isBoxOrPallet",entry.get("isBoxOrPallet"))
+	String isBoxOrPallet = entry.get("isBoxOrPallet")
+	e.put("isBoxOrPallet",isBoxOrPallet)
+	BigDecimal boxWeight = BigDecimal.ZERO
+	if (isBoxOrPallet !=null && isBoxOrPallet.equals("R")){
+		boxWeight=boxWeight.add(new BigDecimal(20))
+	}else{
+		boxWeight=boxWeight.add(new BigDecimal(60))
+	}
 	String pallet = entry.get("pallet")
 	e.put("pallet",entry.get("pallet"))
 
@@ -68,11 +75,34 @@ for (GenericValue entry: orderItemShippingItem){
 				if (boxes.get(split[0])==null){
 					Map<String,Object> box = new HashMap<String,Object>()
 					box.put("isBoxOrPallet", entry.get("isBoxOrPallet"))
+					List<HashMap<String,Object>> products = new ArrayList<HashMap<String,Object>>()
+					Map<String,Object> product = new HashMap<String,Object>()
+					product.put("productId",entry.get("productId"))
+					product.put("productName",entry.get("productName"))
+					products.add(product)
+					box.put("products", products)
+					BigDecimal productWeight =entry.get("productWeight")
+					BigDecimal qty =new BigDecimal(split[1])
+					BigDecimal productNetto = qty.multiply(productWeight)
+					box.put("boxWeight", boxWeight.add(productNetto))
 					boxes.put(split[0], box)
 					boxNumber++
 					boxAlreadyadded++
 				}else{
-					//TODO
+					Map<String,Object> box = boxes.get(split[0])
+					List<HashMap<String,Object>> products = box."products"
+					Map<String,Object> product = new HashMap<String,Object>()
+					product.put("productId",entry.get("productId"))
+					product.put("productName",entry.get("productName"))
+					products.add(product)
+					box.put("products", products)
+					BigDecimal productWeight =entry.get("productWeight")
+					BigDecimal qty =new BigDecimal(split[1])
+					BigDecimal productNetto = qty.multiply(productWeight)
+					BigDecimal weight = box."boxWeight"
+					box.put("boxWeight", weight.add(productNetto))
+
+					boxes.put(split[0], box)
 				}
 			}
 		}
@@ -84,7 +114,18 @@ for (GenericValue entry: orderItemShippingItem){
 	for (int i=0;i<boxNumber;i++){
 		if (boxAlreadyadded==0){
 			Map<String,Object> box = new HashMap<String,Object>()
+			List<HashMap<String,Object>> products = new ArrayList<HashMap<String,Object>>()
 			box.put("isBoxOrPallet", entry.get("isBoxOrPallet"))
+			Map<String,Object> product = new HashMap<String,Object>()
+			product.put("productId",entry.get("productId"))
+			product.put("productName",entry.get("productName"))
+			products.add(product)
+			BigDecimal productWeight =entry.get("productWeight")
+			BigDecimal qty =new BigDecimal(piecesPerBox)
+			BigDecimal productNetto = qty.multiply(productWeight)
+			box.put("boxWeight", boxWeight.add(productNetto))
+
+			box.put("products", products)
 			boxes.put(boxes.size(),box)
 		}else{
 			boxAlreadyadded--
@@ -93,14 +134,25 @@ for (GenericValue entry: orderItemShippingItem){
 	hashMaps.add(e)
 }
 
-int palletNr = 0
+
+
+//count boxes for totals
+long palletNr = 0
+long nettoTotalWeight = 0
+long boxesWeight = 0
 for (e in boxes){
 	Map<String,Object> box  = e.value
 	String isBoxOrPallet = box."isBoxOrPallet"
 	if (isBoxOrPallet !=null && isBoxOrPallet.equals("R")){
 		palletNr++
+	}else{
 	}
+
+	List<HashMap<String,Object>> products = box."products"
+
 }
+
+
 
 
 
@@ -111,7 +163,7 @@ context.listIt = hashMaps
 
 context.totBoxNumber = boxes.size()-palletNr
 context.totPalletNumber = palletNr
-
+context.boxes=boxes.toString()
 
 
 
