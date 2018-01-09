@@ -27,6 +27,7 @@ import org.apache.ofbiz.entity.condition.EntityFieldValue
 import org.apache.ofbiz.entity.condition.EntityConditionList
 import org.apache.ofbiz.entity.condition.EntityCondition
 import org.apache.ofbiz.entity.GenericValue
+import org.json.JSONObject
 
 shipmentId = request.getParameter("shipmentId") ?: ""
 
@@ -78,13 +79,14 @@ for (GenericValue entry: orderItemShippingItem){
 					List<HashMap<String,Object>> products = new ArrayList<HashMap<String,Object>>()
 					Map<String,Object> product = new HashMap<String,Object>()
 					product.put("productId",entry.get("productId"))
-					product.put("productName",entry.get("productName"))
-					products.add(product)
-					box.put("products", products)
+					product.put("productName",entry.get("productName"))					
 					BigDecimal productWeight =entry.get("productWeight")
 					BigDecimal qty =new BigDecimal(split[1])
 					BigDecimal productNetto = qty.multiply(productWeight)
 					box.put("boxWeight", boxWeight.add(productNetto))
+					product.put("quantity",qty)
+					products.add(product)
+					box.put("products", products)
 					boxes.put(split[0], box)
 					boxNumber++
 					boxAlreadyadded++
@@ -94,14 +96,15 @@ for (GenericValue entry: orderItemShippingItem){
 					Map<String,Object> product = new HashMap<String,Object>()
 					product.put("productId",entry.get("productId"))
 					product.put("productName",entry.get("productName"))
-					products.add(product)
-					box.put("products", products)
+					
 					BigDecimal productWeight =entry.get("productWeight")
 					BigDecimal qty =new BigDecimal(split[1])
 					BigDecimal productNetto = qty.multiply(productWeight)
 					BigDecimal weight = box."boxWeight"
 					box.put("boxWeight", weight.add(productNetto))
-
+					product.put("quantity",qty)
+					products.add(product)
+					box.put("products", products)
 					boxes.put(split[0], box)
 				}
 			}
@@ -119,12 +122,13 @@ for (GenericValue entry: orderItemShippingItem){
 			Map<String,Object> product = new HashMap<String,Object>()
 			product.put("productId",entry.get("productId"))
 			product.put("productName",entry.get("productName"))
-			products.add(product)
+			
 			BigDecimal productWeight =entry.get("productWeight")
 			BigDecimal qty =new BigDecimal(piecesPerBox)
 			BigDecimal productNetto = qty.multiply(productWeight)
 			box.put("boxWeight", boxWeight.add(productNetto))
-
+			product.put("quantity",qty)
+			products.add(product)
 			box.put("products", products)
 			boxes.put(boxes.size(),box)
 		}else{
@@ -164,6 +168,11 @@ context.listIt = hashMaps
 context.totBoxNumber = boxes.size()-palletNr
 context.totPalletNumber = palletNr
 context.boxes=boxes.toString()
+context.boxesMap=boxes
+context.boxesListKey=boxes.keySet()
+JSONObject json = new JSONObject(boxes)
+context.boxesJson=json.toString()
+
 
 
 

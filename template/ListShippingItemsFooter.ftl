@@ -22,6 +22,7 @@ under the License.
     
     <div class="h3">${uiLabelMap.CommonTotal}</div>
     <div class="h3">${boxes}</div>
+    <div class="h3">${boxesJson}</div>
     
        
         
@@ -30,15 +31,15 @@ under the License.
     <div class="screenlet-body">
         <table width="100%" border="0" cellpadding="0">
           <tr valign="bottom">
-            <td width="80%"><span><b>${uiLabelMap.BoxTotal}</b></span></td>
+            <td width="50%"><span><b>${uiLabelMap.BoxTotal}</b></span></td>
             
-            <td width="20%" align="right"><span><b>${totBoxNumber}</b></span></td>
+            <td width="50%" align="left"><span><b>${totBoxNumber}</b></span></td>
             
           </tr>
           <tr valign="bottom">
-            <td width="80%"><span><b>${uiLabelMap.PalletTotal}</b></span></td>
+            <td width="50%"><span><b>${uiLabelMap.PalletTotal}</b></span></td>
             
-            <td width="20%" align="right"><span><b>${totPalletNumber}</b></span></td>
+            <td width="50%" align="left"><span><b>${totPalletNumber}</b></span></td>
             
           </tr>
           

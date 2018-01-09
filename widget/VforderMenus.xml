@@ -44,6 +44,12 @@
                 <image url-mode="raw" src="${iconsLocation}/page_white_acrobat.png"/>
             </link>
         </menu-item>
+        <menu-item name="ExportBoxesPdf" title="${uiLabelMap.ExportBoxesPdf}">
+            <link target="ExportBoxesPdf" target-window="_blank">
+                <parameter param-name="shipmentId"/>
+                <image url-mode="raw" src="${iconsLocation}/page_white_acrobat.png"/>
+            </link>
+        </menu-item>
     </menu>
     
 </menus>

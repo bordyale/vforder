@@ -246,40 +246,33 @@
 		<security https="true" auth="true" />
 		<response name="success" type="view" value="EditShippingItems" />
 	</request-map>
-	
+
 	<request-map uri="createShipment">
-        <security https="true" auth="true"/>
-        <event type="service" path="" invoke="createShipment"/>
-        <response name="success" type="request-redirect" value="EditShipping">
-            <redirect-parameter name="shipmentId"/>
-        </response>
-        <response name="error" type="view" value="EditShipping"/>
-    </request-map>
-    <request-map uri="updateShipment">
-        <security https="true" auth="true"/>
-        <event type="service" path="" invoke="updateShipment"/>
-        <response name="success" type="view" value="EditShipping"/>
-        <response name="error" type="view" value="EditShipping"/>
-    </request-map>
-	
-	
-	
-	<!-- <request-map uri="createShipping">
 		<security https="true" auth="true" />
-		<event type="service" invoke="createShipping" />
+		<event type="service" path="" invoke="createShipment" />
 		<response name="success" type="request-redirect" value="EditShipping">
-			<redirect-parameter name="shippingId" />
-		</response>
-		<response name="error" type="view" value="findshippings" />
-	</request-map>
-	<request-map uri="updateShipping">
-		<security https="true" auth="true" />
-		<event type="service" invoke="updateShipping" />
-		<response name="success" type="request-redirect" value="EditShipping">
-			<redirect-parameter name="shippingId" />
+			<redirect-parameter name="shipmentId" />
 		</response>
 		<response name="error" type="view" value="EditShipping" />
-	</request-map> -->
+	</request-map>
+	<request-map uri="updateShipment">
+		<security https="true" auth="true" />
+		<event type="service" path="" invoke="updateShipment" />
+		<response name="success" type="view" value="EditShipping" />
+		<response name="error" type="view" value="EditShipping" />
+	</request-map>
+
+
+
+	<!-- <request-map uri="createShipping"> <security https="true" auth="true" 
+		/> <event type="service" invoke="createShipping" /> <response name="success" 
+		type="request-redirect" value="EditShipping"> <redirect-parameter name="shippingId" 
+		/> </response> <response name="error" type="view" value="findshippings" /> 
+		</request-map> <request-map uri="updateShipping"> <security https="true" 
+		auth="true" /> <event type="service" invoke="updateShipping" /> <response 
+		name="success" type="request-redirect" value="EditShipping"> <redirect-parameter 
+		name="shippingId" /> </response> <response name="error" type="view" value="EditShipping" 
+		/> </request-map> -->
 	<request-map uri="AddShippingItem">
 		<security https="true" auth="true" />
 		<event type="service" invoke="vffindOrders" />
@@ -350,6 +343,10 @@
 		<security https="true" auth="true" />
 		<response name="success" type="view" value="ExportShippingPdf" />
 	</request-map>
+	<request-map uri="ExportBoxesPdf">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="ExportBoxesPdf"/>
+    </request-map>
 	<request-map uri="UpdatePallet">
 		<security https="true" auth="true" />
 		<event type="java" path="org.apache.ofbiz.vforder.VforderEvents"
@@ -359,7 +356,7 @@
 		</response>
 		<response name="error" type="view" value="EditShippingItems" />
 	</request-map>
-	
+
 	<!-- View Mappings -->
 	<view-map name="main" type="screen"
 		page="component://vforder/widget/VforderScreens.xml#main" />
@@ -407,6 +404,9 @@
 		page="component://vforder/widget/VforderScreens.xml#LookupBulkAddSupplierProducts" />
 	<view-map name="ExportShippingPdf" type="screenfop"
 		page="component://vforder/widget/VforderScreens.xml#ExportShippingPdf"
+		content-type="application/pdf" encoding="none" />
+	<view-map name="ExportBoxesPdf" type="screenfop"
+		page="component://vforder/widget/VforderScreens.xml#ExportBoxesPdf"
 		content-type="application/pdf" encoding="none" />
 
 </site-conf>

@@ -451,7 +451,7 @@
 
 						<include-form name="ListShippingItems"
 							location="component://vforder/widget/VforderForms.xml" />
-							
+
 						<platform-specific>
 							<html>
 								<html-template
@@ -460,7 +460,7 @@
 						</platform-specific>
 
 					</decorator-section>
-				
+
 				</decorator-screen>
 			</widgets>
 		</section>
@@ -599,6 +599,26 @@
 							location="component://vforder/widget/VforderForms.xml" />
 					</decorator-section>
 				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<screen name="ExportBoxesPdf">
+		<section>
+			<actions>
+				<!-- base/top/specific map first, then more common map added for shared 
+					labels -->
+				<!-- <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/> 
+					<property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/> -->
+				<set field="shipmentId" from-field="parameters.shipmentId" />
+				<entity-one entity-name="Shipment" value-field="shipping" />
+				<script location="component://vforder/groovyScripts/ListShippingItems.groovy" />
+			</actions>
+			<widgets>
+				<platform-specific>
+					<xsl-fo>
+						<html-template location="component://vforder/template/reports/Boxes.fo.ftl" />
+					</xsl-fo>
+				</platform-specific>
 			</widgets>
 		</section>
 	</screen>
