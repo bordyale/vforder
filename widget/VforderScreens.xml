@@ -588,17 +588,15 @@
 
 
 				<set field="tabButtonItem" value="EditExample" />
-				<entity-one entity-name="Shipment" value-field="shipping" />
+				<entity-one entity-name="Shipment" value-field="shipment" />
 				<script location="component://vforder/groovyScripts/ListShippingItems.groovy" />
 			</actions>
 			<widgets>
-				<decorator-screen name="SimpleDecorator"
-					location="component://common/widget/CommonScreens.xml">
-					<decorator-section name="body">
-						<include-form name="ListShippingItems"
-							location="component://vforder/widget/VforderForms.xml" />
-					</decorator-section>
-				</decorator-screen>
+				<platform-specific>
+					<xsl-fo>
+						<html-template location="component://vforder/template/reports/ListShippingItems.fo.ftl" />
+					</xsl-fo>
+				</platform-specific>
 			</widgets>
 		</section>
 	</screen>
