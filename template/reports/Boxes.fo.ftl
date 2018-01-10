@@ -31,12 +31,44 @@ under the License.
 <#assign keys = boxes?keys>
 <#list boxesListKey as key>
   <#assign box = boxesMap.get(key)>
+  <#assign products = box.get("products")>
   <fo:page-sequence master-reference="main">
+  	<fo:static-content flow-name="xsl-region-after">
+			<fo:block font-size="60pt" font-weight="bold" text-align="center">
+				Brutto - ${box.boxWeight}
+			</fo:block>
+	</fo:static-content>
     <fo:flow flow-name="xsl-region-body" font-family="Helvetica">
-      <fo:block text-align="center">
-        ${box.boxWeight}
-      </fo:block>
+      
+      <#assign productSize = products.size()>
+      <#list products as product>
+      
+      	<#if productSize gt 1>
+     		
+     			<fo:block text-align="left" font-weight="bold" font-size="60pt">
+        			${product.productName}
+      			</fo:block>
+      			<fo:block text-align="right" font-weight="bold" font-size="60pt">
+        			St - ${product.quantity}
+      			</fo:block>
+     		
+     	<#else>
+     		
+     			<fo:block text-align="left" font-weight="bold" font-size="90pt">
+        			${product.productName}
+      			</fo:block>
+      			<fo:block text-align="right" font-weight="bold" font-size="90pt">
+        			St - ${product.quantity}
+      			</fo:block>
+
+   		</#if>
+
+      
+      </#list>
+      
+      
     </fo:flow>
+    
   </fo:page-sequence>
 </#list>
 
