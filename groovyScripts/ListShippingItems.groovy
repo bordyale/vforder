@@ -38,6 +38,7 @@ orderItemShippingItem = select("orderId","orderItemSeqId","quantity","productId"
 
 List<HashMap<String,Object>> hashMaps = new ArrayList<HashMap<String,Object>>()
 Map<String,HashMap<String,Object>> boxes = new HashMap<String,HashMap<String,Object>>()
+BigDecimal totalWeight = BigDecimal.ZERO
 
 for (GenericValue entry: orderItemShippingItem){
 	Map<String,Object> e = new HashMap<String,Object>()
@@ -63,6 +64,10 @@ for (GenericValue entry: orderItemShippingItem){
 	}
 	String pallet = entry.get("pallet")
 	e.put("pallet",entry.get("pallet"))
+	BigDecimal productWeight = entry.get("productWeight")
+	e.put("productWeight", productWeight)
+	totalWeight = totalWeight.add(quantity.multiply(productWeight))
+	e.put("netWeight", quantity.multiply(productWeight))
 
 	int boxNumber =0
 	int boxAlreadyadded=0
@@ -80,7 +85,7 @@ for (GenericValue entry: orderItemShippingItem){
 					Map<String,Object> product = new HashMap<String,Object>()
 					product.put("productId",entry.get("productId"))
 					product.put("productName",entry.get("productName"))					
-					BigDecimal productWeight =entry.get("productWeight")
+					
 					BigDecimal qty =new BigDecimal(split[1])
 					BigDecimal productNetto = qty.multiply(productWeight)
 					box.put("boxWeight", boxWeight.add(productNetto))
@@ -97,7 +102,7 @@ for (GenericValue entry: orderItemShippingItem){
 					product.put("productId",entry.get("productId"))
 					product.put("productName",entry.get("productName"))
 					
-					BigDecimal productWeight =entry.get("productWeight")
+					
 					BigDecimal qty =new BigDecimal(split[1])
 					BigDecimal productNetto = qty.multiply(productWeight)
 					BigDecimal weight = box."boxWeight"
@@ -123,7 +128,7 @@ for (GenericValue entry: orderItemShippingItem){
 			product.put("productId",entry.get("productId"))
 			product.put("productName",entry.get("productName"))
 			
-			BigDecimal productWeight =entry.get("productWeight")
+			
 			BigDecimal qty =new BigDecimal(piecesPerBox)
 			BigDecimal productNetto = qty.multiply(productWeight)
 			box.put("boxWeight", boxWeight.add(productNetto))
@@ -135,13 +140,14 @@ for (GenericValue entry: orderItemShippingItem){
 			boxAlreadyadded--
 		}
 	}
+	
 	hashMaps.add(e)
 }
 
 
 
 //count boxes for totals
-long palletNr = 0
+int palletNr = 0
 long nettoTotalWeight = 0
 long boxesWeight = 0
 for (e in boxes){
@@ -149,7 +155,9 @@ for (e in boxes){
 	String isBoxOrPallet = box."isBoxOrPallet"
 	if (isBoxOrPallet !=null && isBoxOrPallet.equals("R")){
 		palletNr++
+		boxesWeight = boxesWeight + 20
 	}else{
+		boxesWeight = boxesWeight + 60
 	}
 
 	List<HashMap<String,Object>> products = box."products"
@@ -161,7 +169,8 @@ for (e in boxes){
 
 
 
-
+context.totalNetWeight = totalWeight
+context.totalGrosWeight = totalWeight.add(new BigDecimal(boxesWeight))
 
 context.listIt = hashMaps
 

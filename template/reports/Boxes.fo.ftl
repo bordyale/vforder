@@ -35,7 +35,7 @@ under the License.
   <fo:page-sequence master-reference="main">
   	<fo:static-content flow-name="xsl-region-after">
 			<fo:block font-size="60pt" font-weight="bold" text-align="center">
-				Brutto - ${box.boxWeight}
+				Brutto - ${box.boxWeight?round}
 			</fo:block>
 	</fo:static-content>
     <fo:flow flow-name="xsl-region-body" font-family="Helvetica">

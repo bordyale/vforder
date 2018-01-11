@@ -39,7 +39,15 @@ under the License.
 	<fo:static-content flow-name="xsl-region-after">
 			<fo:block font-size="26pt" font-weight="bold" text-align="center">
 				${uiLabelMap.BoxTotal} - ${totBoxNumber}
+			</fo:block>
+			<fo:block font-size="26pt" font-weight="bold" text-align="center">
 				${uiLabelMap.PalletTotal} - ${totPalletNumber}
+			</fo:block>
+			<fo:block font-size="26pt" font-weight="bold" text-align="center">
+				${uiLabelMap.NetWeight} - ${totalNetWeight?round}
+			</fo:block>
+			<fo:block font-size="26pt" font-weight="bold" text-align="center">
+				${uiLabelMap.GrosWeight} - ${totalGrosWeight?round}
 			</fo:block>
 	</fo:static-content>
 	<fo:flow flow-name="xsl-region-body" font-family="Helvetica">
@@ -62,6 +70,12 @@ under the License.
 						</fo:table-cell>
 						<fo:table-cell padding="1mm" border-width="1mm" border-style="solid">
 							<fo:block font-weight="bold">${uiLabelMap.Quantity}</fo:block>
+						</fo:table-cell>
+						<fo:table-cell padding="1mm" border-width="1mm" border-style="solid">
+							<fo:block font-weight="bold">${uiLabelMap.ProductWeight}</fo:block>
+						</fo:table-cell>
+						<fo:table-cell padding="1mm" border-width="1mm" border-style="solid">
+							<fo:block font-weight="bold">${uiLabelMap.NetWeight}</fo:block>
 						</fo:table-cell>
 					</fo:table-row>
 				</fo:table-header>
@@ -91,6 +105,16 @@ under the License.
                     <fo:table-cell border-style="solid">
                       <fo:block>
                         ${item.quantity}
+                      </fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell border-style="solid">
+                      <fo:block>
+                        ${item.productWeight}
+                      </fo:block>
+                    </fo:table-cell>
+                    <fo:table-cell border-style="solid">
+                      <fo:block>
+                        ${item.netWeight?round}
                       </fo:block>
                     </fo:table-cell>
                     
