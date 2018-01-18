@@ -20,9 +20,9 @@ under the License.
 <div class="screenlet">
     <div class="screenlet-title-bar">
     
-    <div class="h3">${uiLabelMap.CommonTotal}</div>
+    <!--<div class="h3">${uiLabelMap.CommonTotal}</div>
     <div class="h3">${boxes}</div>
-    <div class="h3">${boxesJson}</div>
+    <div class="h3">${boxesJson}</div>-->
     
        
         
@@ -42,6 +42,21 @@ under the License.
             <td width="50%" align="left"><span><b>${totPalletNumber}</b></span></td>
             
           </tr>
+          <tr valign="bottom">
+            <td width="50%"><span><b>${uiLabelMap.NetWeight}</b></span></td>
+            
+            <td width="50%" align="left"><span><b>${totalNetWeight?round}</b></span></td>
+            
+          </tr>
+          <tr valign="bottom">
+            <td width="50%"><span><b>${uiLabelMap.GrosWeight}</b></span></td>
+            
+            <td width="50%" align="left"><span><b>${totalGrosWeight?round}</b></span></td>
+            
+          </tr>
+          
+          
+          
           
         </table>
     </div>

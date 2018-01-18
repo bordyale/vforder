@@ -33,7 +33,7 @@ under the License.
   <fo:page-sequence master-reference="main">
   	<fo:static-content flow-name="xsl-region-before">
 			<fo:block font-size="26pt" font-weight="bold" text-align="center">
-				${uiLabelMap.ShippingDate} - ${shipment.estimatedShipDate}
+				${uiLabelMap.ShippingDate} - ${shipment.estimatedShipDate?if_exists?string("yyyy.MM.dd")}
 			</fo:block>
 	</fo:static-content>
 	<fo:static-content flow-name="xsl-region-after">
@@ -56,25 +56,25 @@ under the License.
                 
                 <fo:table-header text-align="center" background-color="silver">
 					<fo:table-row>
-						<fo:table-cell padding="1mm" border-width="1mm" border-style="solid">
+						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid" font-size="12pt">
 							<fo:block font-weight="bold">${uiLabelMap.ProductName}</fo:block>
 						</fo:table-cell>
-						<fo:table-cell padding="1mm" border-width="1mm" border-style="solid">
+						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid">
 							<fo:block font-weight="bold">${uiLabelMap.OrderPallettization}</fo:block>
 						</fo:table-cell>
-						<fo:table-cell padding="1mm" border-width="1mm" border-style="solid">
+						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid">
 							<fo:block font-weight="bold">${uiLabelMap.OrderIsBoxOrPallet}</fo:block>
 						</fo:table-cell>
-						<fo:table-cell padding="1mm" border-width="1mm" border-style="solid">
+						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid">
 							<fo:block font-weight="bold">${uiLabelMap.boxNumber}</fo:block>
 						</fo:table-cell>
-						<fo:table-cell padding="1mm" border-width="1mm" border-style="solid">
+						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid">
 							<fo:block font-weight="bold">${uiLabelMap.Quantity}</fo:block>
 						</fo:table-cell>
-						<fo:table-cell padding="1mm" border-width="1mm" border-style="solid">
+						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid">
 							<fo:block font-weight="bold">${uiLabelMap.ProductWeight}</fo:block>
 						</fo:table-cell>
-						<fo:table-cell padding="1mm" border-width="1mm" border-style="solid">
+						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid">
 							<fo:block font-weight="bold">${uiLabelMap.NetWeight}</fo:block>
 						</fo:table-cell>
 					</fo:table-row>
@@ -82,37 +82,37 @@ under the License.
                 <fo:table-body>
                 <#list listIt as item>
                   <fo:table-row>
-                    <fo:table-cell border-style="solid">
+                    <fo:table-cell border-style="solid" border-width="0.3mm">
                       <fo:block>
                         ${item.productName}
                       </fo:block>
                     </fo:table-cell>
-                    <fo:table-cell border-style="solid">
+                    <fo:table-cell border-style="solid" border-width="0.3mm">
                       <fo:block>
                         ${item.pallet}
                       </fo:block>
                     </fo:table-cell>
-                    <fo:table-cell border-style="solid">
+                    <fo:table-cell border-style="solid" border-width="0.3mm">
                       <fo:block>
                         ${item.isBoxOrPallet}
                       </fo:block>
                     </fo:table-cell>
-                    <fo:table-cell border-style="solid">
+                    <fo:table-cell border-style="solid" border-width="0.3mm">
                       <fo:block>
                         ${item.boxNumber}
                       </fo:block>
                     </fo:table-cell>
-                    <fo:table-cell border-style="solid">
+                    <fo:table-cell border-style="solid" border-width="0.3mm">
                       <fo:block>
                         ${item.quantity}
                       </fo:block>
                     </fo:table-cell>
-                    <fo:table-cell border-style="solid">
+                    <fo:table-cell border-style="solid" border-width="0.3mm">
                       <fo:block>
                         ${item.productWeight}
                       </fo:block>
                     </fo:table-cell>
-                    <fo:table-cell border-style="solid">
+                    <fo:table-cell border-style="solid" border-width="0.3mm">
                       <fo:block>
                         ${item.netWeight?round}
                       </fo:block>

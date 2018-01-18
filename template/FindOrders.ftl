@@ -155,7 +155,7 @@ function toggleOrderIdList() {
                 <td align='left'><input type='text' name='orderId'/></td>
               </tr>
               <tr>
-                <td width='25%' align='right' class='label'>${uiLabelMap.OrderOrderName}</td>
+                <td width='25%' align='right' class='label'>${uiLabelMap.VFOrderOrderName}</td>
                 <td width='5%'>&nbsp;</td>
                 <td align='left'><input type='text' name='orderName'/></td>
               </tr>
