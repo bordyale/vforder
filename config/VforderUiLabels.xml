@@ -26,8 +26,8 @@
         <value xml:lang="zh-TW">不允許您檢視這個頁面.</value>
     </property>
     <property key="OrderOrderId">
-        <value xml:lang="en">Name</value>
-        <value xml:lang="hu">Név</value>
+        <value xml:lang="en">Order Name</value>
+        <value xml:lang="hu">Megrendelés Név</value>
         <value xml:lang="zh-TW">不允許您檢視這個頁面.</value>
     </property>
      <property key="VFOrderOrderName">
@@ -36,8 +36,24 @@
         <value xml:lang="zh-TW">不允許您檢視這個頁面.</value>
     </property>
     <property key="CommonMain">
-        <value xml:lang="en">Name</value>
-        <value xml:lang="hu">Név</value>
+        <value xml:lang="en">Main Page</value>
+        <value xml:lang="hu">Fő oldal</value>
         <value xml:lang="zh-TW">不允許您檢視這個頁面.</value>
+    </property>
+    <property key="OrderFindOrder">
+        <value xml:lang="en">Find Order</value>
+        <value xml:lang="hu">Megrendelés keresés</value>
+    </property>
+    <property key="OrderEntryOrder">
+        <value xml:lang="en">Order Entry</value>
+        <value xml:lang="hu">Új megrendelés</value>
+    </property>
+     <property key="ShippingFindShipping">
+        <value xml:lang="en">Find Shipping</value>
+        <value xml:lang="hu">Szallítás keresés</value>
+    </property>
+    <property key="ProductName">
+        <value xml:lang="en">Product Name</value>
+        <value xml:lang="hu">Termék Név</value>
     </property>
 </resource>
