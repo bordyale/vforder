@@ -53,6 +53,7 @@ import org.apache.ofbiz.entity.condition.EntityCondition;
 import org.apache.ofbiz.entity.condition.EntityOperator;
 import org.apache.ofbiz.entity.util.EntityQuery;
 import org.apache.ofbiz.entity.util.EntityUtil;
+import org.apache.ofbiz.order.shoppingcart.ShoppingCart;
 import org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents;
 import org.apache.ofbiz.order.shoppingcart.product.ProductPromoWorker;
 import org.apache.ofbiz.product.catalog.CatalogWorker;
@@ -559,6 +560,145 @@ public class VforderEvents {
 
 		return "success";
 
+	}
+
+	public static String initializeOrderEntry(HttpServletRequest request, HttpServletResponse response) {
+		Delegator delegator = (Delegator) request.getAttribute("delegator");
+		HttpSession session = request.getSession();
+		Security security = (Security) request.getAttribute("security");
+		GenericValue userLogin = (GenericValue) session.getAttribute("userLogin");
+		Locale locale = UtilHttp.getLocale(request);
+
+		String productStoreId = request.getParameter("productStoreId");
+
+		if (UtilValidate.isNotEmpty(productStoreId)) {
+			session.setAttribute("productStoreId", productStoreId);
+		}
+		ShoppingCart cart = ShoppingCartEvents.getCartObject(request);
+
+		// TODO: re-factor and move this inside the ShoppingCart constructor
+		String orderMode = request.getParameter("orderMode");
+		if (orderMode != null) {
+			cart.setOrderType(orderMode);
+			session.setAttribute("orderMode", orderMode);
+		} else {
+			request.setAttribute("_ERROR_MESSAGE_", UtilProperties.getMessage(resource_error, "OrderPleaseSelectEitherSaleOrPurchaseOrder", locale));
+			return "error";
+		}
+
+		// check the selected product store
+		GenericValue productStore = null;
+		if (UtilValidate.isNotEmpty(productStoreId)) {
+			productStore = ProductStoreWorker.getProductStore(productStoreId, delegator);
+			if (productStore != null) {
+
+				// check permission for taking the order
+				boolean hasPermission = false;
+				if ((cart.getOrderType().equals("PURCHASE_ORDER")) && (security.hasEntityPermission("VFORDER", "_PURCHASE_CREATE", session))) {
+					hasPermission = true;
+				} else if (cart.getOrderType().equals("SALES_ORDER")) {
+					if (security.hasEntityPermission("VFORDER", "_SALES_CREATE", session)) {
+						hasPermission = true;
+					} else {
+						// if the user is a rep of the store, then he also has
+						// permission
+						List<GenericValue> storeReps = null;
+						try {
+							storeReps = EntityQuery
+									.use(delegator)
+									.from("ProductStoreRole")
+									.where("productStoreId", productStore.getString("productStoreId"), "partyId", userLogin.getString("partyId"), "roleTypeId",
+											"SALES_REP").filterByDate().queryList();
+						} catch (GenericEntityException gee) {
+							request.setAttribute("_ERROR_MESSAGE_", gee.getMessage());
+							return "error";
+						}
+						if (UtilValidate.isNotEmpty(storeReps)) {
+							hasPermission = true;
+						}
+					}
+				}
+
+				if (hasPermission) {
+					cart = ShoppingCartEvents.getCartObject(request, null, productStore.getString("defaultCurrencyUomId"));
+				} else {
+					request.setAttribute("_ERROR_MESSAGE_",
+							UtilProperties.getMessage(resource_error, "OrderYouDoNotHavePermissionToTakeOrdersForThisStore", locale));
+					cart.clear();
+					session.removeAttribute("orderMode");
+					return "error";
+				}
+				cart.setProductStoreId(productStoreId);
+			} else {
+				cart.setProductStoreId(null);
+			}
+		}
+
+		if ("SALES_ORDER".equals(cart.getOrderType()) && UtilValidate.isEmpty(cart.getProductStoreId())) {
+			request.setAttribute("_ERROR_MESSAGE_", UtilProperties.getMessage(resource_error, "OrderAProductStoreMustBeSelectedForASalesOrder", locale));
+			cart.clear();
+			session.removeAttribute("orderMode");
+			return "error";
+		}
+
+		String salesChannelEnumId = request.getParameter("salesChannelEnumId");
+		if (UtilValidate.isNotEmpty(salesChannelEnumId)) {
+			cart.setChannelType(salesChannelEnumId);
+		}
+
+		// set party info
+		String partyId = request.getParameter("supplierPartyId");
+		cart.setAttribute("supplierPartyId", partyId);
+		String originOrderId = request.getParameter("originOrderId");
+		cart.setAttribute("originOrderId", originOrderId);
+
+		if (UtilValidate.isNotEmpty(request.getParameter("partyId"))) {
+			partyId = request.getParameter("partyId");
+		}
+		String userLoginId = request.getParameter("userLoginId");
+		if (partyId != null || userLoginId != null) {
+			if (UtilValidate.isEmpty(partyId) && UtilValidate.isNotEmpty(userLoginId)) {
+				GenericValue thisUserLogin = null;
+				try {
+					thisUserLogin = EntityQuery.use(delegator).from("UserLogin").where("userLoginId", userLoginId).queryOne();
+				} catch (GenericEntityException gee) {
+					request.setAttribute("_ERROR_MESSAGE_", gee.getMessage());
+					return "error";
+				}
+				if (thisUserLogin != null) {
+					partyId = thisUserLogin.getString("partyId");
+				} else {
+					partyId = userLoginId;
+				}
+			}
+			if (UtilValidate.isNotEmpty(partyId)) {
+				GenericValue thisParty = null;
+				try {
+					thisParty = EntityQuery.use(delegator).from("Party").where("partyId", partyId).queryOne();
+				} catch (GenericEntityException gee) {
+					request.setAttribute("_ERROR_MESSAGE_", gee.getMessage());
+					return "error";
+				}
+				if (thisParty == null) {
+					request.setAttribute("_ERROR_MESSAGE_", UtilProperties.getMessage(resource_error, "OrderCouldNotLocateTheSelectedParty", locale));
+					return "error";
+				} else {
+					cart.setOrderPartyId(partyId);
+					if ("PURCHASE_ORDER".equals(cart.getOrderType())) {
+						cart.setBillFromVendorPartyId(partyId);
+					}
+				}
+			} else if (partyId != null && partyId.length() == 0) {
+				cart.setOrderPartyId("_NA_");
+				partyId = null;
+			}
+		} else {
+			partyId = cart.getPartyId();
+			if (partyId != null && partyId.equals("_NA_"))
+				partyId = null;
+		}
+
+		return "success";
 	}
 
 }

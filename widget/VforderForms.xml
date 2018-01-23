@@ -320,6 +320,62 @@
 		</field>
 		
 	</form>
+	
+	<form name="LookupBulkAddProducts" type="multi" use-row-submit="true" list-name="productList" title="" target="BulkAddProducts"
+        odd-row-style="alternate-row" default-table-style="basic-table hover-bar" paginate-target="LookupBulkAddProducts">
+        <row-actions>
+            <entity-one entity-name="Product" value-field="product" auto-field-map="true"/>
+            <set field=""/>
+            <set field="hasAmount" value="${groovy:product.getString('requireAmount')?:'N'}"/>
+        </row-actions>
+        <field name="productId"  title="${uiLabelMap.ProductProductId}" widget-style="buttontext">
+            <hyperlink description="${productId}" target="/catalog/control/EditProductInventoryItems" target-type="inter-app">
+                <parameter param-name="productId"/>
+            </hyperlink>
+        </field>
+        <!-- <field name="brandName" title="${uiLabelMap.ProductBrandName}"><display/></field> -->
+        <field name="internalName"><display/></field>
+        <field name="quantity" title="${uiLabelMap.OrderQuantity}">
+            <text size="5" maxlength="10"/>
+        </field>
+        <field use-when="${groovy: 'Y'.equals(context.hasAmount)}"  name="amount" title="${uiLabelMap.OrderAmount}" >
+            <text size="5" maxlength="10"/>
+        </field>
+        <field use-when="${groovy: 'N'.equals(context.hasAmount)}"  name="amount" title="${uiLabelMap.OrderAmount}" widget-style="disabled">
+            <text size="5" maxlength="10" disabled="true"/>
+        </field>        
+       <!--  <field name="itemDesiredDeliveryDate" title="${uiLabelMap.OrderDesiredDeliveryDate}">
+            <date-time/>
+        </field> -->
+        <field name="submitButton" title="${uiLabelMap.OrderAddToOrder}" widget-style="smallSubmit">
+            <submit/>
+        </field>
+    </form>
+    <form name="LookupBulkAddSupplierProducts" type="multi" use-row-submit="true" list-name="productList" title="" target="BulkAddProducts"
+        odd-row-style="alternate-row" default-table-style="basic-table hover-bar" paginate-target="LookupBulkAddSupplierProducts" view-size="5">
+        <field name="productId" widget-style="buttontext">
+            <hyperlink description="${productId}" target="/catalog/control/EditProductInventoryItems" target-type="inter-app">
+                <parameter param-name="productId"/>
+            </hyperlink>
+        </field>
+        <field name="supplierProductId"><display/></field>
+        <field name="supplierProductName"><display/></field>
+        <field name="internalName"><display/></field>
+        <field name="lastPrice"><display/></field>
+        <field name="minimumOrderQuantity"><display/></field>
+        <field name="minimumStock"><display/></field>
+        <field name="qohAtp" title="${uiLabelMap.ProductAtpQoh}"><display/></field>
+        <field name="quantityOnOrder"><display/></field>
+        <field name="quantity" title="${uiLabelMap.OrderQuantity}">
+            <text size="5" maxlength="10"/>
+        </field>
+        <field name="itemDesiredDeliveryDate" title="${uiLabelMap.OrderDesiredDeliveryDate}">
+            <date-time/>
+        </field>
+        <field name="submitButton" title="${uiLabelMap.OrderAddToOrder}" widget-style="smallSubmit">
+            <submit/>
+        </field>
+    </form>
 
 
 

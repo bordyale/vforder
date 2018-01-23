@@ -46,8 +46,8 @@
 	</request-map>
 	<request-map uri="initorderentry">
 		<security https="true" auth="true" />
-		<event type="java"
-			path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="initializeOrderEntry" />
+		<event type="java" path="org.apache.ofbiz.vforder.VforderEvents"
+			invoke="initializeOrderEntry" />
 		<response name="success" type="request" value="orderentry" />
 		<response name="error" type="view" value="checkinits" />
 	</request-map>
@@ -206,6 +206,10 @@
 		<response name="success" type="request" value="orderentry" />
 		<response name="error" type="request" value="orderentry" />
 	</request-map>
+	<request-map uri="order.pdf">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="OrderPDF" />
+	</request-map>
 
 
 	<!-- Order Manager Edit Requests -->
@@ -344,9 +348,9 @@
 		<response name="success" type="view" value="ExportShippingPdf" />
 	</request-map>
 	<request-map uri="ExportBoxesPdf">
-        <security https="true" auth="true"/>
-        <response name="success" type="view" value="ExportBoxesPdf"/>
-    </request-map>
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="ExportBoxesPdf" />
+	</request-map>
 	<request-map uri="UpdatePallet">
 		<security https="true" auth="true" />
 		<event type="java" path="org.apache.ofbiz.vforder.VforderEvents"
@@ -371,11 +375,11 @@
 	<view-map name="orderagreements" type="screen"
 		page="component://vforder/widget/VforderScreens.xml#OrderAgreements" />
 	<view-map name="LookupProduct" type="screen"
-		page="component://product/widget/catalog/LookupScreens.xml#LookupProduct" />
+		page="component://vforder/widget/LookupScreens.xml#LookupProduct" />
 	<view-map name="LookupSupplierProduct" type="screen"
 		page="component://product/widget/catalog/LookupScreens.xml#LookupSupplierProduct" />
 	<view-map name="LookupCustomerName" type="screen"
-		page="component://party/widget/partymgr/LookupScreens.xml#LookupCustomerName" />
+		page="component://vforder/widget/LookupScreens.xml#LookupCustomerName" />
 	<view-map name="confirm" type="screen"
 		page="component://vforder/widget/VforderScreens.xml#ConfirmOrder" />
 	<view-map name="shipsetting" type="screen"
@@ -407,6 +411,9 @@
 		content-type="application/pdf" encoding="none" />
 	<view-map name="ExportBoxesPdf" type="screenfop"
 		page="component://vforder/widget/VforderScreens.xml#ExportBoxesPdf"
+		content-type="application/pdf" encoding="none" />
+	<view-map name="OrderPDF" type="screenfop"
+		page="component://vforder/widget/VforderScreens.xml#OrderPDF"
 		content-type="application/pdf" encoding="none" />
 
 </site-conf>

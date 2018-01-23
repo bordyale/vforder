@@ -44,7 +44,7 @@
         <value xml:lang="en">Find Order</value>
         <value xml:lang="hu">Megrendelés keresés</value>
     </property>
-    <property key="OrderEntryOrder">
+    <property key="OrderOrderEntry">
         <value xml:lang="en">Order Entry</value>
         <value xml:lang="hu">Új megrendelés</value>
     </property>
@@ -55,5 +55,101 @@
     <property key="ProductName">
         <value xml:lang="en">Product Name</value>
         <value xml:lang="hu">Termék Név</value>
+    </property>
+    <property key="OrderCustomer">
+        <value xml:lang="en">Customer</value>
+        <value xml:lang="hu">Vevő</value>
+    </property>
+    <property key="OrderSalesOrder">
+        <value xml:lang="en">Sales Order</value>
+        <value xml:lang="hu">Eladási rendelés</value>
+    </property>
+    <property key="OrderPurchaseOrder">
+        <value xml:lang="en">Purchase Order</value>
+        <value xml:lang="hu">Vásárlási rendelés</value>
+    </property>
+    <property key="PartySupplier">
+        <value xml:lang="en">Supplier</value>
+        <value xml:lang="hu">Beszállító</value>
+    </property>
+    <property key="OrderOrderEntryInternalOrganization">
+        <value xml:lang="en">Company</value>
+        <value xml:lang="hu">Cég</value>
+    </property>
+    <property key="OrderOrderEntryCurrencyAgreementShipDates">
+        <value xml:lang="en">Order Header</value>
+        <value xml:lang="hu">Megrendelés</value>
+    </property>
+    <property key="OrderOrderName">
+        <value xml:lang="en">Order Name</value>
+        <value xml:lang="hu">Megrendelés név</value>
+    </property>
+    <property key="OrderSelectCurrency">
+        <value xml:lang="en">Currency</value>
+        <value xml:lang="hu">Devisa</value>
+    </property>
+    <property key="OrderShipBeforeDateDefault">
+        <value xml:lang="en">Shipping date</value>
+        <value xml:lang="hu">Határ Idő</value>
+    </property>
+    <property key="ProductProductId ">
+        <value xml:lang="en">Product Id</value>
+        <value xml:lang="hu">Termék azonosító</value>
+    </property>
+    <property key="OrderQuantity">
+        <value xml:lang="en">Quantity</value>
+        <value xml:lang="hu">Mennyiség</value>
+    </property>
+    <property key="PageTitleLookupBulkAddProduct">
+        <value xml:lang="en">Select order Items</value>
+        <value xml:lang="hu">Megrendelés termékek</value>
+    </property>
+    <property key="OrderAddToOrder">
+        <value xml:lang="en">Add To Order</value>
+        <value xml:lang="hu">Kosárba</value>
+    </property>
+    <property key="OrderQuickLookup">
+        <value xml:lang="en">Quick Lookup</value>
+        <value xml:lang="hu">Gyors Hozzaadás</value>
+    </property>
+    <property key="OrderClearOrder">
+        <value xml:lang="en">Clear Order</value>
+        <value xml:lang="hu">Kosár törlés</value>
+    </property>
+    <property key="OrderRemoveSelected">
+        <value xml:lang="en">Remove Selected</value>
+        <value xml:lang="hu">Termékek törlés</value>
+    </property>
+    <property key="OrderRecalculateOrder">
+        <value xml:lang="en">Recalculate Order</value>
+        <value xml:lang="hu">Megéndelés újraszámolás</value>
+    </property>
+    <property key="OrderFinalizeOrderDefault">
+        <value xml:lang="en">Finalize Order</value>
+        <value xml:lang="hu">Megrendelés keszités</value>
+    </property>
+    <property key="OrderOrderConfirmation">
+        <value xml:lang="en">Order Confirmation</value>
+        <value xml:lang="hu">Megerősítés</value>
+    </property>
+    <property key="OrderOrderItems">
+        <value xml:lang="en">Order Items</value>
+        <value xml:lang="hu">Vissza a termékekhez</value>
+    </property>
+    <property key="OrderCreateOrder">
+        <value xml:lang="en">Create Order</value>
+        <value xml:lang="hu">Rendelés Létrehozás</value>
+    </property>
+    <property key="OrderCancelOrder">
+        <value xml:lang="en">Cancel Order</value>
+        <value xml:lang="hu">Rendelés törés</value>
+    </property>
+    <property key="OrderStatusHistory">
+        <value xml:lang="en">Status History</value>
+        <value xml:lang="hu">Status torténete</value>
+    </property>
+    <property key="OrderDteOrdered">
+        <value xml:lang="en">Date Ordered</value>
+        <value xml:lang="hu">Rendelés datum létrehozás</value>
     </property>
 </resource>
