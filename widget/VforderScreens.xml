@@ -350,8 +350,7 @@
 				<set field="formShippingListName" value="${groovy: return 'ListShippings';}" />
 
 				<!-- asmselect parameters, must be prefixed by asm_ for SetMultipleSelectJs.ftl -->
-				<property-map resource="OrderUiLabels" map-name="uiLabelMap"
-					global="true" />
+				
 			</actions>
 			<widgets>
 				<decorator-screen name="VforderCommonDecorator"
@@ -594,7 +593,8 @@
 			<widgets>
 				<platform-specific>
 					<xsl-fo>
-						<html-template location="component://vforder/template/reports/ListShippingItems.fo.ftl" />
+						<html-template
+							location="component://vforder/template/reports/ListShippingItems.fo.ftl" />
 					</xsl-fo>
 				</platform-specific>
 			</widgets>
@@ -622,58 +622,84 @@
 	</screen>
 
 	<screen name="OrderPDF">
-        <section>
-            <actions>
-                <set field="titleProperty" value="OrderOrder"/>
-                <property-map resource="OrderUiLabels" map-name="uiLabelMap" global="true"/>
-                <property-map resource="AccountingUiLabels" map-name="uiLabelMap" global="true"/>
-                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
-
-                <script location="component://order/groovyScripts/order/OrderView.groovy"/>
-            </actions>
-            <widgets>
-                <decorator-screen name="FoReportDecorator" location="component://common/widget/CommonScreens.xml">
-                    <!-- at the top left of every page we put the logo and company information -->
-                    <decorator-section name="topLeft">
-                        <section>
-                            <widgets>
-                                <include-screen name="CompanyLogo" location="component://order/widget/ordermgr/OrderPrintScreens.xml"/>
-                            </widgets>
-                        </section>
-                    </decorator-section>
-                    <!-- at the top right of every page we put the order information -->
-                    <decorator-section name="topRight">
-                        <section>
-                            <widgets>
-                                <platform-specific>
-                                    <xsl-fo><html-template location="component://order/template/order/OrderReportHeaderInfo.fo.ftl"/></xsl-fo>
-                                </platform-specific>
-                            </widgets>
-                        </section>
-                    </decorator-section>
-                    <decorator-section name="body">
-                        <section>
-                            <widgets>
-                                <!-- the contach mechanisms, terms, payment and shipping methods are shown in the first page -->
-                                <platform-specific>
-                                    <xsl-fo><html-template location="component://order/template/order/OrderReportContactMechs.fo.ftl"/></xsl-fo>
-                                </platform-specific>
-                                <!-- order items and totals -->
-                                <platform-specific>
-                                    <xsl-fo><html-template location="component://order/template/order/OrderReportBody.fo.ftl"/></xsl-fo>
-                                </platform-specific>
-                                <!-- return policies and notes are shown in the last page -->
-                                <platform-specific>
-                                    <xsl-fo><html-template location="component://order/template/order/OrderReportConditions.fo.ftl"/></xsl-fo>
-                                </platform-specific>
-                            </widgets>
-                        </section>
-                    </decorator-section>
-                </decorator-screen>
-            </widgets>
-        </section>
-    </screen>
-
+		<section>
+			<actions>
+				<set field="titleProperty" value="OrderOrder" />
+				<!-- <property-map resource="OrderUiLabels" map-name="uiLabelMap" global="true"/> -->
+				<property-map resource="AccountingUiLabels" map-name="uiLabelMap"
+					global="true" />
+				<!-- <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/> -->
+				<property-map resource="VforderUiLabels" map-name="uiLabelMap"
+					global="true" />
+				<script location="component://order/groovyScripts/order/OrderView.groovy" />
+			</actions>
+			<widgets>
+				<decorator-screen name="FoReportDecorator"
+					location="component://common/widget/CommonScreens.xml">
+					<!-- at the top left of every page we put the logo and company information -->
+					<decorator-section name="topLeft">
+						<section>
+							<widgets>
+								<include-screen name="CompanyLogo" />
+							</widgets>
+						</section>
+					</decorator-section>
+					<!-- at the top right of every page we put the order information -->
+					<decorator-section name="topRight">
+						<section>
+							<widgets>
+								<platform-specific>
+									<xsl-fo>
+										<html-template
+											location="component://order/template/order/OrderReportHeaderInfo.fo.ftl" />
+									</xsl-fo>
+								</platform-specific>
+							</widgets>
+						</section>
+					</decorator-section>
+					<decorator-section name="body">
+						<section>
+							<widgets>
+								<!-- the contach mechanisms, terms, payment and shipping methods 
+									are shown in the first page -->
+								<platform-specific>
+									<xsl-fo>
+										<html-template
+											location="component://vforder/template/reports/orderpdf/OrderReportContactMechs.fo.ftl" />
+									</xsl-fo>
+								</platform-specific>
+								<!-- order items and totals -->
+								<platform-specific>
+									<xsl-fo>
+										<html-template
+											location="component://vforder/template/reports/orderpdf/OrderReportBody.fo.ftl" />
+									</xsl-fo>
+								</platform-specific>
+								<!-- return policies and notes are shown in the last page -->
+								<!-- <platform-specific> <xsl-fo><html-template location="component://vforder/template/reports/orderpdf/OrderReportConditions.fo.ftl"/></xsl-fo> 
+									</platform-specific> -->
+							</widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<screen name="CompanyLogo">
+		<section>
+			<actions>
+				<script location="component://order/groovyScripts/order/CompanyHeader.groovy" />
+			</actions>
+			<widgets>
+				<platform-specific>
+					<xsl-fo>
+						<html-template
+							location="component://vforder/template/reports/orderpdf/CompanyHeader.fo.ftl" />
+					</xsl-fo>
+				</platform-specific>
+			</widgets>
+		</section>
+	</screen>
 
 
 </screens>

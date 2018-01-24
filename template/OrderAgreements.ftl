@@ -182,7 +182,7 @@ under the License.
         </td>
       </tr>
 
-      <#if cart.getOrderType() == "PURCHASE_ORDER">
+      <!--<#if cart.getOrderType() == "PURCHASE_ORDER">
         <tr>
           <td>&nbsp;</td>
           <td align='right' valign='top'>
@@ -195,7 +195,7 @@ under the License.
               <@htmlTemplate.renderDateTimeField name="cancelBackOrderDate" event="" action="" value="" className="" alert="" title="Format: yyyy-MM-dd HH:mm:ss.SSS" size="25" maxlength="30" id="cancelBackOrderDate1" dateType="date" shortDateInput=false timeDropdownParamName="" defaultDateTimeString="" localizedIconTitle="" timeDropdown="" timeHourName="" classString="" hour1="" hour2="" timeMinutesName="" minutes="" isTwelveHour="" ampmName="" amSelected="" pmSelected="" compositeType="" formName=""/>
           </td>
         </tr>
-      </#if>
+      </#if>-->
 
     </table>
   </div>

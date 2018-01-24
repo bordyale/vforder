@@ -53,9 +53,9 @@ under the License.
                                 <td colspan="1">
                                     <div class="order-item-description">
                                         <#if orderItem.supplierProductId?has_content>
-                                            ${orderItem.supplierProductId} - ${orderItem.itemDescription!}
+                                         <!--   ${orderItem.supplierProductId} - -->${orderItem.itemDescription!}
                                         <#elseif productId??>
-                                            ${orderItem.productId?default("N/A")} - ${orderItem.itemDescription!}
+                                           <!-- ${orderItem.productId?default("N/A")} - --> ${orderItem.itemDescription!}
                                             <#if (product.salesDiscontinuationDate)?? && Static["org.apache.ofbiz.base.util.UtilDateTime"].nowTimestamp().after(product.salesDiscontinuationDate)>
                                                 <br />
                                                 <span style="color: red;">${uiLabelMap.OrderItemDiscontinued}: ${Static["org.apache.ofbiz.base.util.UtilFormatOut"].formatDateTime(product.salesDiscontinuationDate, "", locale, timeZone)!}</span>

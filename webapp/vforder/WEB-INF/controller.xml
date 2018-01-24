@@ -377,7 +377,7 @@
 	<view-map name="LookupProduct" type="screen"
 		page="component://vforder/widget/LookupScreens.xml#LookupProduct" />
 	<view-map name="LookupSupplierProduct" type="screen"
-		page="component://product/widget/catalog/LookupScreens.xml#LookupSupplierProduct" />
+		page="component://vforder/widget/LookupScreens.xml#LookupSupplierProduct" />
 	<view-map name="LookupCustomerName" type="screen"
 		page="component://vforder/widget/LookupScreens.xml#LookupCustomerName" />
 	<view-map name="confirm" type="screen"
