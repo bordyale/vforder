@@ -167,7 +167,7 @@
         <value xml:lang="en">Quantity</value>
         <value xml:lang="hu">Mennyiség</value>
     </property>
-    <property key="OrderPurchaseFrom">
+    <property key="OrderPurchasedFrom">
         <value xml:lang="en">Supplier</value>
         <value xml:lang="hu">Beszállító</value>
     </property>
