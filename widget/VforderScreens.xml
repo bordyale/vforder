@@ -109,8 +109,8 @@
 				<set field="asm_formSize" value="1000" />
 				<set field="asm_asmListItemPercentOfForm" value="95" />
 				<set field="asm_sortable" value="false" />
-				<property-map resource="OrderUiLabels" map-name="uiLabelMap"
-					global="true" />
+				<!-- <property-map resource="OrderUiLabels" map-name="uiLabelMap"
+					global="true" /> -->
 				<set field="asm_title" value="${uiLabelMap.OrderPartySelectRoleForParty}" />
 			</actions>
 			<widgets>
