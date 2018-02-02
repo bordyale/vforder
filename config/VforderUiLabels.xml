@@ -20,9 +20,8 @@
         <value xml:lang="zh-TW">不允許您檢視這個頁面.</value>
     </property>
     <property key="ProductName">
-        <value xml:lang="en">Name</value>
-        <value xml:lang="hu">Név</value>
-        <value xml:lang="zh-TW">不允許您檢視這個頁面.</value>
+        <value xml:lang="en">ProductName</value>
+        <value xml:lang="hu">Termék Név</value>        
     </property>
     <property key="OrderOrderId">
         <value xml:lang="en">Order Id</value>
@@ -198,5 +197,13 @@
     <property key="AddShippingItemOrderItem">
         <value xml:lang="en">Add Item</value>
         <value xml:lang="hu">Termék hozzaadás</value>
+    </property>
+    <property key="ExportBoxesPdf">
+        <value xml:lang="en">Pdf Shipping</value>
+        <value xml:lang="hu">Pdf Kiszállítás</value>
+    </property>
+    <property key="WorkPapers">
+        <value xml:lang="en">Pdf Work Papers</value>
+        <value xml:lang="hu">Pdf Munkalap</value>
     </property>
 </resource>

@@ -351,6 +351,10 @@
 		<security https="true" auth="true" />
 		<response name="success" type="view" value="ExportBoxesPdf" />
 	</request-map>
+	<request-map uri="ExportWorkPapersPdf">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="ExportWorkPapersPdf" />
+	</request-map>
 	<request-map uri="UpdatePallet">
 		<security https="true" auth="true" />
 		<event type="java" path="org.apache.ofbiz.vforder.VforderEvents"
@@ -411,6 +415,9 @@
 		content-type="application/pdf" encoding="none" />
 	<view-map name="ExportBoxesPdf" type="screenfop"
 		page="component://vforder/widget/VforderScreens.xml#ExportBoxesPdf"
+		content-type="application/pdf" encoding="none" />
+	<view-map name="ExportWorkPapersPdf" type="screenfop"
+		page="component://vforder/widget/VforderScreens.xml#ExportWorkPapersPdf"
 		content-type="application/pdf" encoding="none" />
 	<view-map name="OrderPDF" type="screenfop"
 		page="component://vforder/widget/VforderScreens.xml#OrderPDF"
