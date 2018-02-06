@@ -36,7 +36,7 @@
     
         <!-- order lookup services -->
     <service name="vffindOrders" engine="java" transaction-timeout="300" auth="true"
-            location="org.apache.ofbiz.order.order.OrderLookupServices" invoke="findOrders">
+            location="org.apache.ofbiz.vforder.VfOrderLookupServices" invoke="findOrders">
         <description>Uses dynamic view entity to find orders; returns a list of Order (OrderHeader) objects</description>
         <!-- order header fields -->
         <attribute name="orderId" type="String" mode="IN" optional="true"/>
@@ -98,6 +98,9 @@
         <!-- ship to country fields -->
         <attribute name="countryGeoId" type="String" mode="IN" optional="true"/>
         <attribute name="includeCountry" type="String" mode="IN" optional="true"/>
+
+		<!-- Exclude cancelled orders -->
+		<attribute name="excludeCancelled" type="String" mode="IN" optional="true"/>
 
         <!-- view and page fields -->
         <attribute name="viewIndex" type="Integer" mode="INOUT" optional="true"/>

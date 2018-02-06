@@ -122,6 +122,7 @@ function toggleOrderIdList() {
 </#if>
 <form method="post" name="lookuporder" id="lookuporder" action="<@ofbizUrl>${formTarget}</@ofbizUrl>" onsubmit="javascript:lookupOrders();">
 <input type="hidden" name="lookupFlag" value="Y"/>
+<input type="hidden" name="excludeCancelled" value="Y"/>
 <input type="hidden" name="hideFields" value="Y"/>
 <input type="hidden" name="viewSize" value="${viewSize}"/>
 <input type="hidden" name="viewIndex" value="${viewIndex}"/>
@@ -423,12 +424,12 @@ document.lookuporder.orderId.focus();
 	          <td width="5%">${uiLabelMap.OrderOrderId}</td>
 	          <td width="15%">${uiLabelMap.OrderOrderName}</td>
 	          <td width="20%">${uiLabelMap.PartyName}</td>
-	          <td width="5%" align="right">${uiLabelMap.OrderSurvey}</td>
+	         <!-- <td width="5%" align="right">${uiLabelMap.OrderSurvey}</td>-->
 	          <td width="5%" align="right">${uiLabelMap.OrderItemsOrdered}</td>
-	          <td width="5%" align="right">${uiLabelMap.OrderItemsBackOrdered}</td>
+	          <!-- <td width="5%" align="right">${uiLabelMap.OrderItemsBackOrdered}</td>
 	          <td width="5%" align="right">${uiLabelMap.OrderItemsReturned}</td>
-	          <td width="10%" align="right">${uiLabelMap.OrderRemainingSubTotal}</td>
-	          <td width="10%" align="right">${uiLabelMap.OrderOrderTotal}</td>
+	         <td width="10%" align="right">${uiLabelMap.OrderRemainingSubTotal}</td>
+	          <td width="10%" align="right">${uiLabelMap.OrderOrderTotal}</td>-->
 	          <td width="5%">&nbsp;</td>
 	            <#if (requestParameters.filterInventoryProblems?default("N") == "Y") || (requestParameters.filterPOsOpenPastTheirETA?default("N") == "Y") || (requestParameters.filterPOsWithRejectedItems?default("N") == "Y") || (requestParameters.filterPartiallyReceivedPOs?default("N") == "Y")>
 	              <td width="10%">${uiLabelMap.CommonStatus}</td>
@@ -437,7 +438,7 @@ document.lookuporder.orderId.focus();
 	              <td width="15%">${uiLabelMap.CommonStatus}</td>
 	            </#if>
 	          <td width="20%">${uiLabelMap.OrderDate}</td>
-	          <td width="5%">${uiLabelMap.PartyPartyId}</td>
+	          <!--<td width="5%">${uiLabelMap.PartyPartyId}</td>-->
 	          <td width="10%">&nbsp;</td>
 	        </tr>
         <#else>
@@ -451,10 +452,10 @@ document.lookuporder.orderId.focus();
 	          
 	          
 	          <td width="5%" align="right">${uiLabelMap.OrderItemsOrdered}</td>
-	          <td width="5%" align="right">${uiLabelMap.OrderItemsBackOrdered}</td>
+	        <!--  <td width="5%" align="right">${uiLabelMap.OrderItemsBackOrdered}</td>
 	          
 	          <td width="10%" align="right">${uiLabelMap.OrderRemainingSubTotal}</td>
-	          <td width="10%" align="right">${uiLabelMap.OrderOrderTotal}</td>
+	          <td width="10%" align="right">${uiLabelMap.OrderOrderTotal}</td>-->
 	          <td width="5%">&nbsp;</td>
 	            <#if (requestParameters.filterInventoryProblems?default("N") == "Y") || (requestParameters.filterPOsOpenPastTheirETA?default("N") == "Y") || (requestParameters.filterPOsWithRejectedItems?default("N") == "Y") || (requestParameters.filterPartiallyReceivedPOs?default("N") == "Y")>
 	              <td width="10%">${uiLabelMap.CommonStatus}</td>
@@ -501,12 +502,12 @@ document.lookuporder.orderId.focus();
 		                  </#if>
 		                </div>
 		              </td>
-		              <td align="right">${orh.hasSurvey()?string.number}</td>
+		              <!--<td align="right">${orh.hasSurvey()?string.number}</td>-->
 		              <td align="right">${orh.getTotalOrderItemsQuantity()?string.number}</td>
-		              <td align="right">${orh.getOrderBackorderQuantity()?string.number}</td>
+		              <!--<td align="right">${orh.getOrderBackorderQuantity()?string.number}</td>
 		              <td align="right">${orh.getOrderReturnedQuantity()?string.number}</td>
 		              <td align="right"><@ofbizCurrency amount=orderHeader.remainingSubTotal isoCode=orh.getCurrency()/></td>
-		              <td align="right"><@ofbizCurrency amount=orderHeader.grandTotal isoCode=orh.getCurrency()/></td>
+		              <td align="right"><@ofbizCurrency amount=orderHeader.grandTotal isoCode=orh.getCurrency()/></td>-->
 		
 		              <td>&nbsp;</td>
 		              <td>${statusItem.get("description",locale)?default(statusItem.statusId?default("N/A"))}</td>
@@ -528,13 +529,13 @@ document.lookuporder.orderId.focus();
 		                  </td>
 		              </#if>
 		              <td>${orderHeader.getString("orderDate")}</td>
-		              <td>
+		             <!-- <td>
 		                <#if partyId != "_NA_">
 		                  <a href="${customerDetailLink}${partyId}" class="buttontext">${partyId}</a>
 		                <#else>
 		                  ${uiLabelMap.CommonNA}
 		                </#if>
-		              </td>
+		              </td>-->
 		              <td align='right'>
 		                <a href="<@ofbizUrl>orderview?orderId=${orderHeader.orderId}</@ofbizUrl>" class='buttontext'>${uiLabelMap.CommonView}</a>
 		              </td>
@@ -554,11 +555,11 @@ document.lookuporder.orderId.focus();
 			              
 			              
 			              <td align="right">${orh.getTotalOrderItemsQuantity()?string.number}</td>
-			              <td align="right">${orh.getOrderBackorderQuantity()?string.number}</td>
+			              <!--<td align="right">${orh.getOrderBackorderQuantity()?string.number}</td>
 			              
 			              <td align="right"><@ofbizCurrency amount=orderHeader.remainingSubTotal isoCode=orh.getCurrency()/></td>
 			              <td align="right"><@ofbizCurrency amount=orderHeader.grandTotal isoCode=orh.getCurrency()/></td>
-			
+							-->
 			              <td>&nbsp;</td>
 			              <td>${statusItem.get("description",locale)?default(statusItem.statusId?default("N/A"))}</td>
 			              </td>
@@ -580,9 +581,9 @@ document.lookuporder.orderId.focus();
 			              </#if>
 			              <td>${orderHeader.getString("orderDate")}</td>
 			              
-			              <td align='right'>
+			             <!-- <td align='right'>
 			                <a href="<@ofbizUrl>orderview?orderId=${orderHeader.orderId}</@ofbizUrl>" class='buttontext'>${uiLabelMap.CommonView}</a>
-			              </td>
+			              </td>-->
 			              <td align='right'>
 			                <a href="<@ofbizUrl>AddShippingItemOrderItem?orderId=${orderHeader.orderId}&shipmentId=${shipmentId}</@ofbizUrl>" class='buttontext'>${uiLabelMap.AddShippingItemOrderItem}</a>
 			              </td>
