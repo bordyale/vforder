@@ -209,6 +209,9 @@ public class VforderEvents {
 
 				if (vfOrdItemShipItem != null) {
 					quantityShipped = vfOrdItemShipItem.getBigDecimal("quantityShipped");
+					if (quantityShipped == null){
+						quantityShipped = BigDecimal.ZERO;
+					}
 					quantityShippable = quantity.subtract(quantityShipped);
 				}
 
