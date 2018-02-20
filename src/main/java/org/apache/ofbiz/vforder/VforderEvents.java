@@ -136,18 +136,29 @@ public class VforderEvents {
 					orderItemSeqId = (String) paramMap.remove("orderItemSeqId" + thisSuffix);
 				}
 
-				String quantityStr = null;
-				if (paramMap.containsKey("quantity" + thisSuffix)) {
-					quantityStr = (String) paramMap.remove("quantity" + thisSuffix);
-				}
-				if ((quantityStr == null) || (quantityStr.equals(""))) {
-					quantityStr = "0";
-				}
+				/*
+				 * String quantityStr = null; if
+				 * (paramMap.containsKey("quantity" + thisSuffix)) { String tmp
+				 * = (String) paramMap.remove("quantity" + thisSuffix);
+				 * quantityStr = tmp.replace("&nbsp;", ""); } if ((quantityStr
+				 * == null) || (quantityStr.equals(""))) { quantityStr = "0"; }
+				 * try { quantity = new BigDecimal(quantityStr); } catch
+				 * (Exception e) { Debug.logWarning(e,
+				 * "Problems parsing quantity string: " + quantityStr, module);
+				 * quantity = BigDecimal.ZERO; }
+				 */
+
+				GenericValue vfOrdItemShipItem = null;
 				try {
-					quantity = new BigDecimal(quantityStr);
-				} catch (Exception e) {
-					Debug.logWarning(e, "Problems parsing quantity string: " + quantityStr, module);
-					quantity = BigDecimal.ZERO;
+					vfOrdItemShipItem = delegator.findOne("OrderItemShippingItemView", UtilMisc.toMap("orderId", orderId, "orderItemSeqId", orderItemSeqId),
+							false);
+					//if (vfOrdItemShipItem != null) {
+						quantity = (BigDecimal)vfOrdItemShipItem.get("quantity");
+					//}
+
+				} catch (GenericEntityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 
 				/*
@@ -169,22 +180,8 @@ public class VforderEvents {
 				if (paramMap.containsKey("quantityToShip" + thisSuffix)) {
 					quantityToShipStr = (String) paramMap.remove("quantityToShip" + thisSuffix);
 				}
-				if ((quantityToShipStr == null) || (quantityToShipStr.equals(""))) { // otherwise,
-																						// every
-																						// empty
-																						// value
-																						// causes
-																						// an
-																						// exception
-																						// and
-																						// makes
-																						// the
-																						// log
-																						// ugly
-					quantityToShipStr = "0"; // default quantity is 0, so
-												// without a quantity input,
-												// this field will not
-												// be added
+				if ((quantityToShipStr == null) || (quantityToShipStr.equals(""))) {
+					quantityToShipStr = "0";
 				}
 
 				try {
@@ -194,19 +191,25 @@ public class VforderEvents {
 					quantityToShip = BigDecimal.ZERO;
 				}
 
-				String quantityShippableStr = null;
-				if (paramMap.containsKey("quantityShippable" + thisSuffix)) {
-					quantityShippableStr = (String) paramMap.remove("quantityShippable" + thisSuffix);
-				}
-				if ((quantityShippableStr == null) || (quantityShippableStr.equals(""))) {
-					quantityShippableStr = "0";
-				}
+				/*
+				 * String quantityShippableStr = null; if
+				 * (paramMap.containsKey("quantityShippable" + thisSuffix)) {
+				 * String tmp = (String) paramMap.remove("quantityShippable" +
+				 * thisSuffix); quantityShippableStr = tmp.replace("&nbsp;",
+				 * ""); } if ((quantityShippableStr == null) ||
+				 * (quantityShippableStr.equals(""))) { quantityShippableStr =
+				 * "0"; }
+				 * 
+				 * try { quantityShippable = new
+				 * BigDecimal(quantityShippableStr); } catch (Exception e) {
+				 * Debug.logWarning(e, "Problems parsing quantity string: " +
+				 * quantityShippableStr, module); quantityShippable =
+				 * BigDecimal.ZERO; }
+				 */
 
-				try {
-					quantityShippable = new BigDecimal(quantityShippableStr);
-				} catch (Exception e) {
-					Debug.logWarning(e, "Problems parsing quantity string: " + quantityShippableStr, module);
-					quantityShippable = BigDecimal.ZERO;
+				if (vfOrdItemShipItem != null) {
+					quantityShipped = vfOrdItemShipItem.getBigDecimal("quantityShipped");
+					quantityShippable = quantity.subtract(quantityShipped);
 				}
 
 				if (quantityToShip.compareTo(quantityShippable) > 0) {
