@@ -132,6 +132,7 @@
 			</widgets>
 		</section>
 	</screen>
+	<!-- Check and choose Sales of Purchase order page  -->
 	<screen name="CheckInits">
 		<section>
 			<actions>
@@ -153,6 +154,7 @@
 			</widgets>
 		</section>
 	</screen>
+	<!-- Page to Add Items on order -->
 	<screen name="ShowCart">
 		<section>
 			<actions>
@@ -206,6 +208,7 @@
 			</widgets>
 		</section>
 	</screen>
+	<!--  Order Header  -->
 	<screen name="OrderAgreements">
 		<section>
 			<actions>
@@ -229,6 +232,7 @@
 			</widgets>
 		</section>
 	</screen>
+	<!-- Page Order confirmation Megerősítés -->
 	<screen name="ConfirmOrder">
 		<section>
 			<actions>

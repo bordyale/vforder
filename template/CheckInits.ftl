@@ -47,7 +47,7 @@ under the License.
       <input type="hidden" name="originOrderId" value="${parameters.originOrderId!}"/>
       <input type="hidden" name="finalizeMode" value="type"/>
       <input type="hidden" name="orderMode" value="SALES_ORDER"/>
-      <input type="hidden" name="productStoreId" value="9000"/>
+      <input type="hidden" name="productStoreId" value="10000"/>
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
        <!-- <tr>
           <td >&nbsp;</td>

@@ -22,7 +22,7 @@ under the License.
     <#if logoImageUrl?has_content><fo:external-graphic src="<@ofbizContentUrl>${logoImageUrl}</@ofbizContentUrl>" overflow="hidden" height="40px" content-height="scale-to-fit" content-width="2.00in"/></#if>
 </fo:block>
 
-<fo:block font-size="8pt">
+<fo:block font-size="20pt">
     <fo:block>${companyName}</fo:block>
     
 

@@ -126,6 +126,10 @@
         <value xml:lang="en">Finalize Order</value>
         <value xml:lang="hu">Megrendelés keszités</value>
     </property>
+    <property key="OrderFinalizeOrderDefault">
+        <value xml:lang="en">Finalize Order Default</value>
+        <value xml:lang="hu">Megrendelés keszités Default</value>
+    </property>
     <property key="OrderOrderConfirmation">
         <value xml:lang="en">Order Confirmation</value>
         <value xml:lang="hu">Megerősítés</value>
@@ -190,7 +194,7 @@
         <value xml:lang="en">Add Shipping Item</value>
         <value xml:lang="hu">Új szállítás termék</value>
     </property>
-    <property key="ShippingUpdatePalet">
+    <property key="ShippingUpdatePallet">
         <value xml:lang="en">Update Boxes</value>
         <value xml:lang="hu">Ládazás frissités</value>
     </property>
@@ -199,11 +203,19 @@
         <value xml:lang="hu">Termék hozzaadás</value>
     </property>
     <property key="ExportBoxesPdf">
-        <value xml:lang="en">Pdf Shipping</value>
-        <value xml:lang="hu">Pdf Kiszállítás</value>
+        <value xml:lang="en">Pdf Boxes</value>
+        <value xml:lang="hu">Pdf Ládazás</value>
     </property>
     <property key="WorkPapers">
         <value xml:lang="en">Pdf Work Papers</value>
         <value xml:lang="hu">Pdf Munkalap</value>
+    </property>
+    <property key="OrderShipmentInformation">
+        <value xml:lang="en">Shipment Informations</value>
+        <value xml:lang="hu">Szállítási tájékoztatok</value>
+    </property>
+    <property key="OrderShipBeforeDate">
+        <value xml:lang="en">Ship Before Date</value>
+        <value xml:lang="hu">Határ idő</value>
     </property>
 </resource>

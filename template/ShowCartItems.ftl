@@ -44,28 +44,14 @@ under the License.
         <tr>
           <td>&nbsp;</td>
           
-          <!--<td colspan="2">
-            <div>
-              <b>${uiLabelMap.ProductProduct}</b>
-              <#if (shoppingCart.getOrderType() == 'SALES_ORDER') && (productStore.showCheckoutGiftOptions)?default('Y') != 'N'>
-                  <select name="GWALL" onchange="javascript:gwAll(this);">
-                    <option value="">${uiLabelMap.OrderGiftWrapAllItems}</option>
-                    <option value="NO^">${uiLabelMap.OrderNoGiftWrap}</option>
-                    <#if allgiftWraps?has_content>
-                      <#list allgiftWraps as option>
-                        <option value="${option.productFeatureId?default("")}">${option.description?default("")} : <@ofbizCurrency amount=option.defaultAmount?default(0) isoCode=currencyUomId/></option>
-                      </#list>
-                    </#if>
-                  </select>
-              </#if>
-            </div>
-          </td>-->
+         
           
           <td align="center"><div><b>${uiLabelMap.ProductProductName}</b></div></td>
           <td align="center"><div><b>${uiLabelMap.OrderQuantity}</b></div></td>
-          <td align="center"><div><b>${uiLabelMap.CommonUnitPrice}</b></div></td>
-          <td align="right"><div><b>${uiLabelMap.OrderAdjustments}</b></div></td>
-          <td align="right"><div><b>${uiLabelMap.OrderItemTotal}</b></div></td>
+          <#if shoppingCart.getOrderType() == "PURCHASE_ORDER">
+          	<td align="center"><div><b>${uiLabelMap.CommonUnitPrice}</b></div></td>
+          	<td align="right"><div><b>${uiLabelMap.OrderItemTotal}</b></div></td>
+          </#if>
           <td align="center"><input type="checkbox" name="selectAll" value="0" class="selectAll"/></td>
         </tr>
 
@@ -83,7 +69,7 @@ under the License.
                   <#if cartLine.getProductId()??>
                     <#-- product item -->
                     <a href="<@ofbizUrl>product?product_id=${cartLine.getProductId()}</@ofbizUrl>" class="buttontext">${cartLine.getProductId()}</a> -
-                    <input size="60" type="text" name="description_${cartLineIndex}" value="${cartLine.getName()?default("")}"/><br />
+                    ${cartLine.getName()?default("")}<br />
                     <i>${cartLine.getDescription()!}</i>
                     <#if shoppingCart.getOrderType() != "PURCHASE_ORDER">
                       <#-- only applies to sales orders, not purchase orders -->
@@ -138,12 +124,9 @@ under the License.
                   <td><div><input size="60" type="text" name="comment_${cartLineIndex}" value="${cartLine.getItemComment()?default("")}"/><br /></div></td>
               </tr>
             </#if>
-            <!--<#if cartLine.getDesiredDeliveryDate()?has_content>
-              <tr><td><div>${uiLabelMap.OrderDesiredDeliveryDate}: </div></td>
-                  <td><div>${cartLine.getDesiredDeliveryDate()!}</div>
-              </td></tr>
-            </#if>-->
+            
             <#-- inventory summary -->
+            <!--
             <#if cartLine.getProductId()??>
               <#assign productId = cartLine.getProductId()>
               <#assign product = cartLine.getProduct()>
@@ -172,7 +155,7 @@ under the License.
                 </td>
               </tr>
             </#if>
-            <!--<#if shoppingCart.getOrderType() == "PURCHASE_ORDER">
+            <#if shoppingCart.getOrderType() == "PURCHASE_ORDER">
               <#assign currentOrderItemType = cartLine.getItemTypeGenericValue()!/>
                 <tr>
                   <td>
@@ -281,23 +264,27 @@ under the License.
                 </#if>
               </div>
             </td>
-            <td nowrap="nowrap" align="right">
-              <div>
-                <#if cartLine.getIsPromo() || (shoppingCart.getOrderType() == "SALES_ORDER" && !security.hasEntityPermission("ORDERMGR", "_SALES_PRICEMOD", session))>
-                  <@ofbizCurrency amount=cartLine.getDisplayPrice() isoCode=currencyUomId/>
-                <#else>
-                    <#if (cartLine.getSelectedAmount() > 0) >
-                        <#assign price = cartLine.getBasePrice() / cartLine.getSelectedAmount()>
-                    <#else>
-                        <#assign price = cartLine.getBasePrice()>
-                    </#if>
-                    <input size="8" type="text" name="price_${cartLineIndex}" value="<@ofbizAmount amount=price/>"/>
-                </#if>
-              </div>
-            </td>
-            <td nowrap="nowrap" align="right"><div><@ofbizCurrency amount=cartLine.getOtherAdjustments() isoCode=currencyUomId/></div></td>
-            <td nowrap="nowrap" align="right"><div><@ofbizCurrency amount=cartLine.getDisplayItemSubTotal() isoCode=currencyUomId/></div></td>
+            
+            <#if shoppingCart.getOrderType() == "PURCHASE_ORDER">
+	            <td nowrap="nowrap" align="right">
+	              <div>
+	                <#if cartLine.getIsPromo() || (shoppingCart.getOrderType() == "SALES_ORDER" && !security.hasEntityPermission("ORDERMGR", "_SALES_PRICEMOD", session))>
+	                  <@ofbizCurrency amount=cartLine.getDisplayPrice() isoCode=currencyUomId/>
+	                <#else>
+	                    <#if (cartLine.getSelectedAmount() > 0) >
+	                        <#assign price = cartLine.getBasePrice() / cartLine.getSelectedAmount()>
+	                    <#else>
+	                        <#assign price = cartLine.getBasePrice()>
+	                    </#if>
+	                    <input size="8" type="text" name="price_${cartLineIndex}" value="<@ofbizAmount amount=price/>"/>
+	                </#if>
+	              </div>
+	            </td>
+	            
+	            <td nowrap="nowrap" align="right"><div><@ofbizCurrency amount=cartLine.getDisplayItemSubTotal() isoCode=currencyUomId/></div></td>
+            </#if>
             <td nowrap="nowrap" align="center"><div><#if !cartLine.getIsPromo()><input type="checkbox" name="selectedItem" value="${cartLineIndex}"/><#else>&nbsp;</#if></div></td>
+            
           </tr>
         </#list>
 
@@ -336,7 +323,7 @@ under the License.
               </tr>
             </#if>
         </#if>
-
+		<!--
         <tr>
           <td colspan="6" align="right" valign="bottom">
             <div><b>${uiLabelMap.OrderCartTotal}:</b></div>
@@ -345,7 +332,7 @@ under the License.
             <hr />
             <div><b><@ofbizCurrency amount=shoppingCart.getGrandTotal() isoCode=currencyUomId/></b></div>
           </td>
-        </tr>
+        </tr>-->
         <tr>
           <td colspan="8">&nbsp;</td>
         </tr>
