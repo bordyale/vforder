@@ -218,4 +218,8 @@
         <value xml:lang="en">Ship Before Date</value>
         <value xml:lang="hu">Határ idő</value>
     </property>
+    <property key="ShippingDate">
+        <value xml:lang="en">Shipping Date</value>
+        <value xml:lang="hu">Szállítási Dátum</value>
+    </property>
 </resource>

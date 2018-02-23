@@ -33,21 +33,21 @@ under the License.
   <fo:page-sequence master-reference="main">
   	<fo:static-content flow-name="xsl-region-before">
 			<fo:block font-size="26pt" font-weight="bold" text-align="center">
-				${uiLabelMap.ShippingDate} - ${shipment.estimatedShipDate?if_exists?string("yyyy.MM.dd")}
+				 - 
 			</fo:block>
 	</fo:static-content>
 	<fo:static-content flow-name="xsl-region-after">
 			<fo:block font-size="26pt" font-weight="bold" text-align="center">
-				${uiLabelMap.BoxTotal} - ${totBoxNumber}
+				 - 
 			</fo:block>
 			<fo:block font-size="26pt" font-weight="bold" text-align="center">
-				${uiLabelMap.PalletTotal} - ${totPalletNumber}
+				- 
 			</fo:block>
 			<fo:block font-size="26pt" font-weight="bold" text-align="center">
-				${uiLabelMap.NetWeight} - ${totalNetWeight?round}
+				 - 
 			</fo:block>
 			<fo:block font-size="26pt" font-weight="bold" text-align="center">
-				${uiLabelMap.GrosWeight} - ${totalGrosWeight?round}
+				 - 
 			</fo:block>
 	</fo:static-content>
 	<fo:flow flow-name="xsl-region-body" font-family="Helvetica">
@@ -57,25 +57,25 @@ under the License.
                 <fo:table-header text-align="center" background-color="silver">
 					<fo:table-row>
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid" font-size="12pt">
-							<fo:block font-weight="bold">${uiLabelMap.ProductName}</fo:block>
+							<fo:block font-weight="bold">ss</fo:block>
 						</fo:table-cell>
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid">
-							<fo:block font-weight="bold">${uiLabelMap.OrderPallettization}</fo:block>
+							<fo:block font-weight="bold">ss</fo:block>
 						</fo:table-cell>
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid">
-							<fo:block font-weight="bold">${uiLabelMap.OrderIsBoxOrPallet}</fo:block>
+							<fo:block font-weight="bold">ss</fo:block>
 						</fo:table-cell>
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid">
-							<fo:block font-weight="bold">${uiLabelMap.boxNumber}</fo:block>
+							<fo:block font-weight="bold">ss</fo:block>
 						</fo:table-cell>
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid">
-							<fo:block font-weight="bold">${uiLabelMap.Quantity}</fo:block>
+							<fo:block font-weight="bold">ss</fo:block>
 						</fo:table-cell>
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid">
-							<fo:block font-weight="bold">${uiLabelMap.ProductWeight}</fo:block>
+							<fo:block font-weight="bold">ss</fo:block>
 						</fo:table-cell>
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid">
-							<fo:block font-weight="bold">${uiLabelMap.NetWeight}</fo:block>
+							<fo:block font-weight="bold">ss</fo:block>
 						</fo:table-cell>
 					</fo:table-row>
 				</fo:table-header>
