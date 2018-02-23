@@ -132,7 +132,7 @@
 			</widgets>
 		</section>
 	</screen>
-	<!-- Check and choose Sales of Purchase order page  -->
+	<!-- Check and choose Sales of Purchase order page -->
 	<screen name="CheckInits">
 		<section>
 			<actions>
@@ -208,7 +208,7 @@
 			</widgets>
 		</section>
 	</screen>
-	<!--  Order Header  -->
+	<!-- Order Header -->
 	<screen name="OrderAgreements">
 		<section>
 			<actions>
@@ -580,13 +580,14 @@
 	<screen name="ExportShippingPdf">
 		<section>
 			<actions>
-				
+
 
 				<set field="tabButtonItem" value="EditShippingItems" />
 				<set field="headerItem" value="findshippings" />
 				<set field="shipmentId" from-field="parameters.shipmentId" />
 				<set field="titleProperty" value="${shipmentId}" />
-
+				<property-map resource="VforderUiLabels" map-name="uiLabelMap"
+					global="true" />
 
 
 				<set field="tabButtonItem" value="EditExample" />
@@ -718,7 +719,8 @@
 			<widgets>
 				<platform-specific>
 					<xsl-fo>
-						<html-template location="component://vforder/template/reports/WorkPapers.fo.ftl" />
+						<html-template
+							location="component://vforder/template/reports/WorkPapers.fo.ftl" />
 					</xsl-fo>
 				</platform-specific>
 			</widgets>
