@@ -248,6 +248,9 @@
 		<field name="quantity">
 			<display />
 		</field>
+		<field name="supplier">
+			<display />
+		</field>
 
 
 

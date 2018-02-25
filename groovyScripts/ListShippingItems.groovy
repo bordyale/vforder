@@ -34,8 +34,6 @@ shipmentId = request.getParameter("shipmentId") ?: ""
 
 orderItemShippingItem = select("orderId","orderItemSeqId","quantity","productId","productName","pallet","isBoxOrPallet","piecesPerBox","shipmentItemSeqId","productWeight").from("ShippingItemView").where("shipmentId", shipmentId).cache(false).queryList()
 
-
-
 List<HashMap<String,Object>> hashMaps = new ArrayList<HashMap<String,Object>>()
 Map<String,HashMap<String,Object>> boxes = new HashMap<String,HashMap<String,Object>>()
 BigDecimal totalWeight = BigDecimal.ZERO
@@ -44,8 +42,16 @@ for (GenericValue entry: orderItemShippingItem){
 	Map<String,Object> e = new HashMap<String,Object>()
 	e.put("orderItemSeqId",entry.get("orderItemSeqId"))
 	e.put("orderId",entry.get("orderId"))
-	e.put("productId",entry.get("productId"))
+	productId =entry.get("productId")
+	e.put("productId",productId)
 	e.put("productName",entry.get("productName"))
+	//supplier
+	supplier = select("productId","partyId").from("SupplierProduct").where("productId",productId,"supplierPrefOrderId", "10_MAIN_SUPPL").cache(false).queryList()
+	if (supplier.size()>0){
+		e.put("supplier","VardaVulkan")
+	}
+	
+	
 	BigDecimal quantity = entry.get("quantity")
 	e.put("quantity",entry.get("quantity"))
 	Long piecesPerBox = entry.get("piecesPerBox")
