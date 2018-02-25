@@ -52,8 +52,7 @@ under the License.
 	</fo:static-content>
 	<fo:flow flow-name="xsl-region-body" font-family="Helvetica">
             <fo:block>
-              <fo:table width="100%" table-layout="fixed">
-                
+              <fo:table width="100%" table-layout="fixed">           
                 <fo:table-header text-align="center" background-color="silver">
 					<fo:table-row>
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid" font-size="12pt">
