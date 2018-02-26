@@ -30,6 +30,8 @@ import org.apache.ofbiz.entity.GenericValue
 import org.json.JSONObject
 
 shipmentId = request.getParameter("shipmentId") ?: ""
+justSupplier = request.getParameter("justSupplier") ?: ""
+
 
 
 orderItemShippingItem = select("orderId","orderItemSeqId","quantity","productId","productName","pallet","isBoxOrPallet","piecesPerBox","shipmentItemSeqId","productWeight").from("ShippingItemView").where("shipmentId", shipmentId).cache(false).queryList()
@@ -37,6 +39,9 @@ orderItemShippingItem = select("orderId","orderItemSeqId","quantity","productId"
 List<HashMap<String,Object>> hashMaps = new ArrayList<HashMap<String,Object>>()
 Map<String,HashMap<String,Object>> boxes = new HashMap<String,HashMap<String,Object>>()
 BigDecimal totalWeight = BigDecimal.ZERO
+int VFitems =0
+int VVitems =0
+String VV = ""
 
 for (GenericValue entry: orderItemShippingItem){
 	Map<String,Object> e = new HashMap<String,Object>()
@@ -45,13 +50,15 @@ for (GenericValue entry: orderItemShippingItem){
 	productId =entry.get("productId")
 	e.put("productId",productId)
 	e.put("productName",entry.get("productName"))
-	//supplier
+	//supplier for ExportSummaryPdf
 	supplier = select("productId","partyId").from("SupplierProduct").where("productId",productId,"supplierPrefOrderId", "10_MAIN_SUPPL").cache(false).queryList()
 	if (supplier.size()>0){
-		e.put("supplier","VardaVulkan")
+		VV = select("groupName").from("PartyGroup").where("partyId", supplier.getAt(0).get("partyId")).cache(false).queryList().getAt(0).get("groupName")
+		e.put("supplier","VV")
+		VVitems++
+	}else{
+		VFitems++
 	}
-	
-	
 	BigDecimal quantity = entry.get("quantity")
 	e.put("quantity",entry.get("quantity"))
 	Long piecesPerBox = entry.get("piecesPerBox")
@@ -187,6 +194,10 @@ context.boxesMap=boxes
 context.boxesListKey=boxes.keySet()
 JSONObject json = new JSONObject(boxes)
 context.boxesJson=json.toString()
+context.VFitems=VFitems
+context.VVitems=VVitems
+context.VV=VV
+context.justSupplier=justSupplier
 
 
 

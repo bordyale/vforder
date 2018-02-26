@@ -258,4 +258,12 @@
         <value xml:lang="en">Gros Weight</value>
         <value xml:lang="hu">Brutto</value>
     </property>
+    <property key="OrderIsBoxOrPallet">
+        <value xml:lang="en">L or R</value>
+        <value xml:lang="hu">L vagy R</value>
+    </property>
+    <property key="ExportShippingSummaryPdf">
+        <value xml:lang="en">Pdf Summary</value>
+        <value xml:lang="hu">Pdf Összefoglalás</value>
+    </property>
 </resource>

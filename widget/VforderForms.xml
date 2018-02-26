@@ -248,13 +248,7 @@
 		<field name="quantity">
 			<display />
 		</field>
-		<field name="supplier">
-			<display />
-		</field>
-
-
-
-
+		
 		<field name="deleteLink" title=" " widget-style="buttontext">
 			<hyperlink description="${uiLabelMap.CommonDelete}" target="deleteShippingItem"
 				also-hidden="false" confirmation-message="${uiLabelMap.CommonConfirmDelete}"

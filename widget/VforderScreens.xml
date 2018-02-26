@@ -604,6 +604,33 @@
 			</widgets>
 		</section>
 	</screen>
+	<screen name="ExportShippingSummaryPdf">
+		<section>
+			<actions>
+
+
+				<set field="tabButtonItem" value="EditShippingItems" />
+				<set field="headerItem" value="findshippings" />
+				<set field="shipmentId" from-field="parameters.shipmentId" />
+				<set field="titleProperty" value="${shipmentId}" />
+				<property-map resource="VforderUiLabels" map-name="uiLabelMap"
+					global="true" />
+
+
+				<set field="tabButtonItem" value="EditExample" />
+				<entity-one entity-name="Shipment" value-field="shipment" />
+				<script location="component://vforder/groovyScripts/ListShippingItems.groovy" />
+			</actions>
+			<widgets>
+				<platform-specific>
+					<xsl-fo>
+						<html-template
+							location="component://vforder/template/reports/ListShippingItemsSummary.fo.ftl" />
+					</xsl-fo>
+				</platform-specific>
+			</widgets>
+		</section>
+	</screen>
 	<screen name="ExportBoxesPdf">
 		<section>
 			<actions>

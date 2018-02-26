@@ -347,6 +347,10 @@
 		<security https="true" auth="true" />
 		<response name="success" type="view" value="ExportShippingPdf" />
 	</request-map>
+	<request-map uri="ExportShippingSummaryPdf">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="ExportShippingSummaryPdf" />
+	</request-map>
 	<request-map uri="ExportBoxesPdf">
 		<security https="true" auth="true" />
 		<response name="success" type="view" value="ExportBoxesPdf" />
@@ -412,6 +416,9 @@
 		page="component://vforder/widget/VforderScreens.xml#LookupBulkAddSupplierProducts" />
 	<view-map name="ExportShippingPdf" type="screenfop"
 		page="component://vforder/widget/VforderScreens.xml#ExportShippingPdf"
+		content-type="application/pdf" encoding="none" />
+	<view-map name="ExportShippingSummaryPdf" type="screenfop"
+		page="component://vforder/widget/VforderScreens.xml#ExportShippingSummaryPdf"
 		content-type="application/pdf" encoding="none" />
 	<view-map name="ExportBoxesPdf" type="screenfop"
 		page="component://vforder/widget/VforderScreens.xml#ExportBoxesPdf"
