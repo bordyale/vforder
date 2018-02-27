@@ -446,6 +446,7 @@
 							<link target="AddShippingItem" text="${uiLabelMap.AddShippingItem}"
 								style="buttontext create">
 								<parameter param-name="shipmentId" />
+								<parameter param-name="excludeCancelled" value="Y" />
 							</link>
 						</container>
 

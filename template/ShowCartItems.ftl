@@ -196,7 +196,7 @@ under the License.
                </table>
               </td>
             </tr>-->
-
+		<!--
             <#-- Show Associated Products (not for Variants) -->
             <#if cartLine.getProductId()??>
               <#assign itemProductAssocList = cartLine.getProduct().getRelated("MainProductAssoc", null, Static["org.apache.ofbiz.base.util.UtilMisc"].toList("productAssocTypeId", "sequenceNum"), false)!/>
@@ -217,7 +217,7 @@ under the License.
                   </#if>
                 </tr>
               </#list>
-            </#if>
+            </#if>-->
           </table>
 
                 <#if (cartLine.getIsPromo() && cartLine.getAlternativeOptionProductIds()?has_content)>
