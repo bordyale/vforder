@@ -28,6 +28,7 @@ import org.apache.ofbiz.entity.condition.EntityConditionList
 import org.apache.ofbiz.entity.condition.EntityCondition
 import org.apache.ofbiz.entity.GenericValue
 import org.json.JSONObject
+import org.apache.ofbiz.entity.util.EntityUtil
 
 shipmentId = request.getParameter("shipmentId") ?: ""
 justSupplier = request.getParameter("justSupplier") ?: ""
@@ -35,6 +36,8 @@ justSupplier = request.getParameter("justSupplier") ?: ""
 
 
 orderItemShippingItem = select("orderId","orderItemSeqId","quantity","productId","productName","pallet","isBoxOrPallet","piecesPerBox","shipmentItemSeqId","productWeight").from("ShippingItemView").where("shipmentId", shipmentId).cache(false).queryList()
+
+orderItemShippingItem = EntityUtil.orderBy(orderItemShippingItem,  ["productName"])
 
 List<HashMap<String,Object>> hashMaps = new ArrayList<HashMap<String,Object>>()
 Map<String,HashMap<String,Object>> boxes = new HashMap<String,HashMap<String,Object>>()
