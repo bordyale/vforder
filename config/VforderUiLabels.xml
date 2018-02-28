@@ -25,7 +25,7 @@
     </property>
     <property key="OrderOrderId">
         <value xml:lang="en">Order Id</value>
-        <value xml:lang="hu">Megrendelés Azonosító</value>
+        <value xml:lang="hu">Rendelés Azonosító</value>
         <value xml:lang="zh-TW">不允許您檢視這個頁面.</value>
     </property>
      <property key="VFOrderOrderName">

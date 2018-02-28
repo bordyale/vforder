@@ -56,6 +56,9 @@ under the License.
                 <fo:table-header text-align="center" background-color="silver">
 					<fo:table-row>
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid" font-size="12pt">
+							<fo:block font-weight="bold">${uiLabelMap.OrderOrderId}</fo:block>
+						</fo:table-cell>
+						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid" font-size="12pt">
 							<fo:block font-weight="bold">${uiLabelMap.ProductName}</fo:block>
 						</fo:table-cell>
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid">
@@ -81,6 +84,11 @@ under the License.
                 <fo:table-body>
                 <#list listIt as item>
                   <fo:table-row>
+                  	<fo:table-cell border-style="solid" border-width="0.3mm">
+                      <fo:block>
+                        ${item.orderId}
+                      </fo:block>
+                    </fo:table-cell>
                     <fo:table-cell border-style="solid" border-width="0.3mm">
                       <fo:block>
                         ${item.productName}

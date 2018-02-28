@@ -13,6 +13,18 @@
 				<decorator-screen name="VforderCommonDecorator"
 					location="${parameters.mainDecoratorLocation}">
 					<decorator-section name="body">
+						<platform-specific>
+							<html>
+								<html-template
+									location="component://vforder/template/Javascript.ftl" />
+							</html>
+						</platform-specific>
+						<!-- <platform-specific>
+							<html>
+								<html-template
+									location="component://vforder/template/BootStrapTable.ftl" />
+							</html>
+						</platform-specific> -->
 					</decorator-section>
 				</decorator-screen>
 			</widgets>
