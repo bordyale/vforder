@@ -364,6 +364,8 @@
 				<set field="headerItem" value="findshippings" />
 
 				<set field="formShippingListName" value="${groovy: return 'ListShippings';}" />
+				<script
+					location="component://vforder/groovyScripts/FindShipping.groovy" />
 
 				<!-- asmselect parameters, must be prefixed by asm_ for SetMultipleSelectJs.ftl -->
 

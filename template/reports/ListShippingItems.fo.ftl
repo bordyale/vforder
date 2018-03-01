@@ -82,51 +82,107 @@ under the License.
 					</fo:table-row>
 				</fo:table-header>
                 <fo:table-body>
-                <#list listIt as item>
-                  <fo:table-row>
-                  	<fo:table-cell border-style="solid" border-width="0.3mm">
-                      <fo:block>
-                        ${item.orderId}
-                      </fo:block>
-                    </fo:table-cell>
-                    <fo:table-cell border-style="solid" border-width="0.3mm">
-                      <fo:block>
-                        ${item.productName}
-                      </fo:block>
-                    </fo:table-cell>
-                    <fo:table-cell border-style="solid" border-width="0.3mm">
-                      <fo:block>
-                        ${item.pallet}
-                      </fo:block>
-                    </fo:table-cell>
-                    <fo:table-cell border-style="solid" border-width="0.3mm">
-                      <fo:block>
-                        ${item.isBoxOrPallet}
-                      </fo:block>
-                    </fo:table-cell>
-                    <fo:table-cell border-style="solid" border-width="0.3mm">
-                      <fo:block>
-                        ${item.boxNumber}
-                      </fo:block>
-                    </fo:table-cell>
-                    <fo:table-cell border-style="solid" border-width="0.3mm">
-                      <fo:block>
-                        ${item.quantity}
-                      </fo:block>
-                    </fo:table-cell>
-                    <fo:table-cell border-style="solid" border-width="0.3mm">
-                      <fo:block>
-                        ${item.productWeight}
-                      </fo:block>
-                    </fo:table-cell>
-                    <fo:table-cell border-style="solid" border-width="0.3mm">
-                      <fo:block>
-                        ${item.netWeight?round}
-                      </fo:block>
-                    </fo:table-cell>
-                    
-                  </fo:table-row>
-                 </#list>
+                <#if VFitems gt 0>
+	                <#list listIt as item>
+		                <#if !item.supplier?has_content>
+		                  <fo:table-row>
+		                  	<fo:table-cell border-style="solid" border-width="0.3mm">
+		                      <fo:block>
+		                        ${item.orderId}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm">
+		                      <fo:block>
+		                        ${item.productName}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm">
+		                      <fo:block>
+		                        ${item.pallet}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm">
+		                      <fo:block>
+		                        ${item.isBoxOrPallet}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm">
+		                      <fo:block>
+		                        ${item.boxNumber}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm">
+		                      <fo:block>
+		                        ${item.quantity}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm">
+		                      <fo:block>
+		                        ${item.productWeight}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm">
+		                      <fo:block>
+		                        ${item.netWeight?round}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    
+		                  </fo:table-row>
+		                 </#if>
+	                 </#list>
+                 </#if>
+                 <#if VVitems gt 0>
+	                 <#list listIt as item>
+		                 <#if item.supplier?has_content>
+		                  <fo:table-row>
+		                  	<fo:table-cell border-style="solid" border-width="0.3mm">
+		                      <fo:block>
+		                        ${item.orderId}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm">
+		                      <fo:block>
+		                        ${item.productName}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm">
+		                      <fo:block>
+		                        ${item.pallet}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm">
+		                      <fo:block>
+		                        ${item.isBoxOrPallet}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm">
+		                      <fo:block>
+		                        ${item.boxNumber}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm">
+		                      <fo:block>
+		                        ${item.quantity}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm">
+		                      <fo:block>
+		                        ${item.productWeight}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm">
+		                      <fo:block>
+		                        ${item.netWeight?round}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    
+		                  </fo:table-row>
+		                 </#if>
+	                 </#list>
+                 </#if>
+                 
+                 
+                 
                 </fo:table-body>
               </fo:table>
             </fo:block>

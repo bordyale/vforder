@@ -266,4 +266,12 @@
         <value xml:lang="en">Pdf Summary</value>
         <value xml:lang="hu">Pdf Összefoglalás</value>
     </property>
+    <property key="ExportShippingSupplierPdf">
+        <value xml:lang="en">Pdf Várda Vulkan Summary</value>
+        <value xml:lang="hu">Pdf VVulkán</value>
+    </property>
+    <property key="ShippingShipping">
+        <value xml:lang="en">Shipping</value>
+        <value xml:lang="hu">Szállítás</value>
+    </property>
 </resource>
