@@ -51,6 +51,7 @@
 		<member-entity entity-alias="OI" entity-name="OrderItem" />
 		<member-entity entity-alias="PR" entity-name="Product" />
 		<alias entity-alias="OI" name="orderId" />
+		<alias entity-alias="OI" name="statusId" />
 		<alias entity-alias="PR" name="productName" />
 		<alias entity-alias="PR" name="internalName" />
 		<alias entity-alias="OI" name="orderDate" />

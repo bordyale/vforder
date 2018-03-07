@@ -210,6 +210,14 @@
 		<security https="true" auth="true" />
 		<response name="success" type="view" value="OrderPDF" />
 	</request-map>
+	<request-map uri="ordersnotshipped">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="ordersnotshipped" />
+	</request-map>
+	<request-map uri="ListNotShippedOrderItemsPdf">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="ListNotShippedOrderItemsPdf" />
+	</request-map>
 
 
 	<!-- Order Manager Edit Requests -->
@@ -428,6 +436,11 @@
 		content-type="application/pdf" encoding="none" />
 	<view-map name="OrderPDF" type="screenfop"
 		page="component://vforder/widget/VforderScreens.xml#OrderPDF"
+		content-type="application/pdf" encoding="none" />
+	<view-map name="ordersnotshipped" type="screen"
+		page="component://vforder/widget/VforderScreens.xml#ListNotShippedOrderItems" />
+	<view-map name="ListNotShippedOrderItemsPdf" type="screenfop"
+		page="component://vforder/widget/VforderScreens.xml#ListNotShippedOrderItemsPdf"
 		content-type="application/pdf" encoding="none" />
 
 </site-conf>

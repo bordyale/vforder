@@ -28,6 +28,12 @@
 			</condition>
 			<link target="findshippings" />
 		</menu-item>
+		<menu-item name="ordersnotshipped" title="${uiLabelMap.OrdersNotShipped}">
+			<condition>
+				<if-has-permission permission="VFORDER" action="_VIEW" />
+			</condition>
+			<link target="ordersnotshipped" />
+		</menu-item>
 	</menu>
 
 

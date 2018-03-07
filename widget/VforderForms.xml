@@ -113,31 +113,18 @@
 
 	</form>
 
-	<form name="EditShippingItems" type="single" target="updateShipment"
-		title="" default-map-name="shipping" default-entity-name="Shipment">
-		<alt-target use-when="example==null" target="createShipment" />
-
-		<field name="geoName" title="${uiLabelMap.CommonGeoName}"
-			tooltip="${uiLabelMap.ExampleLookupFields4}" tooltip-style="button-text">
-			<lookup target-form-name="LookupOrder" description-field-name="geoId" />
-		</field>
-		<!-- This field may be hidden and the name rendered in geoName using default-value 
-			if geoId is known when loading the form -->
-		<field name="geoId" title="${uiLabelMap.CommonGeoId}">
-			<text />
-		</field><!-- the text field is only used for rendering. In the "real life" 
-			you would use the hidden field commented below to pass the data to the request -->
-		<!--field name="geoId"><hidden/></field -->
-
-
-		<sort-order>
-			<field-group>
-				<sort-field name="geoName" />
-				<sort-field name="geoId" />
-			</field-group>
-		</sort-order>
-
-	</form>
+	<!-- <form name="EditShippingItems" type="single" target="updateShipment" 
+		title="" default-map-name="shipping" default-entity-name="Shipment"> <alt-target 
+		use-when="example==null" target="createShipment" /> <field name="geoName" 
+		title="${uiLabelMap.CommonGeoName}" tooltip="${uiLabelMap.ExampleLookupFields4}" 
+		tooltip-style="button-text"> <lookup target-form-name="LookupOrder" description-field-name="geoId" 
+		/> </field> This field may be hidden and the name rendered in geoName using 
+		default-value if geoId is known when loading the form <field name="geoId" 
+		title="${uiLabelMap.CommonGeoId}"> <text /> </field>the text field is only 
+		used for rendering. In the "real life" you would use the hidden field commented 
+		below to pass the data to the request field name="geoId"><hidden/></field 
+		<sort-order> <field-group> <sort-field name="geoName" /> <sort-field name="geoId" 
+		/> </field-group> </sort-order> </form> -->
 
 
 
@@ -183,31 +170,18 @@
 
 	</form>
 
-	<form name="EditShippingItems" type="single" target="updateShipment"
-		title="" default-map-name="shipping" default-entity-name="Shipment">
-		<alt-target use-when="example==null" target="createShipment" />
-
-		<field name="geoName" title="${uiLabelMap.CommonGeoName}"
-			tooltip="${uiLabelMap.ExampleLookupFields4}" tooltip-style="button-text">
-			<lookup target-form-name="LookupOrder" description-field-name="geoId" />
-		</field>
-		<!-- This field may be hidden and the name rendered in geoName using default-value 
-			if geoId is known when loading the form -->
-		<field name="geoId" title="${uiLabelMap.CommonGeoId}">
-			<text />
-		</field><!-- the text field is only used for rendering. In the "real life" 
-			you would use the hidden field commented below to pass the data to the request -->
-		<!--field name="geoId"><hidden/></field -->
-
-
-		<sort-order>
-			<field-group>
-				<sort-field name="geoName" />
-				<sort-field name="geoId" />
-			</field-group>
-		</sort-order>
-
-	</form>
+	<!-- <form name="EditShippingItems" type="single" target="updateShipment" 
+		title="" default-map-name="shipping" default-entity-name="Shipment"> <alt-target 
+		use-when="example==null" target="createShipment" /> <field name="geoName" 
+		title="${uiLabelMap.CommonGeoName}" tooltip="${uiLabelMap.ExampleLookupFields4}" 
+		tooltip-style="button-text"> <lookup target-form-name="LookupOrder" description-field-name="geoId" 
+		/> </field> This field may be hidden and the name rendered in geoName using 
+		default-value if geoId is known when loading the form <field name="geoId" 
+		title="${uiLabelMap.CommonGeoId}"> <text /> </field>the text field is only 
+		used for rendering. In the "real life" you would use the hidden field commented 
+		below to pass the data to the request field name="geoId"><hidden/></field 
+		<sort-order> <field-group> <sort-field name="geoName" /> <sort-field name="geoId" 
+		/> </field-group> </sort-order> </form> -->
 
 
 	<form name="ListShippingItems" type="multi" list-name="listIt"
@@ -235,6 +209,13 @@
 		<field name="productName">
 			<display />
 		</field>
+
+		<field name="quantity">
+			<display />
+		</field>
+		<field name="boxNumber">
+			<display />
+		</field>
 		<field name="pallet" title="${uiLabelMap.OrderPallettization}">
 			<text size="5" maxlength="10" />
 		</field>
@@ -244,12 +225,7 @@
 		<field name="piecesPerBox" title="${uiLabelMap.OrderPiecesPerBox}">
 			<text size="5" maxlength="10" />
 		</field>
-		<field name="boxNumber">
-			<display />
-		</field>
-		<field name="quantity">
-			<display />
-		</field>
+
 
 		<field name="deleteLink" title=" " widget-style="buttontext">
 			<hyperlink description="${uiLabelMap.CommonDelete}" target="deleteShippingItem"
@@ -289,7 +265,7 @@
 		<field name="orderId">
 			<hidden value="${orderId}" />
 		</field>
-		<field name="orderItemSeqId" >
+		<field name="orderItemSeqId">
 			<hidden value="${orderItemSeqId}" />
 		</field>
 		<!-- <field name="orderId" title="${uiLabelMap.OrderOrderId}" widget-style="buttontext"> 
@@ -406,6 +382,40 @@
 	</form>
 
 
+	<form name="ListNotShippedOrderItems" type="multi" use-row-submit="true"
+		list-name="orderItems" title="" target="ordersnotshipped"
+		odd-row-style="alternate-row" default-table-style="basic-table hover-bar"
+		paginate-target="ordersnotshipped">
+		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" 
+			auto-field-map="true"/> </row-actions> -->
+		<field name="shipmentId">
+			<hidden value="${shipmentId}" />
+		</field>
+		<field name="orderId">
+			<display />
+		</field>
+		<field name="orderItemSeqId">
+			<display />
+		</field>
+		<!-- <field name="orderId" title="${uiLabelMap.OrderOrderId}" widget-style="buttontext"> 
+			<hyperlink description="${orderId}" target="/catalog/control/EditProductInventoryItems" 
+			target-type="inter-app"> <parameter param-name="orderId"/> </hyperlink> </field> -->
+		<field name="productId">
+			<display />
+		</field>
+		<field name="productName">
+			<display />
+		</field>
+		<field name="quantity" title="${uiLabelMap.OrderItemQuantity}">
+			<display />
+		</field>
+		<field name="quantityShipped">
+			<display />
+		</field>
+		<field name="quantityShippable">
+			<display />
+		</field>
+	</form>
 
 
 </forms>

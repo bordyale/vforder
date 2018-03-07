@@ -13,18 +13,9 @@
 				<decorator-screen name="VforderCommonDecorator"
 					location="${parameters.mainDecoratorLocation}">
 					<decorator-section name="body">
-						<platform-specific>
-							<html>
-								<html-template
-									location="component://vforder/template/Javascript.ftl" />
-							</html>
-						</platform-specific>
-						<!-- <platform-specific>
-							<html>
-								<html-template
-									location="component://vforder/template/BootStrapTable.ftl" />
-							</html>
-						</platform-specific> -->
+						<!--<platform-specific> <html> <html-template location="component://vforder/template/Javascript.ftl" 
+							/> </html> </platform-specific> <platform-specific> <html> <html-template 
+							location="component://vforder/template/BootStrapTable.ftl" /> </html> </platform-specific> -->
 					</decorator-section>
 				</decorator-screen>
 			</widgets>
@@ -364,8 +355,7 @@
 				<set field="headerItem" value="findshippings" />
 
 				<set field="formShippingListName" value="${groovy: return 'ListShippings';}" />
-				<script
-					location="component://vforder/groovyScripts/FindShipping.groovy" />
+				<script location="component://vforder/groovyScripts/FindShipping.groovy" />
 
 				<!-- asmselect parameters, must be prefixed by asm_ for SetMultipleSelectJs.ftl -->
 
@@ -763,6 +753,53 @@
 					<xsl-fo>
 						<html-template
 							location="component://vforder/template/reports/WorkPapers.fo.ftl" />
+					</xsl-fo>
+				</platform-specific>
+			</widgets>
+		</section>
+	</screen>
+
+	<screen name="ListNotShippedOrderItems">
+		<section>
+			<actions>
+				<set field="tabButtonItem" value="EditShippingItems" />
+				<set field="headerItem" value="ordersnotshipped" />
+				<script
+					location="component://vforder/groovyScripts/ListNotShippedOrderItems.groovy" />
+			</actions>
+			<widgets>
+				<decorator-screen name="VfFindorderCommonDecorator"
+					location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="body">
+						<container style="button-bar">
+							<link target="ListNotShippedOrderItemsPdf" text="${uiLabelMap.CommonPdf}"
+								style="buttontext create">
+
+							</link>
+						</container>
+						<include-form name="ListNotShippedOrderItems"
+							location="component://vforder/widget/VforderForms.xml" />
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+
+	<screen name="ListNotShippedOrderItemsPdf">
+		<section>
+			<actions>
+				<set field="tabButtonItem" value="EditShippingItems" />
+				<set field="headerItem" value="ordersnotshipped" />
+				<property-map resource="VforderUiLabels" map-name="uiLabelMap"
+					global="true" />
+				<script
+					location="component://vforder/groovyScripts/ListNotShippedOrderItems.groovy" />
+			</actions>
+			<widgets>
+				<platform-specific>
+					<xsl-fo>
+						<html-template
+							location="component://vforder/template/reports/ListNotShippedOrderItems.fo.ftl" />
 					</xsl-fo>
 				</platform-specific>
 			</widgets>
