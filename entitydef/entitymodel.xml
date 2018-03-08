@@ -121,5 +121,16 @@
 			<key-map field-name="shipmentItemSeqId" />
 		</view-link>
 	</view-entity>
+	
+	<view-entity entity-name="ListShippingItemsSummary"
+		package-name="org.apache.ofbiz.order.order" never-cache="true"
+		title="ShippingItems Summary">
+		<member-entity entity-alias="SIV" entity-name="ShippingItemView" />
+		<alias entity-alias="SIV" name="productName" group-by="true" />
+		<alias entity-alias="SIV" name="productId" group-by="true" />
+		<alias entity-alias="SIV" name="shipmentId" group-by="true" />
+		<alias entity-alias="SIV" name="quantity" field="quantity"
+			function="sum" />
+	</view-entity>
 
 </entitymodel>

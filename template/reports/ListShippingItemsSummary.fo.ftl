@@ -38,11 +38,11 @@ under the License.
 	</fo:static-content>
 	<fo:flow flow-name="xsl-region-body" font-family="Helvetica">
             <fo:block>
-            	<#if VFitems gt 0>
+            	<#if vfi gt 0>
             		<#if justSupplier != "YES">
 		              <fo:table width="100%" table-layout="fixed">           
 		                <fo:table-body>
-		                <#list listIt as item>
+		                <#list listIt2 as item>
 		                	<#if !item.supplier?has_content> 
 			                  <fo:table-row>
 			                    <fo:table-cell border-style="none" border-width="0.3mm">
@@ -65,13 +65,13 @@ under the License.
 	           
 	            	
 		       
-	            <#if VVitems gt 0> 
+	            <#if vvi gt 0> 
 	            	<fo:block space-before="5mm" space-after="5mm" font-size="35pt">
 		            	${VV}
 		        	</fo:block>
 	              <fo:table width="100%" table-layout="fixed">           
 	                <fo:table-body>
-	                <#list listIt as item>
+	                <#list listIt2 as item>
 	                	<#if item.supplier?has_content> 
 		                  <fo:table-row>
 		                    <fo:table-cell border-style="none" border-width="0.3mm">

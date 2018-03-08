@@ -180,10 +180,32 @@ for (e in boxes){
 
 }
 
+//ListShippingItemsSummary
+orderItemShippingItem = select("productId","productName","quantity").from("ListShippingItemsSummary").where("shipmentId", shipmentId).cache(false).queryList()
 
+orderItemShippingItem = EntityUtil.orderBy(orderItemShippingItem,  ["productName"])
 
+List<HashMap<String,Object>> hashMaps2 = new ArrayList<HashMap<String,Object>>()
+int vfi =0
+int vvi =0
 
-
+for (GenericValue entry: orderItemShippingItem){
+	Map<String,Object> e = new HashMap<String,Object>()
+	productId =entry.get("productId")
+	e.put("productId",productId)
+	e.put("productName",entry.get("productName"))
+	e.put("quantity",entry.get("quantity"))
+	//supplier for ExportSummaryPdf
+	supplier = select("productId","partyId").from("SupplierProduct").where("productId",productId,"supplierPrefOrderId", "10_MAIN_SUPPL").cache(false).queryList()
+	if (supplier.size()>0){
+		VV = select("groupName").from("PartyGroup").where("partyId", supplier.getAt(0).get("partyId")).cache(false).queryList().getAt(0).get("groupName")
+		e.put("supplier","VV")
+		vvi++
+	}else{
+		vfi++
+	}
+	hashMaps2.add(e)
+}
 
 context.totalNetWeight = totalWeight
 context.totalGrosWeight = totalWeight.add(new BigDecimal(boxesWeight))
@@ -195,13 +217,12 @@ context.totPalletNumber = palletNr
 context.boxes=boxes.toString()
 context.boxesMap=boxes
 context.boxesListKey=boxes.keySet()
-JSONObject json = new JSONObject(boxes)
-context.boxesJson=json.toString()
+
 context.VFitems=VFitems
 context.VVitems=VVitems
 context.VV=VV
 context.justSupplier=justSupplier
-
-
-
+context.listIt2 = hashMaps2
+context.vfi=vfi
+context.vvi=vvi
 
