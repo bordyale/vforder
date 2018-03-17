@@ -140,7 +140,7 @@
 		<response name="customer" type="view" value="custsetting" />
 		<response name="shipping" type="view" value="confirm" />
 		<response name="shippingAddress" type="view" value="EditShipAddress" />
-		<response name="options" type="view" value="optionsetting" />
+		<response name="options" type="view" value="confirm" />
 		<response name="payment" type="request" value="calcShippingBeforePayment" />
 		<response name="paymentError" type="request"
 			value="calcShippingBeforePayment" />
