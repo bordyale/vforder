@@ -64,7 +64,7 @@
 		<menu-item name="ExportShippingSupplierPdf" title="${uiLabelMap.ExportShippingSupplierPdf}">
 			<link target="ExportShippingSummaryPdf" target-window="_blank">
 				<parameter param-name="shipmentId" />
-				<parameter param-name="justSupplier" value="YES"/>
+				<parameter param-name="justSupplier" value="YES" />
 				<image url-mode="raw" src="${iconsLocation}/page_white_acrobat.png" />
 			</link>
 		</menu-item>
@@ -78,6 +78,13 @@
 			<link target="ExportWorkPapersPdf" target-window="_blank">
 				<parameter param-name="shipmentId" />
 				<image url-mode="raw" src="${iconsLocation}/page_white_acrobat.png" />
+			</link>
+		</menu-item>
+		<menu-item name="UpdateInventoryShipment" title="${uiLabelMap.UpdateInventoryShipment}">
+			<link target="updateInventoryShipment" target-window="_blank">
+				<parameter param-name="shipmentId" />
+				<parameter param-name="facilityId" value="10000" />
+
 			</link>
 		</menu-item>
 	</menu>

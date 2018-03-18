@@ -325,6 +325,18 @@
 		</response>
 		<response name="error" type="view" value="EditShipping" />
 	</request-map>
+	<request-map uri="updateInventoryShipment">
+		<security https="true" auth="true" />
+		<event type="java" path="org.apache.ofbiz.vffacility.VffacilityEvents"
+			invoke="updateInventoryShipment" />
+		<response name="success" type="request-redirect" value="EditShippingItems">
+			<redirect-parameter name="shipmentId" />
+		</response>
+		<response name="error" type="view" value="EditShippingItems" />
+	</request-map>
+
+
+
 
 	<request-map uri="LookupUserLoginAndPartyDetails">
 		<security https="true" auth="true" />
