@@ -423,6 +423,28 @@
 				<decorator-screen name="VforderShippingCommonDecorator"
 					location="${parameters.mainDecoratorLocation}">
 					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-compare field="shipping.statusId" operator="equals"
+									value="SHIPMENT_SHIPPED" />
+							</condition>
+							<widgets>
+								<link target="updateInventoryShipment" text="${uiLabelMap.ShipmentRestore}"
+									style="buttontext create">
+									<parameter param-name="shipmentId" />
+									<parameter param-name="facilityId" value="10000" />
+									<parameter param-name="isReturnShipment" value="Y" />
+								</link>
+							</widgets>
+							<fail-widgets>
+								<link target="updateInventoryShipment" text="${uiLabelMap.ShipmentComplete}"
+									style="buttontext create">
+									<parameter param-name="shipmentId" />
+									<parameter param-name="facilityId" value="10000" />
+									<parameter param-name="isReturnShipment" value="N" />
+								</link>
+							</fail-widgets>
+						</section>
 						<include-form name="EditShipping"
 							location="component://vforder/widget/VforderForms.xml" />
 					</decorator-section>

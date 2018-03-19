@@ -329,10 +329,10 @@
 		<security https="true" auth="true" />
 		<event type="java" path="org.apache.ofbiz.vffacility.VffacilityEvents"
 			invoke="updateInventoryShipment" />
-		<response name="success" type="request-redirect" value="EditShippingItems">
+		<response name="success" type="request-redirect" value="EditShipping">
 			<redirect-parameter name="shipmentId" />
 		</response>
-		<response name="error" type="view" value="EditShippingItems" />
+		<response name="error" type="view" value="EditShipping" />
 	</request-map>
 
 
