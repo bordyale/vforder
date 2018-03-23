@@ -227,7 +227,8 @@
 		</field>
 
 
-		<field name="deleteLink" title=" " widget-style="buttontext">
+		<field name="deleteLink" title=" " widget-style="buttontext"
+			use-when="${groovy: !'SHIPMENT_SHIPPED'.equals(shipping.statusId)}">
 			<hyperlink description="${uiLabelMap.CommonDelete}" target="deleteShippingItem"
 				also-hidden="false" confirmation-message="${uiLabelMap.CommonConfirmDelete}"
 				image-location="${iconsLocation}/delete.png">
@@ -238,6 +239,11 @@
 				<parameter param-name="quantityToShip" />
 			</hyperlink>
 		</field>
+		<field name="deleteLink" title=" " widget-style="buttontext disabled"
+			use-when="${groovy: 'SHIPMENT_SHIPPED'.equals(shipping.statusId)}">
+			<display description="${uiLabelMap.DeleteDisabled}"></display>
+		</field>
+
 
 
 		<field name="submitButton" title="${uiLabelMap.ShippingUpdatePallet}"

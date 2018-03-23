@@ -768,7 +768,7 @@
 					<property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/> -->
 				<set field="shipmentId" from-field="parameters.shipmentId" />
 				<entity-one entity-name="Shipment" value-field="shipping" />
-				<script location="component://vforder/groovyScripts/ListShippingItems.groovy" />
+				<script location="component://vforder/groovyScripts/ListWorkPapers.groovy" />
 			</actions>
 			<widgets>
 				<platform-specific>

@@ -102,6 +102,7 @@
 		<alias entity-alias="OI" name="orderItemSeqId" />
 		<alias entity-alias="PR" name="productWeight" />
 		<alias entity-alias="PR" name="productName" />
+		<alias entity-alias="PR" name="internalName" />
 		<alias entity-alias="SI" name="shipmentId" />
 		<alias entity-alias="SI" name="shipmentItemSeqId" />
 		<alias entity-alias="SI" name="quantity" />
@@ -127,6 +128,7 @@
 		title="ShippingItems Summary">
 		<member-entity entity-alias="SIV" entity-name="ShippingItemView" />
 		<alias entity-alias="SIV" name="productName" group-by="true" />
+		<alias entity-alias="SIV" name="internalName" group-by="true" />
 		<alias entity-alias="SIV" name="productId" group-by="true" />
 		<alias entity-alias="SIV" name="shipmentId" group-by="true" />
 		<alias entity-alias="SIV" name="quantity" field="quantity"
