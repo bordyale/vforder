@@ -59,7 +59,7 @@ under the License.
 						</fo:table-cell>
 						<fo:table-cell border-style="solid" border-width="0.1mm">
 							<fo:block>
-								${uiLabelMap.Datum}
+								${uiLabelMap.Id}
 							</fo:block>
 						</fo:table-cell>
 					</fo:table-row>
@@ -72,6 +72,23 @@ under the License.
 						<fo:table-cell>
 							<fo:block text-align="center">
 								${uiLabelMap.WorkPapersTitle}
+							</fo:block>
+						</fo:table-cell>
+						<fo:table-cell border-style="solid" border-width="0.1mm">
+							<fo:block>
+								
+							</fo:block>
+						</fo:table-cell>
+					</fo:table-row>
+					<fo:table-row>
+						<fo:table-cell>
+							<fo:block>
+								${uiLabelMap.Company}
+							</fo:block>
+						</fo:table-cell>
+						<fo:table-cell>
+							<fo:block>
+
 							</fo:block>
 						</fo:table-cell>
 						<fo:table-cell border-style="solid" border-width="0.1mm">
@@ -93,7 +110,7 @@ under the License.
 						</fo:table-cell>
 						<fo:table-cell border-style="solid" border-width="0.1mm">
 							<fo:block>
-								${uiLabelMap.Datum}
+
 							</fo:block>
 						</fo:table-cell>
 					</fo:table-row>
@@ -109,61 +126,46 @@ under the License.
 		<fo:flow flow-name="xsl-region-body" font-family="Helvetica">
 		
 			<fo:table width="100%" table-layout="fixed">
-				<fo:table-column border-width="1px" border-style="solid" />
-				<fo:table-column border-width="1px" border-style="solid" />
-				<fo:table-column border-width="1px" border-style="solid" />
+				<fo:table-column column-width="30%" border-width="1px" border-style="solid" />
+				<fo:table-column column-width="70%" border-width="1px" border-style="solid" />
 				<fo:table-body>
 					<fo:table-row>
-						<fo:table-cell>
+						<fo:table-cell border-style="solid" border-width="0.1mm">
 							<fo:block>
-								${uiLabelMap.Company}
+								${uiLabelMap.orderer}
 							</fo:block>
 						</fo:table-cell>
-						<fo:table-cell>
+						<fo:table-cell border-style="solid" border-width="0.1mm">
 							<fo:block>
 
 							</fo:block>
 						</fo:table-cell>
+					</fo:table-row>
+					<fo:table-row>
 						<fo:table-cell border-style="solid" border-width="0.1mm">
 							<fo:block>
-								${uiLabelMap.Datum}
+								${uiLabelMap.productName}
+							</fo:block>
+						</fo:table-cell>
+						<fo:table-cell border-style="solid" border-width="0.1mm">
+							<fo:block>
+								${item.internalName}
 							</fo:block>
 						</fo:table-cell>
 					</fo:table-row>
 					<fo:table-row>
-						<fo:table-cell>
+						<fo:table-cell border-style="solid" border-width="0.1mm">
 							<fo:block>
-								${uiLabelMap.Company}
-							</fo:block>
-						</fo:table-cell>
-						<fo:table-cell>
-							<fo:block text-align="center">
-								${uiLabelMap.WorkPapersTitle}
+								${uiLabelMap.quantity}
 							</fo:block>
 						</fo:table-cell>
 						<fo:table-cell border-style="solid" border-width="0.1mm">
 							<fo:block>
-								${uiLabelMap.Datum}
+								${item.quantity}
 							</fo:block>
 						</fo:table-cell>
 					</fo:table-row>
-					<fo:table-row>
-						<fo:table-cell>
-							<fo:block>
-								${uiLabelMap.Company}
-							</fo:block>
-						</fo:table-cell>
-						<fo:table-cell>
-							<fo:block>
-
-							</fo:block>
-						</fo:table-cell>
-						<fo:table-cell border-style="solid" border-width="0.1mm">
-							<fo:block>
-								${uiLabelMap.Datum}
-							</fo:block>
-						</fo:table-cell>
-					</fo:table-row>
+					
 				</fo:table-body>
 			</fo:table>
 			
@@ -175,13 +177,13 @@ under the License.
 					<fo:table-row>
 						<fo:table-cell text-align="center">
 							<fo:block>
-								${uiLabelMap.Company}
+								${uiLabelMap.basiccomponents}
 							</fo:block>
 						</fo:table-cell>
 						
 						<fo:table-cell text-align="center">
 							<fo:block>
-								${uiLabelMap.Datum}
+								${uiLabelMap.workactivities}
 							</fo:block>
 						</fo:table-cell>
 					</fo:table-row>
@@ -200,53 +202,88 @@ under the License.
 					<fo:table-row>
 						<fo:table-cell text-align="center">
 							<fo:block>
-								${uiLabelMap.Company}
+								${uiLabelMap.name}
 							</fo:block>
 						</fo:table-cell>
 						<fo:table-cell text-align="center">
 							<fo:block>
-								${uiLabelMap.Datum}
+								${uiLabelMap.quantity}
 							</fo:block>
 						</fo:table-cell>
 						<fo:table-cell text-align="center">
 							<fo:block>
-								${uiLabelMap.Company}
+								${uiLabelMap.whogave}
 							</fo:block>
 						</fo:table-cell>
 						<fo:table-cell text-align="center">
 							<fo:block>
-								${uiLabelMap.Company}
+								${uiLabelMap.actitvityid}
 							</fo:block>
 						</fo:table-cell>
 						<fo:table-cell text-align="center">
 							<fo:block>
-								${uiLabelMap.Company}
+								${uiLabelMap.instruction}
 							</fo:block>
 						</fo:table-cell>
 						<fo:table-cell text-align="center">
 							<fo:block>
-								${uiLabelMap.Company}
+								${uiLabelMap.signature}
 							</fo:block>
 						</fo:table-cell>
 						<fo:table-cell text-align="center">
 							<fo:block>
-								${uiLabelMap.Company}
+								${uiLabelMap.control}
 							</fo:block>
 						</fo:table-cell>
 					</fo:table-row>
 					
+					<#assign components = item.components>
+					<#if components?has_content>
+						<#list components as component>
+					<fo:table-row>
+						<fo:table-cell text-align="center" border-style="solid" border-width="0.1mm">
+							<fo:block>
+								${component.name}
+							</fo:block>
+						</fo:table-cell>
+						<fo:table-cell text-align="center" border-style="solid" border-width="0.1mm">
+							<fo:block>
+								${component.quantity}
+							</fo:block>
+						</fo:table-cell>
+						<fo:table-cell text-align="center" border-style="solid" border-width="0.1mm">
+							<fo:block>
+								
+							</fo:block>
+						</fo:table-cell>
+						<fo:table-cell text-align="center" border-style="solid" border-width="0.1mm">
+							<fo:block>
+							
+							</fo:block>
+						</fo:table-cell>
+						<fo:table-cell text-align="center" border-style="solid" border-width="0.1mm">
+							<fo:block>
+								
+							</fo:block>
+						</fo:table-cell>
+						<fo:table-cell text-align="center" border-style="solid" border-width="0.1mm">
+							<fo:block>
+								
+							</fo:block>
+						</fo:table-cell>
+						<fo:table-cell text-align="center" border-style="solid" border-width="0.1mm">
+							<fo:block>
+								
+							</fo:block>
+						</fo:table-cell>
+						
+					</fo:table-row>
+						</#list>
+					</#if>
+					
+					
 				</fo:table-body>
 			</fo:table>
-
-
-
-			<fo:block text-align="left" font-weight="bold" font-size="60pt">
-				${item.internalName} - ${item.components}
-			</fo:block>
-
-
-
-
 
 		</fo:flow>
 

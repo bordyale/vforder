@@ -286,4 +286,48 @@
         <value xml:lang="en">Qty Shippable</value>
         <value xml:lang="hu">Qty Shippable</value>
     </property>
+    <property key="quantity">
+        <value xml:lang="en">Quantity (pc)</value>
+        <value xml:lang="hu">Mennyiség (db)</value>
+    </property>
+    <property key="WorkPapersTitle">
+        <value xml:lang="en">Work Papers</value>
+        <value xml:lang="hu">MUNKALAP</value>
+    </property>
+    <property key="orderer">
+        <value xml:lang="en">Orderer</value>
+        <value xml:lang="hu">Megrendelő</value>
+    </property>
+    <property key="basiccomponents">
+        <value xml:lang="en">basic components</value>
+        <value xml:lang="hu">Alapanyag és alkatrészellátás</value>
+    </property>
+    <property key="workactivities">
+        <value xml:lang="en">work activities</value>
+        <value xml:lang="hu">Megmunkálás, szerelés, csomagolás</value>
+    </property>
+    <property key="name">
+        <value xml:lang="en">Name</value>
+        <value xml:lang="hu">Megnevezés</value>
+    </property>
+    <property key="whogave">
+        <value xml:lang="en">Who Gave</value>
+        <value xml:lang="hu">Kiadta</value>
+    </property>
+    <property key="activityid">
+        <value xml:lang="en">Activity seq</value>
+        <value xml:lang="hu">Műveleti sorrend</value>
+    </property>
+    <property key="instruction">
+        <value xml:lang="en">Instruction Nr</value>
+        <value xml:lang="hu">Utasítás száma</value>
+    </property>
+    <property key="signature">
+        <value xml:lang="en">Signature</value>
+        <value xml:lang="hu">Dolgozó aláírása</value>
+    </property>
+    <property key="control">
+        <value xml:lang="en">Control</value>
+        <value xml:lang="hu">Ellenőrizte</value>
+    </property>
 </resource>
