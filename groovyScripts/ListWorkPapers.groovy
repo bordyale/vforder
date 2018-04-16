@@ -43,19 +43,26 @@ for (GenericValue entry: orderItemShippingItem){
 	e.put("quantity",quantity)
 	String productId = entry.get("productId")
 	e.put("internalName",entry.get("internalName"))
-	productAssoc = select("paQuantity", "prInternalName").from("VfProductAndAssoc").where("paProductId", productId,"paProductAssocTypeId","MANUF_COMPONENT").cache(false).queryList()
+	productAssoc = select("paQuantity", "prInternalName", "paProductIdTo").from("VfProductAndAssoc").where("paProductId", productId,"paProductAssocTypeId","MANUF_COMPONENT").cache(false).queryList()
 	if (productAssoc != null){
 		List<HashMap<String,Object>> components = new ArrayList<HashMap<String,Object>>()
 		for (GenericValue pra: productAssoc){
 			Map<String,Object> a = new HashMap<String,Object>()
 			a.put("name",pra.get("prInternalName"))
 			BigDecimal qty =pra.get("paQuantity")
-			a.put("quantity",qty.multiply(quantity))
+			//ék 5X5
+			if ("10158".equals(pra.get("paProductIdTo"))){
+				qty = qty.multiply(quantity)
+				qty = qty.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+				a.put("quantity",qty + " fm")
+			}else{
+				a.put("quantity",qty.multiply(quantity).intValue() + " db")
+			}
 			components.add(a)
 		}
 		e.put("components", components)
 	}
-	
+
 	hashMaps.add(e)
 }
 

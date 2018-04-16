@@ -296,7 +296,7 @@
     </property>
     <property key="orderer">
         <value xml:lang="en">Orderer</value>
-        <value xml:lang="hu">Megrendelő</value>
+        <value xml:lang="hu">Megrendeló</value>
     </property>
     <property key="basiccomponents">
         <value xml:lang="en">basic components</value>
@@ -329,5 +329,9 @@
     <property key="control">
         <value xml:lang="en">Control</value>
         <value xml:lang="hu">Ellenőrizte</value>
+    </property>
+    <property key="productName">
+        <value xml:lang="en">Product Name</value>
+        <value xml:lang="hu">Megnevezés,típus</value>
     </property>
 </resource>
