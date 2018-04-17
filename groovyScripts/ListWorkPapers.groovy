@@ -45,6 +45,7 @@ for (GenericValue entry: orderItemShippingItem){
 	e.put("internalName",entry.get("internalName"))
 	productAssoc = select("paQuantity", "prInternalName", "paProductIdTo").from("VfProductAndAssoc").where("paProductId", productId,"paProductAssocTypeId","MANUF_COMPONENT").cache(false).queryList()
 	if (productAssoc != null){
+		int assocNum = 0
 		List<HashMap<String,Object>> components = new ArrayList<HashMap<String,Object>>()
 		for (GenericValue pra: productAssoc){
 			Map<String,Object> a = new HashMap<String,Object>()
@@ -59,8 +60,16 @@ for (GenericValue entry: orderItemShippingItem){
 				a.put("quantity",qty.multiply(quantity).intValue() + " db")
 			}
 			components.add(a)
+			assocNum ++
 		}
 		e.put("components", components)
+		//extra empty row on work paper
+		int tableSize = 12
+		if (assocNum >= tableSize){
+			e.put("emptyRowNum", 0)
+		}else{
+			e.put("emptyRowNum", tableSize - assocNum)
+		}
 	}
 
 	hashMaps.add(e)

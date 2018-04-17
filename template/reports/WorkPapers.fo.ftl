@@ -241,12 +241,12 @@ under the License.
 					<#if components?has_content>
 						<#list components as component>
 					<fo:table-row>
-						<fo:table-cell text-align="center" border-style="solid" border-width="0.1mm">
+						<fo:table-cell text-align="center" border-style="solid" border-width="0.1mm" height="10mm" display-align="after">
 							<fo:block>
 								${component.name}
 							</fo:block>
 						</fo:table-cell>
-						<fo:table-cell text-align="center" border-style="solid" border-width="0.1mm">
+						<fo:table-cell text-align="center" border-style="solid" border-width="0.1mm" display-align="after">
 							<fo:block>
 								${component.quantity}
 							</fo:block>
@@ -278,6 +278,48 @@ under the License.
 						</fo:table-cell>
 						
 					</fo:table-row>
+						</#list>
+					</#if>
+					
+					<#assign emptyRowNum = item.emptyRowNum>
+					<#if emptyRowNum?has_content>
+						<#list 1..emptyRowNum as index>
+		    					<fo:table-row>
+								<fo:table-cell text-align="center" border-style="solid" border-width="0.1mm" height="10mm">
+									<fo:block>
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell text-align="center" border-style="solid" border-width="0.1mm">
+									<fo:block>
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell text-align="center" border-style="solid" border-width="0.1mm">
+									<fo:block>
+										
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell text-align="center" border-style="solid" border-width="0.1mm">
+									<fo:block>
+									
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell text-align="center" border-style="solid" border-width="0.1mm">
+									<fo:block>
+										
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell text-align="center" border-style="solid" border-width="0.1mm">
+									<fo:block>
+										
+									</fo:block>
+								</fo:table-cell>
+								<fo:table-cell text-align="center" border-style="solid" border-width="0.1mm">
+									<fo:block>
+										
+									</fo:block>
+								</fo:table-cell>
+								
+							</fo:table-row>
 						</#list>
 					</#if>
 					
