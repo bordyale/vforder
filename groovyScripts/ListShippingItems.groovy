@@ -95,13 +95,14 @@ for (GenericValue entry: orderItemShippingItem){
 			if (split.length>1){
 				qtySplitpallet += Integer.parseInt(split[1])
 				if (boxes.get(split[0])==null){
+					//new box
 					Map<String,Object> box = new HashMap<String,Object>()
 					box.put("isBoxOrPallet", entry.get("isBoxOrPallet"))
 					List<HashMap<String,Object>> products = new ArrayList<HashMap<String,Object>>()
 					Map<String,Object> product = new HashMap<String,Object>()
 					product.put("productId",entry.get("productId"))
-					product.put("productName",entry.get("productName"))					
-					
+					product.put("productName",entry.get("productName"))
+
 					BigDecimal qty =new BigDecimal(split[1])
 					BigDecimal productNetto = qty.multiply(productWeight)
 					box.put("boxWeight", boxWeight.add(productNetto))
@@ -112,19 +113,33 @@ for (GenericValue entry: orderItemShippingItem){
 					boxNumber++
 					boxAlreadyadded++
 				}else{
+					//existing box
 					Map<String,Object> box = boxes.get(split[0])
 					List<HashMap<String,Object>> products = box."products"
-					Map<String,Object> product = new HashMap<String,Object>()
-					product.put("productId",entry.get("productId"))
-					product.put("productName",entry.get("productName"))
-					
-					
+					String prodId = entry.get("productId")
 					BigDecimal qty =new BigDecimal(split[1])
+
+					boolean found=false
+					for (HashMap<String,Object> existProduct : products){
+						if (prodId.equals(existProduct."productId")){
+							BigDecimal prodQty =existProduct."quantity"
+							existProduct.put("quantity", prodQty.add(qty))
+							found = true
+						}
+
+					}
+					if (found == false){
+						Map<String,Object> product = new HashMap<String,Object>()
+						product.put("productId",prodId)
+						product.put("productName",entry.get("productName"))
+						product.put("quantity",qty)
+						products.add(product)
+					}
+
 					BigDecimal productNetto = qty.multiply(productWeight)
 					BigDecimal weight = box."boxWeight"
 					box.put("boxWeight", weight.add(productNetto))
-					product.put("quantity",qty)
-					products.add(product)
+
 					box.put("products", products)
 					boxes.put(split[0], box)
 				}
@@ -143,8 +158,8 @@ for (GenericValue entry: orderItemShippingItem){
 			Map<String,Object> product = new HashMap<String,Object>()
 			product.put("productId",entry.get("productId"))
 			product.put("productName",entry.get("productName"))
-			
-			
+
+
 			BigDecimal qty =new BigDecimal(piecesPerBox)
 			BigDecimal productNetto = qty.multiply(productWeight)
 			box.put("boxWeight", boxWeight.add(productNetto))
@@ -156,7 +171,7 @@ for (GenericValue entry: orderItemShippingItem){
 			boxAlreadyadded--
 		}
 	}
-	
+
 	hashMaps.add(e)
 }
 
