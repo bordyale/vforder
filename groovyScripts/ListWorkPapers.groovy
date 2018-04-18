@@ -38,6 +38,13 @@ orderItemShippingItem = EntityUtil.orderBy(orderItemShippingItem,  ["productName
 List<HashMap<String,Object>> hashMaps = new ArrayList<HashMap<String,Object>>()
 
 for (GenericValue entry: orderItemShippingItem){
+
+	productId =entry.get("productId")
+	//if there is a main supplier skip.
+	supplier = select("productId","partyId").from("SupplierProduct").where("productId",productId,"supplierPrefOrderId", "10_MAIN_SUPPL").cache(false).queryList()
+	if (supplier.size()>0){
+		continue
+	}
 	Map<String,Object> e = new HashMap<String,Object>()
 	BigDecimal quantity = entry.get("quantity")
 	e.put("quantity",quantity)
