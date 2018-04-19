@@ -28,9 +28,10 @@ under the License.
         <div class="screenlet-body">
             <table class="order-items basic-table" cellspacing='0'>
                 <tr valign="bottom" class="header-row">
-                    <td width="30%">${uiLabelMap.ProductProduct}</td>                    
-                    <td width="5%">${uiLabelMap.OrderQuantity}</td>                
-                    <td width="2%">&nbsp;</td>
+                    <td width="50%">${uiLabelMap.ProductProduct}</td>                    
+                    <td width="25%">${uiLabelMap.OrderQuantity}</td>   
+                    <td width="25%">${uiLabelMap.OrderExtra}</td>                
+                   
                 </tr>
                 <#if !orderItemList?has_content>
                     <tr>
@@ -79,6 +80,57 @@ under the License.
                                     
                                 </td>
                                 <td>${orderItem.quantity?default(0)?string.number}</td>
+                                
+                                <td><a href="javascript:void(0)" id="showOrderItemShipping_LF_${orderItem.orderItemSeqId}_link" class="buttontext create">${uiLabelMap.ShowShippingDetails} </a></td>
+                                <script type="text/javascript">
+							            //<![CDATA[
+							            function showOrderItemShipping_LF_${orderItem.orderItemSeqId}_data() {
+							                var data =  {
+							                    "presentation": "layer",
+							                    "orderId": "${orderItem.orderId}",
+							                    "orderItemSeqId": "${orderItem.orderItemSeqId}"
+							                };
+							        
+							                return data;
+							            }
+							            jQuery("#showOrderItemShipping_LF_${orderItem.orderItemSeqId}_link").click( function () {
+							                $("#showOrderItemShipping_LF_${orderItem.orderItemSeqId}" ).dialog( "open" );
+							                
+							            });							            
+							            $( function() {
+										    $( "#showOrderItemShipping_LF_${orderItem.orderItemSeqId}" ).dialog({
+										      autoOpen: false,
+										      height: 600,
+  							                  width: 800,
+							                  modal: true,
+							                  closeOnEscape: true,
+										      show: {
+										        effect: "blind",
+										        duration: 1000
+										      },
+										      hide: {
+										        effect: "explode",
+										        duration: 1000
+										      },
+								              open: function() {
+						                         jQuery.ajax({
+						                             url: "EditShippingLayer",
+						                             type: "POST",
+						                             data: showOrderItemShipping_LF_${orderItem.orderItemSeqId}_data(),
+						                             success: function(data) {jQuery("#showOrderItemShipping_LF_${orderItem.orderItemSeqId}").html(data);}
+						                         });
+						                	  }
+		       
+										    });
+										 										 
+										  } );
+										  //]]>
+							     </script>							     
+							     <div id="showOrderItemShipping_LF_${orderItem.orderItemSeqId}" title="${uiLabelMap.ShowShippingDetails}">
+  										<p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+								 </div>
+							     
+                           
                             </#if>
                         </tr>
                          

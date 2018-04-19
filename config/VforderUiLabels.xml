@@ -334,4 +334,12 @@
         <value xml:lang="en">Product Name</value>
         <value xml:lang="hu">Megnevezés,típus</value>
     </property>
+    <property key="OrderExtra">
+        <value xml:lang="en">Extra</value>
+        <value xml:lang="hu">Extra</value>
+    </property>
+    <property key="ShowShippingDetails">
+        <value xml:lang="en">Shipping Details</value>
+        <value xml:lang="hu">Szállítási Reszletek</value>
+    </property>
 </resource>
