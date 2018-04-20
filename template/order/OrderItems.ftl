@@ -114,7 +114,7 @@ under the License.
 										      },
 								              open: function() {
 						                         jQuery.ajax({
-						                             url: "EditShippingLayer",
+						                             url: "ShowOrderItemShippingLayer",
 						                             type: "POST",
 						                             data: showOrderItemShipping_LF_${orderItem.orderItemSeqId}_data(),
 						                             success: function(data) {jQuery("#showOrderItemShipping_LF_${orderItem.orderItemSeqId}").html(data);}

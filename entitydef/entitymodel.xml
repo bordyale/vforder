@@ -94,6 +94,7 @@
 
 	<view-entity entity-name="ShippingItemView" package-name="org.apache.ofbiz.order.order"
 		never-cache="true" title="ShippingItem View Entity">
+		<member-entity entity-alias="SH" entity-name="Shipment" />
 		<member-entity entity-alias="VSI" entity-name="VfShipmentItem" />
 		<member-entity entity-alias="SI" entity-name="ShipmentItem" />
 		<member-entity entity-alias="OI" entity-name="OrderItem" />
@@ -104,6 +105,7 @@
 		<alias entity-alias="PR" name="productName" />
 		<alias entity-alias="PR" name="internalName" />
 		<alias entity-alias="SI" name="shipmentId" />
+		<alias entity-alias="SH" name="estimatedShipDate" />
 		<alias entity-alias="SI" name="shipmentItemSeqId" />
 		<alias entity-alias="SI" name="quantity" />
 		<alias entity-alias="OI" name="productId" />
@@ -121,8 +123,11 @@
 			<key-map field-name="shipmentId" />
 			<key-map field-name="shipmentItemSeqId" />
 		</view-link>
+		<view-link entity-alias="SI" rel-entity-alias="SH">
+			<key-map field-name="shipmentId" />
+		</view-link>
 	</view-entity>
-	
+
 	<view-entity entity-name="ListShippingItemsSummary"
 		package-name="org.apache.ofbiz.order.order" never-cache="true"
 		title="ShippingItems Summary">

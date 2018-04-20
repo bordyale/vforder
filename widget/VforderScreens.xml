@@ -830,5 +830,25 @@
 		</section>
 	</screen>
 
+	<screen name="ShowOrderItemShippingLayer">
+		<section>
+			<actions>
+				<property-map resource="VforderUiLabels" map-name="uiLabelMap"
+					global="true" />
+				<property-map resource="CommonUiLabels" map-name="uiLabelMap"
+					global="true" />
+				<set field="titleProperty" value="PageTitleEditShipping" />
+				<set field="tabButtonItem" value="EditShipping" />
+				<set field="orderId" from-field="parameters.orderId" />
+				<set field="orderItemSeqId" from-field="parameters.orderItemSeqId" />
+
+			</actions>
+			<widgets>
+				<include-form name="ListOrderItemShipping"
+					location="component://vforder/widget/VforderForms.xml" />
+			</widgets>
+		</section>
+	</screen>
+
 
 </screens>
