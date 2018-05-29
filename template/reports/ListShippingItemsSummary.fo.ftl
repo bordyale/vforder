@@ -40,17 +40,19 @@ under the License.
             <fo:block>
             	<#if vfi gt 0>
             		<#if justSupplier != "YES">
-		              <fo:table width="100%" table-layout="fixed">           
+		              <fo:table width="100%" table-layout="fixed">
+		              	<fo:table-column column-width="70%" border-width="1px" border-style="solid" />
+						<fo:table-column column-width="30%" border-width="1px" border-style="solid" />           
 		                <fo:table-body>
 		                <#list listIt2 as item>
 		                	<#if !item.supplier?has_content> 
 			                  <fo:table-row>
-			                    <fo:table-cell border-style="none" border-width="0.3mm">
+			                    <fo:table-cell border-style="solid" border-width="0.3mm">
 			                      <fo:block font-size="26pt">
 			                        ${item.productName}
 			                      </fo:block>
 			                    </fo:table-cell>
-			                    <fo:table-cell border-style="none" border-width="0.3mm">
+			                    <fo:table-cell border-style="solid" border-width="0.3mm">
 			                      <fo:block font-size="26pt">
 			                        ${item.quantity}
 			                      </fo:block>
@@ -69,17 +71,19 @@ under the License.
 	            	<fo:block space-before="5mm" space-after="5mm" font-size="35pt">
 		            	${VV}
 		        	</fo:block>
-	              <fo:table width="100%" table-layout="fixed">           
+	              <fo:table width="100%" table-layout="fixed">
+	              	<fo:table-column column-width="70%" border-width="1px" border-style="solid" />
+					<fo:table-column column-width="30%" border-width="1px" border-style="solid" />           
 	                <fo:table-body>
 	                <#list listIt2 as item>
 	                	<#if item.supplier?has_content> 
 		                  <fo:table-row>
-		                    <fo:table-cell border-style="none" border-width="0.3mm">
+		                    <fo:table-cell border-style="solid" border-width="0.3mm">
 		                      <fo:block font-size="26pt">
 		                        ${item.productName}
 		                      </fo:block>
 		                    </fo:table-cell>
-		                    <fo:table-cell border-style="none" border-width="0.3mm">
+		                    <fo:table-cell border-style="solid" border-width="0.3mm">
 		                      <fo:block font-size="26pt">
 		                        ${item.quantity}
 		                      </fo:block>
