@@ -41,8 +41,9 @@ under the License.
             	<#if vfi gt 0>
             		<#if justSupplier != "YES">
 		              <fo:table width="100%" table-layout="fixed">
-		              	<fo:table-column column-width="70%" border-width="1px" border-style="solid" />
-						<fo:table-column column-width="30%" border-width="1px" border-style="solid" />           
+		              	<fo:table-column column-width="40%" border-width="1px" border-style="solid" />
+	              		<fo:table-column column-width="30%" border-width="1px" border-style="solid" />
+						<fo:table-column column-width="30%" border-width="1px" border-style="solid" />             
 		                <fo:table-body>
 		                <#list listIt2 as item>
 		                	<#if !item.supplier?has_content> 
@@ -50,6 +51,11 @@ under the License.
 			                    <fo:table-cell border-style="solid" border-width="0.3mm">
 			                      <fo:block font-size="26pt">
 			                        ${item.productName}
+			                      </fo:block>
+			                    </fo:table-cell>
+			                    <fo:table-cell border-style="solid" border-width="0.3mm">
+			                      <fo:block font-size="26pt">
+			                        ${item.comments}
 			                      </fo:block>
 			                    </fo:table-cell>
 			                    <fo:table-cell border-style="solid" border-width="0.3mm">
@@ -72,7 +78,8 @@ under the License.
 		            	${VV}
 		        	</fo:block>
 	              <fo:table width="100%" table-layout="fixed">
-	              	<fo:table-column column-width="70%" border-width="1px" border-style="solid" />
+	              	<fo:table-column column-width="40%" border-width="1px" border-style="solid" />
+	              	<fo:table-column column-width="30%" border-width="1px" border-style="solid" />
 					<fo:table-column column-width="30%" border-width="1px" border-style="solid" />           
 	                <fo:table-body>
 	                <#list listIt2 as item>
@@ -81,6 +88,11 @@ under the License.
 		                    <fo:table-cell border-style="solid" border-width="0.3mm">
 		                      <fo:block font-size="26pt">
 		                        ${item.productName}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm">
+		                      <fo:block font-size="26pt">
+		                        ${item.comments}
 		                      </fo:block>
 		                    </fo:table-cell>
 		                    <fo:table-cell border-style="solid" border-width="0.3mm">

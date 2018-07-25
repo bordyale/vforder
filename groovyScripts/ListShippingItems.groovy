@@ -35,7 +35,7 @@ justSupplier = request.getParameter("justSupplier") ?: ""
 
 
 
-orderItemShippingItem = select("orderId","orderItemSeqId","quantity","productId","productName","pallet","isBoxOrPallet","piecesPerBox","shipmentItemSeqId","productWeight").from("ShippingItemView").where("shipmentId", shipmentId).cache(false).queryList()
+orderItemShippingItem = select("comments","orderId","orderItemSeqId","quantity","productId","productName","pallet","isBoxOrPallet","piecesPerBox","shipmentItemSeqId","productWeight").from("ShippingItemView").where("shipmentId", shipmentId).cache(false).queryList()
 
 orderItemShippingItem = EntityUtil.orderBy(orderItemShippingItem,  ["productName"])
 
@@ -53,6 +53,11 @@ for (GenericValue entry: orderItemShippingItem){
 	productId =entry.get("productId")
 	e.put("productId",productId)
 	e.put("productName",entry.get("productName"))
+	comments = entry.get("comments")
+	if (comments ==null){
+		comments = ""
+	}
+	e.put("comments", comments)
 	//supplier for ExportSummaryPdf
 	supplier = select("productId","partyId").from("SupplierProduct").where("productId",productId,"supplierPrefOrderId", "10_MAIN_SUPPL").cache(false).queryList()
 	if (supplier.size()>0){
@@ -196,7 +201,7 @@ for (e in boxes){
 }
 
 //ListShippingItemsSummary
-orderItemShippingItem = select("productId","productName","quantity").from("ListShippingItemsSummary").where("shipmentId", shipmentId).cache(false).queryList()
+orderItemShippingItem = select("comments","productId","productName","quantity").from("ListShippingItemsSummary").where("shipmentId", shipmentId).cache(false).queryList()
 
 orderItemShippingItem = EntityUtil.orderBy(orderItemShippingItem,  ["productName"])
 
@@ -209,6 +214,11 @@ for (GenericValue entry: orderItemShippingItem){
 	productId =entry.get("productId")
 	e.put("productId",productId)
 	e.put("productName",entry.get("productName"))
+	comments = entry.get("comments")
+	if (comments ==null){
+		comments = ""
+	}
+	e.put("comments", comments)
 	e.put("quantity",entry.get("quantity"))
 	//supplier for ExportSummaryPdf
 	supplier = select("productId","partyId").from("SupplierProduct").where("productId",productId,"supplierPrefOrderId", "10_MAIN_SUPPL").cache(false).queryList()

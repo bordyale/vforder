@@ -109,6 +109,7 @@
 		<alias entity-alias="SI" name="shipmentItemSeqId" />
 		<alias entity-alias="SI" name="quantity" />
 		<alias entity-alias="OI" name="productId" />
+		<alias entity-alias="OI" name="comments" />
 		<alias entity-alias="VSI" name="pallet" />
 		<alias entity-alias="VSI" name="isBoxOrPallet" />
 		<alias entity-alias="VSI" name="piecesPerBox" />
@@ -133,6 +134,7 @@
 		title="ShippingItems Summary">
 		<member-entity entity-alias="SIV" entity-name="ShippingItemView" />
 		<alias entity-alias="SIV" name="productName" group-by="true" />
+		<alias entity-alias="SIV" name="comments" group-by="true" />
 		<alias entity-alias="SIV" name="internalName" group-by="true" />
 		<alias entity-alias="SIV" name="productId" group-by="true" />
 		<alias entity-alias="SIV" name="shipmentId" group-by="true" />

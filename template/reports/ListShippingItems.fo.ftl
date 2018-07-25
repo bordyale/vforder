@@ -61,6 +61,9 @@ under the License.
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid" font-size="12pt">
 							<fo:block font-weight="bold">${uiLabelMap.ProductName}</fo:block>
 						</fo:table-cell>
+						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid" font-size="12pt">
+							<fo:block font-weight="bold">${uiLabelMap.Comments}</fo:block>
+						</fo:table-cell>
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid">
 							<fo:block font-weight="bold">${uiLabelMap.OrderPallettization}</fo:block>
 						</fo:table-cell>
@@ -94,6 +97,11 @@ under the License.
 		                    <fo:table-cell border-style="solid" border-width="0.3mm">
 		                      <fo:block>
 		                        ${item.productName}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm">
+		                      <fo:block>
+		                        ${item.comments}
 		                      </fo:block>
 		                    </fo:table-cell>
 		                    <fo:table-cell border-style="solid" border-width="0.3mm">
@@ -143,6 +151,11 @@ under the License.
 		                    <fo:table-cell border-style="solid" border-width="0.3mm">
 		                      <fo:block>
 		                        ${item.productName}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm">
+		                      <fo:block>
+		                        ${item.comments}
 		                      </fo:block>
 		                    </fo:table-cell>
 		                    <fo:table-cell border-style="solid" border-width="0.3mm">
