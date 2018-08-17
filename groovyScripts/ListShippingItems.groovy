@@ -107,6 +107,7 @@ for (GenericValue entry: orderItemShippingItem){
 					Map<String,Object> product = new HashMap<String,Object>()
 					product.put("productId",entry.get("productId"))
 					product.put("productName",entry.get("productName"))
+					product.put("comments",comments)
 
 					BigDecimal qty =new BigDecimal(split[1])
 					BigDecimal productNetto = qty.multiply(productWeight)
@@ -137,6 +138,7 @@ for (GenericValue entry: orderItemShippingItem){
 						Map<String,Object> product = new HashMap<String,Object>()
 						product.put("productId",prodId)
 						product.put("productName",entry.get("productName"))
+						product.put("comments",comments)
 						product.put("quantity",qty)
 						products.add(product)
 					}
@@ -163,6 +165,7 @@ for (GenericValue entry: orderItemShippingItem){
 			Map<String,Object> product = new HashMap<String,Object>()
 			product.put("productId",entry.get("productId"))
 			product.put("productName",entry.get("productName"))
+			product.put("comments",comments)
 
 
 			BigDecimal qty =new BigDecimal(piecesPerBox)

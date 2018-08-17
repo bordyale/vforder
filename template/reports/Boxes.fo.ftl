@@ -35,7 +35,7 @@ under the License.
   <fo:page-sequence master-reference="main">
   	<fo:static-content flow-name="xsl-region-after">
 			<fo:block font-size="60pt" font-weight="bold" text-align="center">
-				Brutto - ${box.boxWeight?round}
+				Brutto (kg) - ${box.boxWeight?round}
 			</fo:block>
 	</fo:static-content>
     <fo:flow flow-name="xsl-region-body" font-family="Helvetica">
@@ -43,21 +43,29 @@ under the License.
       <#assign productSize = products.size()>
       <#list products as product>
       
-      	<#if productSize gt 1>
+      	<#if productSize == 1>
+     		
+     			<fo:block text-align="left" font-weight="bold" font-size="80pt">
+        			${product.productName}  ${product.comments}
+      			</fo:block>
+      			<fo:block text-align="right" font-weight="bold" font-size="80pt">
+        			St - ${product.quantity}
+      			</fo:block>
+     		
+     	<#elseif productSize == 2>
      		
      			<fo:block text-align="left" font-weight="bold" font-size="60pt">
-        			${product.productName}
+        			${product.productName} ${product.comments}
       			</fo:block>
       			<fo:block text-align="right" font-weight="bold" font-size="60pt">
         			St - ${product.quantity}
       			</fo:block>
+		<#else>
      		
-     	<#else>
-     		
-     			<fo:block text-align="left" font-weight="bold" font-size="90pt">
-        			${product.productName}
+     			<fo:block text-align="left" font-weight="bold" font-size="50pt">
+        			${product.productName} ${product.comments}
       			</fo:block>
-      			<fo:block text-align="right" font-weight="bold" font-size="90pt">
+      			<fo:block text-align="right" font-weight="bold" font-size="50pt">
         			St - ${product.quantity}
       			</fo:block>
 
