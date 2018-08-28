@@ -49,7 +49,7 @@ under the License.
 					<fo:table-row>
 						<fo:table-cell>
 							<fo:block>
-								${uiLabelMap.Company}
+								${uiLabelMap.VV}
 							</fo:block>
 						</fo:table-cell>
 						<fo:table-cell>
@@ -66,11 +66,11 @@ under the License.
 					<fo:table-row>
 						<fo:table-cell>
 							<fo:block>
-								${uiLabelMap.Company}
+								${uiLabelMap.Kisvarda}
 							</fo:block>
 						</fo:table-cell>
 						<fo:table-cell>
-							<fo:block text-align="center">
+							<fo:block text-align="center" font-size="16pt" font-weight="bold">
 								${uiLabelMap.WorkPapersTitle}
 							</fo:block>
 						</fo:table-cell>
@@ -83,7 +83,7 @@ under the License.
 					<fo:table-row>
 						<fo:table-cell>
 							<fo:block>
-								${uiLabelMap.Company}
+								${uiLabelMap.VVcim}
 							</fo:block>
 						</fo:table-cell>
 						<fo:table-cell>
@@ -100,7 +100,7 @@ under the License.
 					<fo:table-row>
 						<fo:table-cell>
 							<fo:block>
-								${uiLabelMap.Company}
+								
 							</fo:block>
 						</fo:table-cell>
 						<fo:table-cell>
@@ -162,6 +162,18 @@ under the License.
 						<fo:table-cell border-style="solid" border-width="0.1mm">
 							<fo:block>
 								${item.quantity}
+							</fo:block>
+						</fo:table-cell>
+					</fo:table-row>
+					<fo:table-row>
+						<fo:table-cell border-style="solid" border-width="0.1mm">
+							<fo:block>
+								${uiLabelMap.note}
+							</fo:block>
+						</fo:table-cell>
+						<fo:table-cell border-style="solid" border-width="0.1mm">
+							<fo:block>
+								
 							</fo:block>
 						</fo:table-cell>
 					</fo:table-row>

@@ -342,4 +342,20 @@
         <value xml:lang="en">Shipping Details</value>
         <value xml:lang="hu">Szállítási Reszletek</value>
     </property>
+    <property key="VV">
+        <value xml:lang="en">Várda Vulkán Kft</value>
+        <value xml:lang="hu">Várda Vulkán Kft</value>
+    </property>
+    <property key="VVcim">
+        <value xml:lang="en">Árpád út 2</value>
+        <value xml:lang="hu">Árpád út 2</value>
+    </property>
+    <property key="Kisvarda">
+        <value xml:lang="en">Kisvárda</value>
+        <value xml:lang="hu">Kisvárda</value>
+    </property>
+    <property key="note">
+        <value xml:lang="en">Note</value>
+        <value xml:lang="hu">Note</value>
+    </property>
 </resource>
