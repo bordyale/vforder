@@ -298,6 +298,10 @@
         <value xml:lang="en">Orderer</value>
         <value xml:lang="hu">Megrendeló</value>
     </property>
+    <property key="VardaFerroKFt">
+        <value xml:lang="en">Várda Ferro KFt</value>
+        <value xml:lang="hu">Várda Ferro KFt</value>
+    </property>
     <property key="basiccomponents">
         <value xml:lang="en">basic components</value>
         <value xml:lang="hu">Alapanyag és alkatrészellátás</value>

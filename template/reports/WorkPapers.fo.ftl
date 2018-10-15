@@ -137,7 +137,7 @@ under the License.
 						</fo:table-cell>
 						<fo:table-cell border-style="solid" border-width="0.1mm">
 							<fo:block>
-
+								${uiLabelMap.VardaFerroKFt}
 							</fo:block>
 						</fo:table-cell>
 					</fo:table-row>

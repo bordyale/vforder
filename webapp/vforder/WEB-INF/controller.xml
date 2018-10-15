@@ -273,6 +273,20 @@
 		<response name="success" type="view" value="EditShipping" />
 		<response name="error" type="view" value="EditShipping" />
 	</request-map>
+	<request-map uri="createWorkPapers">
+		<security https="true" auth="true" />
+		<event type="service" path="" invoke="createWorkPapers" />
+		<response name="success" type="request-redirect" value="EditShipping">
+			<redirect-parameter name="shipmentId" />
+		</response>
+		<response name="error" type="view" value="EditShipping" />
+	</request-map>
+	<request-map uri="updateWorkPapers">
+		<security https="true" auth="true" />
+		<event type="service" path="" invoke="updateWorkPapers" />
+		<response name="success" type="view" value="EditShipping" />
+		<response name="error" type="view" value="EditShipping" />
+	</request-map>
 
 
 

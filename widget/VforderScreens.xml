@@ -417,7 +417,9 @@
 				<set field="tabButtonItem" value="EditShipping" />
 				<set field="headerItem" value="findshippings" />
 				<set field="shipmentId" from-field="parameters.shipmentId" />
+				<set field="workpapersId" from-field="parameters.workpapersId" />
 				<entity-one entity-name="Shipment" value-field="shipping" />
+				<entity-one entity-name="VfWorkPapers" value-field="workPapers" />
 			</actions>
 			<widgets>
 				<decorator-screen name="VforderShippingCommonDecorator"
@@ -446,6 +448,8 @@
 							</fail-widgets>
 						</section>
 						<include-form name="EditShipping"
+							location="component://vforder/widget/VforderForms.xml" />
+						<include-form name="EditWorkPapers"
 							location="component://vforder/widget/VforderForms.xml" />
 					</decorator-section>
 				</decorator-screen>

@@ -95,6 +95,7 @@
 	<view-entity entity-name="ShippingItemView" package-name="org.apache.ofbiz.order.order"
 		never-cache="true" title="ShippingItem View Entity">
 		<member-entity entity-alias="SH" entity-name="Shipment" />
+		<member-entity entity-alias="WP" entity-name="VfWorkPapers" />
 		<member-entity entity-alias="VSI" entity-name="VfShipmentItem" />
 		<member-entity entity-alias="SI" entity-name="ShipmentItem" />
 		<member-entity entity-alias="OI" entity-name="OrderItem" />
@@ -113,6 +114,9 @@
 		<alias entity-alias="VSI" name="pallet" />
 		<alias entity-alias="VSI" name="isBoxOrPallet" />
 		<alias entity-alias="VSI" name="piecesPerBox" />
+		<alias entity-alias="WP" name="workpapersId" />
+		<alias entity-alias="WP" name="readyDate" />
+		<alias entity-alias="WP" name="comment" />
 		<view-link entity-alias="OI" rel-entity-alias="VSI">
 			<key-map field-name="orderId" />
 			<key-map field-name="orderItemSeqId" />
@@ -127,6 +131,9 @@
 		<view-link entity-alias="SI" rel-entity-alias="SH">
 			<key-map field-name="shipmentId" />
 		</view-link>
+		<view-link entity-alias="SH" rel-entity-alias="WP" rel-optional="true">
+			<key-map field-name="shipmentId" />
+		</view-link>
 	</view-entity>
 
 	<view-entity entity-name="ListShippingItemsSummary"
@@ -138,8 +145,23 @@
 		<alias entity-alias="SIV" name="internalName" group-by="true" />
 		<alias entity-alias="SIV" name="productId" group-by="true" />
 		<alias entity-alias="SIV" name="shipmentId" group-by="true" />
+		<alias entity-alias="SIV" name="workpapersId" group-by="true"/>
+		<alias entity-alias="SIV" name="readyDate" group-by="true"/>
+		<alias entity-alias="SIV" name="comment" group-by="true"/>
 		<alias entity-alias="SIV" name="quantity" field="quantity"
 			function="sum" />
 	</view-entity>
+	
+	<entity entity-name="VfWorkPapers" package-name="org.apache.ofbiz.order.shipping"
+		never-cache="true" title="Work Papers Entry">
+		<field name="shipmentId" type="id-ne"></field>
+		<field name="workpapersId" type="value"></field>
+		<field name="readyDate" type="date-time"></field>
+		<field name="comment" type="value"></field>				
+		<prim-key field="shipmentId" />
+		<relation type="one" fk-name="SHIPPING_HDR" rel-entity-name="Shipment">
+			<key-map field-name="shipmentId" />
+		</relation>
+	</entity>
 
 </entitymodel>

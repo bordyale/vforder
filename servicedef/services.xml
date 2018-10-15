@@ -124,6 +124,20 @@
     </service>
     
     
+    <service name="createWorkPapers" default-entity-name="VfWorkPapers" engine="entity-auto" invoke="create" auth="true">
+        <description>Create Work Papers entry</description>
+        <permission-service service-name="shippingGenericPermission" main-action="CREATE"/>
+        <auto-attributes include="pk" mode="OUT" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>        
+    </service>
+    <service name="updateWorkPapers" default-entity-name="VfWorkPapers" engine="entity-auto" invoke="update" auth="true">
+        <description>Update a Example</description>
+        <permission-service service-name="shippingGenericPermission" main-action="UPDATE"/>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+    
+    
     
     
     
