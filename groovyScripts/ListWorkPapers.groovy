@@ -72,7 +72,7 @@ for (GenericValue entry: orderItemShippingItem){
 		}
 		e.put("components", components)
 		//extra empty row on work paper
-		int tableSize = 12
+		int tableSize = 17
 		if (assocNum >= tableSize){
 			e.put("emptyRowNum", 0)
 		}else{
