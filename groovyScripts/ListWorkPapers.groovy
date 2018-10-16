@@ -32,11 +32,12 @@ import org.apache.ofbiz.entity.util.EntityUtil
 
 
 
-orderItemShippingItem = select("productId","internalName","productName","quantity").from("ListShippingItemsSummary").where("shipmentId", shipmentId).cache(false).queryList()
+orderItemShippingItem = select("productId","internalName","productName","quantity","workpapersId","readyDate","comment").from("ListShippingItemsSummary").where("shipmentId", shipmentId).cache(false).queryList()
 orderItemShippingItem = EntityUtil.orderBy(orderItemShippingItem,  ["productName"])
 
 List<HashMap<String,Object>> hashMaps = new ArrayList<HashMap<String,Object>>()
 
+int i=0
 for (GenericValue entry: orderItemShippingItem){
 
 	productId =entry.get("productId")
@@ -78,6 +79,23 @@ for (GenericValue entry: orderItemShippingItem){
 			e.put("emptyRowNum", tableSize - assocNum)
 		}
 	}
+	workpapersId=entry.get("workpapersId")
+	if (workpapersId!=null){
+		int wpId = new Integer(workpapersId)
+		e.put("workpapersId", wpId + i)
+		i++
+	}else{
+		e.put("workpapersId", null)
+	}
+	
+	
+	
+	
+	
+	e.put("readyDate", entry.get("readyDate"))
+	e.put("comment", entry.get("comment"))
+	
+	
 
 	hashMaps.add(e)
 }

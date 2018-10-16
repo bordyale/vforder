@@ -59,7 +59,7 @@ under the License.
 						</fo:table-cell>
 						<fo:table-cell border-style="solid" border-width="0.1mm">
 							<fo:block>
-								${uiLabelMap.Id}
+								${uiLabelMap.Id} <#if item.workpapersId?has_content>  ${item.workpapersId} </#if>
 							</fo:block>
 						</fo:table-cell>
 					</fo:table-row>
@@ -93,7 +93,7 @@ under the License.
 						</fo:table-cell>
 						<fo:table-cell border-style="solid" border-width="0.1mm">
 							<fo:block>
-								${uiLabelMap.Datum}
+								${uiLabelMap.Datum} <#if item.readyDate?has_content>  ${item.readyDate?if_exists?string("yyyy.MM.dd")} </#if>
 							</fo:block>
 						</fo:table-cell>
 					</fo:table-row>
@@ -173,7 +173,7 @@ under the License.
 						</fo:table-cell>
 						<fo:table-cell border-style="solid" border-width="0.1mm">
 							<fo:block>
-								
+								<#if item.comment?has_content>  ${item.comment} </#if>
 							</fo:block>
 						</fo:table-cell>
 					</fo:table-row>
