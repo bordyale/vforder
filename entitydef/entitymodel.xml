@@ -117,6 +117,13 @@
 		<alias entity-alias="WP" name="workpapersId" />
 		<alias entity-alias="WP" name="readyDate" />
 		<alias entity-alias="WP" name="comment" />
+		<alias name="netWeight">
+			<complex-alias operator="*">
+				<complex-alias-field entity-alias="PR"
+					field="productWeight" />
+				<complex-alias-field entity-alias="SI" field="quantity" />
+			</complex-alias>
+		</alias>
 		<view-link entity-alias="OI" rel-entity-alias="VSI">
 			<key-map field-name="orderId" />
 			<key-map field-name="orderItemSeqId" />
@@ -131,7 +138,8 @@
 		<view-link entity-alias="SI" rel-entity-alias="SH">
 			<key-map field-name="shipmentId" />
 		</view-link>
-		<view-link entity-alias="SH" rel-entity-alias="WP" rel-optional="true">
+		<view-link entity-alias="SH" rel-entity-alias="WP"
+			rel-optional="true">
 			<key-map field-name="shipmentId" />
 		</view-link>
 	</view-entity>
@@ -145,23 +153,36 @@
 		<alias entity-alias="SIV" name="internalName" group-by="true" />
 		<alias entity-alias="SIV" name="productId" group-by="true" />
 		<alias entity-alias="SIV" name="shipmentId" group-by="true" />
-		<alias entity-alias="SIV" name="workpapersId" group-by="true"/>
-		<alias entity-alias="SIV" name="readyDate" group-by="true"/>
-		<alias entity-alias="SIV" name="comment" group-by="true"/>
+		<alias entity-alias="SIV" name="workpapersId" group-by="true" />
+		<alias entity-alias="SIV" name="readyDate" group-by="true" />
+		<alias entity-alias="SIV" name="comment" group-by="true" />
 		<alias entity-alias="SIV" name="quantity" field="quantity"
 			function="sum" />
 	</view-entity>
-	
+
 	<entity entity-name="VfWorkPapers" package-name="org.apache.ofbiz.order.shipping"
 		never-cache="true" title="Work Papers Entry">
 		<field name="shipmentId" type="id-ne"></field>
 		<field name="workpapersId" type="value"></field>
 		<field name="readyDate" type="date-time"></field>
-		<field name="comment" type="value"></field>				
+		<field name="comment" type="value"></field>
 		<prim-key field="shipmentId" />
 		<relation type="one" fk-name="SHIPPING_HDR" rel-entity-name="Shipment">
 			<key-map field-name="shipmentId" />
 		</relation>
 	</entity>
+
+
+	<view-entity entity-name="ShippingWeight"
+		package-name="org.apache.ofbiz.order.order" never-cache="true"
+		title="ShippingItems Summary">
+		<member-entity entity-alias="SIV" entity-name="ShippingItemView" />
+		<alias entity-alias="SIV" name="estimatedShipDate" group-by="true" />
+		<alias entity-alias="SIV" name="shipmentId" group-by="true" />
+		<alias entity-alias="SIV" name="netWeight" field="netWeight"
+			function="sum" />
+	</view-entity>
+
+
 
 </entitymodel>
