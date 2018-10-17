@@ -242,6 +242,10 @@
         <value xml:lang="en">Net Weight</value>
         <value xml:lang="hu">Netto</value>
     </property>
+    <property key="Comments">
+        <value xml:lang="en">Comments</value>
+        <value xml:lang="hu">Note</value>
+    </property>
     <property key="BoxTotal">
         <value xml:lang="en">Total Box</value>
         <value xml:lang="hu">Ládák</value>
@@ -265,6 +269,10 @@
     <property key="ExportShippingSummaryPdf">
         <value xml:lang="en">Pdf Summary</value>
         <value xml:lang="hu">Pdf Összefoglalás</value>
+    </property>
+    <property key="ExportShippingGlIncPdf">
+        <value xml:lang="en">Pdf Globe Incom</value>
+        <value xml:lang="hu">Pdf Globe Incom</value>
     </property>
     <property key="ExportShippingSupplierPdf">
         <value xml:lang="en">Pdf Várda Vulkan Summary</value>

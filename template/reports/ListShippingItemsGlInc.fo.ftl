@@ -52,21 +52,16 @@ under the License.
 	</fo:static-content>
 	<fo:flow flow-name="xsl-region-body" font-family="Helvetica">
             <fo:block>
-              <fo:table width="100%" table-layout="fixed"> 
-              	<fo:table-column column-width="8%" border-width="1px" border-style="solid" />
-	            <fo:table-column column-width="25%" border-width="1px" border-style="solid" />
-				<fo:table-column column-width="22%" border-width="1px" border-style="solid" />
+              <fo:table width="100%" table-layout="fixed">
+              	<fo:table-column column-width="22%" border-width="1px" border-style="solid" />
+	            <fo:table-column column-width="22%" border-width="1px" border-style="solid" />
 				<fo:table-column column-width="8%" border-width="1px" border-style="solid" />
-	            <fo:table-column column-width="8%" border-width="1px" border-style="solid" />
-				<fo:table-column column-width="8%" border-width="1px" border-style="solid" /> 
-				<fo:table-column column-width="8%" border-width="1px" border-style="solid" />
-				<fo:table-column column-width="8%" border-width="1px" border-style="solid" /> 
-				<fo:table-column column-width="8%" border-width="1px" border-style="solid" />          
+				<fo:table-column column-width="12%" border-width="1px" border-style="solid" />
+	            <fo:table-column column-width="12%" border-width="1px" border-style="solid" />
+				<fo:table-column column-width="12%" border-width="1px" border-style="solid" /> 
+				<fo:table-column column-width="12%" border-width="1px" border-style="solid" />
                 <fo:table-header text-align="center" background-color="silver">
 					<fo:table-row>
-						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid" font-size="12pt">
-							<fo:block font-size="8pt" font-weight="bold">${uiLabelMap.OrderOrderId}</fo:block>
-						</fo:table-cell>
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid" font-size="12pt">
 							<fo:block font-weight="bold">${uiLabelMap.ProductName}</fo:block>
 						</fo:table-cell>
@@ -74,19 +69,16 @@ under the License.
 							<fo:block font-weight="bold">${uiLabelMap.Comments}</fo:block>
 						</fo:table-cell>
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid">
-							<fo:block font-size="8pt" font-weight="bold">${uiLabelMap.OrderPallettization}</fo:block>
-						</fo:table-cell>
-						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid">
-							<fo:block font-weight="bold">${uiLabelMap.OrderIsBoxOrPallet}</fo:block>
+							<fo:block font-size="10pt" font-weight="bold">${uiLabelMap.OrderIsBoxOrPallet}</fo:block>
 						</fo:table-cell>
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid">
 							<fo:block font-weight="bold">${uiLabelMap.boxNumber}</fo:block>
 						</fo:table-cell>
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid">
-							<fo:block font-size="8pt" font-weight="bold">${uiLabelMap.Quantity}</fo:block>
+							<fo:block font-size="10pt" font-weight="bold">${uiLabelMap.Quantity}</fo:block>
 						</fo:table-cell>
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid">
-							<fo:block font-size="8pt" font-weight="bold">${uiLabelMap.ProductWeight}</fo:block>
+							<fo:block font-weight="bold">${uiLabelMap.ProductWeight}</fo:block>
 						</fo:table-cell>
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid">
 							<fo:block font-weight="bold">${uiLabelMap.NetWeight}</fo:block>
@@ -98,11 +90,7 @@ under the License.
 	                <#list listIt as item>
 		                <#if !item.supplier?has_content>
 		                  <fo:table-row>
-		                  	<fo:table-cell border-style="solid" border-width="0.3mm">
-		                      <fo:block>
-		                        ${item.orderId}
-		                      </fo:block>
-		                    </fo:table-cell>
+		                  	
 		                    <fo:table-cell border-style="solid" border-width="0.3mm">
 		                      <fo:block>
 		                        ${item.productName}
@@ -113,11 +101,7 @@ under the License.
 		                        ${item.comments}
 		                      </fo:block>
 		                    </fo:table-cell>
-		                    <fo:table-cell border-style="solid" border-width="0.3mm">
-		                      <fo:block>
-		                        ${item.pallet}
-		                      </fo:block>
-		                    </fo:table-cell>
+		                    
 		                    <fo:table-cell border-style="solid" border-width="0.3mm">
 		                      <fo:block>
 		                        ${item.isBoxOrPallet}
@@ -129,7 +113,7 @@ under the License.
 		                      </fo:block>
 		                    </fo:table-cell>
 		                    <fo:table-cell border-style="solid" border-width="0.3mm">
-		                      <fo:block font-weight="bold">
+		                      <fo:block>
 		                        ${item.quantity}
 		                      </fo:block>
 		                    </fo:table-cell>
@@ -152,11 +136,7 @@ under the License.
 	                 <#list listIt as item>
 		                 <#if item.supplier?has_content>
 		                  <fo:table-row>
-		                  	<fo:table-cell border-style="solid" border-width="0.3mm">
-		                      <fo:block>
-		                        ${item.orderId}
-		                      </fo:block>
-		                    </fo:table-cell>
+		                  	
 		                    <fo:table-cell border-style="solid" border-width="0.3mm">
 		                      <fo:block>
 		                        ${item.productName}
@@ -167,11 +147,7 @@ under the License.
 		                        ${item.comments}
 		                      </fo:block>
 		                    </fo:table-cell>
-		                    <fo:table-cell border-style="solid" border-width="0.3mm">
-		                      <fo:block>
-		                        ${item.pallet}
-		                      </fo:block>
-		                    </fo:table-cell>
+		                    
 		                    <fo:table-cell border-style="solid" border-width="0.3mm">
 		                      <fo:block>
 		                        ${item.isBoxOrPallet}
@@ -183,7 +159,7 @@ under the License.
 		                      </fo:block>
 		                    </fo:table-cell>
 		                    <fo:table-cell border-style="solid" border-width="0.3mm">
-		                      <fo:block font-weight="bold">
+		                      <fo:block>
 		                        ${item.quantity}
 		                      </fo:block>
 		                    </fo:table-cell>

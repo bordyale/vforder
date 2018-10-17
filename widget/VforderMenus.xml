@@ -55,6 +55,12 @@
 				<image url-mode="raw" src="${iconsLocation}/page_white_acrobat.png" />
 			</link>
 		</menu-item>
+		<menu-item name="ExportShippingGlIncPdf" title="${uiLabelMap.ExportShippingGlIncPdf}">
+			<link target="ExportShippingGlIncPdf" target-window="_blank">
+				<parameter param-name="shipmentId" />
+				<image url-mode="raw" src="${iconsLocation}/page_white_acrobat.png" />
+			</link>
+		</menu-item>
 		<menu-item name="ExportShippingSummaryPdf" title="${uiLabelMap.ExportShippingSummaryPdf}">
 			<link target="ExportShippingSummaryPdf" target-window="_blank">
 				<parameter param-name="shipmentId" />
