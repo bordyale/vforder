@@ -417,7 +417,7 @@
 				<set field="tabButtonItem" value="EditShipping" />
 				<set field="headerItem" value="findshippings" />
 				<set field="shipmentId" from-field="parameters.shipmentId" />
-				<set field="workpapersId" from-field="parameters.workpapersId" />
+				<!-- <set field="workpapersId" from-field="parameters.workpapersId" /> -->
 				<entity-one entity-name="Shipment" value-field="shipping" />
 				<entity-one entity-name="VfWorkPapers" value-field="workPapers" />
 			</actions>
