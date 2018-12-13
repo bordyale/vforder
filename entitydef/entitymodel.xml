@@ -182,6 +182,18 @@
 		<alias entity-alias="SIV" name="netWeight" field="netWeight"
 			function="sum" />
 	</view-entity>
+	
+	<view-entity entity-name="ShippingProductQuantity"
+		package-name="org.apache.ofbiz.order.order" never-cache="true"
+		title="ShippingItems Summary">
+		<member-entity entity-alias="SIV" entity-name="ShippingItemView" />
+		<alias entity-alias="SIV" name="estimatedShipDate" group-by="true" />
+		<alias entity-alias="SIV" name="shipmentId" group-by="true" />
+		<alias entity-alias="SIV" name="productId" group-by="true" />
+		<alias entity-alias="SIV" name="productName" group-by="true" />
+		<alias entity-alias="SIV" name="quantity" field="quantity"
+			function="sum" />
+	</view-entity>
 
 
 
