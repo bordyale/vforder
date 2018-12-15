@@ -1,0 +1,4 @@
+delete 3 databases
+from mysql commandline execute script
+source ofbizdbcreate
+source ofbizdbrestore
