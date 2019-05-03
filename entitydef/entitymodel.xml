@@ -193,6 +193,8 @@
 		<alias entity-alias="SIV" name="productName" group-by="true" />
 		<alias entity-alias="SIV" name="quantity" field="quantity"
 			function="sum" />
+		<alias entity-alias="SIV" name="netWeight" field="netWeight"
+			function="sum" />
 	</view-entity>
 
 
