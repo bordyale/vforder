@@ -109,7 +109,7 @@
 		<alias entity-alias="SH" name="estimatedShipDate" />
 		<alias entity-alias="SI" name="shipmentItemSeqId" />
 		<alias entity-alias="SI" name="quantity" />
-		<alias entity-alias="OI" name="productId" />
+		<alias entity-alias="SI" name="productId" />
 		<alias entity-alias="OI" name="comments" />
 		<alias entity-alias="VSI" name="pallet" />
 		<alias entity-alias="VSI" name="isBoxOrPallet" />
@@ -124,16 +124,16 @@
 				<complex-alias-field entity-alias="SI" field="quantity" />
 			</complex-alias>
 		</alias>
-		<view-link entity-alias="OI" rel-entity-alias="VSI">
+		<view-link entity-alias="VSI" rel-entity-alias="OI" rel-optional="true">
 			<key-map field-name="orderId" />
 			<key-map field-name="orderItemSeqId" />
-		</view-link>
-		<view-link entity-alias="OI" rel-entity-alias="PR">
-			<key-map field-name="productId" />
 		</view-link>
 		<view-link entity-alias="VSI" rel-entity-alias="SI">
 			<key-map field-name="shipmentId" />
 			<key-map field-name="shipmentItemSeqId" />
+		</view-link>
+		<view-link entity-alias="SI" rel-entity-alias="PR" >
+			<key-map field-name="productId" />
 		</view-link>
 		<view-link entity-alias="SI" rel-entity-alias="SH">
 			<key-map field-name="shipmentId" />

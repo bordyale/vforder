@@ -86,11 +86,9 @@ public class VforderEvents {
 
 	public static final MathContext generalRounding = new MathContext(10);
 
-	public static String updateOrderShippingItems(HttpServletRequest request,
-			HttpServletResponse response) {
+	public static String updateOrderShippingItems(HttpServletRequest request, HttpServletResponse response) {
 		Delegator delegator = (Delegator) request.getAttribute("delegator");
-		LocalDispatcher dispatcher = (LocalDispatcher) request
-				.getAttribute("dispatcher");
+		LocalDispatcher dispatcher = (LocalDispatcher) request.getAttribute("dispatcher");
 
 		String controlDirective = null;
 		Map<String, Object> result = null;
@@ -111,13 +109,13 @@ public class VforderEvents {
 		// The number of multi form rows is retrieved
 		int rowCount = UtilHttp.getMultiFormRowCount(paramMap);
 		if (rowCount < 1) {
-			Debug.logWarning("No rows to process, as rowCount = " + rowCount,
-					module);
+			Debug.logWarning("No rows to process, as rowCount = " + rowCount, module);
 		} else {
 			for (int i = 0; i < rowCount; i++) {
 				String shipmentId = null;
 				String orderId = null;
 				String orderItemSeqId = null;
+				String productId = null;
 
 				BigDecimal quantity = BigDecimal.ZERO;
 				BigDecimal quantityShipped = BigDecimal.ZERO;
@@ -129,8 +127,7 @@ public class VforderEvents {
 
 				// get the params
 				if (paramMap.containsKey("shipmentId" + thisSuffix)) {
-					shipmentId = (String) paramMap.remove("shipmentId"
-							+ thisSuffix);
+					shipmentId = (String) paramMap.remove("shipmentId" + thisSuffix);
 				}
 				if (paramMap.containsKey("orderId" + thisSuffix)) {
 					orderId = (String) paramMap.remove("orderId" + thisSuffix);
@@ -138,26 +135,21 @@ public class VforderEvents {
 				request.setAttribute("shipmentId", shipmentId);
 				request.setAttribute("orderId", orderId);
 				if (paramMap.containsKey("orderItemSeqId" + thisSuffix)) {
-					orderItemSeqId = (String) paramMap.remove("orderItemSeqId"
-							+ thisSuffix);
+					orderItemSeqId = (String) paramMap.remove("orderItemSeqId" + thisSuffix);
 				}
 
 				GenericValue vfOrdItemShipItem = null;
 				GenericValue shipment = null;
 				Integer shipItemId = 1;
 				try {
-					vfOrdItemShipItem = delegator.findOne(
-							"OrderItemShippingItemView", UtilMisc.toMap(
-									"orderId", orderId, "orderItemSeqId",
-									orderItemSeqId), false);
+					vfOrdItemShipItem = delegator.findOne("OrderItemShippingItemView", UtilMisc.toMap("orderId", orderId, "orderItemSeqId", orderItemSeqId),
+							false);
 
 					quantity = (BigDecimal) vfOrdItemShipItem.get("quantity");
-					shipment = delegator.findOne("Shipment",
-							UtilMisc.toMap("shipmentId", shipmentId), false);
-					BigDecimal tmp = (BigDecimal) shipment
-							.get("estimatedShipCost");
-					shipItemId = (tmp == null) ? null : tmp.toBigInteger()
-							.intValue();
+					productId = (String) vfOrdItemShipItem.get("productId");
+					shipment = delegator.findOne("Shipment", UtilMisc.toMap("shipmentId", shipmentId), false);
+					BigDecimal tmp = (BigDecimal) shipment.get("estimatedShipCost");
+					shipItemId = (tmp == null) ? null : tmp.toBigInteger().intValue();
 
 				} catch (GenericEntityException e) {
 					// TODO Auto-generated catch block
@@ -166,25 +158,21 @@ public class VforderEvents {
 
 				String quantityToShipStr = null;
 				if (paramMap.containsKey("quantityToShip" + thisSuffix)) {
-					quantityToShipStr = (String) paramMap
-							.remove("quantityToShip" + thisSuffix);
+					quantityToShipStr = (String) paramMap.remove("quantityToShip" + thisSuffix);
 				}
-				if ((quantityToShipStr == null)
-						|| (quantityToShipStr.equals(""))) {
+				if ((quantityToShipStr == null) || (quantityToShipStr.equals(""))) {
 					quantityToShipStr = "0";
 				}
 
 				try {
 					quantityToShip = new BigDecimal(quantityToShipStr);
 				} catch (Exception e) {
-					Debug.logWarning(e, "Problems parsing quantity string: "
-							+ quantityToShipStr, module);
+					Debug.logWarning(e, "Problems parsing quantity string: " + quantityToShipStr, module);
 					quantityToShip = BigDecimal.ZERO;
 				}
 
 				if (vfOrdItemShipItem != null) {
-					quantityShipped = vfOrdItemShipItem
-							.getBigDecimal("quantityShipped");
+					quantityShipped = vfOrdItemShipItem.getBigDecimal("quantityShipped");
 					if (quantityShipped == null) {
 						quantityShipped = BigDecimal.ZERO;
 					}
@@ -200,10 +188,7 @@ public class VforderEvents {
 				} else {
 
 					try {
-						List<GenericValue> shipmentItems = delegator.findByAnd(
-								"ShipmentItem",
-								UtilMisc.toMap("shipmentId", shipmentId), null,
-								false);
+						List<GenericValue> shipmentItems = delegator.findByAnd("ShipmentItem", UtilMisc.toMap("shipmentId", shipmentId), null, false);
 						if (shipmentItems != null)
 							if (shipItemId == null) {
 								shipItemId = shipmentItems.size();
@@ -215,11 +200,11 @@ public class VforderEvents {
 					}
 
 					try {
-						List<GenericValue> vfshipmentItems = delegator
-								.findByAnd("VfShipmentItem", UtilMisc.toMap(
-										"shipmentId", shipmentId, "orderId",
-										orderId, "orderItemSeqId",
-										orderItemSeqId), null, false);
+						// /List<GenericValue> vfshipmentItems = delegator
+						// .findByAnd("VfShipmentItem", UtilMisc.toMap(
+						// "shipmentId", shipmentId, "orderId",
+						// orderId, "orderItemSeqId",
+						// orderItemSeqId), null, false);
 						BigDecimal qty = BigDecimal.ZERO;
 						GenericValue vfshipmentItem = null;
 						GenericValue shipmentItem = null;
@@ -229,17 +214,15 @@ public class VforderEvents {
 						// GenericValue shippingItem =
 						// delegator.makeValue("ShippingItem");
 						shipmentItem.set("shipmentId", shipmentId);
+						shipmentItem.set("productId", productId);
 						vfshipmentItem.set("shipmentId", shipmentId);
 
 						vfshipmentItem.set("orderId", orderId);
 						vfshipmentItem.set("orderItemSeqId", orderItemSeqId);
 						shipItemId++;
-						vfshipmentItem.set("shipmentItemSeqId",
-								shipItemId.toString());
-						shipmentItem.set("shipmentItemSeqId",
-								shipItemId.toString());
-						shipment.put("estimatedShipCost", new BigDecimal(
-								shipItemId));
+						vfshipmentItem.set("shipmentItemSeqId", shipItemId.toString());
+						shipmentItem.set("shipmentItemSeqId", shipItemId.toString());
+						shipment.put("estimatedShipCost", new BigDecimal(shipItemId));
 						delegator.createOrStore(shipment);
 
 						qty = qty.add(quantityToShip);
@@ -276,13 +259,11 @@ public class VforderEvents {
 	 *            The servlet request instance to set the error messages in
 	 * @return one of NON_CRITICAL_ERROR, ERROR or NO_ERROR.
 	 */
-	private static String processResult(Map<String, Object> result,
-			HttpServletRequest request) {
+	private static String processResult(Map<String, Object> result, HttpServletRequest request) {
 		// Check for errors
 		StringBuilder errMsg = new StringBuilder();
 		if (result.containsKey(ModelService.ERROR_MESSAGE_LIST)) {
-			List<String> errorMsgs = UtilGenerics.checkList(result
-					.get(ModelService.ERROR_MESSAGE_LIST));
+			List<String> errorMsgs = UtilGenerics.checkList(result.get(ModelService.ERROR_MESSAGE_LIST));
 			Iterator<String> iterator = errorMsgs.iterator();
 			errMsg.append("<ul>");
 			while (iterator.hasNext()) {
@@ -299,8 +280,7 @@ public class VforderEvents {
 		// See whether there was an error
 		if (errMsg.length() > 0) {
 			request.setAttribute("_ERROR_MESSAGE_", errMsg.toString());
-			if (result.get(ModelService.RESPONSE_MESSAGE).equals(
-					ModelService.RESPOND_SUCCESS)) {
+			if (result.get(ModelService.RESPONSE_MESSAGE).equals(ModelService.RESPOND_SUCCESS)) {
 				return NON_CRITICAL_ERROR;
 			} else {
 				return ERROR;
@@ -310,14 +290,11 @@ public class VforderEvents {
 		}
 	}
 
-	public static String deleteShippingItemOrderItem(
-			HttpServletRequest request, HttpServletResponse response) {
+	public static String deleteShippingItemOrderItem(HttpServletRequest request, HttpServletResponse response) {
 
 		Delegator delegator = (Delegator) request.getAttribute("delegator");
-		LocalDispatcher dispatcher = (LocalDispatcher) request
-				.getAttribute("dispatcher");
-		GenericValue userLogin = (GenericValue) request.getSession()
-				.getAttribute("userLogin");
+		LocalDispatcher dispatcher = (LocalDispatcher) request.getAttribute("dispatcher");
+		GenericValue userLogin = (GenericValue) request.getSession().getAttribute("userLogin");
 		String controlDirective = null;
 		Map<String, Object> result = null;
 		String shipmentId = null;
@@ -336,9 +313,7 @@ public class VforderEvents {
 		}
 
 		try {
-			Map serviceTwoCtx = UtilMisc.toMap("shipmentId", shipmentId,
-					"shipmentItemSeqId", shipmentItemSeqId, "userLogin",
-					userLogin);
+			Map serviceTwoCtx = UtilMisc.toMap("shipmentId", shipmentId, "shipmentItemSeqId", shipmentItemSeqId, "userLogin", userLogin);
 			dispatcher.runSync("deleteVfShipmentItem", serviceTwoCtx);
 			dispatcher.runSync("deleteShipmentItem", serviceTwoCtx);
 
@@ -376,14 +351,11 @@ public class VforderEvents {
 
 	}
 
-	public static String deleteShipping(HttpServletRequest request,
-			HttpServletResponse response) {
+	public static String deleteShipping(HttpServletRequest request, HttpServletResponse response) {
 
 		Delegator delegator = (Delegator) request.getAttribute("delegator");
-		LocalDispatcher dispatcher = (LocalDispatcher) request
-				.getAttribute("dispatcher");
-		GenericValue userLogin = (GenericValue) request.getSession()
-				.getAttribute("userLogin");
+		LocalDispatcher dispatcher = (LocalDispatcher) request.getAttribute("dispatcher");
+		GenericValue userLogin = (GenericValue) request.getSession().getAttribute("userLogin");
 		String shipmentId = null;
 
 		// Get the parameters as a MAP, remove the productId and quantity
@@ -395,10 +367,8 @@ public class VforderEvents {
 		}
 
 		try {
-			delegator.removeByAnd("shipmentItem",
-					UtilMisc.toMap("shipmentId", shipmentId));
-			delegator.removeByAnd("VfShipmentItem",
-					UtilMisc.toMap("shipmentId", shipmentId));
+			delegator.removeByAnd("shipmentItem", UtilMisc.toMap("shipmentId", shipmentId));
+			delegator.removeByAnd("VfShipmentItem", UtilMisc.toMap("shipmentId", shipmentId));
 
 		} catch (GenericEntityException e) {
 			Debug.logError(e, module);
@@ -406,8 +376,7 @@ public class VforderEvents {
 		}
 
 		try {
-			Map serviceTwoCtx = UtilMisc.toMap("shipmentId", shipmentId,
-					"userLogin", userLogin);
+			Map serviceTwoCtx = UtilMisc.toMap("shipmentId", shipmentId, "userLogin", userLogin);
 			dispatcher.runSync("deleteShipment", serviceTwoCtx);
 
 		} catch (GenericServiceException e) {
@@ -419,20 +388,16 @@ public class VforderEvents {
 
 	}
 
-	public static String updatePallet(HttpServletRequest request,
-			HttpServletResponse response) {
+	public static String updatePallet(HttpServletRequest request, HttpServletResponse response) {
 
 		Delegator delegator = (Delegator) request.getAttribute("delegator");
-		LocalDispatcher dispatcher = (LocalDispatcher) request
-				.getAttribute("dispatcher");
-		GenericValue userLogin = (GenericValue) request.getSession()
-				.getAttribute("userLogin");
+		LocalDispatcher dispatcher = (LocalDispatcher) request.getAttribute("dispatcher");
+		GenericValue userLogin = (GenericValue) request.getSession().getAttribute("userLogin");
 
 		Map<String, Object> paramMap = UtilHttp.getParameterMap(request);
 		int rowCount = UtilHttp.getMultiFormRowCount(paramMap);
 		if (rowCount < 1) {
-			Debug.logWarning("No rows to process, as rowCount = " + rowCount,
-					module);
+			Debug.logWarning("No rows to process, as rowCount = " + rowCount, module);
 		} else {
 			for (int i = 0; i < rowCount; i++) {
 				String shipmentId = null;
@@ -445,14 +410,12 @@ public class VforderEvents {
 
 				// get the params
 				if (paramMap.containsKey("shipmentId" + thisSuffix)) {
-					shipmentId = (String) paramMap.remove("shipmentId"
-							+ thisSuffix);
+					shipmentId = (String) paramMap.remove("shipmentId" + thisSuffix);
 
 				}
 				request.setAttribute("shipmentId", shipmentId);
 				if (paramMap.containsKey("shipmentItemSeqId" + thisSuffix)) {
-					shipmentItemSeqId = (String) paramMap
-							.remove("shipmentItemSeqId" + thisSuffix);
+					shipmentItemSeqId = (String) paramMap.remove("shipmentItemSeqId" + thisSuffix);
 
 				}
 				if (paramMap.containsKey("pallet" + thisSuffix)) {
@@ -460,8 +423,7 @@ public class VforderEvents {
 
 				}
 				if (paramMap.containsKey("isBoxOrPallet" + thisSuffix)) {
-					isBoxOrPallet = (String) paramMap.remove("isBoxOrPallet"
-							+ thisSuffix);
+					isBoxOrPallet = (String) paramMap.remove("isBoxOrPallet" + thisSuffix);
 
 				}
 				if (isBoxOrPallet == null) {
@@ -473,8 +435,7 @@ public class VforderEvents {
 
 				String piecesPerBoxStr = null;
 				if (paramMap.containsKey("piecesPerBox" + thisSuffix)) {
-					piecesPerBoxStr = (String) paramMap.remove("piecesPerBox"
-							+ thisSuffix);
+					piecesPerBoxStr = (String) paramMap.remove("piecesPerBox" + thisSuffix);
 				}
 				if ((piecesPerBoxStr == null) || (piecesPerBoxStr.equals(""))) {
 					piecesPerBoxStr = "1";
@@ -482,17 +443,13 @@ public class VforderEvents {
 				try {
 					piecesPerBox = Long.parseLong(piecesPerBoxStr);
 				} catch (Exception e) {
-					Debug.logWarning(e,
-							"Problems parsing piecesPerBox string: "
-									+ piecesPerBoxStr, module);
+					Debug.logWarning(e, "Problems parsing piecesPerBox string: " + piecesPerBoxStr, module);
 					piecesPerBox = 1L;
 				}
 
 				try {
-					GenericValue vfShippingItem = delegator.findOne(
-							"VfShipmentItem", UtilMisc.toMap("shipmentId",
-									shipmentId, "shipmentItemSeqId",
-									shipmentItemSeqId), false);
+					GenericValue vfShippingItem = delegator.findOne("VfShipmentItem",
+							UtilMisc.toMap("shipmentId", shipmentId, "shipmentItemSeqId", shipmentItemSeqId), false);
 					if (vfShippingItem != null) {
 						vfShippingItem.put("pallet", pallet);
 						vfShippingItem.put("isBoxOrPallet", isBoxOrPallet);
@@ -512,13 +469,11 @@ public class VforderEvents {
 
 	}
 
-	public static String initializeOrderEntry(HttpServletRequest request,
-			HttpServletResponse response) {
+	public static String initializeOrderEntry(HttpServletRequest request, HttpServletResponse response) {
 		Delegator delegator = (Delegator) request.getAttribute("delegator");
 		HttpSession session = request.getSession();
 		Security security = (Security) request.getAttribute("security");
-		GenericValue userLogin = (GenericValue) session
-				.getAttribute("userLogin");
+		GenericValue userLogin = (GenericValue) session.getAttribute("userLogin");
 		Locale locale = UtilHttp.getLocale(request);
 
 		String productStoreId = request.getParameter("productStoreId");
@@ -534,28 +489,22 @@ public class VforderEvents {
 			cart.setOrderType(orderMode);
 			session.setAttribute("orderMode", orderMode);
 		} else {
-			request.setAttribute("_ERROR_MESSAGE_", UtilProperties.getMessage(
-					resource_error,
-					"OrderPleaseSelectEitherSaleOrPurchaseOrder", locale));
+			request.setAttribute("_ERROR_MESSAGE_", UtilProperties.getMessage(resource_error, "OrderPleaseSelectEitherSaleOrPurchaseOrder", locale));
 			return "error";
 		}
 
 		// check the selected product store
 		GenericValue productStore = null;
 		if (UtilValidate.isNotEmpty(productStoreId)) {
-			productStore = ProductStoreWorker.getProductStore(productStoreId,
-					delegator);
+			productStore = ProductStoreWorker.getProductStore(productStoreId, delegator);
 			if (productStore != null) {
 
 				// check permission for taking the order
 				boolean hasPermission = false;
-				if ((cart.getOrderType().equals("PURCHASE_ORDER"))
-						&& (security.hasEntityPermission("VFORDER",
-								"_PURCHASE_CREATE", session))) {
+				if ((cart.getOrderType().equals("PURCHASE_ORDER")) && (security.hasEntityPermission("VFORDER", "_PURCHASE_CREATE", session))) {
 					hasPermission = true;
 				} else if (cart.getOrderType().equals("SALES_ORDER")) {
-					if (security.hasEntityPermission("VFORDER",
-							"_SALES_CREATE", session)) {
+					if (security.hasEntityPermission("VFORDER", "_SALES_CREATE", session)) {
 						hasPermission = true;
 					} else {
 						// if the user is a rep of the store, then he also has
@@ -565,16 +514,10 @@ public class VforderEvents {
 							storeReps = EntityQuery
 									.use(delegator)
 									.from("ProductStoreRole")
-									.where("productStoreId",
-											productStore
-													.getString("productStoreId"),
-											"partyId",
-											userLogin.getString("partyId"),
-											"roleTypeId", "SALES_REP")
-									.filterByDate().queryList();
+									.where("productStoreId", productStore.getString("productStoreId"), "partyId", userLogin.getString("partyId"), "roleTypeId",
+											"SALES_REP").filterByDate().queryList();
 						} catch (GenericEntityException gee) {
-							request.setAttribute("_ERROR_MESSAGE_",
-									gee.getMessage());
+							request.setAttribute("_ERROR_MESSAGE_", gee.getMessage());
 							return "error";
 						}
 						if (UtilValidate.isNotEmpty(storeReps)) {
@@ -584,16 +527,10 @@ public class VforderEvents {
 				}
 
 				if (hasPermission) {
-					cart = ShoppingCartEvents.getCartObject(request, null,
-							productStore.getString("defaultCurrencyUomId"));
+					cart = ShoppingCartEvents.getCartObject(request, null, productStore.getString("defaultCurrencyUomId"));
 				} else {
-					request.setAttribute(
-							"_ERROR_MESSAGE_",
-							UtilProperties
-									.getMessage(
-											resource_error,
-											"OrderYouDoNotHavePermissionToTakeOrdersForThisStore",
-											locale));
+					request.setAttribute("_ERROR_MESSAGE_",
+							UtilProperties.getMessage(resource_error, "OrderYouDoNotHavePermissionToTakeOrdersForThisStore", locale));
 					cart.clear();
 					session.removeAttribute("orderMode");
 					return "error";
@@ -604,11 +541,8 @@ public class VforderEvents {
 			}
 		}
 
-		if ("SALES_ORDER".equals(cart.getOrderType())
-				&& UtilValidate.isEmpty(cart.getProductStoreId())) {
-			request.setAttribute("_ERROR_MESSAGE_", UtilProperties.getMessage(
-					resource_error,
-					"OrderAProductStoreMustBeSelectedForASalesOrder", locale));
+		if ("SALES_ORDER".equals(cart.getOrderType()) && UtilValidate.isEmpty(cart.getProductStoreId())) {
+			request.setAttribute("_ERROR_MESSAGE_", UtilProperties.getMessage(resource_error, "OrderAProductStoreMustBeSelectedForASalesOrder", locale));
 			cart.clear();
 			session.removeAttribute("orderMode");
 			return "error";
@@ -630,13 +564,10 @@ public class VforderEvents {
 		}
 		String userLoginId = request.getParameter("userLoginId");
 		if (partyId != null || userLoginId != null) {
-			if (UtilValidate.isEmpty(partyId)
-					&& UtilValidate.isNotEmpty(userLoginId)) {
+			if (UtilValidate.isEmpty(partyId) && UtilValidate.isNotEmpty(userLoginId)) {
 				GenericValue thisUserLogin = null;
 				try {
-					thisUserLogin = EntityQuery.use(delegator)
-							.from("UserLogin")
-							.where("userLoginId", userLoginId).queryOne();
+					thisUserLogin = EntityQuery.use(delegator).from("UserLogin").where("userLoginId", userLoginId).queryOne();
 				} catch (GenericEntityException gee) {
 					request.setAttribute("_ERROR_MESSAGE_", gee.getMessage());
 					return "error";
@@ -650,17 +581,13 @@ public class VforderEvents {
 			if (UtilValidate.isNotEmpty(partyId)) {
 				GenericValue thisParty = null;
 				try {
-					thisParty = EntityQuery.use(delegator).from("Party")
-							.where("partyId", partyId).queryOne();
+					thisParty = EntityQuery.use(delegator).from("Party").where("partyId", partyId).queryOne();
 				} catch (GenericEntityException gee) {
 					request.setAttribute("_ERROR_MESSAGE_", gee.getMessage());
 					return "error";
 				}
 				if (thisParty == null) {
-					request.setAttribute("_ERROR_MESSAGE_", UtilProperties
-							.getMessage(resource_error,
-									"OrderCouldNotLocateTheSelectedParty",
-									locale));
+					request.setAttribute("_ERROR_MESSAGE_", UtilProperties.getMessage(resource_error, "OrderCouldNotLocateTheSelectedParty", locale));
 					return "error";
 				} else {
 					cart.setOrderPartyId(partyId);
