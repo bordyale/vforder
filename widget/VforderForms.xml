@@ -459,18 +459,17 @@
 
 
 	</form>
-	
+
 	<form name="EditWorkPapers" type="single" target="updateWorkPapers"
 		title="" default-map-name="workPapers" default-entity-name="VfWorkPapers">
 		<alt-target use-when="workPapers==null" target="createWorkPapers" />
 		<!-- <auto-fields-service service-name="updateShipment"/> -->
 		<field name="shipmentId">
-			<hidden/>
+			<hidden />
 		</field>
-		 <field name="workpapersId"
-			title="${uiLabelMap.workPapersId}">
+		<field name="workpapersId" title="${uiLabelMap.workPapersId}">
 			<text size="5" maxlength="100" />
-		</field> 
+		</field>
 
 		<field name="readyDate">
 			<date-time />
@@ -493,6 +492,26 @@
 
 
 	</form>
+	<form name="AddProductToShipping" type="multi" use-row-submit="true"
+		list-name="orderItems" title="" target="AddProductToShipping"
+		odd-row-style="alternate-row" default-table-style="basic-table hover-bar"
+		paginate-target="EditShippingItems">
+		<field name="productId">
+			<lookup target-form-name="LookupProduct" presentation="window" />
+		</field>
+		<field name="shipmentId">
+			<hidden />
+		</field>
+		<field name="quantityToShip" title="${uiLabelMap.OrderQuantity}">
+			<text size="5" maxlength="10" />
+		</field>
+		<field name="submitButton" title="${uiLabelMap.OrderAddToOrder}"
+			widget-style="smallSubmit">
+			<submit />
+		</field>
+
+	</form>
+
 
 
 </forms>

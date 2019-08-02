@@ -254,3 +254,17 @@ context.listIt2 = hashMaps2
 context.vfi=vfi
 context.vvi=vvi
 
+
+
+
+//multi form in EditShippingItems page
+List<HashMap<String,Object>> hashMaps3 = new ArrayList<HashMap<String,Object>>()
+Map<String,Object> e = new HashMap<String,Object>()
+e.put("productId","1")
+hashMaps3.add(e)
+context.productLine = hashMaps3
+
+
+
+
+

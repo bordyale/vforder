@@ -503,6 +503,9 @@
 									location="component://vforder/template/ListShippingItemsFooter.ftl" />
 							</html>
 						</platform-specific>
+						
+						<include-form name="AddProductToShipping"
+							location="component://vforder/widget/VforderForms.xml" />
 
 					</decorator-section>
 

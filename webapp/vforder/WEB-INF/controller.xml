@@ -320,6 +320,18 @@
 			<redirect-parameter name="orderId" />
 		</response>
 	</request-map>
+	<request-map uri="AddProductToShipping">
+		<security https="true" auth="true" />
+		<event type="java" path="org.apache.ofbiz.vforder.VforderEvents"
+			invoke="updateOrderShippingItems" />
+		<response name="success" type="request-redirect" value="EditShippingItems">
+			<redirect-parameter name="shipmentId" />
+		</response>
+		<response name="error" type="request-redirect" value="EditShippingItems">
+			<redirect-parameter name="shipmentId" />
+			<redirect-parameter name="orderId" />
+		</response>
+	</request-map>
 	<request-map uri="deleteShippingItem">
 		<security https="true" auth="true" />
 		<event type="java" path="org.apache.ofbiz.vforder.VforderEvents"
