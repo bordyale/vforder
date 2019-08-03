@@ -492,7 +492,7 @@
 
 
 	</form>
-	<form name="AddProductToShipping" type="multi" use-row-submit="true"
+	<!-- <form name="AddProductToShipping" type="multi" use-row-submit="true"
 		list-name="orderItems" title="" target="AddProductToShipping"
 		odd-row-style="alternate-row" default-table-style="basic-table hover-bar"
 		paginate-target="EditShippingItems">
@@ -500,8 +500,36 @@
 			<lookup target-form-name="LookupProduct" presentation="window" />
 		</field>
 		<field name="shipmentId">
-			<hidden />
+			<hidden value="${shipmentId}" />
 		</field>
+		<field name="quantityToShip" title="${uiLabelMap.OrderQuantity}">
+			<text size="5" maxlength="10" />
+		</field>
+		<field name="submitButton" title="${uiLabelMap.OrderAddToOrder}"
+			widget-style="smallSubmit">
+			<submit />
+		</field>
+
+	</form> -->
+	
+	<form name="AddProductToShipping" type="multi" use-row-submit="true"
+		list-name="productLine" title="" target="AddProductToShipping"
+		odd-row-style="alternate-row" default-table-style="basic-table hover-bar"
+		paginate-target="EditShippingItems">
+		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" 
+			auto-field-map="true"/> </row-actions> -->
+		<field name="shipmentId">
+			<hidden value="${shipmentId}" />
+		</field>
+		
+		<!-- <field name="orderId" title="${uiLabelMap.OrderOrderId}" widget-style="buttontext"> 
+			<hyperlink description="${orderId}" target="/catalog/control/EditProductInventoryItems" 
+			target-type="inter-app"> <parameter param-name="orderId"/> </hyperlink> </field> -->
+		<field name="productId">
+			<lookup target-form-name="LookupProduct"  />
+		</field>
+		
+	
 		<field name="quantityToShip" title="${uiLabelMap.OrderQuantity}">
 			<text size="5" maxlength="10" />
 		</field>

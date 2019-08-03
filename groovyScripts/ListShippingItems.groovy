@@ -260,7 +260,8 @@ context.vvi=vvi
 //multi form in EditShippingItems page
 List<HashMap<String,Object>> hashMaps3 = new ArrayList<HashMap<String,Object>>()
 Map<String,Object> e = new HashMap<String,Object>()
-e.put("productId","1")
+//e.put("productId","1")
+e.put("shipmentId",shipmentId)
 hashMaps3.add(e)
 context.productLine = hashMaps3
 
