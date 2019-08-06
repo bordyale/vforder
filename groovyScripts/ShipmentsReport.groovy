@@ -25,13 +25,20 @@ import org.apache.ofbiz.entity.condition.EntityConditionList
 import org.apache.ofbiz.entity.condition.EntityCondition
 import org.apache.ofbiz.entity.GenericValue
 import org.apache.ofbiz.entity.util.EntityUtil
+import java.sql.Timestamp
 
+fromDate = parameters.fromDate
+thruDate = parameters.thruDate
 
+List searchCond = []
+if (fromDate) {
+	searchCond.add(EntityCondition.makeCondition("estimatedShipDate", EntityOperator.GREATER_THAN_EQUAL_TO, Timestamp.valueOf(fromDate)))
+}
+if (thruDate) {
+	searchCond.add(EntityCondition.makeCondition("estimatedShipDate", EntityOperator.LESS_THAN_EQUAL_TO, Timestamp.valueOf(thruDate)))
+}
 
-
-
-
-orderItemShippingItem = select("estimatedShipDate","orderId","productId","productName","internalName","statusId","quantity","quantityShipped","quantityShippable").from("ShipmentsReport").cache(false).queryList()
+orderItemShippingItem = select("estimatedShipDate","orderId","productId","productName","internalName","statusId","quantity","quantityShipped","quantityShippable").from("ShipmentsReport").where(searchCond).cache(false).queryList()
 
 orderItemShippingItem = EntityUtil.orderBy(orderItemShippingItem,  ["estimatedShipDate"])
 orderItemShippingItem = EntityUtil.orderBy(orderItemShippingItem,  ["productId"])
@@ -53,7 +60,7 @@ for (GenericValue entry: orderItemShippingItem){
 	}
 }
 
-shippingWeight = select("estimatedShipDate","shipmentId","netWeight").from("ShippingWeight").cache(false).queryList()
+shippingWeight = select("estimatedShipDate","shipmentId","netWeight").from("ShippingWeight").where(searchCond).cache(false).queryList()
 
 shippingWeight = EntityUtil.orderBy(shippingWeight,  ["estimatedShipDate"])
 

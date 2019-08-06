@@ -530,12 +530,12 @@
 	</form>
 
 	<form name="ShipmentsReport" type="multi" use-row-submit="true"
-		list-name="orderItems" title="" target="ordersnotshipped"
+		list-name="orderItems" title="" target="shipmentsreport"
 		odd-row-style="alternate-row" default-table-style="basic-table hover-bar"
 		paginate-target="ordersnotshipped">
 		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" 
 			auto-field-map="true"/> </row-actions> -->
-		
+
 		<field name="orderId">
 			<display />
 		</field>
@@ -563,7 +563,7 @@
 	</form>
 
 	<form name="ShipmentsWeights" type="multi" use-row-submit="true"
-		list-name="shipWeights" title="" target="ordersnotshipped"
+		list-name="shipWeights" title="" target="shipmentsreport"
 		odd-row-style="alternate-row" default-table-style="basic-table hover-bar"
 		paginate-target="ordersnotshipped">
 		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" 
@@ -575,9 +575,9 @@
 			<display />
 		</field>
 	</form>
-	
+
 	<form name="ExtraShippedProducts" type="multi" use-row-submit="true"
-		list-name="exShippedPr" title="" target="ordersnotshipped"
+		list-name="exShippedPr" title="" target="shipmentsreport"
 		odd-row-style="alternate-row" default-table-style="basic-table hover-bar"
 		paginate-target="ordersnotshipped">
 		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" 
@@ -597,6 +597,24 @@
 		<field name="quantity">
 			<display />
 		</field>
+	</form>
+
+	<form name="FilterShipmentsReport" type="single" target="shipmentsreport">
+		<field name="fromDate" title="${uiLabelMap.ExampleDateField2Title}"
+			tooltip="${uiLabelMap.FromDate}" tooltip-style="button-text">
+			<date-time mask="Y"/>
+		</field>
+		<field name="thruDate" title="${uiLabelMap.ExampleDateField2Title}"
+			tooltip="${uiLabelMap.ToDate}" tooltip-style="button-text">
+			<date-time mask="Y"/>
+		</field>
+
+		<field name="searchButton" title="${uiLabelMap.CommonFind}"
+			widget-style="smallSubmit">
+			<submit button-type="button" />
+		</field>
+
+
 	</form>
 
 

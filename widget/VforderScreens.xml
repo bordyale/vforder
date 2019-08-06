@@ -872,6 +872,8 @@
 
 							</link>
 						</container>
+						<include-form name="FilterShipmentsReport"
+							location="component://vforder/widget/VforderForms.xml" />
 						<include-form name="ShipmentsReport"
 							location="component://vforder/widget/VforderForms.xml" />
 						<include-form name="ShipmentsWeights"
