@@ -137,25 +137,6 @@ public class VforderEvents {
 				if (paramMap.containsKey("orderItemSeqId" + thisSuffix)) {
 					orderItemSeqId = (String) paramMap.remove("orderItemSeqId" + thisSuffix);
 				}
-
-				GenericValue vfOrdItemShipItem = null;
-				GenericValue shipment = null;
-				Integer shipItemId = 1;
-				try {
-					vfOrdItemShipItem = delegator.findOne("OrderItemShippingItemView", UtilMisc.toMap("orderId", orderId, "orderItemSeqId", orderItemSeqId),
-							false);
-
-					quantity = (BigDecimal) vfOrdItemShipItem.get("quantity");
-					productId = (String) vfOrdItemShipItem.get("productId");
-					shipment = delegator.findOne("Shipment", UtilMisc.toMap("shipmentId", shipmentId), false);
-					BigDecimal tmp = (BigDecimal) shipment.get("estimatedShipCost");
-					shipItemId = (tmp == null) ? null : tmp.toBigInteger().intValue();
-
-				} catch (GenericEntityException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
 				String quantityToShipStr = null;
 				if (paramMap.containsKey("quantityToShip" + thisSuffix)) {
 					quantityToShipStr = (String) paramMap.remove("quantityToShip" + thisSuffix);
@@ -163,26 +144,54 @@ public class VforderEvents {
 				if ((quantityToShipStr == null) || (quantityToShipStr.equals(""))) {
 					quantityToShipStr = "0";
 				}
-
 				try {
 					quantityToShip = new BigDecimal(quantityToShipStr);
 				} catch (Exception e) {
 					Debug.logWarning(e, "Problems parsing quantity string: " + quantityToShipStr, module);
 					quantityToShip = BigDecimal.ZERO;
 				}
-
-				if (vfOrdItemShipItem != null) {
-					quantityShipped = vfOrdItemShipItem.getBigDecimal("quantityShipped");
-					if (quantityShipped == null) {
-						quantityShipped = BigDecimal.ZERO;
-					}
-					quantityShippable = quantity.subtract(quantityShipped);
-				}
 				if (quantityToShip.compareTo(BigDecimal.ZERO) <= 0) {
 					continue;
 				}
 
-				if (quantityToShip.compareTo(quantityShippable) > 0) {
+				GenericValue vfOrdItemShipItem = null;
+				GenericValue shipment = null;
+				try {
+					shipment = delegator.findOne("Shipment", UtilMisc.toMap("shipmentId", shipmentId), false);
+				} catch (GenericEntityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				Integer shipItemId = 1;
+				if (orderId != null) {
+					try {
+						vfOrdItemShipItem = delegator.findOne("OrderItemShippingItemView",
+								UtilMisc.toMap("orderId", orderId, "orderItemSeqId", orderItemSeqId), false);
+
+						quantity = (BigDecimal) vfOrdItemShipItem.get("quantity");
+						productId = (String) vfOrdItemShipItem.get("productId");
+
+						BigDecimal tmp = (BigDecimal) shipment.get("estimatedShipCost");
+						shipItemId = (tmp == null) ? null : tmp.toBigInteger().intValue();
+
+					} catch (GenericEntityException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					if (vfOrdItemShipItem != null) {
+						quantityShipped = vfOrdItemShipItem.getBigDecimal("quantityShipped");
+						if (quantityShipped == null) {
+							quantityShipped = BigDecimal.ZERO;
+						}
+						quantityShippable = quantity.subtract(quantityShipped);
+					}
+				}else{
+					if (paramMap.containsKey("productId" + thisSuffix)) {
+						productId = (String) paramMap.remove("productId" + thisSuffix);
+					}
+				}
+				if (orderId != null && quantityToShip.compareTo(quantityShippable) > 0) {
 					request.setAttribute("_ERROR_MESSAGE_", "errore");
 					return "error";
 				} else {
