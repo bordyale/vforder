@@ -492,26 +492,15 @@
 
 
 	</form>
-	<!-- <form name="AddProductToShipping" type="multi" use-row-submit="true"
-		list-name="orderItems" title="" target="AddProductToShipping"
-		odd-row-style="alternate-row" default-table-style="basic-table hover-bar"
-		paginate-target="EditShippingItems">
-		<field name="productId">
-			<lookup target-form-name="LookupProduct" presentation="window" />
-		</field>
-		<field name="shipmentId">
-			<hidden value="${shipmentId}" />
-		</field>
-		<field name="quantityToShip" title="${uiLabelMap.OrderQuantity}">
-			<text size="5" maxlength="10" />
-		</field>
-		<field name="submitButton" title="${uiLabelMap.OrderAddToOrder}"
-			widget-style="smallSubmit">
-			<submit />
-		</field>
+	<!-- <form name="AddProductToShipping" type="multi" use-row-submit="true" 
+		list-name="orderItems" title="" target="AddProductToShipping" odd-row-style="alternate-row" 
+		default-table-style="basic-table hover-bar" paginate-target="EditShippingItems"> 
+		<field name="productId"> <lookup target-form-name="LookupProduct" presentation="window" 
+		/> </field> <field name="shipmentId"> <hidden value="${shipmentId}" /> </field> 
+		<field name="quantityToShip" title="${uiLabelMap.OrderQuantity}"> <text size="5" 
+		maxlength="10" /> </field> <field name="submitButton" title="${uiLabelMap.OrderAddToOrder}" 
+		widget-style="smallSubmit"> <submit /> </field> </form> -->
 
-	</form> -->
-	
 	<form name="AddProductToShipping" type="multi" use-row-submit="true"
 		list-name="productLine" title="" target="AddProductToShipping"
 		odd-row-style="alternate-row" default-table-style="basic-table hover-bar"
@@ -521,15 +510,15 @@
 		<field name="shipmentId">
 			<hidden value="${shipmentId}" />
 		</field>
-		
+
 		<!-- <field name="orderId" title="${uiLabelMap.OrderOrderId}" widget-style="buttontext"> 
 			<hyperlink description="${orderId}" target="/catalog/control/EditProductInventoryItems" 
 			target-type="inter-app"> <parameter param-name="orderId"/> </hyperlink> </field> -->
 		<field name="productId">
-			<lookup target-form-name="LookupProduct"  />
+			<lookup target-form-name="LookupProduct" />
 		</field>
-		
-	
+
+
 		<field name="quantityToShip" title="${uiLabelMap.OrderQuantity}">
 			<text size="5" maxlength="10" />
 		</field>
@@ -538,6 +527,76 @@
 			<submit />
 		</field>
 
+	</form>
+
+	<form name="ShipmentsReport" type="multi" use-row-submit="true"
+		list-name="orderItems" title="" target="ordersnotshipped"
+		odd-row-style="alternate-row" default-table-style="basic-table hover-bar"
+		paginate-target="ordersnotshipped">
+		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" 
+			auto-field-map="true"/> </row-actions> -->
+		
+		<field name="orderId">
+			<display />
+		</field>
+		<field name="estimatedShipDate">
+			<display />
+		</field>
+		<!-- <field name="orderId" title="${uiLabelMap.OrderOrderId}" widget-style="buttontext"> 
+			<hyperlink description="${orderId}" target="/catalog/control/EditProductInventoryItems" 
+			target-type="inter-app"> <parameter param-name="orderId"/> </hyperlink> </field> -->
+		<field name="productId">
+			<display />
+		</field>
+		<field name="productName">
+			<display />
+		</field>
+		<field name="quantity" title="${uiLabelMap.OrderItemQuantity}">
+			<display />
+		</field>
+		<field name="quantityShipped">
+			<display />
+		</field>
+		<field name="quantityShippable">
+			<display />
+		</field>
+	</form>
+
+	<form name="ShipmentsWeights" type="multi" use-row-submit="true"
+		list-name="shipWeights" title="" target="ordersnotshipped"
+		odd-row-style="alternate-row" default-table-style="basic-table hover-bar"
+		paginate-target="ordersnotshipped">
+		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" 
+			auto-field-map="true"/> </row-actions> -->
+		<field name="estimatedShipDate">
+			<display />
+		</field>
+		<field name="netWeight">
+			<display />
+		</field>
+	</form>
+	
+	<form name="ExtraShippedProducts" type="multi" use-row-submit="true"
+		list-name="exShippedPr" title="" target="ordersnotshipped"
+		odd-row-style="alternate-row" default-table-style="basic-table hover-bar"
+		paginate-target="ordersnotshipped">
+		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" 
+			auto-field-map="true"/> </row-actions> -->
+		<field name="estimatedShipDate">
+			<display />
+		</field>
+		<field name="shipmentId">
+			<display />
+		</field>
+		<field name="productId">
+			<display />
+		</field>
+		<field name="productName">
+			<display />
+		</field>
+		<field name="quantity">
+			<display />
+		</field>
 	</form>
 
 

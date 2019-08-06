@@ -503,7 +503,7 @@
 									location="component://vforder/template/ListShippingItemsFooter.ftl" />
 							</html>
 						</platform-specific>
-						
+
 						<include-form name="AddProductToShipping"
 							location="component://vforder/widget/VforderForms.xml" />
 
@@ -853,6 +853,39 @@
 			</widgets>
 		</section>
 	</screen>
+
+
+	<screen name="ShipmentsReport">
+		<section>
+			<actions>
+				<set field="tabButtonItem" value="EditShippingItems" />
+				<set field="headerItem" value="shipmentsreport" />
+				<script location="component://vforder/groovyScripts/ShipmentsReport.groovy" />
+			</actions>
+			<widgets>
+				<decorator-screen name="VfFindorderCommonDecorator"
+					location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="body">
+						<container style="button-bar">
+							<link target="ListNotShippedOrderItemsPdf" text="${uiLabelMap.CommonPdf}"
+								style="buttontext create">
+
+							</link>
+						</container>
+						<include-form name="ShipmentsReport"
+							location="component://vforder/widget/VforderForms.xml" />
+						<include-form name="ShipmentsWeights"
+							location="component://vforder/widget/VforderForms.xml" />
+						<include-form name="ExtraShippedProducts"
+							location="component://vforder/widget/VforderForms.xml" />
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+
+
+
 
 	<screen name="ListNotShippedOrderItemsPdf">
 		<section>

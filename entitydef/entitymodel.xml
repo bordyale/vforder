@@ -124,7 +124,8 @@
 				<complex-alias-field entity-alias="SI" field="quantity" />
 			</complex-alias>
 		</alias>
-		<view-link entity-alias="VSI" rel-entity-alias="OI" rel-optional="true">
+		<view-link entity-alias="VSI" rel-entity-alias="OI"
+			rel-optional="true">
 			<key-map field-name="orderId" />
 			<key-map field-name="orderItemSeqId" />
 		</view-link>
@@ -132,7 +133,7 @@
 			<key-map field-name="shipmentId" />
 			<key-map field-name="shipmentItemSeqId" />
 		</view-link>
-		<view-link entity-alias="SI" rel-entity-alias="PR" >
+		<view-link entity-alias="SI" rel-entity-alias="PR">
 			<key-map field-name="productId" />
 		</view-link>
 		<view-link entity-alias="SI" rel-entity-alias="SH">
@@ -173,16 +174,15 @@
 	</entity>
 
 
-	<view-entity entity-name="ShippingWeight"
-		package-name="org.apache.ofbiz.order.order" never-cache="true"
-		title="ShippingItems Summary">
+	<view-entity entity-name="ShippingWeight" package-name="org.apache.ofbiz.order.order"
+		never-cache="true" title="ShippingItems Summary">
 		<member-entity entity-alias="SIV" entity-name="ShippingItemView" />
 		<alias entity-alias="SIV" name="estimatedShipDate" group-by="true" />
 		<alias entity-alias="SIV" name="shipmentId" group-by="true" />
 		<alias entity-alias="SIV" name="netWeight" field="netWeight"
 			function="sum" />
 	</view-entity>
-	
+
 	<view-entity entity-name="ShippingProductQuantity"
 		package-name="org.apache.ofbiz.order.order" never-cache="true"
 		title="ShippingItems Summary">
@@ -195,6 +195,37 @@
 			function="sum" />
 		<alias entity-alias="SIV" name="netWeight" field="netWeight"
 			function="sum" />
+	</view-entity>
+
+	<view-entity entity-name="ShipmentsReport" package-name="org.apache.ofbiz.order.order"
+		never-cache="true" title="Order Items and ShippingItem View Entity">
+		<member-entity entity-alias="SI" entity-name="ShippingItemQtySumView" />
+		<member-entity entity-alias="SIV" entity-name="ShippingItemView" />
+		<member-entity entity-alias="OI" entity-name="OrderItem" />
+		<alias entity-alias="SIV" name="shipmentId" group-by="true" />
+		<alias entity-alias="SIV" name="estimatedShipDate" group-by="true" />
+		<alias entity-alias="SIV" name="orderId" group-by="true"/>
+		<alias entity-alias="SIV" name="productId" group-by="true" />
+		<alias entity-alias="SIV" name="productName" group-by="true"/>
+		<alias entity-alias="SIV" name="internalName" group-by="true"/>
+		<alias entity-alias="OI" name="quantity" group-by="true"/>
+		<alias entity-alias="OI" name="statusId" group-by="true"/>
+		<alias entity-alias="SI" name="quantityShipped" group-by="true"/>
+		<alias name="quantityShippable" group-by="true">
+			<complex-alias operator="-">
+				<complex-alias-field entity-alias="OI" field="quantity" />
+				<complex-alias-field entity-alias="SI"
+					field="quantityShipped" />
+			</complex-alias>
+		</alias>
+		<view-link entity-alias="SI" rel-entity-alias="SIV">
+			<key-map field-name="orderId" />
+			<key-map field-name="orderItemSeqId" />
+		</view-link>
+		<view-link entity-alias="SIV" rel-entity-alias="OI">
+			<key-map field-name="orderId" />
+			<key-map field-name="orderItemSeqId" />
+		</view-link>
 	</view-entity>
 
 

@@ -286,6 +286,10 @@
         <value xml:lang="en">Orders not Shipped</value>
         <value xml:lang="hu">Fűggő rendelések</value>
     </property>
+    <property key="ShipmentsReport">
+        <value xml:lang="en">Shipments Report</value>
+        <value xml:lang="hu">Szállítások Összesítő</value>
+    </property>
     <property key="QuantityShipped">
         <value xml:lang="en">Qty Shipped</value>
         <value xml:lang="hu">Qty Shipped</value>

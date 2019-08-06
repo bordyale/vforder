@@ -214,6 +214,10 @@
 		<security https="true" auth="true" />
 		<response name="success" type="view" value="ordersnotshipped" />
 	</request-map>
+	<request-map uri="shipmentsreport">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="shipmentsreport" />
+	</request-map>
 	<request-map uri="ListNotShippedOrderItemsPdf">
 		<security https="true" auth="true" />
 		<response name="success" type="view" value="ListNotShippedOrderItemsPdf" />
@@ -488,6 +492,8 @@
 		content-type="application/pdf" encoding="none" />
 	<view-map name="ordersnotshipped" type="screen"
 		page="component://vforder/widget/VforderScreens.xml#ListNotShippedOrderItems" />
+	<view-map name="shipmentsreport" type="screen"
+		page="component://vforder/widget/VforderScreens.xml#ShipmentsReport" />
 	<view-map name="ListNotShippedOrderItemsPdf" type="screenfop"
 		page="component://vforder/widget/VforderScreens.xml#ListNotShippedOrderItemsPdf"
 		content-type="application/pdf" encoding="none" />

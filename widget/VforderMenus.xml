@@ -34,6 +34,12 @@
 			</condition>
 			<link target="ordersnotshipped" />
 		</menu-item>
+		<menu-item name="shipmentsreport" title="${uiLabelMap.ShipmentsReport}">
+			<condition>
+				<if-has-permission permission="VFORDER" action="_VIEW" />
+			</condition>
+			<link target="shipmentsreport" />
+		</menu-item>
 	</menu>
 
 
