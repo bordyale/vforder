@@ -222,6 +222,10 @@
 		<security https="true" auth="true" />
 		<response name="success" type="view" value="ListNotShippedOrderItemsPdf" />
 	</request-map>
+	<request-map uri="ShipmentsReportPdf">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="ShipmentsReportPdf" />
+	</request-map>
 
 
 	<!-- Order Manager Edit Requests -->
@@ -496,6 +500,9 @@
 		page="component://vforder/widget/VforderScreens.xml#ShipmentsReport" />
 	<view-map name="ListNotShippedOrderItemsPdf" type="screenfop"
 		page="component://vforder/widget/VforderScreens.xml#ListNotShippedOrderItemsPdf"
+		content-type="application/pdf" encoding="none" />
+	<view-map name="ShipmentsReportPdf" type="screenfop"
+		page="component://vforder/widget/VforderScreens.xml#ShipmentsReportPdf"
 		content-type="application/pdf" encoding="none" />
 	<view-map name="ShowOrderItemShippingLayer" type="screen"
 		page="component://vforder/widget/VforderScreens.xml#ShowOrderItemShippingLayer" />

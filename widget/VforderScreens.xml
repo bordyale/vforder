@@ -859,6 +859,8 @@
 		<section>
 			<actions>
 				<set field="tabButtonItem" value="EditShippingItems" />
+				<set field="fromDate" from-field="parameters.fromDate" />
+				<set field="thruDate" from-field="parameters.thruDate" />
 				<set field="headerItem" value="shipmentsreport" />
 				<script location="component://vforder/groovyScripts/ShipmentsReport.groovy" />
 			</actions>
@@ -867,9 +869,10 @@
 					location="${parameters.mainDecoratorLocation}">
 					<decorator-section name="body">
 						<container style="button-bar">
-							<link target="ListNotShippedOrderItemsPdf" text="${uiLabelMap.CommonPdf}"
-								style="buttontext create">
-
+							<link target="ShipmentsReportPdf" text="${uiLabelMap.CommonPdf}"
+								style="buttontext create" target-window="_blank">
+								<parameter param-name="fromDate" />
+								<parameter param-name="thruDate" />
 							</link>
 						</container>
 						<include-form name="FilterShipmentsReport"
@@ -882,6 +885,28 @@
 							location="component://vforder/widget/VforderForms.xml" />
 					</decorator-section>
 				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+
+	<screen name="ShipmentsReportPdf">
+		<section>
+			<actions>
+				<set field="tabButtonItem" value="EditShippingItems" />
+				<set field="fromDate" from-field="parameters.fromDate" />
+				<set field="thruDate" from-field="parameters.thruDate" />
+				<set field="headerItem" value="shipmentsreport" />
+				<property-map resource="VforderUiLabels" map-name="uiLabelMap"
+					global="true" />
+				<script location="component://vforder/groovyScripts/ShipmentsReport.groovy" />
+			</actions>
+			<widgets>
+				<platform-specific>
+					<xsl-fo>
+						<html-template
+							location="component://vforder/template/reports/ShipmentsReportPdf.fo.ftl" />
+					</xsl-fo>
+				</platform-specific>
 			</widgets>
 		</section>
 	</screen>

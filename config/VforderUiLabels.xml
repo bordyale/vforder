@@ -374,4 +374,20 @@
         <value xml:lang="en">Note</value>
         <value xml:lang="hu">Note</value>
     </property>
+    <property key="ShippingProgram">
+        <value xml:lang="en">Shipping Program</value>
+        <value xml:lang="hu">Szállítási Terv</value>
+    </property>
+    <property key="ExtraShipped">
+        <value xml:lang="en">Extra Shipped</value>
+        <value xml:lang="hu">Túl Szállított</value>
+    </property>
+    <property key="StatusPartial">
+        <value xml:lang="en">Status Partial</value>
+        <value xml:lang="hu">Rendszerben</value>
+    </property>
+    <property key="StatusNone">
+        <value xml:lang="en">Status None</value>
+        <value xml:lang="hu">Nincs rendszerben</value>
+    </property>
 </resource>
