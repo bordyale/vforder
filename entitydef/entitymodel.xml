@@ -58,6 +58,7 @@
 		<alias entity-alias="OI" name="orderItemSeqId" />
 		<alias entity-alias="OI" name="productId" />
 		<alias entity-alias="OI" name="quantity" />
+		<alias entity-alias="OI" name="shipBeforeDate" />
 		<alias entity-alias="SI" name="quantityShipped" />
 		<alias name="quantityShippable">
 			<complex-alias operator="-">

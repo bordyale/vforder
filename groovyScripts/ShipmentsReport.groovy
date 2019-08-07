@@ -90,6 +90,40 @@ for (GenericValue entry: extraShippedProducts){
 }
 
 
+notShippedItems = select("orderId","statusId","orderItemSeqId","quantity","quantityShipped","productId","productName","shipBeforeDate").from("OrderItemShippingItemView").cache(false).queryList()
+
+notShippedItems = EntityUtil.orderBy(notShippedItems,  ["shipBeforeDate"])
+
+List<HashMap<String,Object>> hashMaps2 = new ArrayList<HashMap<String,Object>>()
+
+
+for (GenericValue entry: notShippedItems){
+	Map<String,Object> e = new HashMap<String,Object>()
+	e.put("orderItemSeqId",entry.get("orderItemSeqId"))
+	e.put("orderId",entry.get("orderId"))
+	e.put("productId",entry.get("productId"))
+	e.put("shipBeforeDate",entry.get("shipBeforeDate"))
+	e.put("productName",entry.get("productName"))
+	BigDecimal quantity = entry.get("quantity")
+	e.put("quantity",entry.get("quantity"))
+	BigDecimal quantityShipped = entry.get("quantityShipped")
+	if (quantityShipped ==null){
+		quantityShipped = BigDecimal.ZERO
+	}
+
+	e.put("quantityShipped",quantityShipped)
+	e.put("quantityShippable",quantity.subtract(quantityShipped))
+	status = entry.get("statusId")
+	if (!quantity.equals(quantityShipped)){
+		if (!status.equals("ITEM_CANCELLED")){
+			hashMaps2.add(e)
+		}
+	}
+}
+
+
+
+context.orderItems2 = hashMaps2
 context.orderItems = hashMaps
 context.shipWeights = shipWeights
 context.exShippedPr = exShippedPr

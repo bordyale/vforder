@@ -62,4 +62,4 @@ for (GenericValue entry: orderItemShippingItem){
 
 
 
-context.orderItems = hashMaps
+context.orderItems2 = hashMaps

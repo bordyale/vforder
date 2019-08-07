@@ -881,6 +881,9 @@
 							location="component://vforder/widget/VforderForms.xml" />
 						<include-form name="ShipmentsWeights"
 							location="component://vforder/widget/VforderForms.xml" />
+
+						<include-form name="ListNotShippedOrderItems"
+							location="component://vforder/widget/VforderForms.xml" />
 						<include-form name="ExtraShippedProducts"
 							location="component://vforder/widget/VforderForms.xml" />
 					</decorator-section>

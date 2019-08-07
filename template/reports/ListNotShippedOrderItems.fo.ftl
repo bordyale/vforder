@@ -61,7 +61,7 @@ under the License.
 				</fo:table-header>
                 <fo:table-body>
                 
-	                <#list orderItems as item>
+	                <#list orderItems2 as item>
 		                
 		                  <fo:table-row>
 		                  	<fo:table-cell border-style="solid" border-width="0.3mm">
