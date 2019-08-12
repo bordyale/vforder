@@ -87,6 +87,8 @@ public class VforderEvents {
 	public static final MathContext generalRounding = new MathContext(10);
 
 	public static String updateOrderShippingItems(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		GenericValue userLogin = (GenericValue) session.getAttribute("userLogin");
 		Delegator delegator = (Delegator) request.getAttribute("delegator");
 		LocalDispatcher dispatcher = (LocalDispatcher) request.getAttribute("dispatcher");
 
@@ -165,8 +167,7 @@ public class VforderEvents {
 				Integer shipItemId = 1;
 				if (orderId != null) {
 					try {
-						vfOrdItemShipItem = delegator.findOne("OrderItemShippingItemView",
-								UtilMisc.toMap("orderId", orderId, "orderItemSeqId", orderItemSeqId), false);
+						vfOrdItemShipItem = delegator.findOne("OrderItemShippingItemView", UtilMisc.toMap("orderId", orderId, "orderItemSeqId", orderItemSeqId), false);
 
 						quantity = (BigDecimal) vfOrdItemShipItem.get("quantity");
 						productId = (String) vfOrdItemShipItem.get("productId");
@@ -186,7 +187,7 @@ public class VforderEvents {
 						}
 						quantityShippable = quantity.subtract(quantityShipped);
 					}
-				}else{
+				} else {
 					if (paramMap.containsKey("productId" + thisSuffix)) {
 						productId = (String) paramMap.remove("productId" + thisSuffix);
 					}
@@ -197,19 +198,15 @@ public class VforderEvents {
 				} else {
 
 					try {
-						shipItemId=null;
-						List<GenericValue> shipmentItems = delegator.findByAnd("ShipmentItem", UtilMisc.toMap("shipmentId", shipmentId), null, false);
+						/*shipItemId = null;
+						List<GenericValue> shipmentItems = EntityQuery.use(delegator).from("ShipmentItem").where(EntityCondition.makeCondition("shipmentId", EntityOperator.EQUALS, shipmentId))
+								.orderBy("shipmentItemSeqId").queryList();
 						if (shipmentItems != null)
 							if (shipItemId == null) {
-								shipItemId = shipmentItems.size();
-							}
+								// shipItemId = shipmentItems.size();
+								shipItemId = new Integer((String) shipmentItems.get(shipmentItems.size() - 1).get("shipmentItemSeqId"));
+							}*/
 
-					} catch (GenericEntityException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-
-					try {
 						// /List<GenericValue> vfshipmentItems = delegator
 						// .findByAnd("VfShipmentItem", UtilMisc.toMap(
 						// "shipmentId", shipmentId, "orderId",
@@ -217,28 +214,37 @@ public class VforderEvents {
 						// orderItemSeqId), null, false);
 						BigDecimal qty = BigDecimal.ZERO;
 						GenericValue vfshipmentItem = null;
-						GenericValue shipmentItem = null;
+						//GenericValue shipmentItem = null;
 
-						shipmentItem = delegator.makeValue("ShipmentItem");
+						//shipmentItem = delegator.makeValue("ShipmentItem");
 						vfshipmentItem = delegator.makeValue("VfShipmentItem");
 						// GenericValue shippingItem =
 						// delegator.makeValue("ShippingItem");
-						shipmentItem.set("shipmentId", shipmentId);
-						shipmentItem.set("productId", productId);
+						//shipmentItem.set("shipmentId", shipmentId);
+						//shipmentItem.set("productId", productId);
 						vfshipmentItem.set("shipmentId", shipmentId);
 
 						vfshipmentItem.set("orderId", orderId);
 						vfshipmentItem.set("orderItemSeqId", orderItemSeqId);
-						shipItemId++;
+						//shipItemId++;
 						vfshipmentItem.set("shipmentItemSeqId", shipItemId.toString());
-						shipmentItem.set("shipmentItemSeqId", shipItemId.toString());
+						//shipmentItem.set("shipmentItemSeqId", shipItemId.toString());
 						shipment.put("estimatedShipCost", new BigDecimal(shipItemId));
 						delegator.createOrStore(shipment);
 
 						qty = qty.add(quantityToShip);
-						shipmentItem.set("quantity", qty);
+						//shipmentItem.set("quantity", qty);
+
 						if (qty.compareTo(BigDecimal.ZERO) > 0) {
-							delegator.createOrStore(shipmentItem);
+							try {
+								Map<String, Object> tmpResult = dispatcher.runSync("createShipmentItem", UtilMisc.<String, Object> toMap("userLogin", userLogin, "shipmentId", shipmentId, "productId",
+										productId, "orderId", orderId, "orderItemSeqId", orderItemSeqId, "quantity", qty));
+								vfshipmentItem.set("shipmentItemSeqId", (String) tmpResult.get("shipmentItemSeqId"));
+
+							} catch (GenericServiceException e) {
+								Debug.logError(e, module);
+							}
+							// delegator.createOrStore(shipmentItem);
 							delegator.createOrStore(vfshipmentItem);
 						}
 					} catch (GenericEntityException e) {
@@ -458,8 +464,7 @@ public class VforderEvents {
 				}
 
 				try {
-					GenericValue vfShippingItem = delegator.findOne("VfShipmentItem",
-							UtilMisc.toMap("shipmentId", shipmentId, "shipmentItemSeqId", shipmentItemSeqId), false);
+					GenericValue vfShippingItem = delegator.findOne("VfShipmentItem", UtilMisc.toMap("shipmentId", shipmentId, "shipmentItemSeqId", shipmentItemSeqId), false);
 					if (vfShippingItem != null) {
 						vfShippingItem.put("pallet", pallet);
 						vfShippingItem.put("isBoxOrPallet", isBoxOrPallet);
@@ -521,11 +526,8 @@ public class VforderEvents {
 						// permission
 						List<GenericValue> storeReps = null;
 						try {
-							storeReps = EntityQuery
-									.use(delegator)
-									.from("ProductStoreRole")
-									.where("productStoreId", productStore.getString("productStoreId"), "partyId", userLogin.getString("partyId"), "roleTypeId",
-											"SALES_REP").filterByDate().queryList();
+							storeReps = EntityQuery.use(delegator).from("ProductStoreRole")
+									.where("productStoreId", productStore.getString("productStoreId"), "partyId", userLogin.getString("partyId"), "roleTypeId", "SALES_REP").filterByDate().queryList();
 						} catch (GenericEntityException gee) {
 							request.setAttribute("_ERROR_MESSAGE_", gee.getMessage());
 							return "error";
@@ -539,8 +541,7 @@ public class VforderEvents {
 				if (hasPermission) {
 					cart = ShoppingCartEvents.getCartObject(request, null, productStore.getString("defaultCurrencyUomId"));
 				} else {
-					request.setAttribute("_ERROR_MESSAGE_",
-							UtilProperties.getMessage(resource_error, "OrderYouDoNotHavePermissionToTakeOrdersForThisStore", locale));
+					request.setAttribute("_ERROR_MESSAGE_", UtilProperties.getMessage(resource_error, "OrderYouDoNotHavePermissionToTakeOrdersForThisStore", locale));
 					cart.clear();
 					session.removeAttribute("orderMode");
 					return "error";
