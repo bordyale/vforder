@@ -197,6 +197,7 @@ public class VforderEvents {
 				} else {
 
 					try {
+						shipItemId=null;
 						List<GenericValue> shipmentItems = delegator.findByAnd("ShipmentItem", UtilMisc.toMap("shipmentId", shipmentId), null, false);
 						if (shipmentItems != null)
 							if (shipItemId == null) {
