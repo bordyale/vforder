@@ -100,7 +100,11 @@ under the License.
 		                  <fo:table-row>
 		                  	<fo:table-cell border-style="solid" border-width="0.3mm">
 		                      <fo:block>
-		                        ${item.orderId}
+		                        <#if item.orderId?has_content>
+		                        	${item.orderId}
+		                        <#else>
+		                      		ooo
+		                        </#if>
 		                      </fo:block>
 		                    </fo:table-cell>
 		                    <fo:table-cell border-style="solid" border-width="0.3mm">

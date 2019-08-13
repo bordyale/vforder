@@ -227,10 +227,10 @@ public class VforderEvents {
 						vfshipmentItem.set("orderId", orderId);
 						vfshipmentItem.set("orderItemSeqId", orderItemSeqId);
 						//shipItemId++;
-						vfshipmentItem.set("shipmentItemSeqId", shipItemId.toString());
+						//vfshipmentItem.set("shipmentItemSeqId", shipItemId.toString());
 						//shipmentItem.set("shipmentItemSeqId", shipItemId.toString());
-						shipment.put("estimatedShipCost", new BigDecimal(shipItemId));
-						delegator.createOrStore(shipment);
+						//shipment.put("estimatedShipCost", new BigDecimal(shipItemId));
+						//delegator.createOrStore(shipment);
 
 						qty = qty.add(quantityToShip);
 						//shipmentItem.set("quantity", qty);

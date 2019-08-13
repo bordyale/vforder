@@ -185,7 +185,7 @@
 
 
 	<form name="ListShippingItems" type="multi" list-name="listIt"
-		target="UpdatePallet" paginate-target="findshippings" odd-row-style="alternate-row"
+		target="UpdatePallet" paginate-target="EditShippingItems" odd-row-style="alternate-row"
 		default-table-style="basic-table hover-bar">
 		<!-- <actions> <service service-name="performFind" result-map="result" 
 			result-map-list="listIt"> <field-map field-name="inputFields" from-field="findParams"/> 
@@ -428,7 +428,7 @@
 
 
 	<form name="ListOrderItemShipping" type="list" list-name="listIt"
-		paginate-target="findshippings" odd-row-style="alternate-row"
+		paginate-target="EditShippingItems" odd-row-style="alternate-row"
 		default-table-style="basic-table hover-bar" header-row-style="header-row-2"
 		override-list-size="true">
 		<actions>
