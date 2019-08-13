@@ -475,6 +475,8 @@
 				<set field="headerItem" value="findshippings" />
 				<set field="shipmentId" from-field="parameters.shipmentId" />
 				<set field="titleProperty" value="${shipmentId}" />
+				<set field="viewSize" from-field="parameters.VIEW_SIZE_1" type="Integer"
+					default-value="200" />
 				<entity-one entity-name="Shipment" value-field="shipping" />
 				<script location="component://vforder/groovyScripts/ListShippingItems.groovy" />
 			</actions>
@@ -862,6 +864,8 @@
 				<set field="fromDate" from-field="parameters.fromDate" />
 				<set field="thruDate" from-field="parameters.thruDate" />
 				<set field="headerItem" value="shipmentsreport" />
+				<set field="viewSize" from-field="parameters.VIEW_SIZE_1" type="Integer"
+					default-value="200" />
 				<script location="component://vforder/groovyScripts/ShipmentsReport.groovy" />
 			</actions>
 			<widgets>
@@ -881,11 +885,14 @@
 							location="component://vforder/widget/VforderForms.xml" />
 						<include-form name="ShipmentsWeights"
 							location="component://vforder/widget/VforderForms.xml" />
-
-						<include-form name="ListNotShippedOrderItems"
-							location="component://vforder/widget/VforderForms.xml" />
-						<include-form name="ExtraShippedProducts"
-							location="component://vforder/widget/VforderForms.xml" />
+						<screenlet title="${uiLabelMap.OrdersNotShipped}">
+							<include-form name="ListNotShippedOrderItems"
+								location="component://vforder/widget/VforderForms.xml" />
+						</screenlet>
+						<screenlet title="${uiLabelMap.ExtraShipped}">
+							<include-form name="ExtraShippedProducts"
+								location="component://vforder/widget/VforderForms.xml" />
+						</screenlet>
 					</decorator-section>
 				</decorator-screen>
 			</widgets>
