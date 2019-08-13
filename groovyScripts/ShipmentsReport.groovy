@@ -90,7 +90,7 @@ for (GenericValue entry: extraShippedProducts){
 }
 
 
-notShippedItems = select("orderId","statusId","orderItemSeqId","quantity","quantityShipped","productId","productName","shipBeforeDate").from("OrderItemShippingItemView").cache(false).queryList()
+notShippedItems = select("orderId","statusId","orderItemSeqId","quantity","quantityShipped","productId","productName","shipBeforeDate","productWeight").from("OrderItemShippingItemView").cache(false).queryList()
 
 notShippedItems = EntityUtil.orderBy(notShippedItems,  ["shipBeforeDate"])
 
@@ -106,6 +106,7 @@ for (GenericValue entry: notShippedItems){
 	e.put("productName",entry.get("productName"))
 	BigDecimal quantity = entry.get("quantity")
 	e.put("quantity",entry.get("quantity"))
+	e.put("productWeight",entry.get("productWeight"))
 	BigDecimal quantityShipped = entry.get("quantityShipped")
 	if (quantityShipped ==null){
 		quantityShipped = BigDecimal.ZERO
@@ -113,6 +114,12 @@ for (GenericValue entry: notShippedItems){
 
 	e.put("quantityShipped",quantityShipped)
 	e.put("quantityShippable",quantity.subtract(quantityShipped))
+
+	BigDecimal productWeight = entry.get("productWeight")
+	BigDecimal quantityShippable = quantity.subtract(quantityShipped)
+
+	e.put("netWeight",quantityShippable.multiply(productWeight))
+
 	status = entry.get("statusId")
 	if (!quantity.equals(quantityShipped)){
 		if (!status.equals("ITEM_CANCELLED")){

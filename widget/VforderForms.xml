@@ -185,8 +185,8 @@
 
 
 	<form name="ListShippingItems" type="multi" list-name="listIt"
-		target="UpdatePallet" paginate-target="EditShippingItems" odd-row-style="alternate-row"
-		default-table-style="basic-table hover-bar">
+		target="UpdatePallet" paginate-target="EditShippingItems"
+		odd-row-style="alternate-row" default-table-style="basic-table hover-bar">
 		<!-- <actions> <service service-name="performFind" result-map="result" 
 			result-map-list="listIt"> <field-map field-name="inputFields" from-field="findParams"/> 
 			<field-map field-name="entityName" value="ShippingItem"/> <field-map field-name="orderBy" 
@@ -424,6 +424,12 @@
 		<field name="quantityShippable">
 			<display />
 		</field>
+		<field name="productWeight">
+			<display />
+		</field>
+		<field name="netWeight">
+			<display />
+		</field>
 	</form>
 
 
@@ -605,11 +611,11 @@
 	<form name="FilterShipmentsReport" type="single" target="shipmentsreport">
 		<field name="fromDate" title="${uiLabelMap.ExampleDateField2Title}"
 			tooltip="${uiLabelMap.FromDate}" tooltip-style="button-text">
-			<date-time mask="Y"/>
+			<date-time mask="Y" />
 		</field>
 		<field name="thruDate" title="${uiLabelMap.ExampleDateField2Title}"
 			tooltip="${uiLabelMap.ToDate}" tooltip-style="button-text">
-			<date-time mask="Y"/>
+			<date-time mask="Y" />
 		</field>
 
 		<field name="searchButton" title="${uiLabelMap.CommonFind}"

@@ -54,6 +54,7 @@
 		<alias entity-alias="OI" name="statusId" />
 		<alias entity-alias="PR" name="productName" />
 		<alias entity-alias="PR" name="internalName" />
+		<alias entity-alias="PR" name="productWeight" />
 		<alias entity-alias="OI" name="orderDate" />
 		<alias entity-alias="OI" name="orderItemSeqId" />
 		<alias entity-alias="OI" name="productId" />
@@ -67,6 +68,17 @@
 					field="quantityShipped" />
 			</complex-alias>
 		</alias>
+		<!-- <alias name="netWeight">
+			<complex-alias operator="*">
+				<complex-alias-field entity-alias="PR"
+					field="productWeight" />
+				<complex-alias operator="-">
+					<complex-alias-field entity-alias="OI" field="quantity" />
+					<complex-alias-field entity-alias="SI"
+						field="quantityShipped" />
+				</complex-alias>
+			</complex-alias>
+		</alias> -->
 		<view-link entity-alias="OI" rel-entity-alias="SI"
 			rel-optional="true">
 			<key-map field-name="orderId" />
@@ -205,13 +217,13 @@
 		<member-entity entity-alias="OI" entity-name="OrderItem" />
 		<alias entity-alias="SIV" name="shipmentId" group-by="true" />
 		<alias entity-alias="SIV" name="estimatedShipDate" group-by="true" />
-		<alias entity-alias="SIV" name="orderId" group-by="true"/>
+		<alias entity-alias="SIV" name="orderId" group-by="true" />
 		<alias entity-alias="SIV" name="productId" group-by="true" />
-		<alias entity-alias="SIV" name="productName" group-by="true"/>
-		<alias entity-alias="SIV" name="internalName" group-by="true"/>
-		<alias entity-alias="OI" name="quantity" group-by="true"/>
-		<alias entity-alias="OI" name="statusId" group-by="true"/>
-		<alias entity-alias="SI" name="quantityShipped" group-by="true"/>
+		<alias entity-alias="SIV" name="productName" group-by="true" />
+		<alias entity-alias="SIV" name="internalName" group-by="true" />
+		<alias entity-alias="OI" name="quantity" group-by="true" />
+		<alias entity-alias="OI" name="statusId" group-by="true" />
+		<alias entity-alias="SI" name="quantityShipped" group-by="true" />
 		<alias name="quantityShippable" group-by="true">
 			<complex-alias operator="-">
 				<complex-alias-field entity-alias="OI" field="quantity" />
