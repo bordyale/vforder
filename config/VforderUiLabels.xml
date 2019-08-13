@@ -242,6 +242,10 @@
         <value xml:lang="en">Net Weight</value>
         <value xml:lang="hu">Netto</value>
     </property>
+    <property key="ProgresNetWeight">
+        <value xml:lang="en">Net Weight</value>
+        <value xml:lang="hu">Ar. Netto</value>
+    </property>
     <property key="Comments">
         <value xml:lang="en">Comments</value>
         <value xml:lang="hu">Note</value>

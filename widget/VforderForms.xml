@@ -424,10 +424,13 @@
 		<field name="quantityShippable">
 			<display />
 		</field>
-		<field name="productWeight">
+		<!-- <field name="productWeight">
+			<display />
+		</field> -->
+		<field name="netWeight">
 			<display />
 		</field>
-		<field name="netWeight">
+		<field name="progresNetWeight">
 			<display />
 		</field>
 	</form>

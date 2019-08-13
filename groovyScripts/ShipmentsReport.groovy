@@ -95,9 +95,10 @@ notShippedItems = select("orderId","statusId","orderItemSeqId","quantity","quant
 notShippedItems = EntityUtil.orderBy(notShippedItems,  ["shipBeforeDate"])
 
 List<HashMap<String,Object>> hashMaps2 = new ArrayList<HashMap<String,Object>>()
-
-
+int i=0
+BigDecimal progresNetWeigh = BigDecimal.ZERO
 for (GenericValue entry: notShippedItems){
+	i=notShippedItems.size()
 	Map<String,Object> e = new HashMap<String,Object>()
 	e.put("orderItemSeqId",entry.get("orderItemSeqId"))
 	e.put("orderId",entry.get("orderId"))
@@ -111,18 +112,20 @@ for (GenericValue entry: notShippedItems){
 	if (quantityShipped ==null){
 		quantityShipped = BigDecimal.ZERO
 	}
-
+	BigDecimal quantityShippable =quantity.subtract(quantityShipped)
 	e.put("quantityShipped",quantityShipped)
-	e.put("quantityShippable",quantity.subtract(quantityShipped))
+	e.put("quantityShippable",quantityShippable)
 
 	BigDecimal productWeight = entry.get("productWeight")
-	BigDecimal quantityShippable = quantity.subtract(quantityShipped)
-
-	e.put("netWeight",quantityShippable.multiply(productWeight))
-
+	BigDecimal netWeight = quantityShippable.multiply(productWeight)
+	e.put("netWeight",netWeight)
+	
+	
 	status = entry.get("statusId")
 	if (!quantity.equals(quantityShipped)){
 		if (!status.equals("ITEM_CANCELLED")){
+			progresNetWeigh = progresNetWeigh.add(netWeight)		
+			e.put("progresNetWeight",progresNetWeigh)
 			hashMaps2.add(e)
 		}
 	}
