@@ -240,11 +240,11 @@
     </property>
     <property key="NetWeight">
         <value xml:lang="en">Net Weight</value>
-        <value xml:lang="hu">Netto</value>
+        <value xml:lang="hu">Netto súly</value>
     </property>
     <property key="ProgresNetWeight">
         <value xml:lang="en">Net Weight</value>
-        <value xml:lang="hu">Ar. Netto</value>
+        <value xml:lang="hu">Ar. Netto súly</value>
     </property>
     <property key="Comments">
         <value xml:lang="en">Comments</value>
@@ -296,11 +296,11 @@
     </property>
     <property key="QuantityShipped">
         <value xml:lang="en">Qty Shipped</value>
-        <value xml:lang="hu">Qty Shipped</value>
+        <value xml:lang="hu">Szállított db</value>
     </property>
     <property key="QuantityShippable">
         <value xml:lang="en">Qty Shippable</value>
-        <value xml:lang="hu">Qty Shippable</value>
+        <value xml:lang="hu">Nyított db</value>
     </property>
     <property key="quantity">
         <value xml:lang="en">Quantity (pc)</value>
