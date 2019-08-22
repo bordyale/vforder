@@ -1,0 +1,6 @@
+use ofbiz
+\. /home/ale/backupVV/ofbiz.osboxes.2019-08-22--14-12
+use ofbiztenant
+\. /home/ale/backupVV/ofbiztenant.osboxes.2019-08-22--14-12
+use ofbizolap
+\. /home/ale/backupVV/ofbizolap.osboxes.2019-08-22--14-12
