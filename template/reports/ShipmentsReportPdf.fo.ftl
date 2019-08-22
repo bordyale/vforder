@@ -33,7 +33,7 @@ under the License.
   <fo:page-sequence master-reference="main">
   	
 	
-	<fo:flow flow-name="xsl-region-body" font-family="Helvetica">
+	<fo:flow flow-name="xsl-region-body" font-family="NotoSans">
             <fo:block>
               <#if orderItems?has_content>
 			  <fo:block font-size="13pt" font-weight="bold" text-align="center">
@@ -190,7 +190,7 @@ under the License.
               
               
               <#if orderItems2?has_content>
-              <fo:block font-size="13pt" font-weight="bold" text-align="center">
+              <fo:block  font-size="13pt" font-weight="bold" text-align="center">
 					${uiLabelMap.OrdersNotShipped} 
 			  </fo:block>
               <fo:table width="100%" table-layout="fixed"> 
