@@ -1,6 +1,6 @@
 use ofbiz
-\. /home/ale/Dropbox/backupMySql/mysql/ofbiz.osboxes.2019-08-07--09-43
+\. /home/ale/Dropbox/backupMySql/mysql/ofbiz.osboxes.2019-08-22--14-24
 use ofbiztenant
-\. /home/ale/Dropbox/backupMySql/mysql/ofbiztenant.osboxes.2019-08-07--09-43
+\. /home/ale/Dropbox/backupMySql/mysql/ofbiztenant.osboxes.2019-08-22--14-24
 use ofbizolap
-\. /home/ale/Dropbox/backupMySql/mysql/ofbizolap.osboxes.2019-08-07--09-43
+\. /home/ale/Dropbox/backupMySql/mysql/ofbizolap.osboxes.2019-08-22--14-24
