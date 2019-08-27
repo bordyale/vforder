@@ -614,7 +614,7 @@
 	<form name="FilterShipmentsReport" type="single" target="shipmentsreport">
 		<field name="fromDate" title="${uiLabelMap.ExampleDateField2Title}"
 			tooltip="${uiLabelMap.FromDate}" tooltip-style="button-text">
-			<date-time mask="Y" />
+			<date-time  default-value="${nowTimestamp}" />
 		</field>
 		<field name="thruDate" title="${uiLabelMap.ExampleDateField2Title}"
 			tooltip="${uiLabelMap.ToDate}" tooltip-style="button-text">
