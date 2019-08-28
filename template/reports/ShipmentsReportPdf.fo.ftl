@@ -194,10 +194,10 @@ under the License.
 					${uiLabelMap.OrdersNotShipped} 
 			  </fo:block>
               <fo:table width="100%" table-layout="fixed"> 
-	              <fo:table-column column-width="8%" border-width="1px" border-style="solid" />
+	              <fo:table-column column-width="6%" border-width="1px" border-style="solid" />
 		          <fo:table-column column-width="10%" border-width="1px" border-style="solid" />
-				  <fo:table-column column-width="8%" border-width="1px" border-style="solid" />
-				  <fo:table-column column-width="25%" border-width="1px" border-style="solid" />
+				  <fo:table-column column-width="6%" border-width="1px" border-style="solid" />
+				  <fo:table-column column-width="27%" border-width="1px" border-style="solid" />
 		          <fo:table-column column-width="6%" border-width="1px" border-style="solid" />
 				  <fo:table-column column-width="6%" border-width="1px" border-style="solid" /> 
 				  <fo:table-column column-width="6%" border-width="1px" border-style="solid" />
@@ -343,7 +343,9 @@ under the License.
 	              <fo:table-column column-width="8%" border-width="1px" border-style="solid" />
 		          <fo:table-column column-width="10%" border-width="1px" border-style="solid" />
 				  <fo:table-column column-width="8%" border-width="1px" border-style="solid" />
-				  <fo:table-column column-width="25%" border-width="1px" border-style="solid" />
+				  <fo:table-column column-width="27%" border-width="1px" border-style="solid" />
+				  <fo:table-column column-width="8%" border-width="1px" border-style="solid" />
+				  <fo:table-column column-width="8%" border-width="1px" border-style="solid" />
 				  <fo:table-column column-width="8%" border-width="1px" border-style="solid" />
 				        
                 <fo:table-header text-align="center" background-color="silver">
@@ -362,6 +364,12 @@ under the License.
 						</fo:table-cell>
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid" font-size="8pt">
 							<fo:block font-weight="bold">${uiLabelMap.Quantity}</fo:block>
+						</fo:table-cell>
+						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid" font-size="8pt">
+							<fo:block font-weight="bold">${uiLabelMap.StatusPartial}</fo:block>
+						</fo:table-cell>
+						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid" font-size="8pt">
+							<fo:block font-weight="bold">${uiLabelMap.StatusNone}</fo:block>
 						</fo:table-cell>				
 						
 					</fo:table-row>
@@ -394,6 +402,16 @@ under the License.
 		                    <fo:table-cell border-style="solid" border-width="0.3mm" font-size="8pt">
 		                      <fo:block>
 		                        ${item.quantity}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm" font-size="8pt">
+		                      <fo:block>
+		                        
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm" font-size="8pt">
+		                      <fo:block>
+		                        
 		                      </fo:block>
 		                    </fo:table-cell>
 		                  </fo:table-row>		         
