@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://ofbiz.apache.org/Widget-Screen"
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ofbiz.apache.org/Widget-Screen"
 	xsi:schemaLocation="http://ofbiz.apache.org/Widget-Screen http://ofbiz.apache.org/dtds/widget-screen.xsd">
 
 	<screen name="main">
 		<section>
 			<actions>
-				<set field="headerItem" value="main" /><!-- this highlights the selected 
-					menu-item with name "main" -->
+				<set field="headerItem" value="main" /><!-- this highlights the selected menu-item with name "main" -->
 			</actions>
 			<widgets>
-				<decorator-screen name="VforderCommonDecorator"
-					location="${parameters.mainDecoratorLocation}">
+				<decorator-screen name="VforderCommonDecorator" location="${parameters.mainDecoratorLocation}">
 					<decorator-section name="body">
-						<!--<platform-specific> <html> <html-template location="component://vforder/template/Javascript.ftl" 
-							/> </html> </platform-specific> <platform-specific> <html> <html-template 
-							location="component://vforder/template/BootStrapTable.ftl" /> </html> </platform-specific> -->
+						<!--<platform-specific> <html> <html-template location="component://vforder/template/Javascript.ftl" /> </html> </platform-specific> 
+							<platform-specific> <html> <html-template location="component://vforder/template/BootStrapTable.ftl" /> </html> </platform-specific> -->
 					</decorator-section>
 				</decorator-screen>
 			</widgets>
@@ -25,8 +21,7 @@
 	<screen name="CommonOrderViewDecorator">
 		<section>
 			<widgets>
-				<decorator-screen name="main-decorator"
-					location="${parameters.mainDecoratorLocation}">
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
 					<decorator-section name="body">
 						<section>
 							<widgets>
@@ -42,21 +37,17 @@
 		<section>
 			<actions>
 				<set field="headerItem" value="orderentry" />
-				<script
-					location="component://order/groovyScripts/entry/SetShoppingCart.groovy" />
+				<script location="component://order/groovyScripts/entry/SetShoppingCart.groovy" />
 			</actions>
 			<widgets>
-				<decorator-screen name="main-decorator"
-					location="${parameters.mainDecoratorLocation}">
-					<!-- <decorator-section name="left-column"> <include-screen name="leftbar"/> 
-						</decorator-section> -->
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<!-- <decorator-section name="left-column"> <include-screen name="leftbar"/> </decorator-section> -->
 					<decorator-section name="body">
 						<section>
 							<widgets>
 								<platform-specific>
 									<html>
-										<html-template
-											location="component://vforder/template/OrderEntryTabBar.ftl" />
+										<html-template location="component://vforder/template/OrderEntryTabBar.ftl" />
 									</html>
 								</platform-specific>
 								<decorator-section-include name="body" />
@@ -71,20 +62,17 @@
 		<section>
 			<actions>
 				<set field="headerItem" value="orderentry" />
-				<script
-					location="component://order/groovyScripts/entry/SetShoppingCart.groovy" />
+				<script location="component://order/groovyScripts/entry/SetShoppingCart.groovy" />
 				<script location="component://vforder/groovyScripts/SetCheckOutTabBar.groovy" />
 			</actions>
 			<widgets>
-				<decorator-screen name="main-decorator"
-					location="${parameters.mainDecoratorLocation}">
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
 					<decorator-section name="body">
 						<section>
 							<widgets>
 								<platform-specific>
 									<html>
-										<html-template
-											location="component://vforder/template/OrderEntryCheckOutTabBar.ftl" />
+										<html-template location="component://vforder/template/OrderEntryCheckOutTabBar.ftl" />
 									</html>
 								</platform-specific>
 								<decorator-section-include name="body" />
@@ -103,8 +91,7 @@
 				<set field="titleProperty" value="${shipmentId}" />
 				<set field="headerItem" value="findorders" />
 				<script location="component://vforder/groovyScripts/FindOrders.groovy" />
-				<script
-					location="component://content/groovyScripts/print/FindPrinters.groovy" />
+				<script location="component://content/groovyScripts/print/FindPrinters.groovy" />
 
 				<!-- asmselect parameters, must be prefixed by asm_ for SetMultipleSelectJs.ftl -->
 				<set field="asm_multipleSelectForm" value="lookuporder" />
@@ -112,8 +99,7 @@
 				<set field="asm_formSize" value="1000" />
 				<set field="asm_asmListItemPercentOfForm" value="95" />
 				<set field="asm_sortable" value="false" />
-				<!-- <property-map resource="OrderUiLabels" map-name="uiLabelMap" global="true" 
-					/> -->
+				<!-- <property-map resource="OrderUiLabels" map-name="uiLabelMap" global="true" /> -->
 				<set field="asm_title" value="${uiLabelMap.OrderPartySelectRoleForParty}" />
 			</actions>
 			<widgets>
@@ -121,8 +107,7 @@
 					<decorator-section name="body">
 						<platform-specific>
 							<html>
-								<html-template
-									location="component://common/template/includes/SetMultipleSelectJs.ftl" />
+								<html-template location="component://common/template/includes/SetMultipleSelectJs.ftl" />
 							</html>
 						</platform-specific>
 						<platform-specific>
@@ -144,8 +129,7 @@
 				<script location="component://vforder/groovyScripts/CheckInits.groovy" />
 			</actions>
 			<widgets>
-				<decorator-screen name="main-decorator"
-					location="${parameters.mainDecoratorLocation}">
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
 					<decorator-section name="body">
 						<platform-specific>
 							<html>
@@ -163,20 +147,15 @@
 			<actions>
 				<set field="headerItem" value="orderentry" />
 				<set field="titleProperty" value="PageTitleOrderShowCart" />
-				<set field="productsummaryScreen"
-					value="component://order/widget/ordermgr/OrderEntryCatalogScreens.xml#productsummary" />
-				<property-to-field resource="order"
-					property="orderPreference.giftEnable" field="giftEnable" default="Y" />
-				<set field="promoUseDetailsInlineScreen"
-					value="component://order/widget/ordermgr/OrderEntryCartScreens.xml#promoUseDetailsInline" />
+				<set field="productsummaryScreen" value="component://order/widget/ordermgr/OrderEntryCatalogScreens.xml#productsummary" />
+				<property-to-field resource="order" property="orderPreference.giftEnable" field="giftEnable" default="Y" />
+				<set field="promoUseDetailsInlineScreen" value="component://order/widget/ordermgr/OrderEntryCartScreens.xml#promoUseDetailsInline" />
 				<script location="component://vforder/groovyScripts/ShowCart.groovy" />
 				<script location="component://order/groovyScripts/entry/ShowPromoText.groovy" />
-				<entity-condition entity-name="ProductStorePromoAndAppl"
-					list="allProductPromos" filter-by-date="true">
+				<entity-condition entity-name="ProductStorePromoAndAppl" list="allProductPromos" filter-by-date="true">
 					<condition-list combine="and">
 						<condition-expr field-name="manualOnly" value="Y" />
-						<condition-expr field-name="productStoreId"
-							from-field="productStoreId" />
+						<condition-expr field-name="productStoreId" from-field="productStoreId" />
 					</condition-list>
 					<order-by field-name="productPromoId" />
 				</entity-condition>
@@ -186,8 +165,7 @@
 					<decorator-section name="body">
 						<platform-specific>
 							<html>
-								<html-template
-									location="component://order/template/entry/cart/Javascript.ftl" />
+								<html-template location="component://order/template/entry/cart/Javascript.ftl" />
 							</html>
 						</platform-specific>
 						<platform-specific>
@@ -217,17 +195,14 @@
 			<actions>
 				<set field="titleProperty" value="PageTitleOrderAgreements" />
 				<set field="headerItem" value="orderentry" />
-				<script
-					location="component://order/groovyScripts/entry/OrderAgreements.groovy" />
+				<script location="component://order/groovyScripts/entry/OrderAgreements.groovy" />
 			</actions>
 			<widgets>
-				<decorator-screen name="main-decorator"
-					location="${parameters.mainDecoratorLocation}">
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
 					<decorator-section name="body">
 						<platform-specific>
 							<html>
-								<html-template
-									location="component://vforder/template/OrderAgreements.ftl" />
+								<html-template location="component://vforder/template/OrderAgreements.ftl" />
 							</html>
 						</platform-specific>
 					</decorator-section>
@@ -241,18 +216,15 @@
 			<actions>
 				<set field="stepTitleId" value="OrderOrderConfirmation" />
 				<set field="stepLabelId" value="OrderReviewOrder" />
-				<property-to-field resource="order"
-					property="orderPreference.giftEnable" field="giftEnable" default="Y" />
-				<script
-					location="component://order/groovyScripts/entry/CheckoutReview.groovy" />
+				<property-to-field resource="order" property="orderPreference.giftEnable" field="giftEnable" default="Y" />
+				<script location="component://order/groovyScripts/entry/CheckoutReview.groovy" />
 			</actions>
 			<widgets>
 				<decorator-screen name="CommonOrderCheckoutDecorator">
 					<decorator-section name="body">
 						<platform-specific>
 							<html>
-								<html-template
-									location="component://vforder/template/OrderHeaderInfoFinalize.ftl" />
+								<html-template location="component://vforder/template/OrderHeaderInfoFinalize.ftl" />
 							</html>
 						</platform-specific>
 						<platform-specific>
@@ -277,15 +249,11 @@
 			<actions>
 				<set field="titleProperty" value="OrderViewOrder" />
 				<set field="headerItem" value="findorders" />
-				<set field="layoutSettings.javaScripts[]" value="/ordermgr-js/order.js"
-					global="true" />
-				<set field="layoutSettings.javaScripts[]" value="/ordermgr-js/OrderShippingInfo.js"
-					global="true" />
-				<set field="layoutSettings.javaScripts[]" value="/ordermgr-js/geoAutoCompleter.js"
-					global="true" />
+				<set field="layoutSettings.javaScripts[]" value="/ordermgr-js/order.js" global="true" />
+				<set field="layoutSettings.javaScripts[]" value="/ordermgr-js/OrderShippingInfo.js" global="true" />
+				<set field="layoutSettings.javaScripts[]" value="/ordermgr-js/geoAutoCompleter.js" global="true" />
 				<script location="component://order/groovyScripts/order/OrderView.groovy" />
-				<script
-					location="component://order/groovyScripts/order/OrderViewWebSecure.groovy" />
+				<script location="component://order/groovyScripts/order/OrderViewWebSecure.groovy" />
 			</actions>
 			<widgets>
 				<decorator-screen name="CommonOrderViewDecorator">
@@ -294,8 +262,7 @@
 						<container style="clear" />
 						<platform-specific>
 							<html>
-								<html-template
-									location="component://vforder/template/order/OrderItems.ftl" />
+								<html-template location="component://vforder/template/order/OrderItems.ftl" />
 							</html>
 						</platform-specific>
 						<platform-specific>
@@ -320,12 +287,10 @@
 				<container id="split50">
 					<container style="lefthalf">
 						<include-screen name="orderinfo" />
-						<!-- <include-screen name="orderterms"/> <include-screen name="orderpaymentinfo"/> 
-							<include-screen name="projectAssoOrder"/> -->
+						<!-- <include-screen name="orderterms"/> <include-screen name="orderpaymentinfo"/> <include-screen name="projectAssoOrder"/> -->
 					</container>
-					<!-- <container style="righthalf"> <include-screen name="ordercontactinfo"/> 
-						<include-screen name="OrderRoleInfo"/> <include-screen name="ordershippinginfo"/> 
-						<include-screen name="OrderSalesReps"/> </container> -->
+					<!-- <container style="righthalf"> <include-screen name="ordercontactinfo"/> <include-screen name="OrderRoleInfo"/> <include-screen 
+						name="ordershippinginfo"/> <include-screen name="OrderSalesReps"/> </container> -->
 				</container>
 			</widgets>
 			<fail-widgets>
@@ -361,26 +326,21 @@
 
 			</actions>
 			<widgets>
-				<decorator-screen name="VforderCommonDecorator"
-					location="${parameters.mainDecoratorLocation}">
+				<decorator-screen name="VforderCommonDecorator" location="${parameters.mainDecoratorLocation}">
 					<decorator-section name="body">
 						<section>
 							<widgets>
-								<decorator-screen name="FindScreenDecorator"
-									location="component://common/widget/CommonScreens.xml">
+								<decorator-screen name="FindScreenDecorator" location="component://common/widget/CommonScreens.xml">
 									<decorator-section name="menu-bar">
 										<container style="button-bar">
-											<link target="EditShippingLayer" link-type="layered-modal"
-												text="${uiLabelMap.ShippingNewShipping}" style="buttontext create" />
+											<link target="EditShippingLayer" link-type="layered-modal" text="${uiLabelMap.ShippingNewShipping}" style="buttontext create" />
 										</container>
 									</decorator-section>
 									<decorator-section name="search-options">
-										<include-form name="FindShippings"
-											location="component://vforder/widget/VforderForms.xml" />
+										<include-form name="FindShippings" location="component://vforder/widget/VforderForms.xml" />
 									</decorator-section>
 									<decorator-section name="search-results">
-										<include-form name="${formShippingListName}"
-											location="component://vforder/widget/VforderForms.xml" />
+										<include-form name="${formShippingListName}" location="component://vforder/widget/VforderForms.xml" />
 									</decorator-section>
 								</decorator-screen>
 							</widgets>
@@ -394,18 +354,15 @@
 	<screen name="EditShippingLayer">
 		<section>
 			<actions>
-				<property-map resource="VforderUiLabels" map-name="uiLabelMap"
-					global="true" />
-				<property-map resource="CommonUiLabels" map-name="uiLabelMap"
-					global="true" />
+				<property-map resource="VforderUiLabels" map-name="uiLabelMap" global="true" />
+				<property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true" />
 				<set field="titleProperty" value="PageTitleEditShipping" />
 				<set field="tabButtonItem" value="EditShipping" />
 				<set field="shipmentId" from-field="parameters.shipmentId" />
 				<entity-one entity-name="Shipment" value-field="shipping" />
 			</actions>
 			<widgets>
-				<include-form name="EditShipping"
-					location="component://vforder/widget/VforderForms.xml" />
+				<include-form name="EditShipping" location="component://vforder/widget/VforderForms.xml" />
 			</widgets>
 		</section>
 	</screen>
@@ -422,25 +379,21 @@
 				<entity-one entity-name="VfWorkPapers" value-field="workPapers" />
 			</actions>
 			<widgets>
-				<decorator-screen name="VforderShippingCommonDecorator"
-					location="${parameters.mainDecoratorLocation}">
+				<decorator-screen name="VforderShippingCommonDecorator" location="${parameters.mainDecoratorLocation}">
 					<decorator-section name="body">
 						<section>
 							<condition>
-								<if-compare field="shipping.statusId" operator="equals"
-									value="SHIPMENT_SHIPPED" />
+								<if-compare field="shipping.statusId" operator="equals" value="SHIPMENT_SHIPPED" />
 							</condition>
 							<widgets>
-								<link target="updateInventoryShipment" text="${uiLabelMap.ShipmentRestore}"
-									style="buttontext create">
+								<link target="updateInventoryShipment" text="${uiLabelMap.ShipmentRestore}" style="buttontext create">
 									<parameter param-name="shipmentId" />
 									<parameter param-name="facilityId" value="10000" />
 									<parameter param-name="isReturnShipment" value="Y" />
 								</link>
 							</widgets>
 							<fail-widgets>
-								<link target="updateInventoryShipment" text="${uiLabelMap.ShipmentComplete}"
-									style="buttontext create">
+								<link target="updateInventoryShipment" text="${uiLabelMap.ShipmentComplete}" style="buttontext create">
 									<parameter param-name="shipmentId" />
 									<parameter param-name="facilityId" value="10000" />
 									<parameter param-name="isReturnShipment" value="N" />
@@ -449,8 +402,7 @@
 						</section>
 						<section>
 							<widgets>
-								<include-form name="EditShipping"
-									location="component://vforder/widget/VforderForms.xml" />
+								<include-form name="EditShipping" location="component://vforder/widget/VforderForms.xml" />
 							</widgets>
 						</section>
 						<section>
@@ -458,8 +410,7 @@
 								<container style="page-title">
 									<label text="${uiLabelMap.WorkPapersTitle}"></label>
 								</container>
-								<include-form name="EditWorkPapers"
-									location="component://vforder/widget/VforderForms.xml" />
+								<include-form name="EditWorkPapers" location="component://vforder/widget/VforderForms.xml" />
 							</widgets>
 						</section>
 					</decorator-section>
@@ -475,39 +426,33 @@
 				<set field="headerItem" value="findshippings" />
 				<set field="shipmentId" from-field="parameters.shipmentId" />
 				<set field="titleProperty" value="${shipmentId}" />
-				<set field="viewSize" from-field="parameters.VIEW_SIZE_1" type="Integer"
-					default-value="200" />
+				<set field="viewSize" from-field="parameters.VIEW_SIZE_1" type="Integer" default-value="200" />
 				<entity-one entity-name="Shipment" value-field="shipping" />
 				<script location="component://vforder/groovyScripts/ListShippingItems.groovy" />
 			</actions>
 			<widgets>
-				<decorator-screen name="VforderShippingCommonDecorator"
-					location="${parameters.mainDecoratorLocation}">
+				<decorator-screen name="VforderShippingCommonDecorator" location="${parameters.mainDecoratorLocation}">
 					<decorator-section name="body">
 
 						<container style="button-bar">
-							<link target="AddShippingItem" text="${uiLabelMap.AddShippingItem}"
-								style="buttontext create">
+							<link target="AddShippingItem" text="${uiLabelMap.AddShippingItem}" style="buttontext create">
 								<parameter param-name="shipmentId" />
 								<parameter param-name="excludeCancelled" value="Y" />
 							</link>
 						</container>
 
-						<!-- <decorator-section name="search-options"> <include-form name="EditShippingItems" 
-							location="component://vforder/widget/VforderForms.xml"/> </decorator-section> -->
+						<!-- <decorator-section name="search-options"> <include-form name="EditShippingItems" location="component://vforder/widget/VforderForms.xml"/> 
+							</decorator-section> -->
 
-						<include-form name="ListShippingItems"
-							location="component://vforder/widget/VforderForms.xml" />
+						<include-form name="ListShippingItems" location="component://vforder/widget/VforderForms.xml" />
 
 						<platform-specific>
 							<html>
-								<html-template
-									location="component://vforder/template/ListShippingItemsFooter.ftl" />
+								<html-template location="component://vforder/template/ListShippingItemsFooter.ftl" />
 							</html>
 						</platform-specific>
 
-						<include-form name="AddProductToShipping"
-							location="component://vforder/widget/VforderForms.xml" />
+						<include-form name="AddProductToShipping" location="component://vforder/widget/VforderForms.xml" />
 
 					</decorator-section>
 
@@ -526,8 +471,7 @@
 
 				<script location="component://vforder/groovyScripts/FindOrders.groovy" />
 
-				<script
-					location="component://content/groovyScripts/print/FindPrinters.groovy" />
+				<script location="component://content/groovyScripts/print/FindPrinters.groovy" />
 
 				<!-- asmselect parameters, must be prefixed by asm_ for SetMultipleSelectJs.ftl -->
 				<set field="asm_multipleSelectForm" value="lookuporder" />
@@ -538,13 +482,11 @@
 				<entity-one entity-name="Shipment" value-field="shipping" />
 			</actions>
 			<widgets>
-				<decorator-screen name="VfFindorderCommonDecorator"
-					location="${parameters.mainDecoratorLocation}">
+				<decorator-screen name="VfFindorderCommonDecorator" location="${parameters.mainDecoratorLocation}">
 					<decorator-section name="body">
 						<platform-specific>
 							<html>
-								<html-template
-									location="component://common/template/includes/SetMultipleSelectJs.ftl" />
+								<html-template location="component://common/template/includes/SetMultipleSelectJs.ftl" />
 							</html>
 						</platform-specific>
 						<platform-specific>
@@ -566,15 +508,12 @@
 				<set field="shipmentId" from-field="parameters.shipmentId" />
 				<set field="orderId" from-field="parameters.orderId" />
 				<set field="titleProperty" value="${shipmentId} -- ${orderId}" />
-				<script
-					location="component://vforder/groovyScripts/AddShippingItemOrderItem.groovy" />
+				<script location="component://vforder/groovyScripts/AddShippingItemOrderItem.groovy" />
 			</actions>
 			<widgets>
-				<decorator-screen name="VfFindorderCommonDecorator"
-					location="${parameters.mainDecoratorLocation}">
+				<decorator-screen name="VfFindorderCommonDecorator" location="${parameters.mainDecoratorLocation}">
 					<decorator-section name="body">
-						<include-form name="AddShippingItemOrderItem"
-							location="component://vforder/widget/VforderForms.xml" />
+						<include-form name="AddShippingItemOrderItem" location="component://vforder/widget/VforderForms.xml" />
 					</decorator-section>
 				</decorator-screen>
 			</widgets>
@@ -585,21 +524,15 @@
 		<section>
 			<actions>
 				<set field="titleProperty" value="PageTitleLookupBulkAddProduct" />
-				<set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer"
-					default-value="0" />
-				<property-to-field resource="widget"
-					property="widget.form.defaultViewSize" field="viewSizeDefaultValue" />
-				<set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer"
-					default-value="${viewSizeDefaultValue}" />
-				<script
-					location="component://order/groovyScripts/entry/cart/LookupBulkAddProducts.groovy" />
+				<set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="0" />
+				<property-to-field resource="widget" property="widget.form.defaultViewSize" field="viewSizeDefaultValue" />
+				<set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="${viewSizeDefaultValue}" />
+				<script location="component://order/groovyScripts/entry/cart/LookupBulkAddProducts.groovy" />
 			</actions>
 			<widgets>
-				<decorator-screen name="VfFindorderCommonDecorator"
-					location="${parameters.mainDecoratorLocation}">
+				<decorator-screen name="VfFindorderCommonDecorator" location="${parameters.mainDecoratorLocation}">
 					<decorator-section name="body">
-						<include-form name="LookupBulkAddProducts"
-							location="component://vforder/widget/VforderForms.xml" />
+						<include-form name="LookupBulkAddProducts" location="component://vforder/widget/VforderForms.xml" />
 					</decorator-section>
 				</decorator-screen>
 			</widgets>
@@ -609,15 +542,12 @@
 		<section>
 			<actions>
 				<set field="titleProperty" value="PageTitleLookupBulkAddSupplierProduct" />
-				<script
-					location="component://order/groovyScripts/entry/cart/LookupBulkAddSupplierProducts.groovy" />
+				<script location="component://order/groovyScripts/entry/cart/LookupBulkAddSupplierProducts.groovy" />
 			</actions>
 			<widgets>
-				<decorator-screen name="VfFindorderCommonDecorator"
-					location="${parameters.mainDecoratorLocation}">
+				<decorator-screen name="VfFindorderCommonDecorator" location="${parameters.mainDecoratorLocation}">
 					<decorator-section name="body">
-						<include-form name="LookupBulkAddSupplierProducts"
-							location="component://vforder/widget/VforderForms.xml" />
+						<include-form name="LookupBulkAddSupplierProducts" location="component://vforder/widget/VforderForms.xml" />
 					</decorator-section>
 				</decorator-screen>
 			</widgets>
@@ -633,8 +563,7 @@
 				<set field="headerItem" value="findshippings" />
 				<set field="shipmentId" from-field="parameters.shipmentId" />
 				<set field="titleProperty" value="${shipmentId}" />
-				<property-map resource="VforderUiLabels" map-name="uiLabelMap"
-					global="true" />
+				<property-map resource="VforderUiLabels" map-name="uiLabelMap" global="true" />
 
 
 				<set field="tabButtonItem" value="EditExample" />
@@ -644,8 +573,7 @@
 			<widgets>
 				<platform-specific>
 					<xsl-fo>
-						<html-template
-							location="component://vforder/template/reports/ListShippingItems.fo.ftl" />
+						<html-template location="component://vforder/template/reports/ListShippingItems.fo.ftl" />
 					</xsl-fo>
 				</platform-specific>
 			</widgets>
@@ -660,8 +588,7 @@
 				<set field="headerItem" value="findshippings" />
 				<set field="shipmentId" from-field="parameters.shipmentId" />
 				<set field="titleProperty" value="${shipmentId}" />
-				<property-map resource="VforderUiLabels" map-name="uiLabelMap"
-					global="true" />
+				<property-map resource="VforderUiLabels" map-name="uiLabelMap" global="true" />
 
 
 				<set field="tabButtonItem" value="EditExample" />
@@ -671,8 +598,7 @@
 			<widgets>
 				<platform-specific>
 					<xsl-fo>
-						<html-template
-							location="component://vforder/template/reports/ListShippingItemsGlInc.fo.ftl" />
+						<html-template location="component://vforder/template/reports/ListShippingItemsGlInc.fo.ftl" />
 					</xsl-fo>
 				</platform-specific>
 			</widgets>
@@ -687,8 +613,7 @@
 				<set field="headerItem" value="findshippings" />
 				<set field="shipmentId" from-field="parameters.shipmentId" />
 				<set field="titleProperty" value="${shipmentId}" />
-				<property-map resource="VforderUiLabels" map-name="uiLabelMap"
-					global="true" />
+				<property-map resource="VforderUiLabels" map-name="uiLabelMap" global="true" />
 
 
 				<set field="tabButtonItem" value="EditExample" />
@@ -698,8 +623,7 @@
 			<widgets>
 				<platform-specific>
 					<xsl-fo>
-						<html-template
-							location="component://vforder/template/reports/ListShippingItemsSummary.fo.ftl" />
+						<html-template location="component://vforder/template/reports/ListShippingItemsSummary.fo.ftl" />
 					</xsl-fo>
 				</platform-specific>
 			</widgets>
@@ -708,10 +632,9 @@
 	<screen name="ExportBoxesPdf">
 		<section>
 			<actions>
-				<!-- base/top/specific map first, then more common map added for shared 
-					labels -->
-				<!-- <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/> 
-					<property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/> -->
+				<!-- base/top/specific map first, then more common map added for shared labels -->
+				<!-- <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/> <property-map resource="CommonUiLabels" map-name="uiLabelMap" 
+					global="true"/> -->
 				<set field="shipmentId" from-field="parameters.shipmentId" />
 				<entity-one entity-name="Shipment" value-field="shipping" />
 				<script location="component://vforder/groovyScripts/ListShippingItems.groovy" />
@@ -731,16 +654,13 @@
 			<actions>
 				<set field="titleProperty" value="OrderOrder" />
 				<!-- <property-map resource="OrderUiLabels" map-name="uiLabelMap" global="true"/> -->
-				<property-map resource="AccountingUiLabels" map-name="uiLabelMap"
-					global="true" />
+				<property-map resource="AccountingUiLabels" map-name="uiLabelMap" global="true" />
 				<!-- <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/> -->
-				<property-map resource="VforderUiLabels" map-name="uiLabelMap"
-					global="true" />
+				<property-map resource="VforderUiLabels" map-name="uiLabelMap" global="true" />
 				<script location="component://order/groovyScripts/order/OrderView.groovy" />
 			</actions>
 			<widgets>
-				<decorator-screen name="FoReportDecorator"
-					location="component://common/widget/CommonScreens.xml">
+				<decorator-screen name="FoReportDecorator" location="component://common/widget/CommonScreens.xml">
 					<!-- at the top left of every page we put the logo and company information -->
 					<decorator-section name="topLeft">
 						<section>
@@ -755,8 +675,7 @@
 							<widgets>
 								<platform-specific>
 									<xsl-fo>
-										<html-template
-											location="component://order/template/order/OrderReportHeaderInfo.fo.ftl" />
+										<html-template location="component://order/template/order/OrderReportHeaderInfo.fo.ftl" />
 									</xsl-fo>
 								</platform-specific>
 							</widgets>
@@ -765,19 +684,16 @@
 					<decorator-section name="body">
 						<section>
 							<widgets>
-								<!-- the contach mechanisms, terms, payment and shipping methods 
-									are shown in the first page -->
+								<!-- the contach mechanisms, terms, payment and shipping methods are shown in the first page -->
 								<platform-specific>
 									<xsl-fo>
-										<html-template
-											location="component://vforder/template/reports/orderpdf/OrderReportContactMechs.fo.ftl" />
+										<html-template location="component://vforder/template/reports/orderpdf/OrderReportContactMechs.fo.ftl" />
 									</xsl-fo>
 								</platform-specific>
 								<!-- order items and totals -->
 								<platform-specific>
 									<xsl-fo>
-										<html-template
-											location="component://vforder/template/reports/orderpdf/OrderReportBody.fo.ftl" />
+										<html-template location="component://vforder/template/reports/orderpdf/OrderReportBody.fo.ftl" />
 									</xsl-fo>
 								</platform-specific>
 								<!-- return policies and notes are shown in the last page -->
@@ -798,8 +714,7 @@
 			<widgets>
 				<platform-specific>
 					<xsl-fo>
-						<html-template
-							location="component://vforder/template/reports/orderpdf/CompanyHeader.fo.ftl" />
+						<html-template location="component://vforder/template/reports/orderpdf/CompanyHeader.fo.ftl" />
 					</xsl-fo>
 				</platform-specific>
 			</widgets>
@@ -809,21 +724,18 @@
 	<screen name="ExportWorkPapersPdf">
 		<section>
 			<actions>
-				<!-- base/top/specific map first, then more common map added for shared 
-					labels -->
-				<!-- <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/> 
-					<property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/> -->
+				<!-- base/top/specific map first, then more common map added for shared labels -->
+				<!-- <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/> <property-map resource="CommonUiLabels" map-name="uiLabelMap" 
+					global="true"/> -->
 				<set field="shipmentId" from-field="parameters.shipmentId" />
-				<property-map resource="VforderUiLabels" map-name="uiLabelMap"
-					global="true" />
+				<property-map resource="VforderUiLabels" map-name="uiLabelMap" global="true" />
 				<entity-one entity-name="Shipment" value-field="shipping" />
 				<script location="component://vforder/groovyScripts/ListWorkPapers.groovy" />
 			</actions>
 			<widgets>
 				<platform-specific>
 					<xsl-fo>
-						<html-template
-							location="component://vforder/template/reports/WorkPapers.fo.ftl" />
+						<html-template location="component://vforder/template/reports/WorkPapers.fo.ftl" />
 					</xsl-fo>
 				</platform-specific>
 			</widgets>
@@ -835,21 +747,17 @@
 			<actions>
 				<set field="tabButtonItem" value="EditShippingItems" />
 				<set field="headerItem" value="ordersnotshipped" />
-				<script
-					location="component://vforder/groovyScripts/ListNotShippedOrderItems.groovy" />
+				<script location="component://vforder/groovyScripts/ListNotShippedOrderItems.groovy" />
 			</actions>
 			<widgets>
-				<decorator-screen name="VfFindorderCommonDecorator"
-					location="${parameters.mainDecoratorLocation}">
+				<decorator-screen name="VfFindorderCommonDecorator" location="${parameters.mainDecoratorLocation}">
 					<decorator-section name="body">
 						<container style="button-bar">
-							<link target="ListNotShippedOrderItemsPdf" text="${uiLabelMap.CommonPdf}"
-								style="buttontext create">
+							<link target="ListNotShippedOrderItemsPdf" text="${uiLabelMap.CommonPdf}" style="buttontext create">
 
 							</link>
 						</container>
-						<include-form name="ListNotShippedOrderItems"
-							location="component://vforder/widget/VforderForms.xml" />
+						<include-form name="ListNotShippedOrderItems" location="component://vforder/widget/VforderForms.xml" />
 					</decorator-section>
 				</decorator-screen>
 			</widgets>
@@ -864,34 +772,32 @@
 				<set field="fromDate" from-field="parameters.fromDate" />
 				<set field="thruDate" from-field="parameters.thruDate" />
 				<set field="headerItem" value="shipmentsreport" />
-				<set field="viewSize" from-field="parameters.VIEW_SIZE_1" type="Integer"
-					default-value="200" />
+				<set field="viewSize" from-field="parameters.VIEW_SIZE_1" type="Integer" default-value="200" />
 				<script location="component://vforder/groovyScripts/ShipmentsReport.groovy" />
 			</actions>
 			<widgets>
-				<decorator-screen name="VfFindorderCommonDecorator"
-					location="${parameters.mainDecoratorLocation}">
+				<decorator-screen name="VfFindorderCommonDecorator" location="${parameters.mainDecoratorLocation}">
 					<decorator-section name="body">
 						<container style="button-bar">
-							<link target="ShipmentsReportPdf" text="${uiLabelMap.CommonPdf}"
-								style="buttontext create" target-window="_blank">
+							<link target="ShipmentsReportPdf" text="${uiLabelMap.CommonPdf}" style="buttontext create" target-window="_blank">
 								<parameter param-name="fromDate" />
 								<parameter param-name="thruDate" />
+								<parameter param-name="allInfo" value="Y"/>
+							</link>
+							<link target="ShipmentsReportPdf" text="${uiLabelMap.ShipmentsReportForClientPdf}" style="buttontext create" target-window="_blank">
+								<parameter param-name="fromDate" />
+								<parameter param-name="thruDate" />
+								<parameter param-name="allInfo" value="N"/>
 							</link>
 						</container>
-						<include-form name="FilterShipmentsReport"
-							location="component://vforder/widget/VforderForms.xml" />
-						<include-form name="ShipmentsReport"
-							location="component://vforder/widget/VforderForms.xml" />
-						<include-form name="ShipmentsWeights"
-							location="component://vforder/widget/VforderForms.xml" />
+						<include-form name="FilterShipmentsReport" location="component://vforder/widget/VforderForms.xml" />
+						<include-form name="ShipmentsReport" location="component://vforder/widget/VforderForms.xml" />
+						<include-form name="ShipmentsWeights" location="component://vforder/widget/VforderForms.xml" />
 						<screenlet title="${uiLabelMap.OrdersNotShipped}">
-							<include-form name="ListNotShippedOrderItems"
-								location="component://vforder/widget/VforderForms.xml" />
+							<include-form name="ListNotShippedOrderItems" location="component://vforder/widget/VforderForms.xml" />
 						</screenlet>
 						<screenlet title="${uiLabelMap.ExtraShipped}">
-							<include-form name="ExtraShippedProducts"
-								location="component://vforder/widget/VforderForms.xml" />
+							<include-form name="ExtraShippedProducts" location="component://vforder/widget/VforderForms.xml" />
 						</screenlet>
 					</decorator-section>
 				</decorator-screen>
@@ -905,16 +811,15 @@
 				<set field="tabButtonItem" value="EditShippingItems" />
 				<set field="fromDate" from-field="parameters.fromDate" />
 				<set field="thruDate" from-field="parameters.thruDate" />
+				<set field="allInfo" from-field="parameters.allInfo" />
 				<set field="headerItem" value="shipmentsreport" />
-				<property-map resource="VforderUiLabels" map-name="uiLabelMap"
-					global="true" />
+				<property-map resource="VforderUiLabels" map-name="uiLabelMap" global="true" />
 				<script location="component://vforder/groovyScripts/ShipmentsReport.groovy" />
 			</actions>
 			<widgets>
 				<platform-specific>
 					<xsl-fo>
-						<html-template
-							location="component://vforder/template/reports/ShipmentsReportPdf.fo.ftl" />
+						<html-template location="component://vforder/template/reports/ShipmentsReportPdf.fo.ftl" />
 					</xsl-fo>
 				</platform-specific>
 			</widgets>
@@ -929,16 +834,13 @@
 			<actions>
 				<set field="tabButtonItem" value="EditShippingItems" />
 				<set field="headerItem" value="ordersnotshipped" />
-				<property-map resource="VforderUiLabels" map-name="uiLabelMap"
-					global="true" />
-				<script
-					location="component://vforder/groovyScripts/ListNotShippedOrderItems.groovy" />
+				<property-map resource="VforderUiLabels" map-name="uiLabelMap" global="true" />
+				<script location="component://vforder/groovyScripts/ListNotShippedOrderItems.groovy" />
 			</actions>
 			<widgets>
 				<platform-specific>
 					<xsl-fo>
-						<html-template
-							location="component://vforder/template/reports/ListNotShippedOrderItems.fo.ftl" />
+						<html-template location="component://vforder/template/reports/ListNotShippedOrderItems.fo.ftl" />
 					</xsl-fo>
 				</platform-specific>
 			</widgets>
@@ -948,10 +850,8 @@
 	<screen name="ShowOrderItemShippingLayer">
 		<section>
 			<actions>
-				<property-map resource="VforderUiLabels" map-name="uiLabelMap"
-					global="true" />
-				<property-map resource="CommonUiLabels" map-name="uiLabelMap"
-					global="true" />
+				<property-map resource="VforderUiLabels" map-name="uiLabelMap" global="true" />
+				<property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true" />
 				<set field="titleProperty" value="PageTitleEditShipping" />
 				<set field="tabButtonItem" value="EditShipping" />
 				<set field="orderId" from-field="parameters.orderId" />
@@ -959,8 +859,7 @@
 
 			</actions>
 			<widgets>
-				<include-form name="ListOrderItemShipping"
-					location="component://vforder/widget/VforderForms.xml" />
+				<include-form name="ListOrderItemShipping" location="component://vforder/widget/VforderForms.xml" />
 			</widgets>
 		</section>
 	</screen>

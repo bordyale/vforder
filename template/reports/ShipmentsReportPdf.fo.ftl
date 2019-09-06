@@ -201,11 +201,12 @@ under the License.
 		          <fo:table-column column-width="6%" border-width="1px" border-style="solid" />
 				  <fo:table-column column-width="6%" border-width="1px" border-style="solid" /> 
 				  <fo:table-column column-width="6%" border-width="1px" border-style="solid" />
+				  <#if allInfo == "Y">
 				  <fo:table-column column-width="6%" border-width="1px" border-style="solid" /> 
 				  <fo:table-column column-width="6%" border-width="1px" border-style="solid" />  
 				  <fo:table-column column-width="12%" border-width="1px" border-style="solid" /> 
 				  <fo:table-column column-width="8%" border-width="1px" border-style="solid" />     
-				        
+				 </#if>
                 <fo:table-header text-align="center" background-color="silver">
 					<fo:table-row>
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid" font-size="8pt">
@@ -229,6 +230,7 @@ under the License.
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid" font-size="8pt">
 							<fo:block font-weight="bold">${uiLabelMap.QuantityShippable}</fo:block>
 						</fo:table-cell>
+						<#if allInfo == "Y">
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid" font-size="8pt">
 							<fo:block font-weight="bold">${uiLabelMap.NetWeight}</fo:block>
 						</fo:table-cell>
@@ -240,7 +242,8 @@ under the License.
 						</fo:table-cell>
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid" font-size="8pt">
 							<fo:block font-weight="bold">${uiLabelMap.StatusNone}</fo:block>
-						</fo:table-cell>			
+						</fo:table-cell>	
+						 </#if>		
 						
 					</fo:table-row>
 				</fo:table-header>
@@ -284,6 +287,7 @@ under the License.
 		                        ${item.quantityShippable}
 		                      </fo:block>
 		                    </fo:table-cell>
+		                    <#if allInfo == "Y">
 		                    <fo:table-cell border-style="solid" border-width="0.3mm" font-size="8pt">
 		                      <fo:block>
 		                        ${item.netWeight?round}
@@ -304,6 +308,7 @@ under the License.
 		                        
 		                      </fo:block>
 		                    </fo:table-cell>
+		                     </#if>
 		                  </fo:table-row>		         
 	                 </#list>
            

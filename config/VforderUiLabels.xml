@@ -394,4 +394,12 @@
         <value xml:lang="en">Status None</value>
         <value xml:lang="hu">Nincs rendszerben</value>
     </property>
+    <property key="ShipmentsReportForClientPdf">
+        <value xml:lang="en">Shipments Report For Client Pdf</value>
+        <value xml:lang="hu">Vevő összesítő Pdf</value>
+    </property>
+    <property key="ShippingId">
+        <value xml:lang="en">Shipping Id</value>
+        <value xml:lang="hu">Szallítás Id</value>
+    </property>
 </resource>
