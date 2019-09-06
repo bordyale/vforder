@@ -402,4 +402,9 @@
         <value xml:lang="en">Shipping Id</value>
         <value xml:lang="hu">Szallítás Id</value>
     </property>
+     <property key="OrderHold">
+        <value xml:lang="en">Order Hold</value>
+        <value xml:lang="hu">Rendelés Allítás</value>
+    </property>
+   
 </resource>

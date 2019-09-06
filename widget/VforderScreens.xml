@@ -675,7 +675,7 @@
 							<widgets>
 								<platform-specific>
 									<xsl-fo>
-										<html-template location="component://order/template/order/OrderReportHeaderInfo.fo.ftl" />
+										<html-template location="component://vforder/template/reports/orderpdf/OrderReportHeaderInfo.fo.ftl" />
 									</xsl-fo>
 								</platform-specific>
 							</widgets>
