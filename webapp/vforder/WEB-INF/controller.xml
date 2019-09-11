@@ -206,7 +206,7 @@
 		<response name="success" type="request" value="orderentry" />
 		<response name="error" type="request" value="orderentry" />
 	</request-map>
-	<request-map uri="order.pdf">
+	<request-map uri="orderpdf">
 		<security https="true" auth="true" />
 		<response name="success" type="view" value="OrderPDF" />
 	</request-map>

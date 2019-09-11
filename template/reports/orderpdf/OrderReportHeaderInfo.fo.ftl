@@ -43,6 +43,10 @@ under the License.
                       <fo:table-cell><fo:block>${uiLabelMap.OrderCurrentStatus}</fo:block></fo:table-cell>
                       <fo:table-cell><fo:block font-weight="bold">${currentStatus.get("description",locale)}</fo:block></fo:table-cell>
                     </fo:table-row>
+                    <fo:table-row>
+                      <fo:table-cell><fo:block>${uiLabelMap.Comments}</fo:block></fo:table-cell>
+                      <fo:table-cell><fo:block font-weight="bold">${orderHeader.get("orderName")}</fo:block></fo:table-cell>
+                    </fo:table-row>
                     
                     </fo:table-body>
                   </fo:table>

@@ -18,19 +18,17 @@ under the License.
 -->
 <#escape x as x?xml>
     <#if orderHeader?has_content>
-        <fo:table table-layout="fixed" border-spacing="3pt">
-            <fo:table-column column-width="3in"/>
-            <fo:table-column column-width="1in"/>
-            <fo:table-column column-width="1in"/>
-            <fo:table-column column-width="1in"/>
-            <fo:table-column column-width="1in"/>
+        <fo:table table-layout="fixed" border-spacing="3pt" border-width="1px" border-style="solid" width="95%">
+            <fo:table-column column-width="70%"/>
+            <fo:table-column column-width="25%" />
+           
             <fo:table-header>
                 <fo:table-row>
-                    <fo:table-cell>
+                    <fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid">
                         <fo:block font-weight="bold">${uiLabelMap.OrderProduct}</fo:block>
                     </fo:table-cell>
                    
-                    <fo:table-cell text-align="right">
+                    <fo:table-cell text-align="right" padding="1mm" border-width="0.3mm" border-style="solid">
                         <fo:block font-weight="bold">${uiLabelMap.OrderQuantity}</fo:block>
                     </fo:table-cell>
                   
@@ -44,7 +42,7 @@ under the License.
                     <#assign itemAdjustment = Static["org.apache.ofbiz.order.order.OrderReadHelper"].getOrderItemAdjustmentsTotal(orderItem, orderAdjustments, true, false, false)>
                     <#assign internalImageUrl = Static["org.apache.ofbiz.product.imagemanagement.ImageManagementHelper"].getInternalImageUrl(request, productId!)!>
                     <fo:table-row>
-                        <fo:table-cell>
+                        <fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid">
                             <fo:block>
                                 <#if orderItem.supplierProductId?has_content>
                                    <!-- ${orderItem.supplierProductId} - --> ${orderItem.itemDescription!}
@@ -58,7 +56,7 @@ under the License.
                             </fo:block>
                         </fo:table-cell>
                        
-                        <fo:table-cell text-align="right">
+                        <fo:table-cell text-align="right" padding="1mm" border-width="0.3mm" border-style="solid">
                             <fo:block>${remainingQuantity}</fo:block>
                         </fo:table-cell>
                        
