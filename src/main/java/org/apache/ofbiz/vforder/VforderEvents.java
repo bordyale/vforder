@@ -152,7 +152,7 @@ public class VforderEvents {
 					Debug.logWarning(e, "Problems parsing quantity string: " + quantityToShipStr, module);
 					quantityToShip = BigDecimal.ZERO;
 				}
-				if (quantityToShip.compareTo(BigDecimal.ZERO) <= 0) {
+				if (quantityToShip.compareTo(BigDecimal.ZERO) == 0) {
 					continue;
 				}
 
@@ -235,7 +235,7 @@ public class VforderEvents {
 						qty = qty.add(quantityToShip);
 						//shipmentItem.set("quantity", qty);
 
-						if (qty.compareTo(BigDecimal.ZERO) > 0) {
+						if (qty.compareTo(BigDecimal.ZERO) != 0) {
 							try {
 								Map<String, Object> tmpResult = dispatcher.runSync("createShipmentItem", UtilMisc.<String, Object> toMap("userLogin", userLogin, "shipmentId", shipmentId, "productId",
 										productId, "orderId", orderId, "orderItemSeqId", orderItemSeqId, "quantity", qty));
