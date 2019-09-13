@@ -90,7 +90,7 @@ for (GenericValue entry: extraShippedProducts){
 }
 
 
-notShippedItems = select("orderId","statusId","orderItemSeqId","quantity","quantityShipped","productId","productName","shipBeforeDate","productWeight").from("OrderItemShippingItemView").cache(false).queryList()
+notShippedItems = select("orderId","statusId","orderItemSeqId","quantity","quantityShipped","productId","productName","shipBeforeDate","productWeight","orderName").from("OrderItemShippingItemView").cache(false).queryList()
 
 notShippedItems = EntityUtil.orderBy(notShippedItems,  ["shipBeforeDate"])
 
@@ -102,6 +102,7 @@ for (GenericValue entry: notShippedItems){
 	Map<String,Object> e = new HashMap<String,Object>()
 	e.put("orderItemSeqId",entry.get("orderItemSeqId"))
 	e.put("orderId",entry.get("orderId"))
+	e.put("orderName",entry.get("orderName"))
 	e.put("productId",entry.get("productId"))
 	e.put("shipBeforeDate",entry.get("shipBeforeDate"))
 	e.put("productName",entry.get("productName"))

@@ -49,7 +49,9 @@
 		title="Order Items and ShippingItem View Entity">
 		<member-entity entity-alias="SI" entity-name="ShippingItemQtySumView" />
 		<member-entity entity-alias="OI" entity-name="OrderItem" />
+		<member-entity entity-alias="OH" entity-name="OrderHeader" />
 		<member-entity entity-alias="PR" entity-name="Product" />
+		<alias entity-alias="OH" name="orderName" />
 		<alias entity-alias="OI" name="orderId" />
 		<alias entity-alias="OI" name="statusId" />
 		<alias entity-alias="PR" name="productName" />
@@ -87,6 +89,10 @@
 		<view-link entity-alias="OI" rel-entity-alias="PR"
 			rel-optional="true">
 			<key-map field-name="productId" />
+		</view-link>
+		<view-link entity-alias="OI" rel-entity-alias="OH"
+			rel-optional="true">
+			<key-map field-name="orderId" />
 		</view-link>
 	</view-entity>
 
