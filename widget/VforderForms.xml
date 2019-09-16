@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://ofbiz.apache.org/Widget-Form"
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ofbiz.apache.org/Widget-Form"
 	xsi:schemaLocation="http://ofbiz.apache.org/Widget-Form http://ofbiz.apache.org/dtds/widget-form.xsd">
 
-	<form name="FindShippings" type="single" target="findshippings"
-		default-entity-name="Shipment">
+	<form name="FindShippings" type="single" target="findshippings" default-entity-name="Shipment">
 		<field name="noConditionFind">
-			<hidden value="Y" /><!-- if this isn't there then with all fields 
-				empty no query will be done -->
+			<hidden value="Y" /><!-- if this isn't there then with all fields empty no query will be done -->
 		</field>
 		<field name="shipmentId">
 			<text-find ignore-case="true" />
@@ -16,44 +13,32 @@
 		<field name="estimatedShipDate">
 			<date-find type="date" />
 		</field>
-		<field name="searchButton" title="${uiLabelMap.CommonFind}"
-			widget-style="smallSubmit">
+		<field name="searchButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit">
 			<submit button-type="button" />
 		</field>
 
-		<!-- <field name="exampleId" title="${uiLabelMap.ExampleExampleId}"><text-find/></field> 
-			<field name="exampleName" title="${uiLabelMap.CommonName}"><text-find/></field> 
-			<field name="exampleTypeId" title="${uiLabelMap.CommonType}"> <drop-down 
-			allow-empty="true" current-description=""> <entity-options key-field-name="exampleTypeId" 
-			entity-name="ExampleType"> <entity-order-by field-name="description"/> </entity-options> 
-			</drop-down> </field> <field name="statusId" title="${uiLabelMap.CommonStatus}"> 
-			<drop-down allow-empty="true" current-description=""> <entity-options key-field-name="statusId" 
-			entity-name="ExampleStatusItem"/> </drop-down> </field> <field name="listOtherElements"> 
-			<radio> <option key="items"/> <option key="features"/> <option key="status"/> 
-			</radio> </field> <field name="searchButton"><submit/></field> <field name="exportButton" 
-			position="2" widget-style="smallSubmit" title=" "> <hyperlink also-hidden="false" 
-			target-type="plain" description="${uiLabelMap.CommonExport}" target="javascript: 
-			document.FindExamples.action='ListExampleExport'; document.FindExamples.submit();"/> 
-			</field> -->
+		<!-- <field name="exampleId" title="${uiLabelMap.ExampleExampleId}"><text-find/></field> <field name="exampleName" title="${uiLabelMap.CommonName}"><text-find/></field> 
+			<field name="exampleTypeId" title="${uiLabelMap.CommonType}"> <drop-down allow-empty="true" current-description=""> <entity-options 
+			key-field-name="exampleTypeId" entity-name="ExampleType"> <entity-order-by field-name="description"/> </entity-options> </drop-down> 
+			</field> <field name="statusId" title="${uiLabelMap.CommonStatus}"> <drop-down allow-empty="true" current-description=""> <entity-options 
+			key-field-name="statusId" entity-name="ExampleStatusItem"/> </drop-down> </field> <field name="listOtherElements"> <radio> <option 
+			key="items"/> <option key="features"/> <option key="status"/> </radio> </field> <field name="searchButton"><submit/></field> <field 
+			name="exportButton" position="2" widget-style="smallSubmit" title=" "> <hyperlink also-hidden="false" target-type="plain" description="${uiLabelMap.CommonExport}" 
+			target="javascript: document.FindExamples.action='ListExampleExport'; document.FindExamples.submit();"/> </field> -->
 	</form>
 
-	<form name="ListShippings" type="list" list-name="listIt"
-		paginate-target="findshippings" odd-row-style="alternate-row"
-		default-table-style="basic-table hover-bar" header-row-style="header-row-2"
-		override-list-size="true">
+	<form name="ListShippings" type="list" list-name="listIt" paginate-target="findshippings" odd-row-style="alternate-row"
+		default-table-style="basic-table hover-bar" header-row-style="header-row-2" override-list-size="true">
 		<actions>
-			<service service-name="performFind" result-map="result"
-				result-map-list="listIt">
+			<service service-name="performFind" result-map="result" result-map-list="listIt">
 				<field-map field-name="inputFields" from-field="parameters" />
 				<field-map field-name="entityName" value="Shipment" />
 				<field-map field-name="orderBy" from-field="sortField" />
 			</service>
 		</actions>
 
-		<field name="shipmentId" title="${uiLabelMap.ShippingshipmentId}"
-			widget-style="buttontext" sort-field="true">
-			<hyperlink description="${shipmentId}" target="EditShipping"
-				also-hidden="false">
+		<field name="shipmentId" title="${uiLabelMap.ShippingshipmentId}" widget-style="buttontext" sort-field="true">
+			<hyperlink description="${shipmentId}" target="EditShipping" also-hidden="false">
 				<parameter param-name="shipmentId" />
 			</hyperlink>
 		</field>
@@ -61,34 +46,30 @@
 
 
 		<!-- <field name="shipmentId"><display/></field> -->
-		<!-- <field name="shipmentId" widget-style="buttontext"> <hyperlink description="${billingAccountId}" 
-			target="EditBillingAccount"> <parameter param-name="billingAccountId"/> </hyperlink> 
-			</field> -->
+		<!-- <field name="shipmentId" widget-style="buttontext"> <hyperlink description="${billingAccountId}" target="EditBillingAccount"> 
+			<parameter param-name="billingAccountId"/> </hyperlink> </field> -->
 		<field name="estimatedShipDate" sort-field="true">
-			<display
-				description="${groovy:org.apache.ofbiz.base.util.UtilDateTime.toDateString(estimatedShipDate, &quot;yyyy.MM.dd.&quot;);}" />
+			<display description="${groovy:org.apache.ofbiz.base.util.UtilDateTime.toDateString(estimatedShipDate, &quot;yyyy.MM.dd.&quot;);}" />
+		</field>
+		<field name="handlingInstructions"  title="${uiLabelMap.CommonType}" sort-field="true">
+			<display />
 		</field>
 
 
 	</form>
 
 
-	<form name="EditShipping" type="single" target="updateShipment"
-		title="" default-map-name="shipping" default-entity-name="Shipment">
+	<form name="EditShipping" type="single" target="updateShipment" title="" default-map-name="shipping" default-entity-name="Shipment">
 		<alt-target use-when="shipping==null" target="createShipment" />
 		<!-- <auto-fields-service service-name="updateShipment"/> -->
-		<field use-when="shipping!=null" name="shipmentId"
-			title="${uiLabelMap.ShippingshipmentId}">
+		<field use-when="shipping!=null" name="shipmentId" title="${uiLabelMap.ShippingshipmentId}">
 			<display />
 		</field>
-		<field use-when="shipping==null @and shipmentId==null" name="shipmentId"
-			title="${uiLabelMap.ShippingshipmentId}">
+		<field use-when="shipping==null @and shipmentId==null" name="shipmentId" title="${uiLabelMap.ShippingshipmentId}">
 			<ignored />
 		</field>
-		<field use-when="shipping==null @and shipmentId!=null" name="shipmentId"
-			title="${uiLabelMap.ShippingshipmentId}">
-			<display description="${uiLabelMap.CommonCannotBeFound}: [${shipmentId}]"
-				also-hidden="false" />
+		<field use-when="shipping==null @and shipmentId!=null" name="shipmentId" title="${uiLabelMap.ShippingshipmentId}">
+			<display description="${uiLabelMap.CommonCannotBeFound}: [${shipmentId}]" also-hidden="false" />
 		</field>
 
 		<field use-when="shipping==null" name="shipmentTypeId">
@@ -98,54 +79,50 @@
 			<date-time />
 		</field>
 
+		<field name="handlingInstructions" field-name="enumId" title="${uiLabelMap.CommonType}" position="2">
+			<drop-down allow-empty="true">
+				<entity-options entity-name="Enumeration">
+					<entity-constraint name="enumTypeId" operator="equals" value="VV_SHIPMENT_TYPE" />
+				</entity-options>
+			</drop-down>
+		</field>
+
 		<field name="submitButton" use-when="shipping==null" title="${uiLabelMap.CommonCreate}">
 			<submit button-type="button" />
 		</field>
 		<field name="submitButton" use-when="shipping!=null" title="${uiLabelMap.CommonUpdate}">
 			<submit button-type="button" />
 		</field>
-		<!-- <field name="deleteLink" use-when="shipping!=null" title=" " widget-style="buttontext"> 
-			<hyperlink description="${uiLabelMap.CommonDelete}" target="deleteShipping" 
-			also-hidden="false" confirmation-message="${uiLabelMap.CommonConfirmDelete}" 
-			image-location="${iconsLocation}/delete.png"> <parameter param-name="shipmentId"/> 
-			</hyperlink> </field> -->
+		<!-- <field name="deleteLink" use-when="shipping!=null" title=" " widget-style="buttontext"> <hyperlink description="${uiLabelMap.CommonDelete}" 
+			target="deleteShipping" also-hidden="false" confirmation-message="${uiLabelMap.CommonConfirmDelete}" image-location="${iconsLocation}/delete.png"> 
+			<parameter param-name="shipmentId"/> </hyperlink> </field> -->
 
 
 	</form>
 
-	<!-- <form name="EditShippingItems" type="single" target="updateShipment" 
-		title="" default-map-name="shipping" default-entity-name="Shipment"> <alt-target 
-		use-when="example==null" target="createShipment" /> <field name="geoName" 
-		title="${uiLabelMap.CommonGeoName}" tooltip="${uiLabelMap.ExampleLookupFields4}" 
-		tooltip-style="button-text"> <lookup target-form-name="LookupOrder" description-field-name="geoId" 
-		/> </field> This field may be hidden and the name rendered in geoName using 
-		default-value if geoId is known when loading the form <field name="geoId" 
-		title="${uiLabelMap.CommonGeoId}"> <text /> </field>the text field is only 
-		used for rendering. In the "real life" you would use the hidden field commented 
-		below to pass the data to the request field name="geoId"><hidden/></field 
-		<sort-order> <field-group> <sort-field name="geoName" /> <sort-field name="geoId" 
+	<!-- <form name="EditShippingItems" type="single" target="updateShipment" title="" default-map-name="shipping" default-entity-name="Shipment"> 
+		<alt-target use-when="example==null" target="createShipment" /> <field name="geoName" title="${uiLabelMap.CommonGeoName}" tooltip="${uiLabelMap.ExampleLookupFields4}" 
+		tooltip-style="button-text"> <lookup target-form-name="LookupOrder" description-field-name="geoId" /> </field> This field may be hidden 
+		and the name rendered in geoName using default-value if geoId is known when loading the form <field name="geoId" title="${uiLabelMap.CommonGeoId}"> 
+		<text /> </field>the text field is only used for rendering. In the "real life" you would use the hidden field commented below to pass 
+		the data to the request field name="geoId"><hidden/></field <sort-order> <field-group> <sort-field name="geoName" /> <sort-field name="geoId" 
 		/> </field-group> </sort-order> </form> -->
 
 
 
 
 
-	<form name="EditShipping" type="single" target="updateShipment"
-		title="" default-map-name="shipping" default-entity-name="Shipment">
+	<form name="EditShipping" type="single" target="updateShipment" title="" default-map-name="shipping" default-entity-name="Shipment">
 		<alt-target use-when="shipping==null" target="createShipment" />
 		<!-- <auto-fields-service service-name="updateShipment"/> -->
-		<field use-when="shipping!=null" name="shipmentId"
-			title="${uiLabelMap.ShippingshipmentId}">
+		<field use-when="shipping!=null" name="shipmentId" title="${uiLabelMap.ShippingshipmentId}">
 			<display />
 		</field>
-		<field use-when="shipping==null @and shipmentId==null" name="shipmentId"
-			title="${uiLabelMap.ShippingshipmentId}">
+		<field use-when="shipping==null @and shipmentId==null" name="shipmentId" title="${uiLabelMap.ShippingshipmentId}">
 			<ignored />
 		</field>
-		<field use-when="shipping==null @and shipmentId!=null" name="shipmentId"
-			title="${uiLabelMap.ShippingshipmentId}">
-			<display description="${uiLabelMap.CommonCannotBeFound}: [${shipmentId}]"
-				also-hidden="false" />
+		<field use-when="shipping==null @and shipmentId!=null" name="shipmentId" title="${uiLabelMap.ShippingshipmentId}">
+			<display description="${uiLabelMap.CommonCannotBeFound}: [${shipmentId}]" also-hidden="false" />
 		</field>
 
 		<field use-when="shipping==null" name="shipmentTypeId">
@@ -161,36 +138,27 @@
 		<field name="submitButton" title="${uiLabelMap.CommonUpdate}">
 			<submit button-type="button" />
 		</field>
-		<!-- <field name="deleteLink" use-when="shipping!=null" title=" " widget-style="buttontext"> 
-			<hyperlink description="${uiLabelMap.CommonDelete}" target="deleteShipping" 
-			also-hidden="false" confirmation-message="${uiLabelMap.CommonConfirmDelete}" 
-			image-location="${iconsLocation}/delete.png"> <parameter param-name="shipmentId"/> 
-			</hyperlink> </field> -->
+		<!-- <field name="deleteLink" use-when="shipping!=null" title=" " widget-style="buttontext"> <hyperlink description="${uiLabelMap.CommonDelete}" 
+			target="deleteShipping" also-hidden="false" confirmation-message="${uiLabelMap.CommonConfirmDelete}" image-location="${iconsLocation}/delete.png"> 
+			<parameter param-name="shipmentId"/> </hyperlink> </field> -->
 
 
 	</form>
 
-	<!-- <form name="EditShippingItems" type="single" target="updateShipment" 
-		title="" default-map-name="shipping" default-entity-name="Shipment"> <alt-target 
-		use-when="example==null" target="createShipment" /> <field name="geoName" 
-		title="${uiLabelMap.CommonGeoName}" tooltip="${uiLabelMap.ExampleLookupFields4}" 
-		tooltip-style="button-text"> <lookup target-form-name="LookupOrder" description-field-name="geoId" 
-		/> </field> This field may be hidden and the name rendered in geoName using 
-		default-value if geoId is known when loading the form <field name="geoId" 
-		title="${uiLabelMap.CommonGeoId}"> <text /> </field>the text field is only 
-		used for rendering. In the "real life" you would use the hidden field commented 
-		below to pass the data to the request field name="geoId"><hidden/></field 
-		<sort-order> <field-group> <sort-field name="geoName" /> <sort-field name="geoId" 
+	<!-- <form name="EditShippingItems" type="single" target="updateShipment" title="" default-map-name="shipping" default-entity-name="Shipment"> 
+		<alt-target use-when="example==null" target="createShipment" /> <field name="geoName" title="${uiLabelMap.CommonGeoName}" tooltip="${uiLabelMap.ExampleLookupFields4}" 
+		tooltip-style="button-text"> <lookup target-form-name="LookupOrder" description-field-name="geoId" /> </field> This field may be hidden 
+		and the name rendered in geoName using default-value if geoId is known when loading the form <field name="geoId" title="${uiLabelMap.CommonGeoId}"> 
+		<text /> </field>the text field is only used for rendering. In the "real life" you would use the hidden field commented below to pass 
+		the data to the request field name="geoId"><hidden/></field <sort-order> <field-group> <sort-field name="geoName" /> <sort-field name="geoId" 
 		/> </field-group> </sort-order> </form> -->
 
 
-	<form name="ListShippingItems" type="multi" list-name="listIt"
-		target="UpdatePallet" paginate-target="EditShippingItems"
+	<form name="ListShippingItems" type="multi" list-name="listIt" target="UpdatePallet" paginate-target="EditShippingItems"
 		odd-row-style="alternate-row" default-table-style="basic-table hover-bar">
-		<!-- <actions> <service service-name="performFind" result-map="result" 
-			result-map-list="listIt"> <field-map field-name="inputFields" from-field="findParams"/> 
-			<field-map field-name="entityName" value="ShippingItem"/> <field-map field-name="orderBy" 
-			value="shippingItemSeqId"/> </service> </actions> -->
+		<!-- <actions> <service service-name="performFind" result-map="result" result-map-list="listIt"> <field-map field-name="inputFields" 
+			from-field="findParams"/> <field-map field-name="entityName" value="ShippingItem"/> <field-map field-name="orderBy" value="shippingItemSeqId"/> 
+			</service> </actions> -->
 
 		<field name="shipmentId">
 			<hidden />
@@ -227,11 +195,9 @@
 		</field>
 
 
-		<field name="deleteLink" title=" " widget-style="buttontext"
-			use-when="${groovy: !'SHIPMENT_SHIPPED'.equals(shipping.statusId)}">
-			<hyperlink description="${uiLabelMap.CommonDelete}" target="deleteShippingItem"
-				also-hidden="false" confirmation-message="${uiLabelMap.CommonConfirmDelete}"
-				image-location="${iconsLocation}/delete.png">
+		<field name="deleteLink" title=" " widget-style="buttontext" use-when="${groovy: !'SHIPMENT_SHIPPED'.equals(shipping.statusId)}">
+			<hyperlink description="${uiLabelMap.CommonDelete}" target="deleteShippingItem" also-hidden="false"
+				confirmation-message="${uiLabelMap.CommonConfirmDelete}" image-location="${iconsLocation}/delete.png">
 				<parameter param-name="shipmentId" />
 				<parameter param-name="orderId" />
 				<parameter param-name="orderItemSeqId" />
@@ -239,32 +205,26 @@
 				<parameter param-name="quantityToShip" />
 			</hyperlink>
 		</field>
-		<field name="deleteLink" title=" " widget-style="buttontext disabled"
-			use-when="${groovy: 'SHIPMENT_SHIPPED'.equals(shipping.statusId)}">
+		<field name="deleteLink" title=" " widget-style="buttontext disabled" use-when="${groovy: 'SHIPMENT_SHIPPED'.equals(shipping.statusId)}">
 			<display description="${uiLabelMap.DeleteDisabled}"></display>
 		</field>
 
 
 
-		<field name="submitButton" title="${uiLabelMap.ShippingUpdatePallet}"
-			widget-style="smallSubmit">
+		<field name="submitButton" title="${uiLabelMap.ShippingUpdatePallet}" widget-style="smallSubmit">
 			<submit />
 		</field>
 
 		<!-- <field name="shipmentId"><display/></field> -->
-		<!-- <field name="shipmentId" widget-style="buttontext"> <hyperlink description="${billingAccountId}" 
-			target="EditBillingAccount"> <parameter param-name="billingAccountId"/> </hyperlink> 
-			</field> -->
+		<!-- <field name="shipmentId" widget-style="buttontext"> <hyperlink description="${billingAccountId}" target="EditBillingAccount"> 
+			<parameter param-name="billingAccountId"/> </hyperlink> </field> -->
 
 	</form>
 
 
-	<form name="AddShippingItemOrderItem" type="multi" use-row-submit="true"
-		list-name="orderItems" title="" target="UpdateShippingItems"
-		odd-row-style="alternate-row" default-table-style="basic-table hover-bar"
-		paginate-target="AddShippingItemOrderItem">
-		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" 
-			auto-field-map="true"/> </row-actions> -->
+	<form name="AddShippingItemOrderItem" type="multi" use-row-submit="true" list-name="orderItems" title="" target="UpdateShippingItems"
+		odd-row-style="alternate-row" default-table-style="basic-table hover-bar" paginate-target="AddShippingItemOrderItem">
+		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" auto-field-map="true"/> </row-actions> -->
 		<field name="shipmentId">
 			<hidden value="${shipmentId}" />
 		</field>
@@ -274,8 +234,7 @@
 		<field name="orderItemSeqId">
 			<hidden value="${orderItemSeqId}" />
 		</field>
-		<!-- <field name="orderId" title="${uiLabelMap.OrderOrderId}" widget-style="buttontext"> 
-			<hyperlink description="${orderId}" target="/catalog/control/EditProductInventoryItems" 
+		<!-- <field name="orderId" title="${uiLabelMap.OrderOrderId}" widget-style="buttontext"> <hyperlink description="${orderId}" target="/catalog/control/EditProductInventoryItems" 
 			target-type="inter-app"> <parameter param-name="orderId"/> </hyperlink> </field> -->
 		<field name="productId">
 			<display />
@@ -295,27 +254,21 @@
 		<field name="quantityToShip" title="${uiLabelMap.OrderQuantity}">
 			<text size="5" maxlength="10" />
 		</field>
-		<field name="submitButton" title="${uiLabelMap.OrderAddToOrder}"
-			widget-style="smallSubmit">
+		<field name="submitButton" title="${uiLabelMap.OrderAddToOrder}" widget-style="smallSubmit">
 			<submit />
 		</field>
 
 	</form>
 
-	<form name="LookupBulkAddProducts" type="multi" use-row-submit="true"
-		list-name="productList" title="" target="BulkAddProducts"
-		odd-row-style="alternate-row" default-table-style="basic-table hover-bar"
-		paginate-target="LookupBulkAddProducts">
+	<form name="LookupBulkAddProducts" type="multi" use-row-submit="true" list-name="productList" title="" target="BulkAddProducts"
+		odd-row-style="alternate-row" default-table-style="basic-table hover-bar" paginate-target="LookupBulkAddProducts">
 		<row-actions>
-			<entity-one entity-name="Product" value-field="product"
-				auto-field-map="true" />
+			<entity-one entity-name="Product" value-field="product" auto-field-map="true" />
 			<set field="" />
 			<set field="hasAmount" value="${groovy:product.getString('requireAmount')?:'N'}" />
 		</row-actions>
-		<field name="productId" title="${uiLabelMap.ProductProductId}"
-			widget-style="buttontext">
-			<hyperlink description="${productId}"
-				target="/catalog/control/EditProductInventoryItems" target-type="inter-app">
+		<field name="productId" title="${uiLabelMap.ProductProductId}" widget-style="buttontext">
+			<hyperlink description="${productId}" target="/catalog/control/EditProductInventoryItems" target-type="inter-app">
 				<parameter param-name="productId" />
 			</hyperlink>
 		</field>
@@ -326,28 +279,22 @@
 		<field name="quantity" title="${uiLabelMap.OrderQuantity}">
 			<text size="5" maxlength="10" />
 		</field>
-		<field use-when="${groovy: 'Y'.equals(context.hasAmount)}" name="amount"
-			title="${uiLabelMap.OrderAmount}">
+		<field use-when="${groovy: 'Y'.equals(context.hasAmount)}" name="amount" title="${uiLabelMap.OrderAmount}">
 			<text size="5" maxlength="10" />
 		</field>
-		<field use-when="${groovy: 'N'.equals(context.hasAmount)}" name="amount"
-			title="${uiLabelMap.OrderAmount}" widget-style="disabled">
+		<field use-when="${groovy: 'N'.equals(context.hasAmount)}" name="amount" title="${uiLabelMap.OrderAmount}" widget-style="disabled">
 			<text size="5" maxlength="10" disabled="true" />
 		</field>
-		<!-- <field name="itemDesiredDeliveryDate" title="${uiLabelMap.OrderDesiredDeliveryDate}"> 
-			<date-time/> </field> -->
-		<field name="submitButton" title="${uiLabelMap.OrderAddToOrder}"
-			widget-style="smallSubmit">
+		<!-- <field name="itemDesiredDeliveryDate" title="${uiLabelMap.OrderDesiredDeliveryDate}"> <date-time/> </field> -->
+		<field name="submitButton" title="${uiLabelMap.OrderAddToOrder}" widget-style="smallSubmit">
 			<submit />
 		</field>
 	</form>
-	<form name="LookupBulkAddSupplierProducts" type="multi"
-		use-row-submit="true" list-name="productList" title="" target="BulkAddProducts"
-		odd-row-style="alternate-row" default-table-style="basic-table hover-bar"
-		paginate-target="LookupBulkAddSupplierProducts" view-size="5">
+	<form name="LookupBulkAddSupplierProducts" type="multi" use-row-submit="true" list-name="productList" title=""
+		target="BulkAddProducts" odd-row-style="alternate-row" default-table-style="basic-table hover-bar" paginate-target="LookupBulkAddSupplierProducts"
+		view-size="5">
 		<field name="productId" widget-style="buttontext">
-			<hyperlink description="${productId}"
-				target="/catalog/control/EditProductInventoryItems" target-type="inter-app">
+			<hyperlink description="${productId}" target="/catalog/control/EditProductInventoryItems" target-type="inter-app">
 				<parameter param-name="productId" />
 			</hyperlink>
 		</field>
@@ -381,19 +328,15 @@
 		<field name="itemDesiredDeliveryDate" title="${uiLabelMap.OrderDesiredDeliveryDate}">
 			<date-time />
 		</field>
-		<field name="submitButton" title="${uiLabelMap.OrderAddToOrder}"
-			widget-style="smallSubmit">
+		<field name="submitButton" title="${uiLabelMap.OrderAddToOrder}" widget-style="smallSubmit">
 			<submit />
 		</field>
 	</form>
 
 
-	<form name="ListNotShippedOrderItems" type="multi" use-row-submit="true"
-		list-name="orderItems2" title="" target="ordersnotshipped"
-		odd-row-style="alternate-row" default-table-style="basic-table hover-bar"
-		paginate-target="ordersnotshipped">
-		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" 
-			auto-field-map="true"/> </row-actions> -->
+	<form name="ListNotShippedOrderItems" type="multi" use-row-submit="true" list-name="orderItems2" title="" target="ordersnotshipped"
+		odd-row-style="alternate-row" default-table-style="basic-table hover-bar" paginate-target="ordersnotshipped">
+		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" auto-field-map="true"/> </row-actions> -->
 		<field name="shipmentId">
 			<hidden value="${shipmentId}" />
 		</field>
@@ -406,8 +349,7 @@
 		<field name="orderItemSeqId">
 			<display />
 		</field>
-		<!-- <field name="orderId" title="${uiLabelMap.OrderOrderId}" widget-style="buttontext"> 
-			<hyperlink description="${orderId}" target="/catalog/control/EditProductInventoryItems" 
+		<!-- <field name="orderId" title="${uiLabelMap.OrderOrderId}" widget-style="buttontext"> <hyperlink description="${orderId}" target="/catalog/control/EditProductInventoryItems" 
 			target-type="inter-app"> <parameter param-name="orderId"/> </hyperlink> </field> -->
 		<field name="productId">
 			<display />
@@ -424,9 +366,7 @@
 		<field name="quantityShippable">
 			<display />
 		</field>
-		<!-- <field name="productWeight">
-			<display />
-		</field> -->
+		<!-- <field name="productWeight"> <display /> </field> -->
 		<field name="netWeight">
 			<display />
 		</field>
@@ -436,28 +376,22 @@
 	</form>
 
 
-	<form name="ListOrderItemShipping" type="list" list-name="listIt"
-		paginate-target="EditShippingItems" odd-row-style="alternate-row"
-		default-table-style="basic-table hover-bar" header-row-style="header-row-2"
-		override-list-size="true">
+	<form name="ListOrderItemShipping" type="list" list-name="listIt" paginate-target="EditShippingItems" odd-row-style="alternate-row"
+		default-table-style="basic-table hover-bar" header-row-style="header-row-2" override-list-size="true">
 		<actions>
-			<service service-name="performFind" result-map="result"
-				result-map-list="listIt">
+			<service service-name="performFind" result-map="result" result-map-list="listIt">
 				<field-map field-name="inputFields" from-field="parameters" />
 				<field-map field-name="entityName" value="ShippingItemView" />
 			</service>
 		</actions>
 
-		<field name="shipmentId" title="${uiLabelMap.ShippingshipmentId}"
-			widget-style="buttontext">
-			<hyperlink description="${shipmentId}" target="EditShipping"
-				also-hidden="false">
+		<field name="shipmentId" title="${uiLabelMap.ShippingshipmentId}" widget-style="buttontext">
+			<hyperlink description="${shipmentId}" target="EditShipping" also-hidden="false">
 				<parameter param-name="shipmentId" />
 			</hyperlink>
 		</field>
 		<field name="estimatedShipDate" sort-field="true">
-			<display
-				description="${groovy:org.apache.ofbiz.base.util.UtilDateTime.toDateString(estimatedShipDate, &quot;yyyy.MM.dd.&quot;);}" />
+			<display description="${groovy:org.apache.ofbiz.base.util.UtilDateTime.toDateString(estimatedShipDate, &quot;yyyy.MM.dd.&quot;);}" />
 		</field>
 
 
@@ -465,15 +399,14 @@
 		<field name="quantity">
 			<display />
 		</field>
-		<!-- <field name="shipmentId" widget-style="buttontext"> <hyperlink description="${billingAccountId}" 
-			target="EditBillingAccount"> <parameter param-name="billingAccountId"/> </hyperlink> 
-			</field> -->
+		<!-- <field name="shipmentId" widget-style="buttontext"> <hyperlink description="${billingAccountId}" target="EditBillingAccount"> 
+			<parameter param-name="billingAccountId"/> </hyperlink> </field> -->
 
 
 	</form>
 
-	<form name="EditWorkPapers" type="single" target="updateWorkPapers"
-		title="" default-map-name="workPapers" default-entity-name="VfWorkPapers">
+	<form name="EditWorkPapers" type="single" target="updateWorkPapers" title="" default-map-name="workPapers"
+		default-entity-name="VfWorkPapers">
 		<alt-target use-when="workPapers==null" target="createWorkPapers" />
 		<!-- <auto-fields-service service-name="updateShipment"/> -->
 		<field name="shipmentId">
@@ -496,35 +429,26 @@
 		<field name="submitButton" use-when="workPapers!=null" title="${uiLabelMap.CommonUpdate}">
 			<submit button-type="button" />
 		</field>
-		<!-- <field name="deleteLink" use-when="shipping!=null" title=" " widget-style="buttontext"> 
-			<hyperlink description="${uiLabelMap.CommonDelete}" target="deleteShipping" 
-			also-hidden="false" confirmation-message="${uiLabelMap.CommonConfirmDelete}" 
-			image-location="${iconsLocation}/delete.png"> <parameter param-name="shipmentId"/> 
-			</hyperlink> </field> -->
+		<!-- <field name="deleteLink" use-when="shipping!=null" title=" " widget-style="buttontext"> <hyperlink description="${uiLabelMap.CommonDelete}" 
+			target="deleteShipping" also-hidden="false" confirmation-message="${uiLabelMap.CommonConfirmDelete}" image-location="${iconsLocation}/delete.png"> 
+			<parameter param-name="shipmentId"/> </hyperlink> </field> -->
 
 
 	</form>
-	<!-- <form name="AddProductToShipping" type="multi" use-row-submit="true" 
-		list-name="orderItems" title="" target="AddProductToShipping" odd-row-style="alternate-row" 
-		default-table-style="basic-table hover-bar" paginate-target="EditShippingItems"> 
-		<field name="productId"> <lookup target-form-name="LookupProduct" presentation="window" 
-		/> </field> <field name="shipmentId"> <hidden value="${shipmentId}" /> </field> 
-		<field name="quantityToShip" title="${uiLabelMap.OrderQuantity}"> <text size="5" 
-		maxlength="10" /> </field> <field name="submitButton" title="${uiLabelMap.OrderAddToOrder}" 
-		widget-style="smallSubmit"> <submit /> </field> </form> -->
+	<!-- <form name="AddProductToShipping" type="multi" use-row-submit="true" list-name="orderItems" title="" target="AddProductToShipping" 
+		odd-row-style="alternate-row" default-table-style="basic-table hover-bar" paginate-target="EditShippingItems"> <field name="productId"> 
+		<lookup target-form-name="LookupProduct" presentation="window" /> </field> <field name="shipmentId"> <hidden value="${shipmentId}" 
+		/> </field> <field name="quantityToShip" title="${uiLabelMap.OrderQuantity}"> <text size="5" maxlength="10" /> </field> <field name="submitButton" 
+		title="${uiLabelMap.OrderAddToOrder}" widget-style="smallSubmit"> <submit /> </field> </form> -->
 
-	<form name="AddProductToShipping" type="multi" use-row-submit="true"
-		list-name="productLine" title="" target="AddProductToShipping"
-		odd-row-style="alternate-row" default-table-style="basic-table hover-bar"
-		paginate-target="EditShippingItems">
-		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" 
-			auto-field-map="true"/> </row-actions> -->
+	<form name="AddProductToShipping" type="multi" use-row-submit="true" list-name="productLine" title="" target="AddProductToShipping"
+		odd-row-style="alternate-row" default-table-style="basic-table hover-bar" paginate-target="EditShippingItems">
+		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" auto-field-map="true"/> </row-actions> -->
 		<field name="shipmentId">
 			<hidden value="${shipmentId}" />
 		</field>
 
-		<!-- <field name="orderId" title="${uiLabelMap.OrderOrderId}" widget-style="buttontext"> 
-			<hyperlink description="${orderId}" target="/catalog/control/EditProductInventoryItems" 
+		<!-- <field name="orderId" title="${uiLabelMap.OrderOrderId}" widget-style="buttontext"> <hyperlink description="${orderId}" target="/catalog/control/EditProductInventoryItems" 
 			target-type="inter-app"> <parameter param-name="orderId"/> </hyperlink> </field> -->
 		<field name="productId">
 			<lookup target-form-name="LookupProduct" />
@@ -534,19 +458,15 @@
 		<field name="quantityToShip" title="${uiLabelMap.OrderQuantity}">
 			<text size="5" maxlength="10" />
 		</field>
-		<field name="submitButton" title="${uiLabelMap.OrderAddToOrder}"
-			widget-style="smallSubmit">
+		<field name="submitButton" title="${uiLabelMap.OrderAddToOrder}" widget-style="smallSubmit">
 			<submit />
 		</field>
 
 	</form>
 
-	<form name="ShipmentsReport" type="multi" use-row-submit="true"
-		list-name="orderItems" title="" target="shipmentsreport"
-		odd-row-style="alternate-row" default-table-style="basic-table hover-bar"
-		paginate-target="shipmentsreport">
-		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" 
-			auto-field-map="true"/> </row-actions> -->
+	<form name="ShipmentsReport" type="multi" use-row-submit="true" list-name="orderItems" title="" target="shipmentsreport"
+		odd-row-style="alternate-row" default-table-style="basic-table hover-bar" paginate-target="shipmentsreport">
+		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" auto-field-map="true"/> </row-actions> -->
 
 		<field name="orderId">
 			<display />
@@ -554,8 +474,7 @@
 		<field name="estimatedShipDate">
 			<display />
 		</field>
-		<!-- <field name="orderId" title="${uiLabelMap.OrderOrderId}" widget-style="buttontext"> 
-			<hyperlink description="${orderId}" target="/catalog/control/EditProductInventoryItems" 
+		<!-- <field name="orderId" title="${uiLabelMap.OrderOrderId}" widget-style="buttontext"> <hyperlink description="${orderId}" target="/catalog/control/EditProductInventoryItems" 
 			target-type="inter-app"> <parameter param-name="orderId"/> </hyperlink> </field> -->
 		<field name="productId">
 			<display />
@@ -574,12 +493,9 @@
 		</field>
 	</form>
 
-	<form name="ShipmentsWeights" type="multi" use-row-submit="true"
-		list-name="shipWeights" title="" target="shipmentsreport"
-		odd-row-style="alternate-row" default-table-style="basic-table hover-bar"
-		paginate-target="ordersnotshipped">
-		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" 
-			auto-field-map="true"/> </row-actions> -->
+	<form name="ShipmentsWeights" type="multi" use-row-submit="true" list-name="shipWeights" title="" target="shipmentsreport"
+		odd-row-style="alternate-row" default-table-style="basic-table hover-bar" paginate-target="ordersnotshipped">
+		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" auto-field-map="true"/> </row-actions> -->
 		<field name="estimatedShipDate">
 			<display />
 		</field>
@@ -588,12 +504,9 @@
 		</field>
 	</form>
 
-	<form name="ExtraShippedProducts" type="multi" use-row-submit="true"
-		list-name="exShippedPr" title="" target="shipmentsreport"
-		odd-row-style="alternate-row" default-table-style="basic-table hover-bar"
-		paginate-target="ordersnotshipped">
-		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" 
-			auto-field-map="true"/> </row-actions> -->
+	<form name="ExtraShippedProducts" type="multi" use-row-submit="true" list-name="exShippedPr" title="" target="shipmentsreport"
+		odd-row-style="alternate-row" default-table-style="basic-table hover-bar" paginate-target="ordersnotshipped">
+		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" auto-field-map="true"/> </row-actions> -->
 		<field name="estimatedShipDate">
 			<display />
 		</field>
@@ -612,17 +525,14 @@
 	</form>
 
 	<form name="FilterShipmentsReport" type="single" target="shipmentsreport">
-		<field name="fromDate" title="${uiLabelMap.ExampleDateField2Title}"
-			tooltip="${uiLabelMap.FromDate}" tooltip-style="button-text">
-			<date-time  default-value="${nowTimestamp}" />
+		<field name="fromDate" title="${uiLabelMap.ExampleDateField2Title}" tooltip="${uiLabelMap.FromDate}" tooltip-style="button-text">
+			<date-time default-value="${nowTimestamp}" />
 		</field>
-		<field name="thruDate" title="${uiLabelMap.ExampleDateField2Title}"
-			tooltip="${uiLabelMap.ToDate}" tooltip-style="button-text">
+		<field name="thruDate" title="${uiLabelMap.ExampleDateField2Title}" tooltip="${uiLabelMap.ToDate}" tooltip-style="button-text">
 			<date-time mask="Y" />
 		</field>
 
-		<field name="searchButton" title="${uiLabelMap.CommonFind}"
-			widget-style="smallSubmit">
+		<field name="searchButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit">
 			<submit button-type="button" />
 		</field>
 

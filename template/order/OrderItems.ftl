@@ -28,9 +28,10 @@ under the License.
         <div class="screenlet-body">
             <table class="order-items basic-table" cellspacing='0'>
                 <tr valign="bottom" class="header-row">
-                    <td width="50%">${uiLabelMap.ProductProduct}</td>                    
-                    <td width="25%">${uiLabelMap.OrderQuantity}</td>   
-                    <td width="25%">${uiLabelMap.OrderExtra}</td>                
+                	<td width="15%">${uiLabelMap.ProductProductId}</td>
+                    <td width="15%">${uiLabelMap.ProductProduct}</td>                    
+                    <td width="10%">${uiLabelMap.OrderQuantity}</td>   
+                    <td width="10%">${uiLabelMap.OrderExtra}</td>                
                    
                 </tr>
                 <#if !orderItemList?has_content>
@@ -48,9 +49,12 @@ under the License.
                         <tr<#if itemClass == "1"> class="alternate-row"</#if>>
                             <#assign orderItemType = orderItem.getRelatedOne("OrderItemType", false)!>
                             <#assign productId = orderItem.productId!>
+                            
                             <#if productId?? && productId == "shoppingcart.CommentLine">
+            
                                 <td colspan="7" valign="top" class="label"> &gt;&gt; ${orderItem.itemDescription}</td>
                             <#else>
+                            	<td>${productId}</td>
                                 <td colspan="1">
                                     <div class="order-item-description">
                                         <#if orderItem.supplierProductId?has_content>
