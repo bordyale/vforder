@@ -71,7 +71,7 @@ for (GenericValue entry: orderItemShippingItem){
 	e.put("quantity",entry.get("quantity"))
 	Long piecesPerBox = entry.get("piecesPerBox")
 	if (piecesPerBox ==null){
-		piecesPerBox = 1L
+		piecesPerBox = quantity.abs().longValue()
 	}
 	e.put("piecesPerBox",piecesPerBox)
 	e.put("shipmentItemSeqId",entry.get("shipmentItemSeqId"))
