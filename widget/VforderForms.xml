@@ -507,12 +507,7 @@
 	<form name="ExtraShippedProducts" type="multi" use-row-submit="true" list-name="exShippedPr" title="" target="shipmentsreport"
 		odd-row-style="alternate-row" default-table-style="basic-table hover-bar" paginate-target="ordersnotshipped">
 		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" auto-field-map="true"/> </row-actions> -->
-		<field name="estimatedShipDate">
-			<display />
-		</field>
-		<field name="shipmentId">
-			<display />
-		</field>
+		
 		<field name="productId">
 			<display />
 		</field>

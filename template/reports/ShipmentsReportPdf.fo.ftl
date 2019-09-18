@@ -361,8 +361,7 @@ under the License.
 					${uiLabelMap.ExtraShipped} 
 			  </fo:block>
               <fo:table width="100%" table-layout="fixed"> 
-	              <fo:table-column column-width="8%" border-width="1px" border-style="solid" />
-		          <fo:table-column column-width="10%" border-width="1px" border-style="solid" />
+	           
 				  <fo:table-column column-width="8%" border-width="1px" border-style="solid" />
 				  <fo:table-column column-width="27%" border-width="1px" border-style="solid" />
 				  <fo:table-column column-width="8%" border-width="1px" border-style="solid" />
@@ -371,12 +370,8 @@ under the License.
 				        
                 <fo:table-header text-align="center" background-color="silver">
 					<fo:table-row>
-						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid" font-size="8pt">
-							<fo:block font-weight="bold">${uiLabelMap.ShippingId}</fo:block>
-						</fo:table-cell>
-						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid" font-size="8pt">
-							<fo:block font-weight="bold">${uiLabelMap.ShippingDate}</fo:block>
-						</fo:table-cell>
+						
+						
 						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid" font-size="8pt">
 							<fo:block font-weight="bold">${uiLabelMap.ProductProductId}</fo:block>
 						</fo:table-cell>					
@@ -400,16 +395,8 @@ under the License.
 	                <#list exShippedPr as item>
 		                
 		                  <fo:table-row>
-		                  	<fo:table-cell border-style="solid" border-width="0.3mm" font-size="8pt">
-		                      <fo:block>
-		                        ${item.shipmentId}
-		                      </fo:block>
-		                    </fo:table-cell>
-		                    <fo:table-cell border-style="solid" border-width="0.3mm" font-size="8pt">
-		                      <fo:block>
-		                        ${item.estimatedShipDate?if_exists?string("yyyy.MM.dd")}
-		                      </fo:block>
-		                    </fo:table-cell>
+		                  	
+		                    
 		                    <fo:table-cell border-style="solid" border-width="0.3mm" font-size="8pt">
 		                      <fo:block>
 		                        ${item.productId}

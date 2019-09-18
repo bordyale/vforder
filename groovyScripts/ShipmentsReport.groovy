@@ -25,7 +25,12 @@ import org.apache.ofbiz.entity.condition.EntityConditionList
 import org.apache.ofbiz.entity.condition.EntityCondition
 import org.apache.ofbiz.entity.GenericValue
 import org.apache.ofbiz.entity.util.EntityUtil
+
 import java.sql.Timestamp
+
+import org.apache.ofbiz.entity.model.DynamicViewEntity
+
+DynamicViewEntity dynamicViewEntity = new DynamicViewEntity()
 
 fromDate = parameters.fromDate
 thruDate = parameters.thruDate
@@ -73,23 +78,6 @@ for (GenericValue entry: shippingWeight){
 	shipWeights.add(e)
 }
 
-extraShippedProducts = select("estimatedShipDate","shipmentId","productId","productName","internalName","quantity").from("ShippingItemView").where("orderId", null).cache(false).queryList()
-
-extraShippedProducts = EntityUtil.orderBy(extraShippedProducts,  ["productId"])
-extraShippedProducts = EntityUtil.orderBy(extraShippedProducts,  ["estimatedShipDate"])
-
-List<HashMap<String,Object>> exShippedPr = new ArrayList<HashMap<String,Object>>()
-for (GenericValue entry: extraShippedProducts){
-	Map<String,Object> e = new HashMap<String,Object>()
-	e.put("estimatedShipDate",entry.get("estimatedShipDate"))
-	e.put("shipmentId",entry.get("shipmentId"))
-	e.put("productId",entry.get("productId"))
-	e.put("productName",entry.get("productName"))
-	e.put("quantity",entry.get("quantity"))
-	exShippedPr.add(e)
-}
-
-
 notShippedItems = select("orderId","statusId","orderItemSeqId","quantity","quantityShipped","productId","productName","shipBeforeDate","productWeight","orderName").from("OrderItemShippingItemView").cache(false).queryList()
 
 notShippedItems = EntityUtil.orderBy(notShippedItems,  ["shipBeforeDate"])
@@ -120,17 +108,42 @@ for (GenericValue entry: notShippedItems){
 	BigDecimal productWeight = entry.get("productWeight")
 	BigDecimal netWeight = quantityShippable.multiply(productWeight)
 	e.put("netWeight",netWeight)
-	
-	
+
+
 	status = entry.get("statusId")
 	if (!quantity.equals(quantityShipped)){
 		if (!status.equals("ITEM_CANCELLED")){
-			progresNetWeigh = progresNetWeigh.add(netWeight)		
+			progresNetWeigh = progresNetWeigh.add(netWeight)
 			e.put("progresNetWeight",progresNetWeigh)
 			hashMaps2.add(e)
 		}
 	}
 }
+
+
+dynamicViewEntity.addMemberEntity("SIV", "ShippingItemView");
+//dynamicViewEntity.addAliasAll("SIV", null, null)
+dynamicViewEntity.addAlias("SIV", "productId", null, null, null,true, null);
+dynamicViewEntity.addAlias("SIV", "productName", null, null, null,true, null);
+dynamicViewEntity.addAlias("SIV", "orderId", null, null, null,null, null);
+dynamicViewEntity.addAlias("SIV", "quantity", "quantity", null, null, null, "sum");
+
+extraShippedProducts = select("productId","productName","quantity").from(dynamicViewEntity).where("orderId", null).cache(false).queryList()
+
+extraShippedProducts = EntityUtil.orderBy(extraShippedProducts,  ["productId"])
+
+List<HashMap<String,Object>> exShippedPr = new ArrayList<HashMap<String,Object>>()
+for (GenericValue entry: extraShippedProducts){
+	Map<String,Object> e = new HashMap<String,Object>()
+	e.put("productId",entry.get("productId"))
+	e.put("productName",entry.get("productName"))
+	BigDecimal qty = entry.get("quantity")
+	e.put("quantity",qty)
+	if (qty.compareTo(BigDecimal.ZERO)!=0){
+		exShippedPr.add(e)
+	}
+}
+
 
 
 
