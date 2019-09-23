@@ -25,7 +25,7 @@ CHMOD="$(which chmod)"
 GZIP="$(which gzip)"
  
 # Backup Dest directory, change this if you have someother location
-DEST="/home/ale/Dropbox/backupMySqlVV"
+DEST="${HOME}/Dropbox/backupMySqlVV"
  
 # Main directory where backup will be stored
 MBD="$DEST/mysql"
@@ -42,7 +42,7 @@ FILE=""
 DBS=""
  
 # DO NOT BACKUP these databases
-IGGY="test"
+IGGY="phpmyadmin sys test information_schema mysql performance_schema"
  
 [ ! -d $MBD ] && mkdir -p $MBD || :
  
