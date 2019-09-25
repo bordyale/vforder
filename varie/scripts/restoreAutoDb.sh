@@ -57,20 +57,22 @@ DBS=""
 # DO NOT BACKUP these databases
 IGGY="test information_schema mysql performance_schema"
  
-#[ ! -d $MBD ] && mkdir -p $MBD || :
- 
-# Only root can access it!
-#$CHOWN 0.0 -R $DEST
-#$CHMOD 0600 $DEST
- 
-# Get all database list first
-DBS="$($MYSQL -u $MyUSER -h $MyHOST -p$MyPASS -Bse 'drop database ofbiz')"
-DBS="$($MYSQL -u $MyUSER -h $MyHOST -p$MyPASS -Bse 'drop database ofbiztenant')"
-DBS="$($MYSQL -u $MyUSER -h $MyHOST -p$MyPASS -Bse 'drop database ofbizolap')"
 
 DBS="$($MYSQL -u $MyUSER -h $MyHOST -p$MyPASS -Bse 'show databases')"
- 
+
+echo "Databases before delete:" 
 echo $DBS
+ 
+# Get all database list first
+$MYSQL -u $MyUSER -h $MyHOST -p$MyPASS -Bse 'drop database ofbiz'
+$MYSQL -u $MyUSER -h $MyHOST -p$MyPASS -Bse 'drop database ofbiztenant'
+$MYSQL -u $MyUSER -h $MyHOST -p$MyPASS -Bse 'drop database ofbizolap'
+
+DBS="$($MYSQL -u $MyUSER -h $MyHOST -p$MyPASS -Bse 'show databases')"
+echo "Databases after delete:" 
+echo $DBS
+
+echo "Create new databases:"
 
 $MYSQL -u $MyUSER -h $MyHOST -p$MyPASS << EOF
 create database ofbiz;
@@ -90,6 +92,7 @@ grant all privileges on *.* to 'ofbiztenant'@localhost identified by 'ofbiztenan
 EOF
 
 DBS="$($MYSQL -u $MyUSER -h $MyHOST -p$MyPASS -Bse 'show databases')"
+echo "Databases after create:"
 echo $DBS
 
 OFBIZDB="${DEST}/ofbiz.${BACKUPNAME}"
@@ -106,7 +109,7 @@ $MYSQL -u $MyUSER -h $MyHOST -p$MyPASS << EOF
 use ofbiz
 \. $OFBIZDB
 use ofbiztenant
-\. ${OFBIZTENANTDB}
+\. $OFBIZTENANTDB
 use ofbizolap
-\. ${OFBIZOLAPDB}
+\. $OFBIZOLAPDB
 EOF
