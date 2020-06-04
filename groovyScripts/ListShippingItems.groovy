@@ -27,7 +27,7 @@ import org.apache.ofbiz.entity.condition.EntityFieldValue
 import org.apache.ofbiz.entity.condition.EntityConditionList
 import org.apache.ofbiz.entity.condition.EntityCondition
 import org.apache.ofbiz.entity.GenericValue
-import org.json.JSONObject
+
 import org.apache.ofbiz.entity.util.EntityUtil
 
 shipmentId = request.getParameter("shipmentId") ?: ""
