@@ -17,12 +17,8 @@
  * under the License.
  */
 
-import org.apache.ofbiz.service.*
-import org.apache.ofbiz.entity.*
-import org.apache.ofbiz.base.util.*
 import org.apache.ofbiz.order.order.OrderReadHelper
-import org.apache.ofbiz.order.shoppingcart.*
-import org.apache.ofbiz.party.party.PartyWorker
+import org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents
 import org.apache.ofbiz.product.catalog.CatalogWorker
 
 productId = parameters.productId
@@ -53,7 +49,7 @@ context.shoppingCart = shoppingCart
 context.currencyUomId = shoppingCart.getCurrency()
 context.orderType = shoppingCart.getOrderType()
 
-orderItems = shoppingCart.makeOrderItems()
+orderItems = shoppingCart.makeOrderItems(dispatcher)
 orderAdjustments = shoppingCart.makeAllAdjustments()
 orderItemShipGroupInfo = shoppingCart.makeAllShipGroupInfos()
 if (orderItemShipGroupInfo) {
@@ -114,7 +110,7 @@ if (productStore) {
     productStoreFacilityId = productStore.inventoryFacilityId
 }
 context.facilityId = productStoreFacilityId
-inventorySummary = runService('getProductInventorySummaryForItems', [orderItems : shoppingCart.makeOrderItems(), facilityId : productStoreFacilityId])
+inventorySummary = runService('getProductInventorySummaryForItems', [orderItems : shoppingCart.makeOrderItems(dispatcher), facilityId : productStoreFacilityId])
 context.availableToPromiseMap = inventorySummary.availableToPromiseMap
 context.quantityOnHandMap = inventorySummary.quantityOnHandMap
 context.mktgPkgATPMap = inventorySummary.mktgPkgATPMap

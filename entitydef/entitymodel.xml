@@ -12,10 +12,10 @@
 
 	<entity entity-name="VfShipmentItem" package-name="org.apache.ofbiz.order.shipping"
 		never-cache="true" title="Shipping Item Entity">
-		<field name="shipmentId" type="id-ne"></field>
-		<field name="shipmentItemSeqId" type="id-ne"></field>
-		<field name="orderId" type="id-ne"></field>
-		<field name="orderItemSeqId" type="id-ne"></field>
+		<field name="shipmentId" type="id"></field>
+		<field name="shipmentItemSeqId" type="id"></field>
+		<field name="orderId" type="id"></field>
+		<field name="orderItemSeqId" type="id"></field>
 		<field name="pallet" type="value"></field>
 		<field name="isBoxOrPallet" type="value"></field>
 		<field name="piecesPerBox" type="numeric"></field>
@@ -36,7 +36,7 @@
 
 	<!-- <entity entity-name="OrderItemShippingItem" package-name="org.apache.ofbiz.order.shipping" 
 		never-cache="true" title="Order Item Shipping Item"> <field name="orderId" 
-		type="id-ne"></field> <field name="orderItemSeqId" type="id-ne"></field> 
+		type="id"></field> <field name="orderItemSeqId" type="id"></field> 
 		<field name="quantityShipped" type="fixed-point" enable-audit-log="true"></field> 
 		<prim-key field="orderId" /> <prim-key field="orderItemSeqId" /> <relation 
 		type="one" fk-name="ORDER_ITEM_HDR" rel-entity-name="OrderItem"> <key-map 
@@ -182,7 +182,7 @@
 
 	<entity entity-name="VfWorkPapers" package-name="org.apache.ofbiz.order.shipping"
 		never-cache="true" title="Work Papers Entry">
-		<field name="shipmentId" type="id-ne"></field>
+		<field name="shipmentId" type="id"></field>
 		<field name="workpapersId" type="value"></field>
 		<field name="readyDate" type="date-time"></field>
 		<field name="comment" type="value"></field>

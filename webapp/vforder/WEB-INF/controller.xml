@@ -152,7 +152,7 @@
 	</request-map>
 	<request-map uri="processorder">
 		<security https="true" auth="true" />
-		<event type="java" path="org.apache.ofbiz.order.shoppingcart.CheckOutEvents"
+		<event type="java" path="org.apache.ofbiz.vforder.shoppingcart.VfCheckOutEvents"
 			invoke="createOrder" />
 		<response name="sales_order" type="request" value="checkBlackList" />
 		<response name="work_order" type="request" value="checkBlackList" />
