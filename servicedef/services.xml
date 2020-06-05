@@ -138,6 +138,20 @@
         <auto-attributes include="nonpk" mode="IN" optional="true"/>
     </service>
     
+    <service name="vFchangeOrderStatus" engine="java" auth="true"
+            location="org.apache.ofbiz.vforder.VfOrderLookupServices" invoke="setOrderStatus">
+        <description>Change the status of an existing order</description>
+        <attribute name="orderId" type="String" mode="IN"/>
+        <attribute name="statusId" type="String" mode="IN"/>
+        <attribute name="setItemStatus" type="String" mode="IN" optional="true"/>
+        <attribute name="oldStatusId" type="String" mode="OUT" optional="false"/>
+        <attribute name="orderStatusId" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderTypeId" type="String" mode="OUT" optional="true"/>
+        <attribute name="needsInventoryIssuance" type="String" mode="OUT" optional="true"/>
+        <attribute name="grandTotal" type="BigDecimal" mode="OUT" optional="true"/>
+        <attribute name="changeReason" type="String" mode="IN" optional="true"/>
+    </service>
+    
     
     
     

@@ -69,7 +69,7 @@ under the License.
                   <#if cartLine.getProductId()??>
                     <#-- product item -->
                     <a href="<@ofbizUrl>product?product_id=${cartLine.getProductId()}</@ofbizUrl>" class="buttontext">${cartLine.getProductId()}</a> -
-                    ${cartLine.getName()?default("")}<br />
+                    ${cartLine.getName(dispatcher)?default("")}<br />
                     <i>${cartLine.getDescription(dispatcher)!}</i>
                     <#if shoppingCart.getOrderType() != "PURCHASE_ORDER">
                       <#-- only applies to sales orders, not purchase orders -->

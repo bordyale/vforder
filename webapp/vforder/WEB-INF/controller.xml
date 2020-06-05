@@ -231,7 +231,7 @@
 	<!-- Order Manager Edit Requests -->
 	<request-map uri="changeOrderStatus">
 		<security https="true" auth="true" />
-		<event type="service" invoke="changeOrderStatus" />
+		<event type="service" invoke="vFchangeOrderStatus" />
 		<response name="success" type="view" value="orderlist" />
 		<response name="error" type="view" value="orderview" />
 	</request-map>

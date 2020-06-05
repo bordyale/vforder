@@ -31,6 +31,7 @@ import org.apache.ofbiz.base.util.Debug;
 import org.apache.ofbiz.base.util.GeneralException;
 import org.apache.ofbiz.base.util.ObjectType;
 import org.apache.ofbiz.base.util.StringUtil;
+import org.apache.ofbiz.base.util.UtilDateTime;
 import org.apache.ofbiz.base.util.UtilGenerics;
 import org.apache.ofbiz.base.util.UtilMisc;
 import org.apache.ofbiz.base.util.UtilProperties;
@@ -47,6 +48,7 @@ import org.apache.ofbiz.entity.condition.EntityOperator;
 import org.apache.ofbiz.entity.model.DynamicViewEntity;
 import org.apache.ofbiz.entity.model.ModelKeyMap;
 import org.apache.ofbiz.entity.util.EntityQuery;
+import org.apache.ofbiz.entity.util.EntityUtil;
 import org.apache.ofbiz.security.Security;
 import org.apache.ofbiz.service.DispatchContext;
 import org.apache.ofbiz.service.GenericServiceException;
@@ -54,6 +56,7 @@ import org.apache.ofbiz.service.LocalDispatcher;
 import org.apache.ofbiz.service.ServiceUtil;
 import org.apache.ofbiz.widget.renderer.Paginator;
 import org.apache.ofbiz.order.order.OrderReadHelper;
+import org.apache.ofbiz.order.order.OrderServices;
 
 /**
  * OrderLookupServices
@@ -61,6 +64,7 @@ import org.apache.ofbiz.order.order.OrderReadHelper;
 public class VfOrderLookupServices {
 
 	public static final String module = VfOrderLookupServices.class.getName();
+	public static final String resource_error = "OrderErrorUiLabels";
 
 	public static Map<String, Object> findOrders(DispatchContext dctx, Map<String, ? extends Object> context) {
 		LocalDispatcher dispatcher = dctx.getDispatcher();
@@ -139,7 +143,7 @@ public class VfOrderLookupServices {
 		}
 
 		// exclude cancelled orders.
-		String excludeCancelled = (String)context.get("excludeCancelled");
+		String excludeCancelled = (String) context.get("excludeCancelled");
 		if ("Y".equals(excludeCancelled)) {
 			List<EntityCondition> orExprs = new LinkedList<EntityCondition>();
 			orExprs.add(EntityCondition.makeCondition("statusId", EntityOperator.NOT_EQUAL, "ORDER_CANCELLED"));
@@ -425,8 +429,7 @@ public class VfOrderLookupServices {
 						conditions.add(EntityCondition.makeCondition("productId", EntityOperator.EQUALS, productId));
 					}
 				} else {
-					String failMsg = UtilProperties.getMessage("OrderErrorUiLabels", "OrderFindOrderProductInvalid", UtilMisc.toMap("productId", productId),
-							locale);
+					String failMsg = UtilProperties.getMessage("OrderErrorUiLabels", "OrderFindOrderProductInvalid", UtilMisc.toMap("productId", productId), locale);
 					return ServiceUtil.returnFailure(failMsg);
 				}
 			}
@@ -571,8 +574,8 @@ public class VfOrderLookupServices {
 			EntityConditionList<EntityExpr> exprs = null;
 			if ("Y".equals(includeCountry)) {
 				exprs = EntityCondition.makeCondition(
-						UtilMisc.toList(EntityCondition.makeCondition("contactMechPurposeTypeId", "SHIPPING_LOCATION"),
-								EntityCondition.makeCondition("countryGeoId", countryGeoId)), EntityOperator.AND);
+						UtilMisc.toList(EntityCondition.makeCondition("contactMechPurposeTypeId", "SHIPPING_LOCATION"), EntityCondition.makeCondition("countryGeoId", countryGeoId)),
+						EntityOperator.AND);
 			} else {
 				exprs = EntityCondition.makeCondition(
 						UtilMisc.toList(EntityCondition.makeCondition("contactMechPurposeTypeId", "SHIPPING_LOCATION"),
@@ -647,8 +650,7 @@ public class VfOrderLookupServices {
 		return result;
 	}
 
-	public static void filterInventoryProblems(Map<String, ? extends Object> context, Map<String, Object> result, List<GenericValue> orderList,
-			List<String> paramList) {
+	public static void filterInventoryProblems(Map<String, ? extends Object> context, Map<String, Object> result, List<GenericValue> orderList, List<String> paramList) {
 		List<String> filterInventoryProblems = new LinkedList<String>();
 
 		String doFilter = (String) context.get("filterInventoryProblems");
@@ -753,5 +755,165 @@ public class VfOrderLookupServices {
 		}
 
 		return EntityCondition.makeCondition(fieldName, op, value);
+	}
+
+	/** Service for changing the status on an order header */
+	public static Map<String, Object> setOrderStatus(DispatchContext ctx, Map<String, ? extends Object> context) {
+		LocalDispatcher dispatcher = ctx.getDispatcher();
+		Delegator delegator = ctx.getDelegator();
+		GenericValue userLogin = (GenericValue) context.get("userLogin");
+		String orderId = (String) context.get("orderId");
+		String statusId = (String) context.get("statusId");
+		String changeReason = (String) context.get("changeReason");
+		Map<String, Object> successResult = ServiceUtil.returnSuccess();
+		Locale locale = (Locale) context.get("locale");
+
+		// check and make sure we have permission to change the order
+		Security security = ctx.getSecurity();
+		boolean hasPermission = VfOrderLookupServices.hasPermission(orderId, userLogin, "UPDATE", security, delegator);
+		if (!hasPermission) {
+			return ServiceUtil.returnError(UtilProperties.getMessage(resource_error, "OrderYouDoNotHavePermissionToChangeThisOrdersStatus", locale));
+		}
+
+		try {
+			GenericValue orderHeader = EntityQuery.use(delegator).from("OrderHeader").where("orderId", orderId).queryOne();
+
+			if (orderHeader == null) {
+				return ServiceUtil.returnError(UtilProperties.getMessage(resource_error, "OrderErrorCouldNotChangeOrderStatusOrderCannotBeFound", locale));
+			}
+			// first save off the old status
+			successResult.put("oldStatusId", orderHeader.get("statusId"));
+			successResult.put("orderTypeId", orderHeader.get("orderTypeId"));
+
+			if (Debug.verboseOn()) {
+				Debug.logVerbose("[OrderServices.setOrderStatus] : From Status : " + orderHeader.getString("statusId"), module);
+			}
+			if (Debug.verboseOn()) {
+				Debug.logVerbose("[OrderServices.setOrderStatus] : To Status : " + statusId, module);
+			}
+
+			if (orderHeader.getString("statusId").equals(statusId)) {
+				Debug.logWarning(
+						UtilProperties.getMessage(resource_error, "OrderTriedToSetOrderStatusWithTheSameStatusIdforOrderWithId", UtilMisc.toMap("statusId", statusId, "orderId", orderId), locale),
+						module);
+				return successResult;
+			}
+			try {
+				GenericValue statusChange = EntityQuery.use(delegator).from("StatusValidChange").where("statusId", orderHeader.getString("statusId"), "statusIdTo", statusId).cache(true).queryOne();
+				if (statusChange == null) {
+					return ServiceUtil.returnError(UtilProperties.getMessage(resource_error, "OrderErrorCouldNotChangeOrderStatusStatusIsNotAValidChange", locale) + ": ["
+							+ orderHeader.getString("statusId") + "] -> [" + statusId + "]");
+				}
+			} catch (GenericEntityException e) {
+				return ServiceUtil.returnError(UtilProperties.getMessage(resource_error, "OrderErrorCouldNotChangeOrderStatus", locale) + e.getMessage() + ").");
+			}
+
+			// update the current status
+			orderHeader.set("statusId", statusId);
+
+			// now create a status change
+			GenericValue orderStatus = delegator.makeValue("OrderStatus");
+			orderStatus.put("orderStatusId", delegator.getNextSeqId("OrderStatus"));
+			orderStatus.put("statusId", statusId);
+			orderStatus.put("orderId", orderId);
+			orderStatus.put("statusDatetime", UtilDateTime.nowTimestamp());
+			orderStatus.put("statusUserLogin", userLogin.getString("userLoginId"));
+			orderStatus.put("changeReason", changeReason);
+
+			orderHeader.store();
+			orderStatus.create();
+
+			successResult.put("needsInventoryIssuance", orderHeader.get("needsInventoryIssuance"));
+			successResult.put("grandTotal", orderHeader.get("grandTotal"));
+		} catch (GenericEntityException e) {
+			return ServiceUtil.returnError(UtilProperties.getMessage(resource_error, "OrderErrorCouldNotChangeOrderStatus", locale) + e.getMessage() + ").");
+		}
+
+		/*
+		 * if ("Y".equals(context.get("setItemStatus"))) { String
+		 * newItemStatusId = null; if ("ORDER_APPROVED".equals(statusId)) {
+		 * newItemStatusId = "ITEM_APPROVED"; } else if
+		 * ("ORDER_COMPLETED".equals(statusId)) { newItemStatusId =
+		 * "ITEM_COMPLETED"; } else if ("ORDER_CANCELLED".equals(statusId)) {
+		 * newItemStatusId = "ITEM_CANCELLED"; }
+		 * 
+		 * if (newItemStatusId != null) { try { Map<String, Object> resp =
+		 * dispatcher.runSync("changeOrderItemStatus", UtilMisc.<String,
+		 * Object>toMap("orderId", orderId, "statusId", newItemStatusId,
+		 * "userLogin", userLogin)); if (ServiceUtil.isError(resp)) { return
+		 * ServiceUtil.returnError(UtilProperties.getMessage(resource_error,
+		 * "OrderErrorCouldNotChangeItemStatus", locale) + newItemStatusId,
+		 * null, null, resp); } } catch (GenericServiceException e) {
+		 * Debug.logError(e, "Error changing item status to " + newItemStatusId
+		 * + ": " + e.toString(), module); return
+		 * ServiceUtil.returnError(UtilProperties.getMessage(resource_error,
+		 * "OrderErrorCouldNotChangeItemStatus", locale) + newItemStatusId +
+		 * ": " + e.toString()); } } }
+		 */
+
+		successResult.put("orderStatusId", statusId);
+		return successResult;
+	}
+
+	private static boolean hasPermission(String orderId, GenericValue userLogin, String action, Security security, Delegator delegator) {
+		OrderReadHelper orh = new OrderReadHelper(delegator, orderId);
+		String orderTypeId = orh.getOrderTypeId();
+		String partyId = null;
+		GenericValue orderParty = orh.getEndUserParty();
+		if (UtilValidate.isEmpty(orderParty)) {
+			orderParty = orh.getPlacingParty();
+		}
+		if (orderParty != null) {
+			partyId = orderParty.getString("partyId");
+		}
+		boolean hasPermission = hasPermission(orderTypeId, partyId, userLogin, action, security);
+		if (!hasPermission) {
+			GenericValue placingCustomer = null;
+			try {
+				placingCustomer = EntityQuery.use(delegator).from("OrderRole").where("orderId", orderId, "partyId", userLogin.getString("partyId"), "roleTypeId", "PLACING_CUSTOMER").queryOne();
+			} catch (GenericEntityException e) {
+				Debug.logError("Could not select OrderRoles for order " + orderId + " due to " + e.getMessage(), module);
+			}
+			hasPermission = (placingCustomer != null);
+		}
+		return hasPermission;
+	}
+
+	private static boolean hasPermission(String orderTypeId, String partyId, GenericValue userLogin, String action, Security security) {
+		boolean hasPermission = security.hasEntityPermission("ORDERMGR", "_" + action, userLogin);
+		if (!hasPermission) {
+			if ("SALES_ORDER".equals(orderTypeId)) {
+				if (security.hasEntityPermission("ORDERMGR", "_SALES_" + action, userLogin)) {
+					hasPermission = true;
+				} else {
+					// check sales agent/customer relationship
+					List<GenericValue> repsCustomers = new LinkedList<>();
+					try {
+						repsCustomers = EntityUtil.filterByDate(userLogin.getRelatedOne("Party", false).getRelated("FromPartyRelationship",
+								UtilMisc.toMap("roleTypeIdFrom", "AGENT", "roleTypeIdTo", "CUSTOMER", "partyIdTo", partyId), null, false));
+					} catch (GenericEntityException ex) {
+						Debug.logError("Could not determine if " + partyId + " is a customer of user " + userLogin.getString("userLoginId") + " due to " + ex.getMessage(), module);
+					}
+					if ((repsCustomers != null) && (repsCustomers.size() > 0) && (security.hasEntityPermission("ORDERMGR", "_ROLE_" + action, userLogin))) {
+						hasPermission = true;
+					}
+					if (!hasPermission) {
+						// check sales sales rep/customer relationship
+						try {
+							repsCustomers = EntityUtil.filterByDate(userLogin.getRelatedOne("Party", false).getRelated("FromPartyRelationship",
+									UtilMisc.toMap("roleTypeIdFrom", "SALES_REP", "roleTypeIdTo", "CUSTOMER", "partyIdTo", partyId), null, false));
+						} catch (GenericEntityException ex) {
+							Debug.logError("Could not determine if " + partyId + " is a customer of user " + userLogin.getString("userLoginId") + " due to " + ex.getMessage(), module);
+						}
+						if ((repsCustomers != null) && (repsCustomers.size() > 0) && (security.hasEntityPermission("ORDERMGR", "_ROLE_" + action, userLogin))) {
+							hasPermission = true;
+						}
+					}
+				}
+			} else if (("PURCHASE_ORDER".equals(orderTypeId) && (security.hasEntityPermission("ORDERMGR", "_PURCHASE_" + action, userLogin)))) {
+				hasPermission = true;
+			}
+		}
+		return hasPermission;
 	}
 }
