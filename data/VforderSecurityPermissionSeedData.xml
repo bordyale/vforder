@@ -6,6 +6,6 @@
     <SecurityPermission description="Delete operations in the Vforder Component." permissionId="VFORDER_DELETE"/>
     <SecurityPermission description="ALL operations in the Vforder Component." permissionId="VFORDER_ADMIN"/>
 
-    <SecurityGroupPermission groupId="SUPER" permissionId="VFORDER_ADMIN"/>
+    <SecurityGroupPermission fromDate="2001-05-13 12:00:00.0" groupId="SUPER" permissionId="VFORDER_ADMIN"/>
 
 </entity-engine-xml>
