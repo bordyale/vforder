@@ -230,6 +230,7 @@
 		<alias entity-alias="SIV" name="productName" group-by="true" />
 		<alias entity-alias="SIV" name="internalName" group-by="true" />
 		<alias entity-alias="OI" name="quantity" group-by="true" />
+		<alias entity-alias="OI" name="shipBeforeDate" group-by="true" />
 		<alias entity-alias="OI" name="statusId" group-by="true" />
 		<alias entity-alias="OH" field="statusId" name="orderHStatusId" />
 		<alias entity-alias="SI" name="quantityShipped" group-by="true" />

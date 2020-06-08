@@ -1,410 +1,414 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/ofbiz-properties.xsd">
-    <property key="VforderApplication">
-        <value xml:lang="en">Vforder Apication</value>
-        <value xml:lang="hu">Vforder Alkalmazás</value>
-    </property>
-    <property key="VforderCompanyName">
-        <value xml:lang="en">OFBiz: Vforder</value>
-        <value xml:lang="zh-TW">OFBiz: Vforder</value>
-    </property>
-    <property key="VforderCompanySubtitle">
-        <value xml:lang="en">Part of the Apache OFBiz Family of Open Source Software</value>
-        <value xml:lang="it">Un modulo della famiglia di software open source Apache OFBiz</value>
-        <value xml:lang="zh">开源软件OFBiz的组成部分</value>
-        <value xml:lang="zh-TW">開源軟體OFBiz的組成部分</value>
-    </property>
-    <property key="VforderViewPermissionError">
-        <value xml:lang="en">You are not allowed to view this page.</value>
-        <value xml:lang="zh">不允许你浏览这个页面。</value>
-        <value xml:lang="zh-TW">不允許您檢視這個頁面.</value>
-    </property>
-    <property key="ProductName">
-        <value xml:lang="en">ProductName</value>
-        <value xml:lang="hu">Termék Név</value>        
-    </property>
-    <property key="OrderOrderId">
-        <value xml:lang="en">Order Id</value>
-        <value xml:lang="hu">Rendelés Azonosító</value>
-        <value xml:lang="zh-TW">不允許您檢視這個頁面.</value>
-    </property>
-     <property key="VFOrderOrderName">
-        <value xml:lang="en">Name</value>
-        <value xml:lang="hu">Név</value>
-        <value xml:lang="zh-TW">不允許您檢視這個頁面.</value>
-    </property>
-    <property key="CommonMain">
-        <value xml:lang="en">Main Page</value>
-        <value xml:lang="hu">Fő oldal</value>
-        <value xml:lang="zh-TW">不允許您檢視這個頁面.</value>
-    </property>
-    <property key="OrderFindOrder">
-        <value xml:lang="en">Find Order</value>
-        <value xml:lang="hu">Megrendelés keresés</value>
-    </property>
-    <property key="OrderOrderEntry">
-        <value xml:lang="en">Order Entry</value>
-        <value xml:lang="hu">Új megrendelés</value>
-    </property>
-     <property key="ShippingFindShipping">
-        <value xml:lang="en">Find Shipping</value>
-        <value xml:lang="hu">Szallítás keresés</value>
-    </property>
-    <property key="ProductName">
-        <value xml:lang="en">Product Name</value>
-        <value xml:lang="hu">Termék Név</value>
-    </property>
-    <property key="OrderCustomer">
-        <value xml:lang="en">Customer</value>
-        <value xml:lang="hu">Vevő</value>
-    </property>
-    <property key="OrderSalesOrder">
-        <value xml:lang="en">Sales Order</value>
-        <value xml:lang="hu">Eladási rendelés</value>
-    </property>
-    <property key="OrderPurchaseOrder">
-        <value xml:lang="en">Purchase Order</value>
-        <value xml:lang="hu">Vásárlási rendelés</value>
-    </property>
-    <property key="PartySupplier">
-        <value xml:lang="en">Supplier</value>
-        <value xml:lang="hu">Beszállító</value>
-    </property>
-    <property key="OrderOrderEntryInternalOrganization">
-        <value xml:lang="en">Company</value>
-        <value xml:lang="hu">Cég</value>
-    </property>
-    <property key="OrderOrderEntryCurrencyAgreementShipDates">
-        <value xml:lang="en">Order Header</value>
-        <value xml:lang="hu">Megrendelés</value>
-    </property>
-    <property key="OrderOrderName">
-        <value xml:lang="en">Order Name</value>
-        <value xml:lang="hu">Megrendelés név</value>
-    </property>
-    <property key="OrderSelectCurrency">
-        <value xml:lang="en">Currency</value>
-        <value xml:lang="hu">Devisa</value>
-    </property>
-    <property key="OrderShipBeforeDateDefault">
-        <value xml:lang="en">Shipping date</value>
-        <value xml:lang="hu">Határ Idő</value>
-    </property>
-    <property key="ProductProductId">
-        <value xml:lang="en">Product Id</value>
-        <value xml:lang="hu">Termék azonosító</value>
-    </property>
-    <property key="OrderQuantity">
-        <value xml:lang="en">Quantity</value>
-        <value xml:lang="hu">Mennyiség</value>
-    </property>
-    <property key="PageTitleLookupBulkAddProduct">
-        <value xml:lang="en">Select order Items</value>
-        <value xml:lang="hu">Megrendelés termékek</value>
-    </property>
-    <property key="OrderAddToOrder">
-        <value xml:lang="en">Add To Order</value>
-        <value xml:lang="hu">Kosárba</value>
-    </property>
-    <property key="OrderQuickLookup">
-        <value xml:lang="en">Quick Lookup</value>
-        <value xml:lang="hu">Gyors Hozzaadás</value>
-    </property>
-    <property key="OrderClearOrder">
-        <value xml:lang="en">Clear Order</value>
-        <value xml:lang="hu">Kosár törlés</value>
-    </property>
-    <property key="OrderRemoveSelected">
-        <value xml:lang="en">Remove Selected</value>
-        <value xml:lang="hu">Termékek törlés</value>
-    </property>
-    <property key="OrderRecalculateOrder">
-        <value xml:lang="en">Recalculate Order</value>
-        <value xml:lang="hu">Megéndelés újraszámolás</value>
-    </property>
-    <property key="OrderFinalizeOrder">
-        <value xml:lang="en">Finalize Order</value>
-        <value xml:lang="hu">Megrendelés keszités</value>
-    </property>
-    <property key="OrderFinalizeOrderDefault">
-        <value xml:lang="en">Finalize Order Default</value>
-        <value xml:lang="hu">Megrendelés keszités Default</value>
-    </property>
-    <property key="OrderOrderConfirmation">
-        <value xml:lang="en">Order Confirmation</value>
-        <value xml:lang="hu">Megerősítés</value>
-    </property>
-    <property key="OrderOrderItems">
-        <value xml:lang="en">Order Items</value>
-        <value xml:lang="hu">Megrendelés termékek</value>
-    </property>
-    <property key="OrderCreateOrder">
-        <value xml:lang="en">Create Order</value>
-        <value xml:lang="hu">Rendelés Létrehozás</value>
-    </property>
-    <property key="OrderCancelOrder">
-        <value xml:lang="en">Cancel Order</value>
-        <value xml:lang="hu">Rendelés törés</value>
-    </property>
-    <property key="OrderStatusHistory">
-        <value xml:lang="en">Status History</value>
-        <value xml:lang="hu">Status torténete</value>
-    </property>
-    <property key="OrderDateOrdered">
-        <value xml:lang="en">Date Ordered</value>
-        <value xml:lang="hu">Rendelés datum létrehozás</value>
-    </property>
-    <property key="ProductProduct">
-        <value xml:lang="en">Product</value>
-        <value xml:lang="hu">Termék</value>
-    </property>
-    <property key="OrderApproveOrder">
-        <value xml:lang="en">Approve</value>
-        <value xml:lang="hu">Jóva hagyás</value>
-    </property>
-    <property key="OrderProduct">
-        <value xml:lang="en">Product</value>
-        <value xml:lang="hu">Termék</value>
-    </property>
-    <property key="OrderQuantity">
-        <value xml:lang="en">Quantity</value>
-        <value xml:lang="hu">Mennyiség</value>
-    </property>
-    <property key="OrderPurchasedFrom">
-        <value xml:lang="en">Supplier</value>
-        <value xml:lang="hu">Beszállító</value>
-    </property>
-    <property key="OrderCurrentStatus">
-        <value xml:lang="en">Status</value>
-        <value xml:lang="hu">Status</value>
-    </property>
-    <property key="CommonNbr">
-        <value xml:lang="en">Order Id</value>
-        <value xml:lang="hu">Rendelés Id</value>
-    </property>
-    <property key="ShippingNewShipping">
-        <value xml:lang="en">New Shipping</value>
-        <value xml:lang="hu">Új kiszállítás</value>
-    </property>
-    <property key="ShipmentId">
-        <value xml:lang="en">New Shipping</value>
-        <value xml:lang="hu">Új kiszállítás</value>
-    </property>
-    <property key="AddShippingItem">
-        <value xml:lang="en">Add Shipping Item</value>
-        <value xml:lang="hu">Új szállítás termék</value>
-    </property>
-    <property key="ShippingUpdatePallet">
-        <value xml:lang="en">Update Boxes</value>
-        <value xml:lang="hu">Ládazás frissités</value>
-    </property>
-    <property key="AddShippingItemOrderItem">
-        <value xml:lang="en">Add Item</value>
-        <value xml:lang="hu">Termék hozzaadás</value>
-    </property>
-    <property key="ExportBoxesPdf">
-        <value xml:lang="en">Pdf Boxes</value>
-        <value xml:lang="hu">Pdf Ládazás</value>
-    </property>
-    <property key="WorkPapers">
-        <value xml:lang="en">Pdf Work Papers</value>
-        <value xml:lang="hu">Pdf Munkalap</value>
-    </property>
-    <property key="OrderShipmentInformation">
-        <value xml:lang="en">Shipment Informations</value>
-        <value xml:lang="hu">Szállítási tájékoztatok</value>
-    </property>
-    <property key="OrderShipBeforeDate">
-        <value xml:lang="en">Ship Before Date</value>
-        <value xml:lang="hu">Határ idő</value>
-    </property>
-    <property key="ShippingDate">
-        <value xml:lang="en">Shipping Date</value>
-        <value xml:lang="hu">Szállítási Dátum</value>
-    </property>
-    <property key="OrderPallettization">
-        <value xml:lang="en">Palletization</value>
-        <value xml:lang="hu">Ládazás</value>
-    </property>
-    <property key="boxNumber">
-        <value xml:lang="en">Box Number</value>
-        <value xml:lang="hu">Láda szám</value>
-    </property>
-    <property key="Quantity">
-        <value xml:lang="en">Quantity</value>
-        <value xml:lang="hu">Mennyiség</value>
-    </property>
-    <property key="ProductWeight">
-        <value xml:lang="en">Product Weight</value>
-        <value xml:lang="hu">Termék súlya</value>
-    </property>
-    <property key="NetWeight">
-        <value xml:lang="en">Net Weight</value>
-        <value xml:lang="hu">Netto súly</value>
-    </property>
-    <property key="ProgresNetWeight">
-        <value xml:lang="en">Net Weight</value>
-        <value xml:lang="hu">Ar. Netto súly</value>
-    </property>
-    <property key="Comments">
-        <value xml:lang="en">Comments</value>
-        <value xml:lang="hu">Note</value>
-    </property>
-    <property key="BoxTotal">
-        <value xml:lang="en">Total Box</value>
-        <value xml:lang="hu">Ládák</value>
-    </property>
-    <property key="PalletTotal">
-        <value xml:lang="en">Total Pallet</value>
-        <value xml:lang="hu">Raklapok</value>
-    </property>
-    <property key="NetWeight">
-        <value xml:lang="en">Net Weight</value>
-        <value xml:lang="hu">Netto</value>
-    </property>
-    <property key="GrosWeight">
-        <value xml:lang="en">Gros Weight</value>
-        <value xml:lang="hu">Brutto</value>
-    </property>
-    <property key="OrderIsBoxOrPallet">
-        <value xml:lang="en">L or R</value>
-        <value xml:lang="hu">L vagy R</value>
-    </property>
-    <property key="ExportShippingSummaryPdf">
-        <value xml:lang="en">Pdf Summary</value>
-        <value xml:lang="hu">Pdf Összefoglalás</value>
-    </property>
-    <property key="ExportShippingGlIncPdf">
-        <value xml:lang="en">Pdf Globe Incom</value>
-        <value xml:lang="hu">Pdf Globe Incom</value>
-    </property>
-    <property key="ExportShippingSupplierPdf">
-        <value xml:lang="en">Pdf Várda Vulkan Summary</value>
-        <value xml:lang="hu">Pdf VVulkán</value>
-    </property>
-    <property key="ShippingShipping">
-        <value xml:lang="en">Shipping</value>
-        <value xml:lang="hu">Szállítás</value>
-    </property>
-    <property key="OrdersNotShipped">
-        <value xml:lang="en">Orders not Shipped</value>
-        <value xml:lang="hu">Fűggő rendelések</value>
-    </property>
-    <property key="ShipmentsReport">
-        <value xml:lang="en">Shipments Report</value>
-        <value xml:lang="hu">Szállítások Összesítő</value>
-    </property>
-    <property key="QuantityShipped">
-        <value xml:lang="en">Qty Shipped</value>
-        <value xml:lang="hu">Szállított db</value>
-    </property>
-    <property key="QuantityShippable">
-        <value xml:lang="en">Qty Shippable</value>
-        <value xml:lang="hu">Nyított db</value>
-    </property>
-    <property key="quantity">
-        <value xml:lang="en">Quantity (pc)</value>
-        <value xml:lang="hu">Mennyiség (db)</value>
-    </property>
-    <property key="WorkPapersTitle">
-        <value xml:lang="en">Work Papers</value>
-        <value xml:lang="hu">MUNKALAP</value>
-    </property>
-    <property key="orderer">
-        <value xml:lang="en">Orderer</value>
-        <value xml:lang="hu">Megrendeló</value>
-    </property>
-    <property key="VardaFerroKFt">
-        <value xml:lang="en">Várda Ferro KFt</value>
-        <value xml:lang="hu">Várda Ferro KFt</value>
-    </property>
-    <property key="basiccomponents">
-        <value xml:lang="en">basic components</value>
-        <value xml:lang="hu">Alapanyag és alkatrészellátás</value>
-    </property>
-    <property key="workactivities">
-        <value xml:lang="en">work activities</value>
-        <value xml:lang="hu">Megmunkálás, szerelés, csomagolás</value>
-    </property>
-    <property key="name">
-        <value xml:lang="en">Name</value>
-        <value xml:lang="hu">Megnevezés</value>
-    </property>
-    <property key="whogave">
-        <value xml:lang="en">Who Gave</value>
-        <value xml:lang="hu">Kiadta</value>
-    </property>
-    <property key="activityid">
-        <value xml:lang="en">Activity seq</value>
-        <value xml:lang="hu">Műveleti sorrend</value>
-    </property>
-    <property key="instruction">
-        <value xml:lang="en">Instruction Nr</value>
-        <value xml:lang="hu">Utasítás száma</value>
-    </property>
-    <property key="signature">
-        <value xml:lang="en">Signature</value>
-        <value xml:lang="hu">Dolgozó aláírása</value>
-    </property>
-    <property key="control">
-        <value xml:lang="en">Control</value>
-        <value xml:lang="hu">Ellenőrizte</value>
-    </property>
-    <property key="productName">
-        <value xml:lang="en">Product Name</value>
-        <value xml:lang="hu">Megnevezés,típus</value>
-    </property>
-    <property key="OrderExtra">
-        <value xml:lang="en">Extra</value>
-        <value xml:lang="hu">Extra</value>
-    </property>
-    <property key="ShowShippingDetails">
-        <value xml:lang="en">Shipping Details</value>
-        <value xml:lang="hu">Szállítási Reszletek</value>
-    </property>
-    <property key="VV">
-        <value xml:lang="en">Várda Vulkán Kft</value>
-        <value xml:lang="hu">Várda Vulkán Kft</value>
-    </property>
-    <property key="VVcim">
-        <value xml:lang="en">Árpád út 2</value>
-        <value xml:lang="hu">Árpád út 2</value>
-    </property>
-    <property key="Kisvarda">
-        <value xml:lang="en">Kisvárda</value>
-        <value xml:lang="hu">Kisvárda</value>
-    </property>
-    <property key="note">
-        <value xml:lang="en">Note</value>
-        <value xml:lang="hu">Note</value>
-    </property>
-    <property key="ShippingProgram">
-        <value xml:lang="en">Shipping Program</value>
-        <value xml:lang="hu">Szállítási Terv</value>
-    </property>
-    <property key="ExtraShipped">
-        <value xml:lang="en">Extra Shipped</value>
-        <value xml:lang="hu">Túl Szállított</value>
-    </property>
-    <property key="StatusPartial">
-        <value xml:lang="en">Status Partial</value>
-        <value xml:lang="hu">Rendszerben</value>
-    </property>
-    <property key="StatusNone">
-        <value xml:lang="en">Status None</value>
-        <value xml:lang="hu">Nincs rendszerben</value>
-    </property>
-    <property key="ShipmentsReportForClientPdf">
-        <value xml:lang="en">Shipments Report For Client Pdf</value>
-        <value xml:lang="hu">Vevő összesítő Pdf</value>
-    </property>
-    <property key="ShippingId">
-        <value xml:lang="en">Shipping Id</value>
-        <value xml:lang="hu">Szallítás Id</value>
-    </property>
-     <property key="OrderHold">
-        <value xml:lang="en">Order Hold</value>
-        <value xml:lang="hu">Rendelés Allítás</value>
-    </property>
-   
+	<property key="VforderApplication">
+		<value xml:lang="en">Vforder Apication</value>
+		<value xml:lang="hu">Vforder Alkalmazás</value>
+	</property>
+	<property key="VforderCompanyName">
+		<value xml:lang="en">OFBiz: Vforder</value>
+		<value xml:lang="zh-TW">OFBiz: Vforder</value>
+	</property>
+	<property key="VforderCompanySubtitle">
+		<value xml:lang="en">Part of the Apache OFBiz Family of Open Source Software</value>
+		<value xml:lang="it">Un modulo della famiglia di software open source Apache OFBiz</value>
+		<value xml:lang="zh">开源软件OFBiz的组成部分</value>
+		<value xml:lang="zh-TW">開源軟體OFBiz的組成部分</value>
+	</property>
+	<property key="VforderViewPermissionError">
+		<value xml:lang="en">You are not allowed to view this page.</value>
+		<value xml:lang="zh">不允许你浏览这个页面。</value>
+		<value xml:lang="zh-TW">不允許您檢視這個頁面.</value>
+	</property>
+	<property key="ProductName">
+		<value xml:lang="en">ProductName</value>
+		<value xml:lang="hu">Termék Név</value>
+	</property>
+	<property key="OrderOrderId">
+		<value xml:lang="en">Order Id</value>
+		<value xml:lang="hu">Rendelés Azonosító</value>
+		<value xml:lang="zh-TW">不允許您檢視這個頁面.</value>
+	</property>
+	<property key="VFOrderOrderName">
+		<value xml:lang="en">Name</value>
+		<value xml:lang="hu">Név</value>
+		<value xml:lang="zh-TW">不允許您檢視這個頁面.</value>
+	</property>
+	<property key="CommonMain">
+		<value xml:lang="en">Main Page</value>
+		<value xml:lang="hu">Fő oldal</value>
+		<value xml:lang="zh-TW">不允許您檢視這個頁面.</value>
+	</property>
+	<property key="OrderFindOrder">
+		<value xml:lang="en">Find Order</value>
+		<value xml:lang="hu">Megrendelés keresés</value>
+	</property>
+	<property key="OrderOrderEntry">
+		<value xml:lang="en">Order Entry</value>
+		<value xml:lang="hu">Új megrendelés</value>
+	</property>
+	<property key="ShippingFindShipping">
+		<value xml:lang="en">Find Shipping</value>
+		<value xml:lang="hu">Szallítás keresés</value>
+	</property>
+	<property key="ProductName">
+		<value xml:lang="en">Product Name</value>
+		<value xml:lang="hu">Termék Név</value>
+	</property>
+	<property key="OrderCustomer">
+		<value xml:lang="en">Customer</value>
+		<value xml:lang="hu">Vevő</value>
+	</property>
+	<property key="OrderSalesOrder">
+		<value xml:lang="en">Sales Order</value>
+		<value xml:lang="hu">Eladási rendelés</value>
+	</property>
+	<property key="OrderPurchaseOrder">
+		<value xml:lang="en">Purchase Order</value>
+		<value xml:lang="hu">Vásárlási rendelés</value>
+	</property>
+	<property key="PartySupplier">
+		<value xml:lang="en">Supplier</value>
+		<value xml:lang="hu">Beszállító</value>
+	</property>
+	<property key="OrderOrderEntryInternalOrganization">
+		<value xml:lang="en">Company</value>
+		<value xml:lang="hu">Cég</value>
+	</property>
+	<property key="OrderOrderEntryCurrencyAgreementShipDates">
+		<value xml:lang="en">Order Header</value>
+		<value xml:lang="hu">Megrendelés</value>
+	</property>
+	<property key="OrderOrderName">
+		<value xml:lang="en">Order Name</value>
+		<value xml:lang="hu">Megrendelés név</value>
+	</property>
+	<property key="OrderSelectCurrency">
+		<value xml:lang="en">Currency</value>
+		<value xml:lang="hu">Devisa</value>
+	</property>
+	<property key="OrderShipBeforeDateDefault">
+		<value xml:lang="en">Shipping date</value>
+		<value xml:lang="hu">Határ Idő</value>
+	</property>
+	<property key="ProductProductId">
+		<value xml:lang="en">Product Id</value>
+		<value xml:lang="hu">Termék azonosító</value>
+	</property>
+	<property key="OrderQuantity">
+		<value xml:lang="en">Quantity</value>
+		<value xml:lang="hu">Mennyiség</value>
+	</property>
+	<property key="PageTitleLookupBulkAddProduct">
+		<value xml:lang="en">Select order Items</value>
+		<value xml:lang="hu">Megrendelés termékek</value>
+	</property>
+	<property key="OrderAddToOrder">
+		<value xml:lang="en">Add To Order</value>
+		<value xml:lang="hu">Kosárba</value>
+	</property>
+	<property key="OrderQuickLookup">
+		<value xml:lang="en">Quick Lookup</value>
+		<value xml:lang="hu">Gyors Hozzaadás</value>
+	</property>
+	<property key="OrderClearOrder">
+		<value xml:lang="en">Clear Order</value>
+		<value xml:lang="hu">Kosár törlés</value>
+	</property>
+	<property key="OrderRemoveSelected">
+		<value xml:lang="en">Remove Selected</value>
+		<value xml:lang="hu">Termékek törlés</value>
+	</property>
+	<property key="OrderRecalculateOrder">
+		<value xml:lang="en">Recalculate Order</value>
+		<value xml:lang="hu">Megéndelés újraszámolás</value>
+	</property>
+	<property key="OrderFinalizeOrder">
+		<value xml:lang="en">Finalize Order</value>
+		<value xml:lang="hu">Megrendelés keszités</value>
+	</property>
+	<property key="OrderFinalizeOrderDefault">
+		<value xml:lang="en">Finalize Order Default</value>
+		<value xml:lang="hu">Megrendelés keszités Default</value>
+	</property>
+	<property key="OrderOrderConfirmation">
+		<value xml:lang="en">Order Confirmation</value>
+		<value xml:lang="hu">Megerősítés</value>
+	</property>
+	<property key="OrderOrderItems">
+		<value xml:lang="en">Order Items</value>
+		<value xml:lang="hu">Megrendelés termékek</value>
+	</property>
+	<property key="OrderCreateOrder">
+		<value xml:lang="en">Create Order</value>
+		<value xml:lang="hu">Rendelés Létrehozás</value>
+	</property>
+	<property key="OrderCancelOrder">
+		<value xml:lang="en">Cancel Order</value>
+		<value xml:lang="hu">Rendelés törés</value>
+	</property>
+	<property key="OrderStatusHistory">
+		<value xml:lang="en">Status History</value>
+		<value xml:lang="hu">Status torténete</value>
+	</property>
+	<property key="OrderDateOrdered">
+		<value xml:lang="en">Date Ordered</value>
+		<value xml:lang="hu">Rendelés datum létrehozás</value>
+	</property>
+	<property key="ProductProduct">
+		<value xml:lang="en">Product</value>
+		<value xml:lang="hu">Termék</value>
+	</property>
+	<property key="OrderApproveOrder">
+		<value xml:lang="en">Approve</value>
+		<value xml:lang="hu">Jóva hagyás</value>
+	</property>
+	<property key="OrderProduct">
+		<value xml:lang="en">Product</value>
+		<value xml:lang="hu">Termék</value>
+	</property>
+	<property key="OrderQuantity">
+		<value xml:lang="en">Quantity</value>
+		<value xml:lang="hu">Mennyiség</value>
+	</property>
+	<property key="OrderPurchasedFrom">
+		<value xml:lang="en">Supplier</value>
+		<value xml:lang="hu">Beszállító</value>
+	</property>
+	<property key="OrderCurrentStatus">
+		<value xml:lang="en">Status</value>
+		<value xml:lang="hu">Status</value>
+	</property>
+	<property key="CommonNbr">
+		<value xml:lang="en">Order Id</value>
+		<value xml:lang="hu">Rendelés Id</value>
+	</property>
+	<property key="ShippingNewShipping">
+		<value xml:lang="en">New Shipping</value>
+		<value xml:lang="hu">Új kiszállítás</value>
+	</property>
+	<property key="ShipmentId">
+		<value xml:lang="en">New Shipping</value>
+		<value xml:lang="hu">Új kiszállítás</value>
+	</property>
+	<property key="AddShippingItem">
+		<value xml:lang="en">Add Shipping Item</value>
+		<value xml:lang="hu">Új szállítás termék</value>
+	</property>
+	<property key="ShippingUpdatePallet">
+		<value xml:lang="en">Update Boxes</value>
+		<value xml:lang="hu">Ládazás frissités</value>
+	</property>
+	<property key="AddShippingItemOrderItem">
+		<value xml:lang="en">Add Item</value>
+		<value xml:lang="hu">Termék hozzaadás</value>
+	</property>
+	<property key="ExportBoxesPdf">
+		<value xml:lang="en">Pdf Boxes</value>
+		<value xml:lang="hu">Pdf Ládazás</value>
+	</property>
+	<property key="WorkPapers">
+		<value xml:lang="en">Pdf Work Papers</value>
+		<value xml:lang="hu">Pdf Munkalap</value>
+	</property>
+	<property key="OrderShipmentInformation">
+		<value xml:lang="en">Shipment Informations</value>
+		<value xml:lang="hu">Szállítási tájékoztatok</value>
+	</property>
+	<property key="OrderShipBeforeDate">
+		<value xml:lang="en">Ship Before Date</value>
+		<value xml:lang="hu">Határ idő</value>
+	</property>
+	<property key="ShippingDate">
+		<value xml:lang="en">Shipping Date</value>
+		<value xml:lang="hu">Szállítási Dátum</value>
+	</property>
+	<property key="OrderPallettization">
+		<value xml:lang="en">Palletization</value>
+		<value xml:lang="hu">Ládazás</value>
+	</property>
+	<property key="boxNumber">
+		<value xml:lang="en">Box Number</value>
+		<value xml:lang="hu">Láda szám</value>
+	</property>
+	<property key="Quantity">
+		<value xml:lang="en">Quantity</value>
+		<value xml:lang="hu">Mennyiség</value>
+	</property>
+	<property key="ProductWeight">
+		<value xml:lang="en">Product Weight</value>
+		<value xml:lang="hu">Termék súlya</value>
+	</property>
+	<property key="NetWeight">
+		<value xml:lang="en">Net Weight</value>
+		<value xml:lang="hu">Netto súly</value>
+	</property>
+	<property key="ProgresNetWeight">
+		<value xml:lang="en">Net Weight</value>
+		<value xml:lang="hu">Ar. Netto súly</value>
+	</property>
+	<property key="Comments">
+		<value xml:lang="en">Comments</value>
+		<value xml:lang="hu">Note</value>
+	</property>
+	<property key="BoxTotal">
+		<value xml:lang="en">Total Box</value>
+		<value xml:lang="hu">Ládák</value>
+	</property>
+	<property key="PalletTotal">
+		<value xml:lang="en">Total Pallet</value>
+		<value xml:lang="hu">Raklapok</value>
+	</property>
+	<property key="NetWeight">
+		<value xml:lang="en">Net Weight</value>
+		<value xml:lang="hu">Netto</value>
+	</property>
+	<property key="GrosWeight">
+		<value xml:lang="en">Gros Weight</value>
+		<value xml:lang="hu">Brutto</value>
+	</property>
+	<property key="OrderIsBoxOrPallet">
+		<value xml:lang="en">L or R</value>
+		<value xml:lang="hu">L vagy R</value>
+	</property>
+	<property key="ExportShippingSummaryPdf">
+		<value xml:lang="en">Pdf Summary</value>
+		<value xml:lang="hu">Pdf Összefoglalás</value>
+	</property>
+	<property key="ExportShippingGlIncPdf">
+		<value xml:lang="en">Pdf Globe Incom</value>
+		<value xml:lang="hu">Pdf Globe Incom</value>
+	</property>
+	<property key="ExportShippingSupplierPdf">
+		<value xml:lang="en">Pdf Várda Vulkan Summary</value>
+		<value xml:lang="hu">Pdf VVulkán</value>
+	</property>
+	<property key="ShippingShipping">
+		<value xml:lang="en">Shipping</value>
+		<value xml:lang="hu">Szállítás</value>
+	</property>
+	<property key="OrdersNotShipped">
+		<value xml:lang="en">Orders not Shipped</value>
+		<value xml:lang="hu">Fűggő rendelések</value>
+	</property>
+	<property key="ShipmentsReport">
+		<value xml:lang="en">Shipments Report</value>
+		<value xml:lang="hu">Szállítások Összesítő</value>
+	</property>
+	<property key="QuantityShipped">
+		<value xml:lang="en">Qty Shipped</value>
+		<value xml:lang="hu">Szállított db</value>
+	</property>
+	<property key="QuantityShippable">
+		<value xml:lang="en">Qty Shippable</value>
+		<value xml:lang="hu">Nyított db</value>
+	</property>
+	<property key="quantity">
+		<value xml:lang="en">Quantity (pc)</value>
+		<value xml:lang="hu">Mennyiség (db)</value>
+	</property>
+	<property key="WorkPapersTitle">
+		<value xml:lang="en">Work Papers</value>
+		<value xml:lang="hu">MUNKALAP</value>
+	</property>
+	<property key="orderer">
+		<value xml:lang="en">Orderer</value>
+		<value xml:lang="hu">Megrendeló</value>
+	</property>
+	<property key="VardaFerroKFt">
+		<value xml:lang="en">Várda Ferro KFt</value>
+		<value xml:lang="hu">Várda Ferro KFt</value>
+	</property>
+	<property key="basiccomponents">
+		<value xml:lang="en">basic components</value>
+		<value xml:lang="hu">Alapanyag és alkatrészellátás</value>
+	</property>
+	<property key="workactivities">
+		<value xml:lang="en">work activities</value>
+		<value xml:lang="hu">Megmunkálás, szerelés, csomagolás</value>
+	</property>
+	<property key="name">
+		<value xml:lang="en">Name</value>
+		<value xml:lang="hu">Megnevezés</value>
+	</property>
+	<property key="whogave">
+		<value xml:lang="en">Who Gave</value>
+		<value xml:lang="hu">Kiadta</value>
+	</property>
+	<property key="activityid">
+		<value xml:lang="en">Activity seq</value>
+		<value xml:lang="hu">Műveleti sorrend</value>
+	</property>
+	<property key="instruction">
+		<value xml:lang="en">Instruction Nr</value>
+		<value xml:lang="hu">Utasítás száma</value>
+	</property>
+	<property key="signature">
+		<value xml:lang="en">Signature</value>
+		<value xml:lang="hu">Dolgozó aláírása</value>
+	</property>
+	<property key="control">
+		<value xml:lang="en">Control</value>
+		<value xml:lang="hu">Ellenőrizte</value>
+	</property>
+	<property key="productName">
+		<value xml:lang="en">Product Name</value>
+		<value xml:lang="hu">Megnevezés,típus</value>
+	</property>
+	<property key="OrderExtra">
+		<value xml:lang="en">Extra</value>
+		<value xml:lang="hu">Extra</value>
+	</property>
+	<property key="ShowShippingDetails">
+		<value xml:lang="en">Shipping Details</value>
+		<value xml:lang="hu">Szállítási Reszletek</value>
+	</property>
+	<property key="VV">
+		<value xml:lang="en">Várda Vulkán Kft</value>
+		<value xml:lang="hu">Várda Vulkán Kft</value>
+	</property>
+	<property key="VVcim">
+		<value xml:lang="en">Árpád út 2</value>
+		<value xml:lang="hu">Árpád út 2</value>
+	</property>
+	<property key="Kisvarda">
+		<value xml:lang="en">Kisvárda</value>
+		<value xml:lang="hu">Kisvárda</value>
+	</property>
+	<property key="note">
+		<value xml:lang="en">Note</value>
+		<value xml:lang="hu">Note</value>
+	</property>
+	<property key="ShippingProgram">
+		<value xml:lang="en">Shipping Program</value>
+		<value xml:lang="hu">Szállítási Terv</value>
+	</property>
+	<property key="ExtraShipped">
+		<value xml:lang="en">Extra Shipped</value>
+		<value xml:lang="hu">Túl Szállított</value>
+	</property>
+	<property key="StatusPartial">
+		<value xml:lang="en">Status Partial</value>
+		<value xml:lang="hu">Rendszerben</value>
+	</property>
+	<property key="StatusNone">
+		<value xml:lang="en">Status None</value>
+		<value xml:lang="hu">Nincs rendszerben</value>
+	</property>
+	<property key="ShipmentsReportForClientPdf">
+		<value xml:lang="en">Shipments Report For Client Pdf</value>
+		<value xml:lang="hu">Vevő összesítő Pdf</value>
+	</property>
+	<property key="ShippingId">
+		<value xml:lang="en">Shipping Id</value>
+		<value xml:lang="hu">Szallítás Id</value>
+	</property>
+	<property key="OrderShipBeforeFrom">
+		<value xml:lang="en">Order Ship Before From</value>
+		<value xml:lang="hu">Rendelés határidő from</value>
+	</property>
+	<property key="OrderShipBeforeTo">
+		<value xml:lang="en">Order Ship Before To</value>
+		<value xml:lang="hu">Rendelés határidő from</value>
+	</property>
+
 </resource>

@@ -34,6 +34,8 @@ DynamicViewEntity dynamicViewEntity = new DynamicViewEntity()
 
 fromDate = parameters.fromDate
 thruDate = parameters.thruDate
+orderShipBeforeFrom = parameters.orderShipBeforeFrom
+orderShipBeforeTo = parameters.orderShipBeforeTo
 
 List searchCond = []
 if (fromDate) {
@@ -42,6 +44,21 @@ if (fromDate) {
 if (thruDate) {
 	searchCond.add(EntityCondition.makeCondition("estimatedShipDate", EntityOperator.LESS_THAN_EQUAL_TO, Timestamp.valueOf(thruDate)))
 }
+
+
+shippingWeight = select("estimatedShipDate","shipmentId","netWeight").from("ShippingWeight").where(searchCond).cache(false).queryList()
+
+shippingWeight = EntityUtil.orderBy(shippingWeight,  ["estimatedShipDate"])
+
+List<HashMap<String,Object>> shipWeights = new ArrayList<HashMap<String,Object>>()
+for (GenericValue entry: shippingWeight){
+	Map<String,Object> e = new HashMap<String,Object>()
+	e.put("estimatedShipDate",entry.get("estimatedShipDate"))
+	e.put("shipmentId",entry.get("shipmentId"))
+	e.put("netWeight",entry.get("netWeight"))
+	shipWeights.add(e)
+}
+
 
 orderItemShippingItem = select("estimatedShipDate","orderId","productId","productName","internalName","statusId","orderHStatusId","quantity","quantityShipped","quantityShippable").from("ShipmentsReport").where(searchCond).cache(false).queryList()
 
@@ -64,21 +81,15 @@ for (GenericValue entry: orderItemShippingItem){
 		hashMaps.add(e)
 	}
 }
-
-shippingWeight = select("estimatedShipDate","shipmentId","netWeight").from("ShippingWeight").where(searchCond).cache(false).queryList()
-
-shippingWeight = EntityUtil.orderBy(shippingWeight,  ["estimatedShipDate"])
-
-List<HashMap<String,Object>> shipWeights = new ArrayList<HashMap<String,Object>>()
-for (GenericValue entry: shippingWeight){
-	Map<String,Object> e = new HashMap<String,Object>()
-	e.put("estimatedShipDate",entry.get("estimatedShipDate"))
-	e.put("shipmentId",entry.get("shipmentId"))
-	e.put("netWeight",entry.get("netWeight"))
-	shipWeights.add(e)
+List searchCond2 = []
+if (orderShipBeforeFrom) {
+	searchCond2.add(EntityCondition.makeCondition("shipBeforeDate", EntityOperator.GREATER_THAN_EQUAL_TO, Timestamp.valueOf(orderShipBeforeFrom)))
+}
+if (orderShipBeforeTo) {
+	searchCond2.add(EntityCondition.makeCondition("shipBeforeDate", EntityOperator.LESS_THAN_EQUAL_TO, Timestamp.valueOf(orderShipBeforeTo)))
 }
 
-notShippedItems = select("orderId","orderHStatusId","statusId","orderItemSeqId","quantity","quantityShipped","productId","productName","shipBeforeDate","productWeight","orderName").from("OrderItemShippingItemView").cache(false).queryList()
+notShippedItems = select("orderId","orderHStatusId","statusId","orderItemSeqId","quantity","quantityShipped","productId","productName","shipBeforeDate","productWeight","orderName").from("OrderItemShippingItemView").where(searchCond2).cache(false).queryList()
 
 notShippedItems = EntityUtil.orderBy(notShippedItems,  ["shipBeforeDate"])
 

@@ -771,6 +771,8 @@
 				<set field="tabButtonItem" value="EditShippingItems" />
 				<set field="fromDate" from-field="parameters.fromDate" />
 				<set field="thruDate" from-field="parameters.thruDate" />
+				<set field="orderShipBeforeFrom" from-field="parameters.orderShipBeforeFrom" />
+				<set field="orderShipBeforeTo" from-field="parameters.orderShipBeforeTo" />
 				<set field="headerItem" value="shipmentsreport" />
 				<set field="viewSize" from-field="parameters.VIEW_SIZE_1" type="Integer" default-value="200" />
 				<script location="component://vforder/groovyScripts/ShipmentsReport.groovy" />
@@ -782,11 +784,15 @@
 							<link target="ShipmentsReportPdf" text="${uiLabelMap.CommonPdf}" style="buttontext create" target-window="_blank">
 								<parameter param-name="fromDate" />
 								<parameter param-name="thruDate" />
+								<parameter param-name="orderShipBeforeFrom" />
+								<parameter param-name="orderShipBeforeTo" />
 								<parameter param-name="allInfo" value="Y"/>
 							</link>
 							<link target="ShipmentsReportPdf" text="${uiLabelMap.ShipmentsReportForClientPdf}" style="buttontext create" target-window="_blank">
 								<parameter param-name="fromDate" />
 								<parameter param-name="thruDate" />
+								<parameter param-name="orderShipBeforeFrom" />
+								<parameter param-name="orderShipBeforeTo" />
 								<parameter param-name="allInfo" value="N"/>
 							</link>
 						</container>
