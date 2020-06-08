@@ -43,7 +43,7 @@ if (thruDate) {
 	searchCond.add(EntityCondition.makeCondition("estimatedShipDate", EntityOperator.LESS_THAN_EQUAL_TO, Timestamp.valueOf(thruDate)))
 }
 
-orderItemShippingItem = select("estimatedShipDate","orderId","productId","productName","internalName","statusId","quantity","quantityShipped","quantityShippable").from("ShipmentsReport").where(searchCond).cache(false).queryList()
+orderItemShippingItem = select("estimatedShipDate","orderId","productId","productName","internalName","statusId","orderHStatusId","quantity","quantityShipped","quantityShippable").from("ShipmentsReport").where(searchCond).cache(false).queryList()
 
 orderItemShippingItem = EntityUtil.orderBy(orderItemShippingItem,  ["estimatedShipDate"])
 orderItemShippingItem = EntityUtil.orderBy(orderItemShippingItem,  ["productId"])
@@ -59,8 +59,8 @@ for (GenericValue entry: orderItemShippingItem){
 	e.put("quantity",entry.get("quantity"))
 	e.put("quantityShipped",entry.get("quantityShipped"))
 	e.put("quantityShippable",entry.get("quantityShippable"))
-	status = entry.get("statusId")
-	if (!status.equals("ITEM_CANCELLED")){
+	status = entry.get("orderHStatusId")
+	if (!status.equals("ORDER_CANCELLED")){
 		hashMaps.add(e)
 	}
 }
@@ -78,7 +78,7 @@ for (GenericValue entry: shippingWeight){
 	shipWeights.add(e)
 }
 
-notShippedItems = select("orderId","statusId","orderItemSeqId","quantity","quantityShipped","productId","productName","shipBeforeDate","productWeight","orderName").from("OrderItemShippingItemView").cache(false).queryList()
+notShippedItems = select("orderId","orderHStatusId","statusId","orderItemSeqId","quantity","quantityShipped","productId","productName","shipBeforeDate","productWeight","orderName").from("OrderItemShippingItemView").cache(false).queryList()
 
 notShippedItems = EntityUtil.orderBy(notShippedItems,  ["shipBeforeDate"])
 
@@ -110,9 +110,9 @@ for (GenericValue entry: notShippedItems){
 	e.put("netWeight",netWeight)
 
 
-	status = entry.get("statusId")
+	status = entry.get("orderHStatusId")
 	if (!quantity.equals(quantityShipped)){
-		if (!status.equals("ITEM_CANCELLED")){
+		if (!status.equals("ORDER_CANCELLED")){
 			progresNetWeigh = progresNetWeigh.add(netWeight)
 			e.put("progresNetWeight",progresNetWeigh)
 			hashMaps2.add(e)

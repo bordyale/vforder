@@ -52,6 +52,7 @@
 		<member-entity entity-alias="OH" entity-name="OrderHeader" />
 		<member-entity entity-alias="PR" entity-name="Product" />
 		<alias entity-alias="OH" name="orderName" />
+		<alias entity-alias="OH" field="statusId" name="orderHStatusId" />
 		<alias entity-alias="OI" name="orderId" />
 		<alias entity-alias="OI" name="statusId" />
 		<alias entity-alias="PR" name="productName" />
@@ -221,6 +222,7 @@
 		<member-entity entity-alias="SI" entity-name="ShippingItemQtySumView" />
 		<member-entity entity-alias="SIV" entity-name="ShippingItemView" />
 		<member-entity entity-alias="OI" entity-name="OrderItem" />
+		<member-entity entity-alias="OH" entity-name="OrderHeader" />
 		<alias entity-alias="SIV" name="shipmentId" group-by="true" />
 		<alias entity-alias="SIV" name="estimatedShipDate" group-by="true" />
 		<alias entity-alias="SIV" name="orderId" group-by="true" />
@@ -229,6 +231,7 @@
 		<alias entity-alias="SIV" name="internalName" group-by="true" />
 		<alias entity-alias="OI" name="quantity" group-by="true" />
 		<alias entity-alias="OI" name="statusId" group-by="true" />
+		<alias entity-alias="OH" field="statusId" name="orderHStatusId" />
 		<alias entity-alias="SI" name="quantityShipped" group-by="true" />
 		<alias name="quantityShippable" group-by="true">
 			<complex-alias operator="-">
@@ -244,6 +247,9 @@
 		<view-link entity-alias="SIV" rel-entity-alias="OI">
 			<key-map field-name="orderId" />
 			<key-map field-name="orderItemSeqId" />
+		</view-link>
+		<view-link entity-alias="OI" rel-entity-alias="OH">
+			<key-map field-name="orderId" />
 		</view-link>
 	</view-entity>
 
