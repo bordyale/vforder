@@ -69,8 +69,8 @@ under the License.
                   <#if cartLine.getProductId()??>
                     <#-- product item -->
                     <a href="<@ofbizUrl>product?product_id=${cartLine.getProductId()}</@ofbizUrl>" class="buttontext">${cartLine.getProductId()}</a> -
-                    ${cartLine.getName(dispatcher)?default("")}<br />
-                    <i>${cartLine.getDescription(dispatcher)!}</i>
+                    ${cartLine.getName()?default("")}<br />
+                    <i>${cartLine.getDescription()!}</i>
                     <#if shoppingCart.getOrderType() != "PURCHASE_ORDER">
                       <#-- only applies to sales orders, not purchase orders -->
                       <#-- if inventory is not required check to see if it is out of stock and needs to have a message shown about that... -->
