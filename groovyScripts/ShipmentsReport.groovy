@@ -51,12 +51,17 @@ shippingWeight = select("estimatedShipDate","shipmentId","netWeight").from("Ship
 shippingWeight = EntityUtil.orderBy(shippingWeight,  ["estimatedShipDate"])
 
 List<HashMap<String,Object>> shipWeights = new ArrayList<HashMap<String,Object>>()
+BigDecimal totalShippedWeight = BigDecimal.ZERO
 for (GenericValue entry: shippingWeight){
 	Map<String,Object> e = new HashMap<String,Object>()
 	e.put("estimatedShipDate",entry.get("estimatedShipDate"))
 	e.put("shipmentId",entry.get("shipmentId"))
-	e.put("netWeight",entry.get("netWeight"))
-	shipWeights.add(e)
+	BigDecimal netWeight = entry.get("netWeight")
+	e.put("netWeight",netWeight)
+	if (netWeight.compareTo(BigDecimal.ZERO)>0){
+		totalShippedWeight= totalShippedWeight.add(netWeight)
+		shipWeights.add(e)
+	}
 }
 
 
@@ -157,7 +162,7 @@ for (GenericValue entry: extraShippedProducts){
 
 
 
-
+context.totalShippedWeight=totalShippedWeight
 context.orderItems2 = hashMaps2
 context.orderItems = hashMaps
 context.shipWeights = shipWeights

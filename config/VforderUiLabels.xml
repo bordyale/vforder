@@ -266,6 +266,10 @@
 		<value xml:lang="en">Gros Weight</value>
 		<value xml:lang="hu">Brutto</value>
 	</property>
+	<property key="TotalNetWeight">
+		<value xml:lang="en">Total Net Weight</value>
+		<value xml:lang="hu">Össz. Net Súly</value>
+	</property>
 	<property key="OrderIsBoxOrPallet">
 		<value xml:lang="en">L or R</value>
 		<value xml:lang="hu">L vagy R</value>

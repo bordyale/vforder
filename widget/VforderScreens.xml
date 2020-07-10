@@ -10,8 +10,16 @@
 			<widgets>
 				<decorator-screen name="VforderCommonDecorator" location="${parameters.mainDecoratorLocation}">
 					<decorator-section name="body">
-						<!--<platform-specific> <html> <html-template location="component://vforder/template/Javascript.ftl" /> </html> </platform-specific> 
-							<platform-specific> <html> <html-template location="component://vforder/template/BootStrapTable.ftl" /> </html> </platform-specific> -->
+						<platform-specific>
+							<html>
+								<html-template location="component://vforder/template/Javascript.ftl" />
+							</html>
+						</platform-specific>
+						<platform-specific>
+							<html>
+								<html-template location="component://vforder/template/BootStrapTable.ftl" />
+							</html>
+						</platform-specific>
 					</decorator-section>
 				</decorator-screen>
 			</widgets>
@@ -786,19 +794,25 @@
 								<parameter param-name="thruDate" />
 								<parameter param-name="orderShipBeforeFrom" />
 								<parameter param-name="orderShipBeforeTo" />
-								<parameter param-name="allInfo" value="Y"/>
+								<parameter param-name="allInfo" value="Y" />
 							</link>
-							<link target="ShipmentsReportPdf" text="${uiLabelMap.ShipmentsReportForClientPdf}" style="buttontext create" target-window="_blank">
+							<link target="ShipmentsReportPdf" text="${uiLabelMap.ShipmentsReportForClientPdf}" style="buttontext create"
+								target-window="_blank">
 								<parameter param-name="fromDate" />
 								<parameter param-name="thruDate" />
 								<parameter param-name="orderShipBeforeFrom" />
 								<parameter param-name="orderShipBeforeTo" />
-								<parameter param-name="allInfo" value="N"/>
+								<parameter param-name="allInfo" value="N" />
 							</link>
 						</container>
 						<include-form name="FilterShipmentsReport" location="component://vforder/widget/VforderForms.xml" />
 						<include-form name="ShipmentsReport" location="component://vforder/widget/VforderForms.xml" />
 						<include-form name="ShipmentsWeights" location="component://vforder/widget/VforderForms.xml" />
+
+						<container>
+							<label style="h2" text="${uiLabelMap.TotalNetWeight} : ${totalShippedWeight}" />
+						</container>
+
 						<screenlet title="${uiLabelMap.OrdersNotShipped}">
 							<include-form name="ListNotShippedOrderItems" location="component://vforder/widget/VforderForms.xml" />
 						</screenlet>
