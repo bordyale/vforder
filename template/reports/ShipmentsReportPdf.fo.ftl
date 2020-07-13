@@ -182,6 +182,24 @@ under the License.
 		                    </fo:table-cell>
 		                  </fo:table-row>		         
 	                 </#list>
+	                 	<fo:table-row>
+		                  	<fo:table-cell border-style="solid" border-width="0.3mm" font-size="8pt">
+		                      <fo:block>
+		                        ${uiLabelMap.TotalNetWeight}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm" font-size="8pt">
+		                      <fo:block>
+		                        ${totalShippedWeight}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm" font-size="8pt">
+		                      <fo:block>
+		                        
+		                      </fo:block>
+		                    </fo:table-cell>
+		                  </fo:table-row>	
+	                 
            
                 </fo:table-body>
               </fo:table>
