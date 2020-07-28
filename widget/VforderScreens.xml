@@ -781,6 +781,7 @@
 				<set field="thruDate" from-field="parameters.thruDate" />
 				<set field="orderShipBeforeFrom" from-field="parameters.orderShipBeforeFrom" />
 				<set field="orderShipBeforeTo" from-field="parameters.orderShipBeforeTo" />
+				<set field="handlingInstructions" from-field="parameters.handlingInstructions" />
 				<set field="headerItem" value="shipmentsreport" />
 				<set field="viewSize" from-field="parameters.VIEW_SIZE_1" type="Integer" default-value="200" />
 				<script location="component://vforder/groovyScripts/ShipmentsReport.groovy" />
@@ -795,6 +796,7 @@
 								<parameter param-name="orderShipBeforeFrom" />
 								<parameter param-name="orderShipBeforeTo" />
 								<parameter param-name="allInfo" value="Y" />
+								<parameter param-name="handlingInstructions"/>
 							</link>
 							<link target="ShipmentsReportPdf" text="${uiLabelMap.ShipmentsReportForClientPdf}" style="buttontext create"
 								target-window="_blank">
@@ -803,6 +805,7 @@
 								<parameter param-name="orderShipBeforeFrom" />
 								<parameter param-name="orderShipBeforeTo" />
 								<parameter param-name="allInfo" value="N" />
+								<parameter param-name="handlingInstructions"/>
 							</link>
 						</container>
 						<include-form name="FilterShipmentsReport" location="component://vforder/widget/VforderForms.xml" />
@@ -818,6 +821,9 @@
 						</screenlet>
 						<screenlet title="${uiLabelMap.ExtraShipped}">
 							<include-form name="ExtraShippedProducts" location="component://vforder/widget/VforderForms.xml" />
+						</screenlet>
+						<screenlet title="${uiLabelMap.ProdShippedQuantity}">
+							<include-form name="ProdShippedQuantity" location="component://vforder/widget/VforderForms.xml" />
 						</screenlet>
 					</decorator-section>
 				</decorator-screen>

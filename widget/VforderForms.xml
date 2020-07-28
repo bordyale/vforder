@@ -518,6 +518,23 @@
 			<display />
 		</field>
 	</form>
+	<form name="ProdShippedQuantity" type="multi" use-row-submit="true" list-name="prodQty" title="" target="shipmentsreport"
+		odd-row-style="alternate-row" default-table-style="basic-table hover-bar" paginate-target="ordersnotshipped">
+		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" auto-field-map="true"/> </row-actions> -->
+		
+		<field name="productId">
+			<display />
+		</field>
+		<field name="productName">
+			<display />
+		</field>
+		<field name="handlingInstructions">
+			<display />
+		</field>
+		<field name="quantity">
+			<display />
+		</field>
+	</form>
 
 	<form name="FilterShipmentsReport" type="single" target="shipmentsreport">
 		<field name="fromDate" title="${uiLabelMap.ExampleDateField2Title}" tooltip="${uiLabelMap.FromDate}" tooltip-style="button-text">
@@ -531,6 +548,13 @@
 		</field>
 		<field name="orderShipBeforeTo" title="${uiLabelMap.OrderShipBeforeTo}" tooltip="${uiLabelMap.ToDate}" tooltip-style="button-text">
 			<date-time mask="Y" />
+		</field>
+		<field name="handlingInstructions" field-name="enumId" title="${uiLabelMap.CommonType}" >
+			<drop-down allow-empty="true">
+				<entity-options entity-name="Enumeration">
+					<entity-constraint name="enumTypeId" operator="equals" value="VV_SHIPMENT_TYPE" />
+				</entity-options>
+			</drop-down>
 		</field>
 
 		<field name="searchButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit">

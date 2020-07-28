@@ -36,6 +36,7 @@ fromDate = parameters.fromDate
 thruDate = parameters.thruDate
 orderShipBeforeFrom = parameters.orderShipBeforeFrom
 orderShipBeforeTo = parameters.orderShipBeforeTo
+shipmentType = parameters.handlingInstructions
 
 List searchCond = []
 if (fromDate) {
@@ -162,8 +163,29 @@ for (GenericValue entry: extraShippedProducts){
 
 
 
-context.totalShippedWeight=totalShippedWeight
-context.orderItems2 = hashMaps2
-context.orderItems = hashMaps
-context.shipWeights = shipWeights
-context.exShippedPr = exShippedPr
+if (shipmentType) {
+	searchCond.add(EntityCondition.makeCondition("handlingInstructions", EntityOperator.EQUALS, shipmentType))
+}
+productQuantity = select("productId","productName","handlingInstructions","quantity").from("ShippingProductQuantity").where(searchCond).cache(false).queryList()
+
+productQuantity = EntityUtil.orderBy(productQuantity,  ["productId"])
+
+List<HashMap<String,Object>> prodQty = new ArrayList<HashMap<String,Object>>()
+for (GenericValue entry: productQuantity){
+	Map<String,Object> e = new HashMap<String,Object>()
+	e.put("productId",entry.get("productId"))
+	e.put("productName",entry.get("productName"))
+	e.put("handlingInstructions",entry.get("handlingInstructions"))
+	e.put("quantity",entry.get("quantity"))
+
+	prodQty.add(e)
+}
+
+
+
+	context.totalShippedWeight=totalShippedWeight
+	context.orderItems2 = hashMaps2
+	context.orderItems = hashMaps
+	context.shipWeights = shipWeights
+	context.exShippedPr = exShippedPr
+	context.prodQty = prodQty

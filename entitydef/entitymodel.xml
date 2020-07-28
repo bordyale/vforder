@@ -127,6 +127,7 @@
 		<alias entity-alias="PR" name="internalName" />
 		<alias entity-alias="SI" name="shipmentId" />
 		<alias entity-alias="SH" name="estimatedShipDate" />
+		<alias entity-alias="SH" name="handlingInstructions" />
 		<alias entity-alias="SI" name="shipmentItemSeqId" />
 		<alias entity-alias="SI" name="quantity" />
 		<alias entity-alias="SI" name="productId" />
@@ -252,6 +253,17 @@
 		<view-link entity-alias="OI" rel-entity-alias="OH">
 			<key-map field-name="orderId" />
 		</view-link>
+	</view-entity>
+	
+	<view-entity entity-name="ShippingProductQuantity" package-name="org.apache.ofbiz.order.order"
+		never-cache="true" title="ShippingItems Summary">
+		<member-entity entity-alias="SIV" entity-name="ShippingItemView" />
+		<alias entity-alias="SIV" name="productId" group-by="true" />
+		<alias entity-alias="SIV" name="productName" group-by="true" />
+		<alias entity-alias="SIV" name="estimatedShipDate" />
+		<alias entity-alias="SIV" name="handlingInstructions" group-by="true" />
+		<alias entity-alias="SIV" name="quantity" field="quantity"
+			function="sum" />
 	</view-entity>
 
 

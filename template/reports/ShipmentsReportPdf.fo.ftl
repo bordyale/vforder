@@ -446,6 +446,66 @@ under the License.
                 </fo:table-body>
               </fo:table>
               </#if>
+              
+              
+              
+              
+              <#if prodQty?has_content>
+              <fo:block font-size="13pt" font-weight="bold" text-align="center">
+					${uiLabelMap.ProdShippedQuantity} 
+			  </fo:block>
+              <fo:table width="100%" table-layout="fixed"> 
+	           
+				  <fo:table-column column-width="8%" border-width="1px" border-style="solid" />
+				  <fo:table-column column-width="27%" border-width="1px" border-style="solid" />
+				  <fo:table-column column-width="8%" border-width="1px" border-style="solid" />
+				  
+				        
+                <fo:table-header text-align="center" background-color="silver">
+					<fo:table-row>
+						
+						
+						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid" font-size="8pt">
+							<fo:block font-weight="bold">${uiLabelMap.ProductProductId}</fo:block>
+						</fo:table-cell>					
+						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid" font-size="8pt">
+							<fo:block font-weight="bold">${uiLabelMap.ProductName}</fo:block>
+						</fo:table-cell>
+						<fo:table-cell padding="1mm" border-width="0.3mm" border-style="solid" font-size="8pt">
+							<fo:block font-weight="bold">${uiLabelMap.Quantity}</fo:block>
+						</fo:table-cell>				
+						
+					</fo:table-row>
+				</fo:table-header>
+                <fo:table-body>
+                
+	                <#list prodQty as item>
+		                
+		                  <fo:table-row>
+		                  	
+		                    
+		                    <fo:table-cell border-style="solid" border-width="0.3mm" font-size="8pt">
+		                      <fo:block>
+		                        ${item.productId}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm" font-size="8pt">
+		                      <fo:block>
+		                        ${item.productName}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    <fo:table-cell border-style="solid" border-width="0.3mm" font-size="8pt">
+		                      <fo:block>
+		                        ${item.quantity}
+		                      </fo:block>
+		                    </fo:table-cell>
+		                    
+		                  </fo:table-row>		         
+	                 </#list>
+           
+                </fo:table-body>
+              </fo:table>
+              </#if>
                         
             </fo:block>
 	</fo:flow>
