@@ -200,6 +200,7 @@
 		<member-entity entity-alias="SIV" entity-name="ShippingItemView" />
 		<alias entity-alias="SIV" name="estimatedShipDate" group-by="true" />
 		<alias entity-alias="SIV" name="shipmentId" group-by="true" />
+		<alias entity-alias="SIV" name="handlingInstructions" group-by="true" />
 		<alias entity-alias="SIV" name="netWeight" field="netWeight"
 			function="sum" />
 	</view-entity>

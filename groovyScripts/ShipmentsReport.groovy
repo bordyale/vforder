@@ -47,23 +47,6 @@ if (thruDate) {
 }
 
 
-shippingWeight = select("estimatedShipDate","shipmentId","netWeight").from("ShippingWeight").where(searchCond).cache(false).queryList()
-
-shippingWeight = EntityUtil.orderBy(shippingWeight,  ["estimatedShipDate"])
-
-List<HashMap<String,Object>> shipWeights = new ArrayList<HashMap<String,Object>>()
-BigDecimal totalShippedWeight = BigDecimal.ZERO
-for (GenericValue entry: shippingWeight){
-	Map<String,Object> e = new HashMap<String,Object>()
-	e.put("estimatedShipDate",entry.get("estimatedShipDate"))
-	e.put("shipmentId",entry.get("shipmentId"))
-	BigDecimal netWeight = entry.get("netWeight")
-	e.put("netWeight",netWeight)
-	if (netWeight.compareTo(BigDecimal.ZERO)>0){
-		totalShippedWeight= totalShippedWeight.add(netWeight)
-		shipWeights.add(e)
-	}
-}
 
 
 orderItemShippingItem = select("estimatedShipDate","orderId","productId","productName","internalName","statusId","orderHStatusId","quantity","quantityShipped","quantityShippable").from("ShipmentsReport").where(searchCond).cache(false).queryList()
@@ -161,31 +144,50 @@ for (GenericValue entry: extraShippedProducts){
 	}
 }
 
-
-
 if (shipmentType) {
 	searchCond.add(EntityCondition.makeCondition("handlingInstructions", EntityOperator.EQUALS, shipmentType))
 }
+shippingWeight = select("estimatedShipDate","shipmentId","netWeight").from("ShippingWeight").where(searchCond).cache(false).queryList()
+
+shippingWeight = EntityUtil.orderBy(shippingWeight,  ["estimatedShipDate"])
+
+List<HashMap<String,Object>> shipWeights = new ArrayList<HashMap<String,Object>>()
+BigDecimal totalShippedWeight = BigDecimal.ZERO
+for (GenericValue entry: shippingWeight){
+	Map<String,Object> e = new HashMap<String,Object>()
+	e.put("estimatedShipDate",entry.get("estimatedShipDate"))
+	e.put("shipmentId",entry.get("shipmentId"))
+	BigDecimal netWeight = entry.get("netWeight")
+	e.put("netWeight",netWeight)
+
+	totalShippedWeight= totalShippedWeight.add(netWeight)
+	shipWeights.add(e)
+
+}
+
+
 productQuantity = select("productId","productName","handlingInstructions","quantity").from("ShippingProductQuantity").where(searchCond).cache(false).queryList()
 
 productQuantity = EntityUtil.orderBy(productQuantity,  ["productId"])
 
 List<HashMap<String,Object>> prodQty = new ArrayList<HashMap<String,Object>>()
+BigDecimal progresQuantity = BigDecimal.ZERO
 for (GenericValue entry: productQuantity){
 	Map<String,Object> e = new HashMap<String,Object>()
 	e.put("productId",entry.get("productId"))
 	e.put("productName",entry.get("productName"))
 	e.put("handlingInstructions",entry.get("handlingInstructions"))
-	e.put("quantity",entry.get("quantity"))
+	BigDecimal qty = entry.get("quantity")
+	e.put("quantity",qty)
 
 	prodQty.add(e)
 }
 
 
 
-	context.totalShippedWeight=totalShippedWeight
-	context.orderItems2 = hashMaps2
-	context.orderItems = hashMaps
-	context.shipWeights = shipWeights
-	context.exShippedPr = exShippedPr
-	context.prodQty = prodQty
+context.totalShippedWeight=totalShippedWeight
+context.orderItems2 = hashMaps2
+context.orderItems = hashMaps
+context.shipWeights = shipWeights
+context.exShippedPr = exShippedPr
+context.prodQty = prodQty
