@@ -8,7 +8,7 @@
 			<actions>
 				<property-map resource="VforderUiLabels" map-name="uiLabelMap" global="true" />
 				<property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true" />
-				
+
 
 
 				<set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="0" />
@@ -28,8 +28,31 @@
 		</section>
 	</screen>
 
+	<screen name="ShipmentReportCSV">
+		<section>
+			<actions>
+				<set field="tabButtonItem" value="EditShippingItems" />
+				<set field="fromDate" from-field="parameters.fromDate" />
+				<set field="thruDate" from-field="parameters.thruDate" />
+				<set field="orderShipBeforeFrom" from-field="parameters.orderShipBeforeFrom" />
+				<set field="orderShipBeforeTo" from-field="parameters.orderShipBeforeTo" />
+				<set field="handlingInstructions" from-field="parameters.handlingInstructions" />
+				<set field="headerItem" value="shipmentsreport" />
+				<set field="viewSize" from-field="parameters.VIEW_SIZE_1" type="Integer" default-value="200" />
+				<script location="component://vforder/groovyScripts/ShipmentsReport.groovy" />
+			</actions>
+			<widgets>
+				<container>
+					<label style="h2" text="${uiLabelMap.OrdersNotShipped}" />
+				</container>
+				<include-form name="ListNotShippedOrderItems" location="component://vforder/widget/VforderForms.xml" />
 
-	
+			</widgets>
+		</section>
+	</screen>
+
+
+
 
 
 </screens>

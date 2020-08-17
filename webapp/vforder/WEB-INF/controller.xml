@@ -403,6 +403,10 @@
 		<security https="true" auth="true" />
 		<response name="success" type="view" value="ExportShippingSummaryCSV" />
 	</request-map>
+	<request-map uri="ShipmentReport.csv">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="ShipmentReportCSV" />
+	</request-map>
 
 	<!-- View Mappings -->
 	<view-map name="main" type="screen" page="component://vforder/widget/VforderScreens.xml#main" />
@@ -450,5 +454,7 @@
 	<view-map name="ShowOrderItemShippingLayer" type="screen"
 		page="component://vforder/widget/VforderScreens.xml#ShowOrderItemShippingLayer" />
 	<view-map name="ExportShippingSummaryCSV" type="screencsv" page="component://vforder/widget/CsvScreens.xml#ExportShippingSummaryCSV"
+		content-type="text/csv" encoding="none" />
+	<view-map name="ShipmentReportCSV" type="screencsv" page="component://vforder/widget/CsvScreens.xml#ShipmentReportCSV"
 		content-type="text/csv" encoding="none" />
 </site-conf>

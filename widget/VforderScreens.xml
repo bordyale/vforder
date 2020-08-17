@@ -807,6 +807,14 @@
 								<parameter param-name="allInfo" value="N" />
 								<parameter param-name="handlingInstructions"/>
 							</link>
+							<link target="ShipmentReport.csv" text="${uiLabelMap.CommonCSV}" style="buttontext create" target-window="_blank">
+								<parameter param-name="fromDate" />
+								<parameter param-name="thruDate" />
+								<parameter param-name="orderShipBeforeFrom" />
+								<parameter param-name="orderShipBeforeTo" />
+								<parameter param-name="allInfo" value="Y" />
+								<parameter param-name="handlingInstructions"/>
+							</link>
 						</container>
 						<include-form name="FilterShipmentsReport" location="component://vforder/widget/VforderForms.xml" />
 						<include-form name="ShipmentsReport" location="component://vforder/widget/VforderForms.xml" />
