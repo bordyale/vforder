@@ -278,6 +278,10 @@
 		<value xml:lang="en">Pdf Summary</value>
 		<value xml:lang="hu">Pdf Összefoglalás</value>
 	</property>
+	<property key="ExportShippingSummaryCSV">
+		<value xml:lang="en">CSV Summary</value>
+		<value xml:lang="hu">CSV Összefoglalás</value>
+	</property>
 	<property key="ExportShippingGlIncPdf">
 		<value xml:lang="en">Pdf Globe Incom</value>
 		<value xml:lang="hu">Pdf Globe Incom</value>

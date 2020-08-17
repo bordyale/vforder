@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ofbiz.apache.org/Widget-Screen"
+	xsi:schemaLocation="http://ofbiz.apache.org/Widget-Screen http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+
+	<screen name="ExportShippingSummaryCSV">
+		<section>
+			<actions>
+				<property-map resource="VforderUiLabels" map-name="uiLabelMap" global="true" />
+				<property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true" />
+				
+
+
+				<set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="0" />
+				<property-to-field resource="widget" property="widget.form.defaultViewSize" field="viewSizeDefaultValue" />
+				<set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="${viewSizeDefaultValue}" />
+
+				<!-- <entity-one entity-name="Facility" value-field="facility" use-cache="true"/> -->
+				<script location="component://vforder/groovyScripts/ListShippingItems.groovy" />
+			</actions>
+			<widgets>
+				<container>
+					<label style="h2" text="${uiLabelMap.ExportShippingSummaryCSV}" />
+				</container>
+				<include-form name="ExportShippingSummaryCSV" location="component://vforder/widget/CsvForms.xml" />
+
+			</widgets>
+		</section>
+	</screen>
+
+
+	
+
+
+</screens>

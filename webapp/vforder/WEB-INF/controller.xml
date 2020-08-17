@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://ofbiz.apache.org/Site-Conf"
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ofbiz.apache.org/Site-Conf"
 	xsi:schemaLocation="http://ofbiz.apache.org/Site-Conf http://ofbiz.apache.org/dtds/site-conf.xsd">
-	<!-- The controller elements that are common to all OFBiz components can 
-		be found in the following xml file. A component can override the elements 
-		found in the common-controller.xml file. -->
+	<!-- The controller elements that are common to all OFBiz components can be found in the following xml file. A component can override 
+		the elements found in the common-controller.xml file. -->
 	<include location="component://common/webcommon/WEB-INF/common-controller.xml" />
 
 	<description>Vforder Component Site Configuration File</description>
@@ -12,8 +10,7 @@
 	<!-- Events to run on every request before security (chains exempt) -->
 	<!-- <preprocessor> </preprocessor> -->
 	<!-- Events to run on every request after all other processing (chains exempt) -->
-	<!-- <postprocessor> <event name="test" type="java" path="org.apache.ofbiz.webapp.event.TestEvent" 
-		invoke="test"/> </postprocessor> -->
+	<!-- <postprocessor> <event name="test" type="java" path="org.apache.ofbiz.webapp.event.TestEvent" invoke="test"/> </postprocessor> -->
 
 	<!-- Request Mappings -->
 	<request-map uri="main">
@@ -37,8 +34,7 @@
 	<!-- Order Entry Requests -->
 	<request-map uri="orderentry">
 		<security https="true" auth="true" />
-		<event type="java"
-			path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="routeOrderEntry" />
+		<event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="routeOrderEntry" />
 		<response name="init" type="view" value="checkinits" />
 		<response name="agreements" type="view" value="orderagreements" />
 		<response name="cart" type="view" value="showcart" />
@@ -46,8 +42,7 @@
 	</request-map>
 	<request-map uri="initorderentry">
 		<security https="true" auth="true" />
-		<event type="java" path="org.apache.ofbiz.vforder.VforderEvents"
-			invoke="initializeOrderEntry" />
+		<event type="java" path="org.apache.ofbiz.vforder.VforderEvents" invoke="initializeOrderEntry" />
 		<response name="success" type="request" value="orderentry" />
 		<response name="error" type="view" value="checkinits" />
 	</request-map>
@@ -62,44 +57,38 @@
 	<request-map uri="setOrderCurrencyAgreementShipDates">
 		<description>Handles setting the currency, agreement and shipment dates of an order.</description>
 		<security https="true" auth="true" />
-		<event type="java"
-			path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="setOrderCurrencyAgreementShipDates" />
+		<event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="setOrderCurrencyAgreementShipDates" />
 		<response name="success" type="request" value="orderentry" />
 		<response name="error" type="request" value="orderagreements" />
 	</request-map>
 	<request-map uri="setOrderAgreement">
 		<security https="true" auth="true" />
-		<event type="java"
-			path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="selectAgreement" />
+		<event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="selectAgreement" />
 		<response name="success" type="request" value="orderentry" />
 		<response name="error" type="request" value="orderagreements" />
 	</request-map>
 	<request-map uri="setOrderCurrency">
 		<security https="true" auth="true" />
-		<event type="java"
-			path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="setCurrency" />
+		<event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="setCurrency" />
 		<response name="success" type="request" value="orderentry" />
 		<response name="error" type="request" value="orderagreements" />
 	</request-map>
 	<request-map uri="setOrderName">
 		<security https="true" auth="true" />
-		<event type="java"
-			path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="setOrderName" />
+		<event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="setOrderName" />
 		<response name="success" type="request" value="orderentry" />
 		<response name="error" type="request" value="orderentry" />
 	</request-map>
 	<request-map uri="setPoNumber">
 		<security https="true" auth="true" />
-		<event type="java"
-			path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="setPoNumber" />
+		<event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="setPoNumber" />
 		<response name="success" type="request" value="orderentry" />
 		<response name="error" type="request" value="orderentry" />
 	</request-map>
 
 	<request-map uri="additem">
 		<security https="true" auth="true" />
-		<event type="java"
-			path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="addToCart" />
+		<event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="addToCart" />
 		<response name="success" type="request" value="orderentry" />
 		<response name="survey" type="view" value="survey" />
 		<response name="product" type="view" value="product" />
@@ -107,8 +96,7 @@
 	</request-map>
 	<request-map uri="loadCartFromOrder">
 		<security https="true" auth="true" />
-		<event type="java"
-			path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="loadCartFromOrder" />
+		<event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="loadCartFromOrder" />
 		<response name="success" type="request" value="finalizeOrder" />
 		<response name="error" type="view" value="orderview" />
 	</request-map>
@@ -120,30 +108,26 @@
 	</request-map>
 	<request-map uri="emptycart">
 		<security https="true" auth="true" />
-		<event type="java"
-			path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="destroyCart" />
+		<event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="destroyCart" />
 		<response name="success" type="request" value="orderentry" />
 		<response name="error" type="request" value="orderentry" />
 	</request-map>
 	<request-map uri="modifycart">
 		<security https="true" auth="true" />
-		<event type="java"
-			path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="modifyCart" />
+		<event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="modifyCart" />
 		<response name="success" type="request" value="orderentry" />
 		<response name="error" type="request" value="orderentry" />
 	</request-map>
 	<request-map uri="finalizeOrder">
 		<security https="true" auth="true" />
-		<event type="java" path="org.apache.ofbiz.order.shoppingcart.CheckOutEvents"
-			invoke="finalizeOrderEntry" />
+		<event type="java" path="org.apache.ofbiz.order.shoppingcart.CheckOutEvents" invoke="finalizeOrderEntry" />
 		<response name="addparty" type="view" value="setAdditionalParty" />
 		<response name="customer" type="view" value="custsetting" />
 		<response name="shipping" type="view" value="confirm" />
 		<response name="shippingAddress" type="view" value="EditShipAddress" />
 		<response name="options" type="view" value="confirm" />
 		<response name="payment" type="request" value="calcShippingBeforePayment" />
-		<response name="paymentError" type="request"
-			value="calcShippingBeforePayment" />
+		<response name="paymentError" type="request" value="calcShippingBeforePayment" />
 		<response name="term" type="view" value="confirm" />
 		<response name="shipGroups" type="view" value="SetItemShipGroups" />
 		<response name="sales" type="request" value="calcShipping" />
@@ -152,8 +136,7 @@
 	</request-map>
 	<request-map uri="processorder">
 		<security https="true" auth="true" />
-		<event type="java" path="org.apache.ofbiz.vforder.shoppingcart.VfCheckOutEvents"
-			invoke="createOrder" />
+		<event type="java" path="org.apache.ofbiz.vforder.shoppingcart.VfCheckOutEvents" invoke="createOrder" />
 		<response name="sales_order" type="request" value="checkBlackList" />
 		<response name="work_order" type="request" value="checkBlackList" />
 		<response name="purchase_order" type="request" value="clearpocart" />
@@ -161,24 +144,21 @@
 	</request-map>
 	<request-map uri="checkBlackList">
 		<security direct-request="false" />
-		<event type="java" path="org.apache.ofbiz.order.shoppingcart.CheckOutEvents"
-			invoke="checkOrderBlacklist" />
+		<event type="java" path="org.apache.ofbiz.order.shoppingcart.CheckOutEvents" invoke="checkOrderBlacklist" />
 		<response name="success" type="request" value="processpayment" />
 		<response name="failed" type="request" value="failedBlacklist" />
 		<response name="error" type="view" value="confirm" />
 	</request-map>
 	<request-map uri="processpayment">
 		<security direct-request="false" />
-		<event type="java" path="org.apache.ofbiz.order.shoppingcart.CheckOutEvents"
-			invoke="processPayment" />
+		<event type="java" path="org.apache.ofbiz.order.shoppingcart.CheckOutEvents" invoke="processPayment" />
 		<response name="success" type="request" value="clearcart" />
 		<response name="fail" type="view" value="confirm" />
 		<response name="error" type="view" value="confirm" />
 	</request-map>
 	<request-map uri="clearcart">
 		<security https="true" auth="true" />
-		<event type="java"
-			path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="destroyCart" />
+		<event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="destroyCart" />
 		<response name="success" type="request" value="emailorder" />
 		<response name="error" type="view" value="confirm" />
 	</request-map>
@@ -194,15 +174,13 @@
 	</request-map>
 	<request-map uri="clearpocart">
 		<security https="true" direct-request="false" />
-		<event type="java"
-			path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="destroyCart" />
+		<event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="destroyCart" />
 		<response name="success" type="view" value="ordercomplete" />
 		<response name="error" type="view" value="confirm" />
 	</request-map>
 	<request-map uri="BulkAddProducts">
 		<security https="true" auth="true" />
-		<event type="java"
-			path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="bulkAddProducts" />
+		<event type="java" path="org.apache.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="bulkAddProducts" />
 		<response name="success" type="request" value="orderentry" />
 		<response name="error" type="request" value="orderentry" />
 	</request-map>
@@ -298,15 +276,11 @@
 
 
 
-	<!-- <request-map uri="createShipping"> <security https="true" auth="true" 
-		/> <event type="service" invoke="createShipping" /> <response name="success" 
-		type="request-redirect" value="EditShipping"> <redirect-parameter name="shippingId" 
-		/> </response> <response name="error" type="view" value="findshippings" /> 
-		</request-map> <request-map uri="updateShipping"> <security https="true" 
-		auth="true" /> <event type="service" invoke="updateShipping" /> <response 
-		name="success" type="request-redirect" value="EditShipping"> <redirect-parameter 
-		name="shippingId" /> </response> <response name="error" type="view" value="EditShipping" 
-		/> </request-map> -->
+	<!-- <request-map uri="createShipping"> <security https="true" auth="true" /> <event type="service" invoke="createShipping" /> <response 
+		name="success" type="request-redirect" value="EditShipping"> <redirect-parameter name="shippingId" /> </response> <response name="error" 
+		type="view" value="findshippings" /> </request-map> <request-map uri="updateShipping"> <security https="true" auth="true" /> <event 
+		type="service" invoke="updateShipping" /> <response name="success" type="request-redirect" value="EditShipping"> <redirect-parameter 
+		name="shippingId" /> </response> <response name="error" type="view" value="EditShipping" /> </request-map> -->
 	<request-map uri="AddShippingItem">
 		<security https="true" auth="true" />
 		<event type="service" invoke="vffindOrders" />
@@ -318,8 +292,7 @@
 	</request-map>
 	<request-map uri="UpdateShippingItems">
 		<security https="true" auth="true" />
-		<event type="java" path="org.apache.ofbiz.vforder.VforderEvents"
-			invoke="updateOrderShippingItems" />
+		<event type="java" path="org.apache.ofbiz.vforder.VforderEvents" invoke="updateOrderShippingItems" />
 		<response name="success" type="request-redirect" value="EditShippingItems">
 			<redirect-parameter name="shipmentId" />
 		</response>
@@ -330,8 +303,7 @@
 	</request-map>
 	<request-map uri="AddProductToShipping">
 		<security https="true" auth="true" />
-		<event type="java" path="org.apache.ofbiz.vforder.VforderEvents"
-			invoke="updateOrderShippingItems" />
+		<event type="java" path="org.apache.ofbiz.vforder.VforderEvents" invoke="updateOrderShippingItems" />
 		<response name="success" type="request-redirect" value="EditShippingItems">
 			<redirect-parameter name="shipmentId" />
 		</response>
@@ -342,8 +314,7 @@
 	</request-map>
 	<request-map uri="deleteShippingItem">
 		<security https="true" auth="true" />
-		<event type="java" path="org.apache.ofbiz.vforder.VforderEvents"
-			invoke="deleteShippingItemOrderItem" />
+		<event type="java" path="org.apache.ofbiz.vforder.VforderEvents" invoke="deleteShippingItemOrderItem" />
 		<response name="success" type="request-redirect" value="EditShippingItems">
 			<redirect-parameter name="shipmentId" />
 		</response>
@@ -352,8 +323,7 @@
 	<request-map uri="deleteShipping">
 		<security https="true" auth="true" />
 
-		<event type="java" path="org.apache.ofbiz.vforder.VforderEvents"
-			invoke="deleteShipping" />
+		<event type="java" path="org.apache.ofbiz.vforder.VforderEvents" invoke="deleteShipping" />
 
 		<response name="success" type="request-redirect" value="findshippings">
 		</response>
@@ -361,8 +331,7 @@
 	</request-map>
 	<request-map uri="updateInventoryShipment">
 		<security https="true" auth="true" />
-		<event type="java" path="org.apache.ofbiz.vffacility.VffacilityEvents"
-			invoke="updateInventoryShipment" />
+		<event type="java" path="org.apache.ofbiz.vffacility.VffacilityEvents" invoke="updateInventoryShipment" />
 		<response name="success" type="request-redirect" value="EditShipping">
 			<redirect-parameter name="shipmentId" />
 		</response>
@@ -374,8 +343,7 @@
 
 	<request-map uri="LookupUserLoginAndPartyDetails">
 		<security https="true" auth="true" />
-		<response name="success" type="view"
-			value="LookupUserLoginAndPartyDetails" />
+		<response name="success" type="view" value="LookupUserLoginAndPartyDetails" />
 	</request-map>
 	<request-map uri="LookupProduct">
 		<security https="true" auth="true" />
@@ -419,8 +387,7 @@
 	</request-map>
 	<request-map uri="UpdatePallet">
 		<security https="true" auth="true" />
-		<event type="java" path="org.apache.ofbiz.vforder.VforderEvents"
-			invoke="updatePallet" />
+		<event type="java" path="org.apache.ofbiz.vforder.VforderEvents" invoke="updatePallet" />
 		<response name="success" type="request-redirect" value="EditShippingItems">
 			<redirect-parameter name="shipmentId" />
 		</response>
@@ -431,80 +398,57 @@
 		<response name="success" type="view" value="ShowOrderItemShippingLayer" />
 	</request-map>
 
+	<!-- CSV export request mappings -->
+	<request-map uri="ExportShippingSummary.csv">
+		<security https="true" auth="true" />
+		<response name="success" type="view" value="ExportShippingSummaryCSV" />
+	</request-map>
+
 	<!-- View Mappings -->
-	<view-map name="main" type="screen"
-		page="component://vforder/widget/VforderScreens.xml#main" />
-	<view-map name="findorders" type="screen"
-		page="component://vforder/widget/VforderScreens.xml#OrderFindOrder" />
-	<view-map name="checkinits" type="screen"
-		page="component://vforder/widget/VforderScreens.xml#CheckInits" />
+	<view-map name="main" type="screen" page="component://vforder/widget/VforderScreens.xml#main" />
+	<view-map name="findorders" type="screen" page="component://vforder/widget/VforderScreens.xml#OrderFindOrder" />
+	<view-map name="checkinits" type="screen" page="component://vforder/widget/VforderScreens.xml#CheckInits" />
 	<view-map name="LookupUserLoginAndPartyDetails" type="screen"
 		page="component://party/widget/partymgr/LookupScreens.xml#LookupUserLoginAndPartyDetails" />
-	<view-map name="showcart" type="screen"
-		page="component://vforder/widget/VforderScreens.xml#ShowCart" />
-	<view-map name="orderagreements" type="screen"
-		page="component://vforder/widget/VforderScreens.xml#OrderAgreements" />
-	<view-map name="LookupProduct" type="screen"
-		page="component://vforder/widget/LookupScreens.xml#LookupProduct" />
-	<view-map name="LookupSupplierProduct" type="screen"
-		page="component://vforder/widget/LookupScreens.xml#LookupSupplierProduct" />
-	<view-map name="LookupCustomerName" type="screen"
-		page="component://vforder/widget/LookupScreens.xml#LookupCustomerName" />
-	<view-map name="confirm" type="screen"
-		page="component://vforder/widget/VforderScreens.xml#ConfirmOrder" />
-	<view-map name="shipsetting" type="screen"
-		page="component://order/widget/ordermgr/OrderEntryOrderScreens.xml#ShipSettings" />
-	<view-map name="ordercomplete" type="screen"
-		page="component://vforder/widget/VforderScreens.xml#OrderHeaderView" />
-	<view-map name="orderview" type="screen"
-		page="component://vforder/widget/VforderScreens.xml#OrderHeaderView" />
-	<view-map name="findshippings" type="screen"
-		page="component://vforder/widget/VforderScreens.xml#ShippingFindShipping" />
-	<view-map name="shippingentry" type="screen"
-		page="component://vforder/widget/VforderScreens.xml#ShippingEntryShipping" />
-	<view-map name="EditShippingLayer" type="screen"
-		page="component://vforder/widget/VforderScreens.xml#EditShippingLayer" />
-	<view-map name="EditShipping" type="screen"
-		page="component://vforder/widget/VforderScreens.xml#EditShipping" />
-	<view-map name="EditShippingItems" type="screen"
-		page="component://vforder/widget/VforderScreens.xml#EditShippingItems" />
-	<view-map name="AddShippingItem" type="screen"
-		page="component://vforder/widget/VforderScreens.xml#AddShippingItem" />
-	<view-map name="AddShippingItemOrderItem" type="screen"
-		page="component://vforder/widget/VforderScreens.xml#AddShippingItemOrderItem" />
-	<view-map name="LookupBulkAddProducts" type="screen"
-		page="component://vforder/widget/VforderScreens.xml#LookupBulkAddProducts" />
+	<view-map name="showcart" type="screen" page="component://vforder/widget/VforderScreens.xml#ShowCart" />
+	<view-map name="orderagreements" type="screen" page="component://vforder/widget/VforderScreens.xml#OrderAgreements" />
+	<view-map name="LookupProduct" type="screen" page="component://vforder/widget/LookupScreens.xml#LookupProduct" />
+	<view-map name="LookupSupplierProduct" type="screen" page="component://vforder/widget/LookupScreens.xml#LookupSupplierProduct" />
+	<view-map name="LookupCustomerName" type="screen" page="component://vforder/widget/LookupScreens.xml#LookupCustomerName" />
+	<view-map name="confirm" type="screen" page="component://vforder/widget/VforderScreens.xml#ConfirmOrder" />
+	<view-map name="shipsetting" type="screen" page="component://order/widget/ordermgr/OrderEntryOrderScreens.xml#ShipSettings" />
+	<view-map name="ordercomplete" type="screen" page="component://vforder/widget/VforderScreens.xml#OrderHeaderView" />
+	<view-map name="orderview" type="screen" page="component://vforder/widget/VforderScreens.xml#OrderHeaderView" />
+	<view-map name="findshippings" type="screen" page="component://vforder/widget/VforderScreens.xml#ShippingFindShipping" />
+	<view-map name="shippingentry" type="screen" page="component://vforder/widget/VforderScreens.xml#ShippingEntryShipping" />
+	<view-map name="EditShippingLayer" type="screen" page="component://vforder/widget/VforderScreens.xml#EditShippingLayer" />
+	<view-map name="EditShipping" type="screen" page="component://vforder/widget/VforderScreens.xml#EditShipping" />
+	<view-map name="EditShippingItems" type="screen" page="component://vforder/widget/VforderScreens.xml#EditShippingItems" />
+	<view-map name="AddShippingItem" type="screen" page="component://vforder/widget/VforderScreens.xml#AddShippingItem" />
+	<view-map name="AddShippingItemOrderItem" type="screen" page="component://vforder/widget/VforderScreens.xml#AddShippingItemOrderItem" />
+	<view-map name="LookupBulkAddProducts" type="screen" page="component://vforder/widget/VforderScreens.xml#LookupBulkAddProducts" />
 	<view-map name="LookupBulkAddSupplierProducts" type="screen"
 		page="component://vforder/widget/VforderScreens.xml#LookupBulkAddSupplierProducts" />
-	<view-map name="ExportShippingPdf" type="screenfop"
-		page="component://vforder/widget/VforderScreens.xml#ExportShippingPdf"
+	<view-map name="ExportShippingPdf" type="screenfop" page="component://vforder/widget/VforderScreens.xml#ExportShippingPdf"
 		content-type="application/pdf" encoding="none" />
-	<view-map name="ExportShippingGlIncPdf" type="screenfop"
-		page="component://vforder/widget/VforderScreens.xml#ExportShippingGlIncPdf"
+	<view-map name="ExportShippingGlIncPdf" type="screenfop" page="component://vforder/widget/VforderScreens.xml#ExportShippingGlIncPdf"
 		content-type="application/pdf" encoding="none" />
-	<view-map name="ExportShippingSummaryPdf" type="screenfop"
-		page="component://vforder/widget/VforderScreens.xml#ExportShippingSummaryPdf"
+	<view-map name="ExportShippingSummaryPdf" type="screenfop" page="component://vforder/widget/VforderScreens.xml#ExportShippingSummaryPdf"
 		content-type="application/pdf" encoding="none" />
-	<view-map name="ExportBoxesPdf" type="screenfop"
-		page="component://vforder/widget/VforderScreens.xml#ExportBoxesPdf"
+	<view-map name="ExportBoxesPdf" type="screenfop" page="component://vforder/widget/VforderScreens.xml#ExportBoxesPdf"
 		content-type="application/pdf" encoding="none" />
-	<view-map name="ExportWorkPapersPdf" type="screenfop"
-		page="component://vforder/widget/VforderScreens.xml#ExportWorkPapersPdf"
+	<view-map name="ExportWorkPapersPdf" type="screenfop" page="component://vforder/widget/VforderScreens.xml#ExportWorkPapersPdf"
 		content-type="application/pdf" encoding="none" />
-	<view-map name="OrderPDF" type="screenfop"
-		page="component://vforder/widget/VforderScreens.xml#OrderPDF"
-		content-type="application/pdf" encoding="none" />
-	<view-map name="ordersnotshipped" type="screen"
-		page="component://vforder/widget/VforderScreens.xml#ListNotShippedOrderItems" />
-	<view-map name="shipmentsreport" type="screen"
-		page="component://vforder/widget/VforderScreens.xml#ShipmentsReport" />
+	<view-map name="OrderPDF" type="screenfop" page="component://vforder/widget/VforderScreens.xml#OrderPDF" content-type="application/pdf"
+		encoding="none" />
+	<view-map name="ordersnotshipped" type="screen" page="component://vforder/widget/VforderScreens.xml#ListNotShippedOrderItems" />
+	<view-map name="shipmentsreport" type="screen" page="component://vforder/widget/VforderScreens.xml#ShipmentsReport" />
 	<view-map name="ListNotShippedOrderItemsPdf" type="screenfop"
-		page="component://vforder/widget/VforderScreens.xml#ListNotShippedOrderItemsPdf"
-		content-type="application/pdf" encoding="none" />
-	<view-map name="ShipmentsReportPdf" type="screenfop"
-		page="component://vforder/widget/VforderScreens.xml#ShipmentsReportPdf"
+		page="component://vforder/widget/VforderScreens.xml#ListNotShippedOrderItemsPdf" content-type="application/pdf" encoding="none" />
+	<view-map name="ShipmentsReportPdf" type="screenfop" page="component://vforder/widget/VforderScreens.xml#ShipmentsReportPdf"
 		content-type="application/pdf" encoding="none" />
 	<view-map name="ShowOrderItemShippingLayer" type="screen"
 		page="component://vforder/widget/VforderScreens.xml#ShowOrderItemShippingLayer" />
-
+	<view-map name="ExportShippingSummaryCSV" type="screencsv" page="component://vforder/widget/CsvScreens.xml#ExportShippingSummaryCSV"
+		content-type="text/csv" encoding="none" />
 </site-conf>

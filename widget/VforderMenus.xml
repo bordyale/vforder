@@ -92,6 +92,12 @@
 				<image url-mode="raw" src="${iconsLocation}/page_white_acrobat.png" />
 			</link>
 		</menu-item>
+		<menu-item name="ExportShippingSummary.csv" title="${uiLabelMap.ExportShippingSummaryCSV}">
+			<link target="ExportShippingSummary.csv" target-window="_blank">
+				<parameter param-name="shipmentId" />
+				<image url-mode="raw" src="${iconsLocation}/page_white_acrobat.png" />
+			</link>
+		</menu-item>
 		<!-- <menu-item name="UpdateInventoryShipment" title="${uiLabelMap.UpdateInventoryShipment}"> 
 			<link target="updateInventoryShipment" target-window="_blank"> <parameter 
 			param-name="shipmentId" /> <parameter param-name="facilityId" value="10000" 
