@@ -51,7 +51,7 @@
 		<field name="estimatedShipDate" sort-field="true">
 			<display description="${groovy:org.apache.ofbiz.base.util.UtilDateTime.toDateString(estimatedShipDate, &quot;yyyy.MM.dd.&quot;);}" />
 		</field>
-		<field name="handlingInstructions"  title="${uiLabelMap.CommonType}" sort-field="true">
+		<field name="handlingInstructions" title="${uiLabelMap.CommonType}" sort-field="true">
 			<display />
 		</field>
 
@@ -463,6 +463,29 @@
 		</field>
 
 	</form>
+	<form name="AddProductToShippingWithOpenOrders" type="single" use-row-submit="true" list-name="productLine" title=""
+		target="AddProductToShippingWithOpenOrders" odd-row-style="alternate-row" default-table-style="basic-table hover-bar"
+		paginate-target="EditShippingItems">
+		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" auto-field-map="true"/> </row-actions> -->
+		<field name="shipmentId">
+			<hidden value="${shipmentId}" />
+		</field>
+
+		<!-- <field name="orderId" title="${uiLabelMap.OrderOrderId}" widget-style="buttontext"> <hyperlink description="${orderId}" target="/catalog/control/EditProductInventoryItems" 
+			target-type="inter-app"> <parameter param-name="orderId"/> </hyperlink> </field> -->
+		<field name="productId">
+			<lookup target-form-name="LookupProduct" />
+		</field>
+
+
+		<field name="quantityToShip" title="${uiLabelMap.OrderQuantity}">
+			<text size="5" maxlength="10" />
+		</field>
+		<field name="submitButton" title="${uiLabelMap.OrderAddToOrder}" widget-style="smallSubmit">
+			<submit />
+		</field>
+
+	</form>
 
 	<form name="ShipmentsReport" type="multi" use-row-submit="true" list-name="orderItems" title="" target="shipmentsreport"
 		odd-row-style="alternate-row" default-table-style="basic-table hover-bar" paginate-target="shipmentsreport">
@@ -507,7 +530,7 @@
 	<form name="ExtraShippedProducts" type="multi" use-row-submit="true" list-name="exShippedPr" title="" target="shipmentsreport"
 		odd-row-style="alternate-row" default-table-style="basic-table hover-bar" paginate-target="ordersnotshipped">
 		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" auto-field-map="true"/> </row-actions> -->
-		
+
 		<field name="productId">
 			<display />
 		</field>
@@ -521,7 +544,7 @@
 	<form name="ProdShippedQuantity" type="multi" use-row-submit="true" list-name="prodQty" title="" target="shipmentsreport"
 		odd-row-style="alternate-row" default-table-style="basic-table hover-bar" paginate-target="ordersnotshipped">
 		<!-- <row-actions> <entity-one entity-name="OrderItem" value-field="product" auto-field-map="true"/> </row-actions> -->
-		
+
 		<field name="productId">
 			<display />
 		</field>
@@ -543,13 +566,14 @@
 		<field name="thruDate" title="${uiLabelMap.ShippingDate} to" tooltip="${uiLabelMap.ToDate}" tooltip-style="button-text">
 			<date-time mask="Y" />
 		</field>
-		<field name="orderShipBeforeFrom" title="${uiLabelMap.OrderShipBeforeFrom}" tooltip="${uiLabelMap.FromDate}" tooltip-style="button-text">
+		<field name="orderShipBeforeFrom" title="${uiLabelMap.OrderShipBeforeFrom}" tooltip="${uiLabelMap.FromDate}"
+			tooltip-style="button-text">
 			<date-time mask="Y" />
 		</field>
 		<field name="orderShipBeforeTo" title="${uiLabelMap.OrderShipBeforeTo}" tooltip="${uiLabelMap.ToDate}" tooltip-style="button-text">
 			<date-time mask="Y" />
 		</field>
-		<field name="handlingInstructions" field-name="enumId" title="${uiLabelMap.CommonType}" >
+		<field name="handlingInstructions" field-name="enumId" title="${uiLabelMap.CommonType}">
 			<drop-down allow-empty="true">
 				<entity-options entity-name="Enumeration">
 					<entity-constraint name="enumTypeId" operator="equals" value="VV_SHIPMENT_TYPE" />

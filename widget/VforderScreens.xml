@@ -452,6 +452,10 @@
 						<!-- <decorator-section name="search-options"> <include-form name="EditShippingItems" location="component://vforder/widget/VforderForms.xml"/> 
 							</decorator-section> -->
 
+						<screenlet title="${uiLabelMap.AddProductToShippingWithOpenOrders}">
+							<include-form name="AddProductToShippingWithOpenOrders" location="component://vforder/widget/VforderForms.xml" />
+						</screenlet>
+
 						<include-form name="ListShippingItems" location="component://vforder/widget/VforderForms.xml" />
 
 						<platform-specific>

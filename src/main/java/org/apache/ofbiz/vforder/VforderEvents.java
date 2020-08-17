@@ -51,6 +51,8 @@ import org.apache.ofbiz.entity.GenericEntityException;
 import org.apache.ofbiz.entity.GenericPK;
 import org.apache.ofbiz.entity.GenericValue;
 import org.apache.ofbiz.entity.condition.EntityCondition;
+import org.apache.ofbiz.entity.condition.EntityConditionList;
+import org.apache.ofbiz.entity.condition.EntityExpr;
 import org.apache.ofbiz.entity.condition.EntityOperator;
 import org.apache.ofbiz.entity.util.EntityQuery;
 import org.apache.ofbiz.entity.util.EntityUtil;
@@ -198,14 +200,19 @@ public class VforderEvents {
 				} else {
 
 					try {
-						/*shipItemId = null;
-						List<GenericValue> shipmentItems = EntityQuery.use(delegator).from("ShipmentItem").where(EntityCondition.makeCondition("shipmentId", EntityOperator.EQUALS, shipmentId))
-								.orderBy("shipmentItemSeqId").queryList();
-						if (shipmentItems != null)
-							if (shipItemId == null) {
-								// shipItemId = shipmentItems.size();
-								shipItemId = new Integer((String) shipmentItems.get(shipmentItems.size() - 1).get("shipmentItemSeqId"));
-							}*/
+						/*
+						 * shipItemId = null; List<GenericValue> shipmentItems =
+						 * EntityQuery
+						 * .use(delegator).from("ShipmentItem").where(
+						 * EntityCondition.makeCondition("shipmentId",
+						 * EntityOperator.EQUALS, shipmentId))
+						 * .orderBy("shipmentItemSeqId").queryList(); if
+						 * (shipmentItems != null) if (shipItemId == null) { //
+						 * shipItemId = shipmentItems.size(); shipItemId = new
+						 * Integer((String)
+						 * shipmentItems.get(shipmentItems.size() -
+						 * 1).get("shipmentItemSeqId")); }
+						 */
 
 						// /List<GenericValue> vfshipmentItems = delegator
 						// .findByAnd("VfShipmentItem", UtilMisc.toMap(
@@ -214,26 +221,29 @@ public class VforderEvents {
 						// orderItemSeqId), null, false);
 						BigDecimal qty = BigDecimal.ZERO;
 						GenericValue vfshipmentItem = null;
-						//GenericValue shipmentItem = null;
+						// GenericValue shipmentItem = null;
 
-						//shipmentItem = delegator.makeValue("ShipmentItem");
+						// shipmentItem = delegator.makeValue("ShipmentItem");
 						vfshipmentItem = delegator.makeValue("VfShipmentItem");
 						// GenericValue shippingItem =
 						// delegator.makeValue("ShippingItem");
-						//shipmentItem.set("shipmentId", shipmentId);
-						//shipmentItem.set("productId", productId);
+						// shipmentItem.set("shipmentId", shipmentId);
+						// shipmentItem.set("productId", productId);
 						vfshipmentItem.set("shipmentId", shipmentId);
 
 						vfshipmentItem.set("orderId", orderId);
 						vfshipmentItem.set("orderItemSeqId", orderItemSeqId);
-						//shipItemId++;
-						//vfshipmentItem.set("shipmentItemSeqId", shipItemId.toString());
-						//shipmentItem.set("shipmentItemSeqId", shipItemId.toString());
-						//shipment.put("estimatedShipCost", new BigDecimal(shipItemId));
-						//delegator.createOrStore(shipment);
+						// shipItemId++;
+						// vfshipmentItem.set("shipmentItemSeqId",
+						// shipItemId.toString());
+						// shipmentItem.set("shipmentItemSeqId",
+						// shipItemId.toString());
+						// shipment.put("estimatedShipCost", new
+						// BigDecimal(shipItemId));
+						// delegator.createOrStore(shipment);
 
 						qty = qty.add(quantityToShip);
-						//shipmentItem.set("quantity", qty);
+						// shipmentItem.set("quantity", qty);
 
 						if (qty.compareTo(BigDecimal.ZERO) != 0) {
 							try {
@@ -617,6 +627,141 @@ public class VforderEvents {
 		}
 
 		return "success";
+	}
+
+	public static String addShippingItemWithOpenOrder(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		GenericValue userLogin = (GenericValue) session.getAttribute("userLogin");
+		Delegator delegator = (Delegator) request.getAttribute("delegator");
+		LocalDispatcher dispatcher = (LocalDispatcher) request.getAttribute("dispatcher");
+
+		String controlDirective = null;
+		Map<String, Object> result = null;
+
+		// Get the parameters as a MAP, remove the productId and quantity
+		// params.
+		Map<String, Object> paramMap = UtilHttp.getParameterMap(request);
+
+		String shipmentId = null;
+		
+		String productId = null;
+
+		BigDecimal quantity = BigDecimal.ZERO;
+		BigDecimal quantityShipped = BigDecimal.ZERO;
+		BigDecimal quantityToShip = BigDecimal.ZERO;
+		BigDecimal quantityShippable = BigDecimal.ZERO;
+
+		controlDirective = null; // re-initialize each time
+
+		// get the params
+		if (paramMap.containsKey("shipmentId")) {
+			shipmentId = (String) paramMap.remove("shipmentId");
+		}
+		if (paramMap.containsKey("productId")) {
+			productId = (String) paramMap.remove("productId");
+		}
+
+		request.setAttribute("shipmentId", shipmentId);
+		String quantityToShipStr = null;
+		if (paramMap.containsKey("quantityToShip")) {
+			quantityToShipStr = (String) paramMap.remove("quantityToShip");
+		}
+		if ((quantityToShipStr == null) || (quantityToShipStr.equals(""))) {
+			quantityToShipStr = "0";
+		}
+		try {
+			quantityToShip = new BigDecimal(quantityToShipStr);
+		} catch (Exception e) {
+			Debug.logWarning(e, "Problems parsing quantity string: " + quantityToShipStr, module);
+			quantityToShip = BigDecimal.ZERO;
+		}
+
+		GenericValue vfOrdItemShipItem = null;
+		GenericValue shipment = null;
+		try {
+			shipment = delegator.findOne("Shipment", UtilMisc.toMap("shipmentId", shipmentId), false);
+		} catch (GenericEntityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Integer shipItemId = 1;
+
+		try {
+
+			// lookup payment applications which took place before the
+			// asOfDateTime for this invoice
+			EntityConditionList<EntityExpr> dateCondition = EntityCondition.makeCondition(
+					UtilMisc.toList(EntityCondition.makeCondition("quantityShippable", EntityOperator.EQUALS, null),
+							EntityCondition.makeCondition("quantityShippable", EntityOperator.GREATER_THAN, BigDecimal.ZERO)), EntityOperator.OR);
+			EntityConditionList<EntityCondition> conditions = EntityCondition.makeCondition(
+					UtilMisc.toList(dateCondition, EntityCondition.makeCondition("productId", EntityOperator.EQUALS, productId)), EntityOperator.AND);
+
+			List<GenericValue> vfOrdItemShipItems = delegator.findList("OrderItemShippingItemView", conditions, null, UtilMisc.toList("shipBeforeDate"), null, false);
+
+			if (quantityToShip.equals(BigDecimal.ZERO)) {
+				return "success";
+			}
+			BigDecimal qtyRemainToShip = quantityToShip;
+			for (GenericValue item : vfOrdItemShipItems) {
+				BigDecimal itemQty = (BigDecimal) item.get("quantityShippable");
+				String orderId = (String) item.get("orderId");
+				String orderItemSeqId = (String) item.get("orderItemSeqId");;
+				if (itemQty == null) {
+					itemQty = (BigDecimal) item.get("quantity");
+				}
+				if (qtyRemainToShip.compareTo(itemQty) >= 0) {
+
+					try {
+						Map<String, Object> tmpResult = dispatcher.runSync("createShipmentItem", UtilMisc.<String, Object> toMap("userLogin", userLogin, "shipmentId", shipmentId, "productId",
+								productId, "orderId", orderId, "orderItemSeqId", orderItemSeqId, "quantity", itemQty));
+
+						Map<String, Object> tmpResult2 = dispatcher.runSync("createVfShipmentItem", UtilMisc.<String, Object> toMap("userLogin", userLogin, "shipmentId", shipmentId,
+								"shipmentItemSeqId", (String) tmpResult.get("shipmentItemSeqId"), "orderId", orderId, "orderItemSeqId", orderItemSeqId));
+
+					} catch (GenericServiceException e) {
+						Debug.logError(e, module);
+					}
+
+					qtyRemainToShip = qtyRemainToShip.subtract(itemQty);
+				} else {
+					
+					try {
+						Map<String, Object> tmpResult = dispatcher.runSync("createShipmentItem", UtilMisc.<String, Object> toMap("userLogin", userLogin, "shipmentId", shipmentId, "productId",
+								productId, "orderId", orderId, "orderItemSeqId", orderItemSeqId, "quantity", qtyRemainToShip));
+
+						Map<String, Object> tmpResult2 = dispatcher.runSync("createVfShipmentItem", UtilMisc.<String, Object> toMap("userLogin", userLogin, "shipmentId", shipmentId,
+								"shipmentItemSeqId", (String) tmpResult.get("shipmentItemSeqId"), "orderId", orderId, "orderItemSeqId", orderItemSeqId));
+
+					} catch (GenericServiceException e) {
+						Debug.logError(e, module);
+					}
+
+					qtyRemainToShip = BigDecimal.ZERO;
+				}
+				if (qtyRemainToShip.equals(BigDecimal.ZERO))
+					break;
+
+			}
+			if (qtyRemainToShip.compareTo(BigDecimal.ZERO) > 0) {
+				try {
+					Map<String, Object> tmpResult = dispatcher.runSync("createShipmentItem", UtilMisc.<String, Object> toMap("userLogin", userLogin, "shipmentId", shipmentId, "productId",
+							productId, "quantity", qtyRemainToShip));
+
+					Map<String, Object> tmpResult2 = dispatcher.runSync("createVfShipmentItem", UtilMisc.<String, Object> toMap("userLogin", userLogin, "shipmentId", shipmentId,
+							"shipmentItemSeqId", (String) tmpResult.get("shipmentItemSeqId")));
+
+				} catch (GenericServiceException e) {
+					Debug.logError(e, module);
+				}
+			}
+
+		} catch (GenericEntityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return "success";
+
 	}
 
 }
