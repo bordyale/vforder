@@ -30,7 +30,7 @@ import org.apache.ofbiz.entity.GenericValue
 
 
 
-orderItemShippingItem = select("orderId","statusId","orderItemSeqId","quantity","quantityShipped","productId","productName").from("OrderItemShippingItemView").cache(false).queryList()
+orderItemShippingItem = select("orderId","statusId","orderHStatusId","orderItemSeqId","quantity","quantityShipped","productId","productName").from("OrderItemShippingItemView").cache(false).queryList()
 
 
 
@@ -52,9 +52,9 @@ for (GenericValue entry: orderItemShippingItem){
 
 	e.put("quantityShipped",quantityShipped)
 	e.put("quantityShippable",quantity.subtract(quantityShipped))
-	status = entry.get("statusId")
+	status = entry.get("orderHStatusId")
 	if (!quantity.equals(quantityShipped)){
-		if (!status.equals("ITEM_CANCELLED")){
+		if (!status.equals("ORDER_CANCELLED")){
 			hashMaps.add(e)
 		}
 	}
