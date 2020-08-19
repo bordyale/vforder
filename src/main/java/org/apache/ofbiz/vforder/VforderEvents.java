@@ -643,7 +643,7 @@ public class VforderEvents {
 		Map<String, Object> paramMap = UtilHttp.getParameterMap(request);
 
 		String shipmentId = null;
-		
+
 		String productId = null;
 
 		BigDecimal quantity = BigDecimal.ZERO;
@@ -693,8 +693,10 @@ public class VforderEvents {
 			EntityConditionList<EntityExpr> dateCondition = EntityCondition.makeCondition(
 					UtilMisc.toList(EntityCondition.makeCondition("quantityShippable", EntityOperator.EQUALS, null),
 							EntityCondition.makeCondition("quantityShippable", EntityOperator.GREATER_THAN, BigDecimal.ZERO)), EntityOperator.OR);
+
 			EntityConditionList<EntityCondition> conditions = EntityCondition.makeCondition(
-					UtilMisc.toList(dateCondition, EntityCondition.makeCondition("productId", EntityOperator.EQUALS, productId)), EntityOperator.AND);
+					UtilMisc.toList(dateCondition, EntityCondition.makeCondition("productId", EntityOperator.EQUALS, productId),
+							EntityCondition.makeCondition("orderHStatusId", EntityOperator.NOT_EQUAL, "ORDER_CANCELLED")), EntityOperator.AND);
 
 			List<GenericValue> vfOrdItemShipItems = delegator.findList("OrderItemShippingItemView", conditions, null, UtilMisc.toList("shipBeforeDate"), null, false);
 
@@ -705,7 +707,8 @@ public class VforderEvents {
 			for (GenericValue item : vfOrdItemShipItems) {
 				BigDecimal itemQty = (BigDecimal) item.get("quantityShippable");
 				String orderId = (String) item.get("orderId");
-				String orderItemSeqId = (String) item.get("orderItemSeqId");;
+				String orderItemSeqId = (String) item.get("orderItemSeqId");
+				;
 				if (itemQty == null) {
 					itemQty = (BigDecimal) item.get("quantity");
 				}
@@ -724,7 +727,7 @@ public class VforderEvents {
 
 					qtyRemainToShip = qtyRemainToShip.subtract(itemQty);
 				} else {
-					
+
 					try {
 						Map<String, Object> tmpResult = dispatcher.runSync("createShipmentItem", UtilMisc.<String, Object> toMap("userLogin", userLogin, "shipmentId", shipmentId, "productId",
 								productId, "orderId", orderId, "orderItemSeqId", orderItemSeqId, "quantity", qtyRemainToShip));
@@ -744,11 +747,11 @@ public class VforderEvents {
 			}
 			if (qtyRemainToShip.compareTo(BigDecimal.ZERO) > 0) {
 				try {
-					Map<String, Object> tmpResult = dispatcher.runSync("createShipmentItem", UtilMisc.<String, Object> toMap("userLogin", userLogin, "shipmentId", shipmentId, "productId",
-							productId, "quantity", qtyRemainToShip));
+					Map<String, Object> tmpResult = dispatcher.runSync("createShipmentItem",
+							UtilMisc.<String, Object> toMap("userLogin", userLogin, "shipmentId", shipmentId, "productId", productId, "quantity", qtyRemainToShip));
 
-					Map<String, Object> tmpResult2 = dispatcher.runSync("createVfShipmentItem", UtilMisc.<String, Object> toMap("userLogin", userLogin, "shipmentId", shipmentId,
-							"shipmentItemSeqId", (String) tmpResult.get("shipmentItemSeqId")));
+					Map<String, Object> tmpResult2 = dispatcher.runSync("createVfShipmentItem",
+							UtilMisc.<String, Object> toMap("userLogin", userLogin, "shipmentId", shipmentId, "shipmentItemSeqId", (String) tmpResult.get("shipmentItemSeqId")));
 
 				} catch (GenericServiceException e) {
 					Debug.logError(e, module);
