@@ -1,0 +1,1 @@
+sudo keytool -import -alias alphaXXX -file XXX.cer -keystore /usr/lib/jvm..../security -storepass changeit
