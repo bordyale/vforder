@@ -741,7 +741,7 @@ public class VforderEvents {
 
 					qtyRemainToShip = BigDecimal.ZERO;
 				}
-				if (qtyRemainToShip.equals(BigDecimal.ZERO))
+				if (qtyRemainToShip.compareTo(BigDecimal.ZERO)==0)
 					break;
 
 			}

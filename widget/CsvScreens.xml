@@ -10,10 +10,11 @@
 				<property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true" />
 
 
-
+				<set field="viewSize" from-field="parameters.VIEW_SIZE_1" type="Integer" default-value="200" />
 				<set field="viewIndex" from-field="parameters.VIEW_INDEX" type="Integer" default-value="0" />
 				<property-to-field resource="widget" property="widget.form.defaultViewSize" field="viewSizeDefaultValue" />
-				<set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="${viewSizeDefaultValue}" />
+				<!-- <set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="${viewSizeDefaultValue}" /> -->
+				<set field="viewSize" from-field="parameters.VIEW_SIZE" type="Integer" default-value="200" />
 
 				<!-- <entity-one entity-name="Facility" value-field="facility" use-cache="true"/> -->
 				<script location="component://vforder/groovyScripts/ListShippingItems.groovy" />
