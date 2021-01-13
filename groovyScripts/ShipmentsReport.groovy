@@ -25,8 +25,12 @@ import org.apache.ofbiz.entity.condition.EntityConditionList
 import org.apache.ofbiz.entity.condition.EntityCondition
 import org.apache.ofbiz.entity.GenericValue
 import org.apache.ofbiz.entity.util.EntityUtil
+import org.apache.ofbiz.base.util.UtilDateTime
+import java.text.SimpleDateFormat
 
 import java.sql.Timestamp
+
+def sdf = new SimpleDateFormat("yyyy-MM-dd")
 
 import org.apache.ofbiz.entity.model.DynamicViewEntity
 
@@ -40,10 +44,12 @@ shipmentType = parameters.handlingInstructions
 
 List searchCond = []
 if (fromDate) {
-	searchCond.add(EntityCondition.makeCondition("estimatedShipDate", EntityOperator.GREATER_THAN_EQUAL_TO, Timestamp.valueOf(fromDate)))
+	def parseDate = sdf.parse(fromDate)
+	searchCond.add(EntityCondition.makeCondition("estimatedShipDate", EntityOperator.GREATER_THAN_EQUAL_TO, UtilDateTime.toTimestamp(parseDate)))
 }
 if (thruDate) {
-	searchCond.add(EntityCondition.makeCondition("estimatedShipDate", EntityOperator.LESS_THAN_EQUAL_TO, Timestamp.valueOf(thruDate)))
+	def parseDate = sdf.parse(thruDate)
+	searchCond.add(EntityCondition.makeCondition("estimatedShipDate", EntityOperator.LESS_THAN_EQUAL_TO, UtilDateTime.toTimestamp(parseDate)))
 }
 
 
