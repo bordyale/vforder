@@ -115,7 +115,7 @@
 					<decorator-section name="body">
 						<platform-specific>
 							<html>
-								<html-template location="component://common/template/includes/SetMultipleSelectJs.ftl" />
+								<html-template location="component://common-theme/template/includes/SetMultipleSelectJs.ftl" />
 							</html>
 						</platform-specific>
 						<platform-specific>
@@ -498,7 +498,7 @@
 					<decorator-section name="body">
 						<platform-specific>
 							<html>
-								<html-template location="component://common/template/includes/SetMultipleSelectJs.ftl" />
+								<html-template location="component://common-theme/template/includes/SetMultipleSelectJs.ftl" />
 							</html>
 						</platform-specific>
 						<platform-specific>
