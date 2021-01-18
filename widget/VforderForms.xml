@@ -29,11 +29,15 @@
 
 	<form name="ListShippings" type="list" list-name="listIt" paginate-target="findshippings" odd-row-style="alternate-row"
 		default-table-style="basic-table hover-bar" header-row-style="header-row-2" override-list-size="true">
+		
 		<actions>
-			<service service-name="performFind" result-map="result" result-map-list="listIt">
-				<field-map field-name="inputFields" from-field="parameters" />
-				<field-map field-name="entityName" value="Shipment" />
-				<field-map field-name="orderBy" from-field="sortField" />
+			<set field="requestParameters.noConditionFind" value="Y" />
+			<set field="entityName" value="Shipment" />
+			<service service-name="performFind" result-map="result"
+				result-map-list="listIt">
+				<field-map field-name="inputFields" from-field="requestParameters" />
+				<field-map field-name="entityName" from-field="entityName" />
+				<field-map field-name="orderBy" from-field="parameters.sortField" />
 			</service>
 		</actions>
 
