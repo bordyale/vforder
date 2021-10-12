@@ -342,9 +342,9 @@
 		<value xml:lang="en">Who Gave</value>
 		<value xml:lang="hu">Kiadta</value>
 	</property>
-	<property key="activityid">
+	<property key="activityId">
 		<value xml:lang="en">Activity seq</value>
-		<value xml:lang="hu">Műveleti sorrend</value>
+		<value xml:lang="hu">Müveleti sorrend</value>
 	</property>
 	<property key="instruction">
 		<value xml:lang="en">Instruction Nr</value>
@@ -356,7 +356,7 @@
 	</property>
 	<property key="control">
 		<value xml:lang="en">Control</value>
-		<value xml:lang="hu">Ellenőrizte</value>
+		<value xml:lang="hu">Ellenörizte</value>
 	</property>
 	<property key="productName">
 		<value xml:lang="en">Product Name</value>
