@@ -229,7 +229,7 @@ under the License.
 						</fo:table-cell>
 						<fo:table-cell text-align="center">
 							<fo:block>
-								${uiLabelMap.actitvityid}
+								${uiLabelMap.activityId}
 							</fo:block>
 						</fo:table-cell>
 						<fo:table-cell text-align="center">
