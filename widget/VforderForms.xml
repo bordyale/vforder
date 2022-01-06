@@ -9,6 +9,9 @@
 		<field name="shipmentId">
 			<text-find ignore-case="true" />
 		</field>
+		<field name="partyIdTo" title="${uiLabelMap.PartyId}">
+			<lookup target-form-name="LookupCustomerName" position="center" />
+		</field>
 		<!-- <field name="fromDate"><date-time/></field> <field name="thruDate"><date-time/></field> -->
 		<field name="estimatedShipDate">
 			<date-find type="date" />
@@ -29,12 +32,11 @@
 
 	<form name="ListShippings" type="list" list-name="listIt" paginate-target="findshippings" odd-row-style="alternate-row"
 		default-table-style="basic-table hover-bar" header-row-style="header-row-2" override-list-size="true">
-		
+
 		<actions>
 			<set field="requestParameters.noConditionFind" value="Y" />
 			<set field="entityName" value="Shipment" />
-			<service service-name="performFind" result-map="result"
-				result-map-list="listIt">
+			<service service-name="performFind" result-map="result" result-map-list="listIt">
 				<field-map field-name="inputFields" from-field="requestParameters" />
 				<field-map field-name="entityName" from-field="entityName" />
 				<field-map field-name="orderBy" from-field="parameters.sortField" />
@@ -576,6 +578,9 @@
 		</field>
 		<field name="orderShipBeforeTo" title="${uiLabelMap.OrderShipBeforeTo}" tooltip="${uiLabelMap.ToDate}" tooltip-style="button-text">
 			<date-time mask="Y" />
+		</field>
+		<field name="partyIdTo" title="${uiLabelMap.PartyId}">
+			<lookup target-form-name="LookupCustomerName" position="center" />
 		</field>
 		<field name="handlingInstructions" field-name="enumId" title="${uiLabelMap.CommonType}">
 			<drop-down allow-empty="true">
