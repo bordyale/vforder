@@ -366,7 +366,7 @@
 		<field name="productName">
 			<display />
 		</field>
-		<field name="quantity" title="${uiLabelMap.OrderItemQuantity}">
+		<field name="quantity">
 			<display />
 		</field>
 		<field name="quantityShipped">
