@@ -84,6 +84,9 @@
 		<field name="estimatedShipDate">
 			<date-time />
 		</field>
+		<field name="partyIdTo" title="${uiLabelMap.PartyId}">
+			<lookup target-form-name="LookupCustomerName" position="center" />
+		</field>
 
 		<field name="handlingInstructions" field-name="enumId" title="${uiLabelMap.CommonType}" position="2">
 			<drop-down allow-empty="true">
@@ -118,9 +121,9 @@
 
 
 
-	<form name="EditShipping" type="single" target="updateShipment" title="" default-map-name="shipping" default-entity-name="Shipment">
+	<!-- <form name="EditShipping" type="single" target="updateShipment" title="" default-map-name="shipping" default-entity-name="Shipment">
 		<alt-target use-when="shipping==null" target="createShipment" />
-		<!-- <auto-fields-service service-name="updateShipment"/> -->
+		<auto-fields-service service-name="updateShipment"/>
 		<field use-when="shipping!=null" name="shipmentId" title="${uiLabelMap.ShippingshipmentId}">
 			<display />
 		</field>
@@ -144,12 +147,12 @@
 		<field name="submitButton" title="${uiLabelMap.CommonUpdate}">
 			<submit button-type="button" />
 		</field>
-		<!-- <field name="deleteLink" use-when="shipping!=null" title=" " widget-style="buttontext"> <hyperlink description="${uiLabelMap.CommonDelete}" 
+		<field name="deleteLink" use-when="shipping!=null" title=" " widget-style="buttontext"> <hyperlink description="${uiLabelMap.CommonDelete}" 
 			target="deleteShipping" also-hidden="false" confirmation-message="${uiLabelMap.CommonConfirmDelete}" image-location="${iconsLocation}/delete.png"> 
-			<parameter param-name="shipmentId"/> </hyperlink> </field> -->
+			<parameter param-name="shipmentId"/> </hyperlink> </field>
 
 
-	</form>
+	</form> -->
 
 	<!-- <form name="EditShippingItems" type="single" target="updateShipment" title="" default-map-name="shipping" default-entity-name="Shipment"> 
 		<alt-target use-when="example==null" target="createShipment" /> <field name="geoName" title="${uiLabelMap.CommonGeoName}" tooltip="${uiLabelMap.ExampleLookupFields4}" 
