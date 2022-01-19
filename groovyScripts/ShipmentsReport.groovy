@@ -128,8 +128,7 @@ for (GenericValue entry: notShippedItems){
 	status = entry.get("orderHStatusId")
 	if (!quantity.equals(quantityShipped)){
 		if (!status.equals("ORDER_CANCELLED")){
-			progresNetWeigh = progresNetWeigh.add(netWeight)
-			e.put("progresNetWeight",progresNetWeigh)
+			
 
 			//extract order party
 			orderId = entry.get("orderId")
@@ -140,10 +139,14 @@ for (GenericValue entry: notShippedItems){
 				partyId = orh.getBillFromParty().partyId
 				if (partyIdTo){
 					if (partyIdTo.equals(partyId)){
+						progresNetWeigh = progresNetWeigh.add(netWeight)
+						e.put("progresNetWeight",progresNetWeigh)
 						hashMaps2.add(e)
 					}
 
 				}else{
+					progresNetWeigh = progresNetWeigh.add(netWeight)
+					e.put("progresNetWeight",progresNetWeigh)
 					hashMaps2.add(e)
 				}
 
