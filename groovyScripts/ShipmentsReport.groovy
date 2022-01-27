@@ -43,6 +43,7 @@ orderShipBeforeFrom = parameters.orderShipBeforeFrom
 orderShipBeforeTo = parameters.orderShipBeforeTo
 shipmentType = parameters.handlingInstructions
 partyIdTo = parameters.partyIdTo
+showNoOrderShipItems = parameters.showNoOrderShipItems
 
 List searchCond = []
 if (fromDate) {
@@ -57,28 +58,47 @@ if (partyIdTo) {
 	searchCond.add(EntityCondition.makeCondition("partyIdTo", EntityOperator.EQUALS, partyIdTo))
 }
 
-
-
-
-orderItemShippingItem = select("estimatedShipDate","orderId","productId","productName","internalName","statusId","orderHStatusId","quantity","quantityShipped","quantityShippable").from("ShipmentsReport").where(searchCond).cache(false).queryList()
-
-orderItemShippingItem = EntityUtil.orderBy(orderItemShippingItem,  ["estimatedShipDate"])
-orderItemShippingItem = EntityUtil.orderBy(orderItemShippingItem,  ["productId"])
-
 List<HashMap<String,Object>> hashMaps = new ArrayList<HashMap<String,Object>>()
-for (GenericValue entry: orderItemShippingItem){
-	Map<String,Object> e = new HashMap<String,Object>()
-	e.put("estimatedShipDate",entry.get("estimatedShipDate"))
-	e.put("orderId",entry.get("orderId"))
-	e.put("productId",entry.get("productId"))
-	e.put("productName",entry.get("productName"))
-	BigDecimal quantity = entry.get("quantity")
-	e.put("quantity",entry.get("quantity"))
-	e.put("quantityShipped",entry.get("quantityShipped"))
-	e.put("quantityShippable",entry.get("quantityShippable"))
-	status = entry.get("orderHStatusId")
-	if (!status.equals("ORDER_CANCELLED")){
+if ("Y".equals(showNoOrderShipItems)){
+
+	orderItemShippingItem = select("estimatedShipDate","orderId","productId","productName","internalName","quantity").from("ShippingItemView").where(searchCond).cache(false).queryList()
+
+	orderItemShippingItem = EntityUtil.orderBy(orderItemShippingItem,  ["estimatedShipDate"])
+
+	for (GenericValue entry: orderItemShippingItem){
+		Map<String,Object> e = new HashMap<String,Object>()
+		e.put("estimatedShipDate",entry.get("estimatedShipDate"))
+		e.put("orderId",entry.get("orderId"))
+		e.put("productId",entry.get("productId"))
+		e.put("productName",entry.get("productName"))
+		BigDecimal quantity = entry.get("quantity")
+		e.put("quantity",entry.get("quantity"))
+
+
 		hashMaps.add(e)
+	}
+}else{
+
+	orderItemShippingItem = select("estimatedShipDate","orderId","productId","productName","internalName","statusId","orderHStatusId","quantity","quantityShipped","quantityShippable").from("ShipmentsReport").where(searchCond).cache(false).queryList()
+
+	orderItemShippingItem = EntityUtil.orderBy(orderItemShippingItem,  ["estimatedShipDate"])
+	orderItemShippingItem = EntityUtil.orderBy(orderItemShippingItem,  ["productId"])
+
+
+	for (GenericValue entry: orderItemShippingItem){
+		Map<String,Object> e = new HashMap<String,Object>()
+		e.put("estimatedShipDate",entry.get("estimatedShipDate"))
+		e.put("orderId",entry.get("orderId"))
+		e.put("productId",entry.get("productId"))
+		e.put("productName",entry.get("productName"))
+		BigDecimal quantity = entry.get("quantity")
+		e.put("quantity",entry.get("quantity"))
+		e.put("quantityShipped",entry.get("quantityShipped"))
+		e.put("quantityShippable",entry.get("quantityShippable"))
+		status = entry.get("orderHStatusId")
+		if (!status.equals("ORDER_CANCELLED")){
+			hashMaps.add(e)
+		}
 	}
 }
 List searchCond2 = []
@@ -128,7 +148,7 @@ for (GenericValue entry: notShippedItems){
 	status = entry.get("orderHStatusId")
 	if (!quantity.equals(quantityShipped)){
 		if (!status.equals("ORDER_CANCELLED")){
-			
+
 
 			//extract order party
 			orderId = entry.get("orderId")

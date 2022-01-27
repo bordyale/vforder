@@ -787,6 +787,7 @@
 				<set field="orderShipBeforeTo" from-field="parameters.orderShipBeforeTo" />
 				<set field="handlingInstructions" from-field="parameters.handlingInstructions" />
 				<set field="partyIdTo" from-field="parameters.partyIdTo" />
+				<set field="showNoOrderShipItems" from-field="parameters.showNoOrderShipItems" />
 				<set field="headerItem" value="shipmentsreport" />
 				<set field="viewSize" from-field="parameters.VIEW_SIZE_1" type="Integer" default-value="200" />
 				<script location="component://vforder/groovyScripts/ShipmentsReport.groovy" />
@@ -820,6 +821,7 @@
 								<parameter param-name="allInfo" value="Y" />
 								<parameter param-name="handlingInstructions"/>
 								<parameter param-name="partyIdTo"/>
+								<parameter param-name="showNoOrderShipItems"/>
 							</link>
 						</container>
 						<include-form name="FilterShipmentsReport" location="component://vforder/widget/VforderForms.xml" />

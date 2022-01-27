@@ -418,5 +418,9 @@
 		<value xml:lang="en">Order Ship Before To</value>
 		<value xml:lang="hu">Rendelés határidő from</value>
 	</property>
+	<property key="showNoOrderShipItems">
+		<value xml:lang="en">Show No Order Ship Items</value>
+		<value xml:lang="hu">Rendelés nélkül termékek</value>
+	</property>
 
 </resource>
