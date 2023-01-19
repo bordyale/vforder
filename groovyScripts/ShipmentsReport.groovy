@@ -172,7 +172,7 @@ for (GenericValue entry: shippingWeight){
 }
 
 
-productQuantity = select("productId","productName","handlingInstructions","quantity").from("ShippingProductQuantity").where(searchCond).cache(false).queryList()
+productQuantity = select("productId","productName","productWeight","handlingInstructions","quantity").from("ShippingProductQuantity").where(searchCond).cache(false).queryList()
 
 productQuantity = EntityUtil.orderBy(productQuantity,  ["productId"])
 
@@ -182,6 +182,7 @@ for (GenericValue entry: productQuantity){
 	Map<String,Object> e = new HashMap<String,Object>()
 	e.put("productId",entry.get("productId"))
 	e.put("productName",entry.get("productName"))
+	e.put("productWeight",entry.get("productWeight"))
 	e.put("handlingInstructions",entry.get("handlingInstructions"))
 	BigDecimal qty = entry.get("quantity")
 	e.put("quantity",qty)

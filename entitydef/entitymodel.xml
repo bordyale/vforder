@@ -263,6 +263,7 @@
 		<alias entity-alias="SIV" name="productName" group-by="true" />
 		<alias entity-alias="SIV" name="estimatedShipDate" />
 		<alias entity-alias="SIV" name="handlingInstructions" group-by="true" />
+		<alias entity-alias="SIV" name="productWeight" group-by="true" />
 		<alias entity-alias="SIV" name="quantity" field="quantity"
 			function="sum" />
 	</view-entity>

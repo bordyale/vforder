@@ -551,6 +551,9 @@
 		<field name="productName">
 			<display />
 		</field>
+		<field name="productWeight">
+			<display />
+		</field>
 		<field name="handlingInstructions">
 			<display />
 		</field>
