@@ -1,0 +1,23 @@
+
+
+
+/usr/lib/jvm/jdk1.8.0_321/jre/bin/keytool -genkey -keyalg RSA -alias ofbiz -keystore ofbizssl.jks
+
+
+/usr/lib/jvm/jdk1.8.0_321/jre/bin/keytool -certreq -alias ofbiz -keyalg RSA -file certreq.csr -keystore ofbizssl.jks
+
+cat certreq.csr
+
+//sign cert request to a CA, download signed chain certificates. If .pem conver to .der 
+
+/usr/lib/jvm/jdk1.8.0_321/jre/bin/keytool -import -alias getacert -trustcacerts -file getacer.cer -keystore ofbizssl.jks
+
+/usr/lib/jvm/jdk1.8.0_321/jre/bin/keytool -import -alias ofbiz -trustcacerts -file VardaVulkanKft-2024-12-13-064605.der -keystore ofbizssl.jks
+
+
+
+/usr/lib/jvm/jdk1.8.0_321/jre/bin/keytool -v -list -keystore ofbizssl.jks
+
+chmod +x ofbizssl.jks
+
+cp ofbizssl.jks /home/ale/workspacewin/apache-ofbiz-17.12.09/framework/base/config/ofbizssl.jks
