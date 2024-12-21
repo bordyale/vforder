@@ -42,7 +42,7 @@ FILE=""
 DBS=""
  
 # DO NOT BACKUP these databases
-IGGY="test information_schema mysql performance_schema"
+IGGY="phpmyadmin sys test information_schema mysql performance_schema"
  
 [ ! -d $MBD ] && mkdir -p $MBD || :
  
