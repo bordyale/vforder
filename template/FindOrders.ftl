@@ -238,8 +238,15 @@ function toggleOrderIdList() {
                   </#list>
                 </td>
               </tr>
-              
-              
+              <tr>
+                <td width='25%' align='right' class='label'>${uiLabelMap.PartyPartyId}</td>
+                <td width='5%'>&nbsp;</td>
+                <td align='left'>
+                 
+                  <@htmlTemplate.lookupField value='${requestParameters.partyId!}' formName="salesentryform" name="partyId" id="partyId" fieldFormName="LookupCustomerName"/>
+                </td>
+               
+              </tr>              
             
               <tr>
                 <td width='25%' align='right' class='label'>${uiLabelMap.CommonDateFilter}</td>

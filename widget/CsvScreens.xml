@@ -46,7 +46,10 @@
 				<container>
 					<label style="h2" text="${uiLabelMap.OrdersNotShipped}" />
 				</container>
+				<include-form name="ShipmentsReport" location="component://vforder/widget/VforderForms.xml" />
+				<include-form name="ShipmentsWeights" location="component://vforder/widget/VforderForms.xml" />
 				<include-form name="ListNotShippedOrderItems" location="component://vforder/widget/VforderForms.xml" />
+				<include-form name="ProdShippedQuantity" location="component://vforder/widget/VforderForms.xml" />
 
 			</widgets>
 		</section>

@@ -10,7 +10,7 @@
 			<widgets>
 				<decorator-screen name="VforderCommonDecorator" location="${parameters.mainDecoratorLocation}">
 					<decorator-section name="body">
-						<platform-specific>
+						<!-- <platform-specific>
 							<html>
 								<html-template location="component://vforder/template/Javascript.ftl" />
 							</html>
@@ -19,7 +19,7 @@
 							<html>
 								<html-template location="component://vforder/template/BootStrapTable.ftl" />
 							</html>
-						</platform-specific>
+						</platform-specific> -->
 					</decorator-section>
 				</decorator-screen>
 			</widgets>
@@ -115,7 +115,7 @@
 					<decorator-section name="body">
 						<platform-specific>
 							<html>
-								<html-template location="component://common/template/includes/SetMultipleSelectJs.ftl" />
+								<html-template location="component://common-theme/template/includes/SetMultipleSelectJs.ftl" />
 							</html>
 						</platform-specific>
 						<platform-specific>
@@ -328,7 +328,7 @@
 				<set field="headerItem" value="findshippings" />
 
 				<set field="formShippingListName" value="${groovy: return 'ListShippings';}" />
-				<script location="component://vforder/groovyScripts/FindShipping.groovy" />
+				<!-- <script location="component://vforder/groovyScripts/FindShipping.groovy" /> -->
 
 				<!-- asmselect parameters, must be prefixed by asm_ for SetMultipleSelectJs.ftl -->
 
@@ -498,7 +498,7 @@
 					<decorator-section name="body">
 						<platform-specific>
 							<html>
-								<html-template location="component://common/template/includes/SetMultipleSelectJs.ftl" />
+								<html-template location="component://common-theme/template/includes/SetMultipleSelectJs.ftl" />
 							</html>
 						</platform-specific>
 						<platform-specific>
@@ -786,6 +786,8 @@
 				<set field="orderShipBeforeFrom" from-field="parameters.orderShipBeforeFrom" />
 				<set field="orderShipBeforeTo" from-field="parameters.orderShipBeforeTo" />
 				<set field="handlingInstructions" from-field="parameters.handlingInstructions" />
+				<set field="partyIdTo" from-field="parameters.partyIdTo" />
+				<set field="showNoOrderShipItems" from-field="parameters.showNoOrderShipItems" />
 				<set field="headerItem" value="shipmentsreport" />
 				<set field="viewSize" from-field="parameters.VIEW_SIZE_1" type="Integer" default-value="200" />
 				<script location="component://vforder/groovyScripts/ShipmentsReport.groovy" />
@@ -818,6 +820,8 @@
 								<parameter param-name="orderShipBeforeTo" />
 								<parameter param-name="allInfo" value="Y" />
 								<parameter param-name="handlingInstructions"/>
+								<parameter param-name="partyIdTo"/>
+								<parameter param-name="showNoOrderShipItems"/>
 							</link>
 						</container>
 						<include-form name="FilterShipmentsReport" location="component://vforder/widget/VforderForms.xml" />

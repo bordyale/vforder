@@ -27,6 +27,7 @@ import org.apache.ofbiz.entity.GenericValue
 import org.apache.ofbiz.entity.util.EntityUtil
 import org.apache.ofbiz.base.util.UtilDateTime
 import java.text.SimpleDateFormat
+import org.apache.ofbiz.order.order.OrderReadHelper
 
 import java.sql.Timestamp
 
@@ -41,6 +42,8 @@ thruDate = parameters.thruDate
 orderShipBeforeFrom = parameters.orderShipBeforeFrom
 orderShipBeforeTo = parameters.orderShipBeforeTo
 shipmentType = parameters.handlingInstructions
+partyIdTo = parameters.partyIdTo
+showNoOrderShipItems = parameters.showNoOrderShipItems
 
 List searchCond = []
 if (fromDate) {
@@ -51,29 +54,51 @@ if (thruDate) {
 	def parseDate = sdf.parse(thruDate)
 	searchCond.add(EntityCondition.makeCondition("estimatedShipDate", EntityOperator.LESS_THAN_EQUAL_TO, UtilDateTime.toTimestamp(parseDate)))
 }
-
-
-
-
-orderItemShippingItem = select("estimatedShipDate","orderId","productId","productName","internalName","statusId","orderHStatusId","quantity","quantityShipped","quantityShippable").from("ShipmentsReport").where(searchCond).cache(false).queryList()
-
-orderItemShippingItem = EntityUtil.orderBy(orderItemShippingItem,  ["estimatedShipDate"])
-orderItemShippingItem = EntityUtil.orderBy(orderItemShippingItem,  ["productId"])
+if (partyIdTo) {
+	searchCond.add(EntityCondition.makeCondition("partyIdTo", EntityOperator.EQUALS, partyIdTo))
+}
 
 List<HashMap<String,Object>> hashMaps = new ArrayList<HashMap<String,Object>>()
-for (GenericValue entry: orderItemShippingItem){
-	Map<String,Object> e = new HashMap<String,Object>()
-	e.put("estimatedShipDate",entry.get("estimatedShipDate"))
-	e.put("orderId",entry.get("orderId"))
-	e.put("productId",entry.get("productId"))
-	e.put("productName",entry.get("productName"))
-	BigDecimal quantity = entry.get("quantity")
-	e.put("quantity",entry.get("quantity"))
-	e.put("quantityShipped",entry.get("quantityShipped"))
-	e.put("quantityShippable",entry.get("quantityShippable"))
-	status = entry.get("orderHStatusId")
-	if (!status.equals("ORDER_CANCELLED")){
+if ("Y".equals(showNoOrderShipItems)){
+
+	orderItemShippingItem = select("estimatedShipDate","orderId","productId","productName","internalName","quantity").from("ShippingItemView").where(searchCond).cache(false).queryList()
+
+	orderItemShippingItem = EntityUtil.orderBy(orderItemShippingItem,  ["estimatedShipDate"])
+
+	for (GenericValue entry: orderItemShippingItem){
+		Map<String,Object> e = new HashMap<String,Object>()
+		e.put("estimatedShipDate",entry.get("estimatedShipDate"))
+		e.put("orderId",entry.get("orderId"))
+		e.put("productId",entry.get("productId"))
+		e.put("productName",entry.get("productName"))
+		BigDecimal quantity = entry.get("quantity")
+		e.put("quantity",entry.get("quantity"))
+
+
 		hashMaps.add(e)
+	}
+}else{
+
+	orderItemShippingItem = select("estimatedShipDate","orderId","productId","productName","internalName","statusId","orderHStatusId","quantity","quantityShipped","quantityShippable").from("ShipmentsReport").where(searchCond).cache(false).queryList()
+
+	orderItemShippingItem = EntityUtil.orderBy(orderItemShippingItem,  ["estimatedShipDate"])
+	orderItemShippingItem = EntityUtil.orderBy(orderItemShippingItem,  ["productId"])
+
+
+	for (GenericValue entry: orderItemShippingItem){
+		Map<String,Object> e = new HashMap<String,Object>()
+		e.put("estimatedShipDate",entry.get("estimatedShipDate"))
+		e.put("orderId",entry.get("orderId"))
+		e.put("productId",entry.get("productId"))
+		e.put("productName",entry.get("productName"))
+		BigDecimal quantity = entry.get("quantity")
+		e.put("quantity",entry.get("quantity"))
+		e.put("quantityShipped",entry.get("quantityShipped"))
+		e.put("quantityShippable",entry.get("quantityShippable"))
+		status = entry.get("orderHStatusId")
+		if (!status.equals("ORDER_CANCELLED")){
+			hashMaps.add(e)
+		}
 	}
 }
 List searchCond2 = []
@@ -83,6 +108,10 @@ if (orderShipBeforeFrom) {
 if (orderShipBeforeTo) {
 	searchCond2.add(EntityCondition.makeCondition("shipBeforeDate", EntityOperator.LESS_THAN_EQUAL_TO, Timestamp.valueOf(orderShipBeforeTo)))
 }
+/*if (partyIdTo) {
+ searchCond2.add(EntityCondition.makeCondition("partyId", EntityOperator.EQUALS, partyIdTo))
+ }*/
+//searchCond2.add(EntityCondition.makeCondition("roleTypeId", EntityOperator.EQUALS, "BILL_FROM_VENDOR"))
 
 notShippedItems = select("orderId","orderHStatusId","statusId","orderItemSeqId","quantity","quantityShipped","productId","productName","shipBeforeDate","productWeight","orderName").from("OrderItemShippingItemView").where(searchCond2).cache(false).queryList()
 
@@ -119,9 +148,34 @@ for (GenericValue entry: notShippedItems){
 	status = entry.get("orderHStatusId")
 	if (!quantity.equals(quantityShipped)){
 		if (!status.equals("ORDER_CANCELLED")){
-			progresNetWeigh = progresNetWeigh.add(netWeight)
-			e.put("progresNetWeight",progresNetWeigh)
-			hashMaps2.add(e)
+
+
+			//extract order party
+			orderId = entry.get("orderId")
+			if (orderId) {
+				orderHeader = from("OrderHeader").where("orderId", orderId).queryOne()
+				orh = new OrderReadHelper(orderHeader)
+				orh.getBillFromParty()
+				partyId = orh.getBillFromParty().partyId
+				if (partyIdTo){
+					if (partyIdTo.equals(partyId)){
+						progresNetWeigh = progresNetWeigh.add(netWeight)
+						e.put("progresNetWeight",progresNetWeigh)
+						hashMaps2.add(e)
+					}
+
+				}else{
+					progresNetWeigh = progresNetWeigh.add(netWeight)
+					e.put("progresNetWeight",progresNetWeigh)
+					hashMaps2.add(e)
+				}
+
+			}
+
+
+
+
+
 		}
 	}
 }
@@ -132,9 +186,16 @@ dynamicViewEntity.addMemberEntity("SIV", "ShippingItemView");
 dynamicViewEntity.addAlias("SIV", "productId", null, null, null,true, null);
 dynamicViewEntity.addAlias("SIV", "productName", null, null, null,true, null);
 dynamicViewEntity.addAlias("SIV", "orderId", null, null, null,null, null);
+dynamicViewEntity.addAlias("SIV", "partyIdTo", null, null, null,null, null);
 dynamicViewEntity.addAlias("SIV", "quantity", "quantity", null, null, null, "sum");
+extraShippedProducts= null
+if (partyIdTo) {
+	extraShippedProducts = select("productId","productName","quantity").from(dynamicViewEntity).where("orderId", null,"partyIdTo", partyIdTo).cache(false).queryList()
+}else{
+	extraShippedProducts = select("productId","productName","quantity").from(dynamicViewEntity).where("orderId", null).cache(false).queryList()
+}
 
-extraShippedProducts = select("productId","productName","quantity").from(dynamicViewEntity).where("orderId", null).cache(false).queryList()
+
 
 extraShippedProducts = EntityUtil.orderBy(extraShippedProducts,  ["productId"])
 
